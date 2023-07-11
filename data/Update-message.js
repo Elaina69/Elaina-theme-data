@@ -1,5 +1,5 @@
 ///*
-let update = "v1.8.1"
+import update from './configs/Version'
 if (!DataStore.has(`Update-${update}`)) {
 	DataStore.set(`Update-${update}`, true)
 }
@@ -7,10 +7,12 @@ if (DataStore.get(`Update-${update}`)) {
 	window.alert(
 		// Add this ""+"\n"+
 
-		`ElainaV2 Update ${update}`+"\n"+
-		"- Add \"balance-buff-viewer\" by Nomi"+"\n"+
-		"- Update css"+"\n"+
-		"- Optimize plugins"+"\n"
+		`ElainaV3 Update ${update}`+"\n"+
+		"- Update to V3"+"\n"+
+		"- Using npm JsDelivr instead raw.githack (more stable than V2)"+"\n"+
+		"- Separate data folder"+"\n"+
+		"- Now you can change css file by ur self again"+"\n"+
+		"- Add zh-CN"+"\n"
 	)
 	DataStore.set(`Update-${update}`, false)
 }
