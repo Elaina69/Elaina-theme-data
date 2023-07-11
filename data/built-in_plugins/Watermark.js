@@ -65,7 +65,7 @@ function ElainaTrigger() {
 		
 	Elaina1Text.classList.add ("Elaina1Text")
 	Elaina1Image.classList.add("Elaina1Image")
-	Elaina1Image.setAttribute ("src", `${datapath}/assets/Icon/Plugins-icons/ElainaCB.png`)	
+	Elaina1Image.setAttribute ("src", `${datapath}assets/Icon/Plugins-icons/ElainaCB.png`)	
 	Elaina1Image.style.visibility = "hidden"
 			
 	answer1.id = "answer1"
