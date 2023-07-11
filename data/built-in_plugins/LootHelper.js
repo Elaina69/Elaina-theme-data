@@ -1,9 +1,5 @@
-let lang
-
 let datapath = new URL("..", import.meta.url).href
-
-try{let res = await fetch(`https://raw.githack.com/Elaina69/Elaina-V2/main/Main/configs/Language.js`)
-if (res.status==200) {lang = (await (() => import(`https://raw.githack.com/Elaina69/Elaina-V2/main/Main/configs/Language.js`))()).default}}catch{}
+import lang from "../configs/Language.js"
 
 if (DataStore.get("loot-helper")) {
     function AddElement(parent, tag, params = [], classes = [], content = null) {

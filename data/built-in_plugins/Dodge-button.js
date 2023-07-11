@@ -1,6 +1,4 @@
-let lang
-try{let res = await fetch(`https://raw.githack.com/Elaina69/Elaina-V2/main/Main/configs/Language.js`)
-if (res.status==200) {lang = (await (() => import(`https://raw.githack.com/Elaina69/Elaina-V2/main/Main/configs/Language.js`))()).default}}catch{}
+import lang from "../configs/Language.js"
 
 async function exitClient(){
     await fetch("/process-control/v1/process/quit",

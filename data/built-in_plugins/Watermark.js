@@ -1,6 +1,6 @@
 import utils from "../_utils.js"
 
-let datapath = new URL("..", import.meta.url).href+"assets"
+let datapath = new URL("..", import.meta.url).href
 
 function ElainaTrigger() {
     const container0  = document.createElement("div")

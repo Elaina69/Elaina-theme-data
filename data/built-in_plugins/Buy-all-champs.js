@@ -1,6 +1,6 @@
 import utils from "../_utils.js"
 import axios from "https://cdn.skypack.dev/axios"
-import ChampsP from 'https://raw.githack.com/Elaina69/Elaina-V2/main/Main/configs/ChampionsPrices.js'
+import ChampsP from '../configs/ChampionsPrices.js'
 
 export class Store {
     constructor() {
