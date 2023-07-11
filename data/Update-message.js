@@ -9,7 +9,7 @@ if (DataStore.get(`Update-${update}`)) {
 
 		`ElainaV3 Update ${update}`+"\n"+
 		"- Update to V3"+"\n"+
-		"- Using npm JsDelivr instead raw.githack (more stable than V2)"+"\n"+
+		"- Using npm unpkg instead raw.githack (more stable than V2)"+"\n"+
 		"- Separate data folder"+"\n"+
 		"- Now you can change css file by ur self again"+"\n"+
 		"- Add zh-CN"+"\n"
