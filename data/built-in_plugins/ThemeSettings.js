@@ -867,6 +867,7 @@ window.addEventListener('load', async () => {
             if (panel && mutations.some((record) => Array.from(record.addedNodes).includes(panel))) {
                injectSettings(panel)
                const check = setInterval (()=>{
+                  let conAudioel = document.getElementById("conAudio");let sbtel = document.getElementById("sbt");
                   let hidechampartel = document.getElementById("hidechampart");let cusfontel = document.getElementById("cusfont");let cusrpel = document.getElementById("cusrp");
                   let cusbeel = document.getElementById("cusbe");let cusranknameel = document.getElementById("cusrankname");let aniloadel = document.getElementById("aniload");
                   let cusavel = document.getElementById("cusav");let cusiconel = document.getElementById("cusicon");let cuscursorel = document.getElementById("cuscursor");
@@ -874,7 +875,7 @@ window.addEventListener('load', async () => {
                   let autoqel = document.getElementById("autoq");let cusrankhoverel = document.getElementById("cusrankhover");let cusstael = document.getElementById("cussta");
                   let _1_4el = document.getElementById("_1_4");let MCel = document.getElementById("MC");let lhel = document.getElementById("lh");
                   let stdiatel = document.getElementById("stdiat");let oldpnbel = document.getElementById("oldpnb");let hideveriaccel = document.getElementById("hideveriacc");
-                  let hidelinksetel = document.getElementById("hidelinkset");let Arambox = document.getElementById("Aram only checkbox");let updatebox = document.getElementById("update checkbox");
+                  let hidelinksetel = document.getElementById("hidelinkset");let Arambox = document.getElementById("Aram only checkbox");
                   let conAudiobox = document.getElementById("conAudiobox");let sbtbox = document.getElementById("sbtbox");let cusrpbox = document.getElementById("cusrpbox");
                   let hidechampartbox = document.getElementById("hidechampartbox");let cusfontbox = document.getElementById("cusfontbox");let cusbebox = document.getElementById("cusbebox");
                   let cusranknamebox = document.getElementById("cusranknamebox");let aniloadbox = document.getElementById("aniloadbox");let cuscursorbox = document.getElementById("cuscursorbox");
