@@ -7,17 +7,14 @@
     "index.js",
     "data"
   ],
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Elaina69/ElainaV3-Data.git"
+    "url": "git+https://github.com/Elaina69/Elaina-V3"
   },
   "author": "Elaina Da Catto",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Elaina69/ElainaV3-Data/issues"
+    "url": "https://github.com/Elaina69/Elaina-V3/issues"
   },
-  "homepage": "https://github.com/Elaina69/ElainaV3-Data#readme"
+  "homepage": "https://github.com/Elaina69/Elaina-V3"
 }
