@@ -867,26 +867,63 @@ window.addEventListener('load', async () => {
             if (panel && mutations.some((record) => Array.from(record.addedNodes).includes(panel))) {
                injectSettings(panel)
                const check = setInterval (()=>{
-                  let conAudioel = document.getElementById("conAudio");let sbtel = document.getElementById("sbt");
-                  let hidechampartel = document.getElementById("hidechampart");let cusfontel = document.getElementById("cusfont");let cusrpel = document.getElementById("cusrp");
-                  let cusbeel = document.getElementById("cusbe");let cusranknameel = document.getElementById("cusrankname");let aniloadel = document.getElementById("aniload");
-                  let cusavel = document.getElementById("cusav");let cusiconel = document.getElementById("cusicon");let cuscursorel = document.getElementById("cuscursor");
-                  let oldllel = document.getElementById("oldll");let Aramel = document.getElementById("Aram only");let autobpel = document.getElementById("autobp");
-                  let autoqel = document.getElementById("autoq");let cusrankhoverel = document.getElementById("cusrankhover");let cusstael = document.getElementById("cussta");
-                  let _1_4el = document.getElementById("_1_4");let MCel = document.getElementById("MC");let lhel = document.getElementById("lh");
-                  let stdiatel = document.getElementById("stdiat");let oldpnbel = document.getElementById("oldpnb");let hideveriaccel = document.getElementById("hideveriacc");
-                  let hidelinksetel = document.getElementById("hidelinkset");let Arambox = document.getElementById("Aram only checkbox");
-                  let conAudiobox = document.getElementById("conAudiobox");let sbtbox = document.getElementById("sbtbox");let cusrpbox = document.getElementById("cusrpbox");
-                  let hidechampartbox = document.getElementById("hidechampartbox");let cusfontbox = document.getElementById("cusfontbox");let cusbebox = document.getElementById("cusbebox");
-                  let cusranknamebox = document.getElementById("cusranknamebox");let aniloadbox = document.getElementById("aniloadbox");let cuscursorbox = document.getElementById("cuscursorbox");
-                  let cusavbox = document.getElementById("cusavbox");let cusiconbox = document.getElementById("cusiconbox");let oldllbox = document.getElementById("oldllbox");
-                  let autobpbox = document.getElementById("autobpbox");let cusrankhoverbox = document.getElementById("cusrankhoverbox");
-                  let autoqbox = document.getElementById("autoqbox");let cusstabox = document.getElementById("cusstabox");let MCbox = document.getElementById("MCbox");
-                  let _1_4box = document.getElementById("_1_4box");let lhbox = document.getElementById("lhbox");let stdiatbox = document.getElementById("stdiatbox");
-                  let oldpnbbox = document.getElementById("oldpnbbox");let hidelinksetbox = document.getElementById("hidelinksetbox");let hideveriaccbox = document.getElementById("hideveriaccbox");
-                  let ngsdel = document.getElementById("ngsd");let ngsdbox = document.getElementById("ngsdbox");let rdsel = document.getElementById("rds");
-                  let rdsbox = document.getElementById("rdsbox");let bycel = document.getElementById("byc");let bycbox = document.getElementById("bycbox");
-                  let namespfel = document.getElementById("namespf");let namespfbox = document.getElementById("namespfbox");let hidevlel = document.getElementById("hidevl");
+                  let conAudioel = document.getElementById("conAudio");
+                  let sbtel = document.getElementById("sbt");
+                  let hidechampartel = document.getElementById("hidechampart");
+                  let cusfontel = document.getElementById("cusfont");
+                  let cusrpel = document.getElementById("cusrp");
+                  let cusbeel = document.getElementById("cusbe");
+                  let cusranknameel = document.getElementById("cusrankname");
+                  let aniloadel = document.getElementById("aniload");
+                  let cusavel = document.getElementById("cusav");
+                  let cusiconel = document.getElementById("cusicon");
+                  let cuscursorel = document.getElementById("cuscursor");
+                  let oldllel = document.getElementById("oldll");
+                  let Aramel = document.getElementById("Aram only");
+                  let autobpel = document.getElementById("autobp");
+                  let autoqel = document.getElementById("autoq");
+                  let cusrankhoverel = document.getElementById("cusrankhover");
+                  let cusstael = document.getElementById("cussta");
+                  let _1_4el = document.getElementById("_1_4");
+                  let MCel = document.getElementById("MC");
+                  let lhel = document.getElementById("lh");
+                  let stdiatel = document.getElementById("stdiat");
+                  let oldpnbel = document.getElementById("oldpnb");
+                  let hideveriaccel = document.getElementById("hideveriacc");
+                  let hidelinksetel = document.getElementById("hidelinkset");
+                  let Arambox = document.getElementById("Aram only checkbox");
+                  let conAudiobox = document.getElementById("conAudiobox");
+                  let sbtbox = document.getElementById("sbtbox")
+                  ;let cusrpbox = document.getElementById("cusrpbox");
+                  let hidechampartbox = document.getElementById("hidechampartbox");
+                  let cusfontbox = document.getElementById("cusfontbox");
+                  let cusbebox = document.getElementById("cusbebox");
+                  let cusranknamebox = document.getElementById("cusranknamebox");
+                  let aniloadbox = document.getElementById("aniloadbox");
+                  let cuscursorbox = document.getElementById("cuscursorbox");
+                  let cusavbox = document.getElementById("cusavbox");
+                  let cusiconbox = document.getElementById("cusiconbox");
+                  let oldllbox = document.getElementById("oldllbox");
+                  let autobpbox = document.getElementById("autobpbox");
+                  let cusrankhoverbox = document.getElementById("cusrankhoverbox");
+                  let autoqbox = document.getElementById("autoqbox");
+                  let cusstabox = document.getElementById("cusstabox");
+                  let MCbox = document.getElementById("MCbox");
+                  let _1_4box = document.getElementById("_1_4box");
+                  let lhbox = document.getElementById("lhbox");
+                  let stdiatbox = document.getElementById("stdiatbox");
+                  let oldpnbbox = document.getElementById("oldpnbbox");
+                  let hidelinksetbox = document.getElementById("hidelinksetbox");
+                  let hideveriaccbox = document.getElementById("hideveriaccbox");
+                  let ngsdel = document.getElementById("ngsd");
+                  let ngsdbox = document.getElementById("ngsdbox");
+                  let rdsel = document.getElementById("rds");
+                  let rdsbox = document.getElementById("rdsbox");
+                  let bycel = document.getElementById("byc");
+                  let bycbox = document.getElementById("bycbox");
+                  let namespfel = document.getElementById("namespf");
+                  let namespfbox = document.getElementById("namespfbox");
+                  let hidevlel = document.getElementById("hidevl");
                   let hidevlbox = document.getElementById("hidevlbox");
 
                   if (document.getElementById("Aram only")) {
@@ -921,7 +958,6 @@ window.addEventListener('load', async () => {
                      tickcheck(DataStore.get("Old-League-Loader-Settings"), oldllel, oldllbox)
                      tickcheck(DataStore.get("Auto-ban-pick"), autobpel, autobpbox)
                      tickcheck(DataStore.get("Auto-Find-Queue"), autoqel, autoqbox)
-                     tickcheck(DataStore.get("Custom-Rank(Hover-card)"), cusrankhoverel, cusrankhoverbox)
                      tickcheck(DataStore.get("Custom-Status"), cusstael, cusstabox)
                      tickcheck(DataStore.get("April fool` joke"), _1_4el, _1_4box)
                      tickcheck(DataStore.get("Merry-Christmas"), MCel, MCbox)
@@ -933,6 +969,7 @@ window.addEventListener('load', async () => {
                      tickcheck(DataStore.get("new-gamesearch-queue"),ngsdel, ngsdbox)
                      tickcheck(DataStore.get("random-skin"), rdsel, rdsbox)
                      tickcheck(DataStore.get("buy-all-champs"), bycel, bycbox)
+                     tickcheck(DataStore.get("Custom-Rank(Hover-card)"), cusrankhoverel, cusrankhoverbox)
                   }
                },100)
             }
