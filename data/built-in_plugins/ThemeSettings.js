@@ -219,25 +219,6 @@ const injectSettings = (panel) => {
          ),
          document.createElement('br'),
          UI.CheckBox(
-            `${selectedLang["receive-update"]}`,"update","update checkbox",
-            () => {
-               let updateel = document.getElementById("update")
-               let updatebox = document.getElementById("update checkbox")
-
-               if (DataStore.get("Receive-Update")) {
-                  updatebox.checked = false
-                  DataStore.set("Receive-Update", false)
-                  updateel.removeAttribute("class")
-               }
-               else {
-                  updatebox.checked = true
-                  DataStore.set("Receive-Update", true)
-                  updateel.setAttribute("class", "checked")
-               }
-            }
-         ),
-         document.createElement('br'),
-         UI.CheckBox(
             `${selectedLang["old-prev/next-button"]}`,"oldpnb","oldpnbbox",
             ()=>{
                let oldpnbel = document.getElementById("oldpnb")
@@ -886,7 +867,6 @@ window.addEventListener('load', async () => {
             if (panel && mutations.some((record) => Array.from(record.addedNodes).includes(panel))) {
                injectSettings(panel)
                const check = setInterval (()=>{
-                  let updateel = document.getElementById("update");let conAudioel = document.getElementById("conAudio");let sbtel = document.getElementById("sbt");
                   let hidechampartel = document.getElementById("hidechampart");let cusfontel = document.getElementById("cusfont");let cusrpel = document.getElementById("cusrp");
                   let cusbeel = document.getElementById("cusbe");let cusranknameel = document.getElementById("cusrankname");let aniloadel = document.getElementById("aniload");
                   let cusavel = document.getElementById("cusav");let cusiconel = document.getElementById("cusicon");let cuscursorel = document.getElementById("cuscursor");
@@ -926,7 +906,6 @@ window.addEventListener('load', async () => {
                      tickcheck(DataStore.get("Name-Spoofer"), namespfel, namespfbox)
                      tickcheck(DataStore.get("hide-vertical-lines"), hidevlel, hidevlbox)
                      tickcheck(DataStore.get("aram-only"), Aramel, Arambox)
-                     tickcheck(DataStore.get("Receive-Update"), updateel, updatebox)
                      tickcheck(DataStore.get("Continues_Audio"), conAudioel, conAudiobox)
                      tickcheck(DataStore.get("Sidebar-Transparent"), sbtel, sbtbox)
                      tickcheck(DataStore.get("Hide-Champions-Splash-Art"), hidechampartel, hidechampartbox)

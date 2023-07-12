@@ -78,7 +78,7 @@ if (DataStore.get("random-skin")) {
 
         buttonDiv.classList = "sr-reroll-div mission-button-component ember-view";
         button.classList = "sr-reroll mission-button use-animation";
-        button.style.backgroundImage = `url("${datapath}/assets/Icon/Plugins-icons/reroll_button.png")`
+        button.style.backgroundImage = `url("${datapath}assets/Icon/Plugins-icons/reroll_button.png")`
 
         buttonDiv.append(button);
 
@@ -104,7 +104,7 @@ if (DataStore.get("random-skin")) {
     }
 
     window.addEventListener("load", async () => {
-        utils.addCss("","","",`${datapath}/assets/Css/Addon-Css/reroll_button.css`)
+        utils.addCss("","","",`${datapath}assets/Css/Addon-Css/reroll_button.css`)
         await delay(1000);
         if (DataStore.get("sr_enable") == undefined) DataStore.set("sr_enable", true);
         if (DataStore.get("champion_id")) DataStore.remove("champion_id")

@@ -1,8 +1,9 @@
 {
   "name": "elainav3-data",
-  "version": "2.0.16",
+  "version": "2.0.15",
   "description": "Data files for ElainaV3 theme",
   "main": "index.js",
+  "files": ["index.js","data"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
