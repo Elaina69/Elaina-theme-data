@@ -191,8 +191,8 @@ const injectSettings = (panel) => {
          UI.Row("Info",[
             UI.Row("Info-div",[
                UI.Link(
-                  'ElainaV2',
-                  'https://github.com/Elaina69/Elaina-V2'
+                  'ElainaV3',
+                  'https://github.com/Elaina69/Elaina-V3'
                ),
                UI.Label(
                   `*${selectedLang["note"]}: ${selectedLang["note-1"]}`
