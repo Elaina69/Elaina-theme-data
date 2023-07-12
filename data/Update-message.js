@@ -8,11 +8,13 @@ if (DataStore.get(`Update-${update}`)) {
 		// Add this ""+"\n"+
 
 		`ElainaV3 Update ${update}`+"\n"+
-		"- Update to V3"+"\n"+
-		"- Using npm unpkg instead raw.githack (more stable than V2)"+"\n"+
-		"- Separate data folder"+"\n"+
-		"- Now you can change css file by ur self again"+"\n"+
-		"- Add zh-CN"+"\n"
+		"- Fix Custom status"+"\n"+
+		"- Fix Custom rank (hover card)"+"\n"+
+		"- Fix Custom font"+"\n"+
+		"- Fix Random skin plugins"+"\n"+
+		"- Fix Loot helper plugins"+"\n"+
+		"- Fix Mute audio button"+"\n"+
+		"- Update Old LL settings"+"\n"
 	)
 	DataStore.set(`Update-${update}`, false)
 }
