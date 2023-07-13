@@ -5,6 +5,9 @@ let datapath = new URL(".", import.meta.url).href
 if (!DataStore.has("Custom-rank")) {
 	DataStore.set("Custom-rank", true)
 }
+if (!DataStore.has("Runes-BG")) {
+	DataStore.set("Runes-BG", true)
+}
 
 window.addEventListener("load", ()=> {
     utils.addCss("","","",`${datapath}ImportUpdate.css`)

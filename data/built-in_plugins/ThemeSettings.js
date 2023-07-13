@@ -478,6 +478,25 @@ const injectSettings = (panel) => {
          ),
          document.createElement('br'),
          UI.CheckBox(
+            `${selectedLang["custom-runes-bg"]}`,'rsbg','rsbgbox',
+            ()=>{
+               let rsbgel = document.getElementById("rsbg")
+               let rsbgbox = document.getElementById("rsbgbox")
+
+               if (DataStore.get("Runes-BG")) {
+                  rsbgbox.checked = false
+                  DataStore.set("Runes-BG", false)
+                  rsbgel.removeAttribute("class")
+               }
+               else {
+                  rsbgbox.checked = true
+                  DataStore.set("Runes-BG", true)
+                  rsbgel.setAttribute("class", "checked")
+               }
+            }
+         ),
+         document.createElement('br'),
+         UI.CheckBox(
             `${selectedLang["custom-cursor"]}`,'cuscursor','cuscursorbox',
             ()=>{
                let cuscursorel = document.getElementById("cuscursor")
@@ -925,6 +944,9 @@ window.addEventListener('load', async () => {
                   let namespfbox = document.getElementById("namespfbox");
                   let hidevlel = document.getElementById("hidevl");
                   let hidevlbox = document.getElementById("hidevlbox");
+                  let rsbgel = document.getElementById("rsbg")
+                  let rsbgbox = document.getElementById("rsbgbox")
+
 
                   if (document.getElementById("Aram only")) {
                      clearInterval(check)
@@ -941,6 +963,7 @@ window.addEventListener('load', async () => {
                      DeleteElcheck("pandoru",`${datapath}built-in_plugins/Pandoru.js`)
                      DeleteElcheck("namespoof",`${datapath}built-in_plugins/NameSpoofer.js`)
 
+                     tickcheck(DataStore.get("Runes-BG"), rsbgel, rsbgbox)
                      tickcheck(DataStore.get("Name-Spoofer"), namespfel, namespfbox)
                      tickcheck(DataStore.get("hide-vertical-lines"), hidevlel, hidevlbox)
                      tickcheck(DataStore.get("aram-only"), Aramel, Arambox)

@@ -8,13 +8,15 @@ if (DataStore.get(`Update-${update}`)) {
 		// Add this ""+"\n"+
 
 		`ElainaV3 Update ${update}`+"\n"+
-		"- Fix Custom status"+"\n"+
-		"- Fix Custom rank (hover card)"+"\n"+
-		"- Fix Custom font"+"\n"+
-		"- Fix Random skin plugins"+"\n"+
-		"- Fix Loot helper plugins"+"\n"+
-		"- Fix Mute audio button"+"\n"+
-		"- Update Old LL settings"+"\n"
+		"- Fix Custom rank (again)"+"\n"+
+		"- Add custom runes page backgrounds"+"\n"+
+		"- Update Auto queue list"+"\n"+
+		"- Update Css"+"\n"+
+		"- Add Dev mode (turn on; DataStore.set(\"Dev-mode\", true) )"+"\n"+
+		""+"\n"+
+		"You must download update version from github to get newest function"+"\n"+
+		""+"\n"+
+		"Sorry for this inconvenience"+"\n"
 	)
 	DataStore.set(`Update-${update}`, false)
 }
