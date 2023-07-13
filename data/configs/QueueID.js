@@ -7,6 +7,12 @@ const List = {
             "notes": null
         },
         {
+            "queueId": 400,
+            "map": "Summoner's Rift",
+            "description": "5v5 Draft Pick games",
+            "notes": null
+        },
+        {
             "queueId": 420,
             "map": "Summoner's Rift",
             "description": "5v5 Ranked Solo games",
@@ -92,12 +98,7 @@ const List = {
 
 
 
-        /*{
-            "queueId": 400,
-            "map": "Summoner's Rift",
-            "description": "5v5 Draft Pick games",
-            "notes": null
-        },
+        /*
         {
             "queueId": 325,
             "map": "Summoner's Rift",
