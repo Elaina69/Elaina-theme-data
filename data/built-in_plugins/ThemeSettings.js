@@ -764,14 +764,14 @@ const injectSettings = (panel) => {
                let cusrankhoverel = document.getElementById("cusrankhover")
                let cusrankhoverbox = document.getElementById("cusrankhoverbox")
 
-               if (DataStore.get("Custom-Rank-Hover-card")) {
+               if (DataStore.get("Custom-rank")) {
                   cusrankhoverbox.checked = false
-                  DataStore.set("Custom-Rank-Hover-card", false)
+                  DataStore.set("Custom-rank", false)
                   cusrankhoverel.removeAttribute("class")
                }
                else {
                   cusrankhoverbox.checked = true
-                  DataStore.set("Custom-Rank-Hover-card", true)
+                  DataStore.set("Custom-rank", true)
                   cusrankhoverel.setAttribute("class", "checked")
                }
             }
@@ -969,7 +969,7 @@ window.addEventListener('load', async () => {
                      tickcheck(DataStore.get("new-gamesearch-queue"),ngsdel, ngsdbox)
                      tickcheck(DataStore.get("random-skin"), rdsel, rdsbox)
                      tickcheck(DataStore.get("buy-all-champs"), bycel, bycbox)
-                     tickcheck(DataStore.get("Custom-Rank-Hover-card"), cusrankhoverel, cusrankhoverbox)
+                     tickcheck(DataStore.get("Custom-rank"), cusrankhoverel, cusrankhoverbox)
                   }
                },100)
             }
