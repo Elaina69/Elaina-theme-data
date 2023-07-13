@@ -36,6 +36,18 @@ const List = {
             "description": "Ranked Teamfight Tactics games",
             "notes": null
         },
+        {
+            "queueId": 1130,
+            "map": "Convergence",
+            "description": "Teamfight Tactics Hyper Roll games",
+            "notes": null
+        },
+        {
+            "queueId": 1160,
+            "map": "Convergence",
+            "description": "Teamfight Tactics Double Up games",
+            "notes": null
+        },
 
 
 
@@ -67,6 +79,12 @@ const List = {
             "queueId": 1900,
             "map": "Summoner's Rift",
             "description": "Pick URF games",
+            "notes": null
+        },
+        {
+            "queueId": ,
+            "map": "",
+            "description": " games",
             "notes": null
         },*/
 
