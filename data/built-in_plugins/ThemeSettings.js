@@ -903,8 +903,8 @@ window.addEventListener('load', async () => {
                   let autoqel = document.getElementById("autoq");
                   let cusrankhoverel = document.getElementById("cusrankhover");
                   let cusstael = document.getElementById("cussta");
-                  //let _1_4el = document.getElementById("_1_4");
-                  let MCel = document.getElementById("MC");
+                  let _1_4el = document.getElementById("_1_4");
+                  //let MCel = document.getElementById("MC");
                   let lhel = document.getElementById("lh");
                   let stdiatel = document.getElementById("stdiat");
                   let oldpnbel = document.getElementById("oldpnb");
@@ -927,8 +927,8 @@ window.addEventListener('load', async () => {
                   let cusrankhoverbox = document.getElementById("cusrankhoverbox");
                   let autoqbox = document.getElementById("autoqbox");
                   let cusstabox = document.getElementById("cusstabox");
-                  let MCbox = document.getElementById("MCbox");
-                  //let _1_4box = document.getElementById("_1_4box");
+                  //let MCbox = document.getElementById("MCbox");
+                  let _1_4box = document.getElementById("_1_4box");
                   let lhbox = document.getElementById("lhbox");
                   let stdiatbox = document.getElementById("stdiatbox");
                   let oldpnbbox = document.getElementById("oldpnbbox");
@@ -982,8 +982,8 @@ window.addEventListener('load', async () => {
                      tickcheck(DataStore.get("Auto-ban-pick"), autobpel, autobpbox)
                      tickcheck(DataStore.get("Auto-Find-Queue"), autoqel, autoqbox)
                      tickcheck(DataStore.get("Custom-Status"), cusstael, cusstabox)
-                     //tickcheck(DataStore.get("April fool` joke"), _1_4el, _1_4box)
-                     tickcheck(DataStore.get("Merry-Christmas"), MCel, MCbox)
+                     tickcheck(DataStore.get("April fool` joke"), _1_4el, _1_4box)
+                     //tickcheck(DataStore.get("Merry-Christmas"), MCel, MCbox)
                      tickcheck(DataStore.get("loot-helper"), lhel, lhbox)
                      tickcheck(DataStore.get("settings-dialogs-transparent"), stdiatel, stdiatbox)
                      tickcheck(DataStore.get("old-prev/next-button"), oldpnbel, oldpnbbox)
