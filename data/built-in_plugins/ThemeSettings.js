@@ -237,7 +237,7 @@ const injectSettings = (panel) => {
             }
          ),
          document.createElement('br'),
-         UI.CheckBox(
+         /*UI.CheckBox(
             `${selectedLang["continues-song"]}`,"conAudio","conAudiobox",
             ()=>{
                let conAudioel = document.getElementById("conAudio")
@@ -255,7 +255,7 @@ const injectSettings = (panel) => {
                }
             }
          ),
-         document.createElement('br'),
+         document.createElement('br'),*/
          UI.CheckBox(
             `${selectedLang["sidebar-transparent"]}`,'sbt','sbtbox',
             ()=>{
@@ -556,7 +556,7 @@ const injectSettings = (panel) => {
             }
          ),
          document.createElement('br'),
-         UI.CheckBox(
+         /*UI.CheckBox(
             `${selectedLang["new-gamesearch-queue"]}`,"ngsd","ngsdbox",
             () => {
                let ngsdel = document.getElementById("ngsd")
@@ -574,7 +574,7 @@ const injectSettings = (panel) => {
                }
             }
          ),
-         document.createElement('br'),
+         document.createElement('br'),*/
          document.createElement('br'),
 //________________________________________________________________________________________//
          
@@ -703,7 +703,7 @@ const injectSettings = (panel) => {
                }
             )
          ]),
-         UI.Row("pandoru",[
+         /*UI.Row("pandoru",[
             UI.CheckBox(
                `${selectedLang["Santa"]}`,'MC','MCbox',
                ()=>{
@@ -722,7 +722,7 @@ const injectSettings = (panel) => {
                   }
                }
             )
-         ]),
+         ]),*/
          UI.Row("buyallchamp",[
             UI.CheckBox(
                `${selectedLang["buy-all-champs"]}`,'byc','bycbox',
