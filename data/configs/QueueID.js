@@ -1,6 +1,24 @@
 const List = {
     "Gamemode" :[
         {
+            "queueId": 830,
+            "map": "Summoner's Rift",
+            "description": "Co-op vs. AI Intro Bot games",
+            "notes": null
+        },
+        {
+            "queueId": 840,
+            "map": "Summoner's Rift",
+            "description": "Co-op vs. AI Beginner Bot games",
+            "notes": null
+        },
+        {
+            "queueId": 850,
+            "map": "Summoner's Rift",
+            "description": "Co-op vs. AI Intermediate Bot games",
+            "notes": null
+        },
+        {
             "queueId": 430,
             "map": "Summoner's Rift",
             "description": "5v5 Blind Pick games",
@@ -199,24 +217,6 @@ const List = {
             "queueId": 820,
             "map": "Twisted Treeline",
             "description": "Co-op vs. AI Beginner Bot games",
-            "notes": null
-        },
-        {
-            "queueId": 830,
-            "map": "Summoner's Rift",
-            "description": "Co-op vs. AI Intro Bot games",
-            "notes": null
-        },
-        {
-            "queueId": 840,
-            "map": "Summoner's Rift",
-            "description": "Co-op vs. AI Beginner Bot games",
-            "notes": null
-        },
-        {
-            "queueId": 850,
-            "map": "Summoner's Rift",
-            "description": "Co-op vs. AI Intermediate Bot games",
             "notes": null
         },
         {
