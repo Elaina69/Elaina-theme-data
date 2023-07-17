@@ -1,6 +1,6 @@
 import axios from "https://cdn.skypack.dev/axios"
-import utils from "./_utils.js"
-import lang from "./Language.js"
+import utils from "../_utils.js"
+import lang from "../configs/Language.js"
 
 if (DataStore.get("Auto-ban-pick")) {
   const request = async (method, url, userBody = null) => {
