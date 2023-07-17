@@ -1,3 +1,17 @@
 .ready-check-map-background.ember-view {
     display: none !important;
 }
+
+#BanPick-Delay {
+	display: flex;
+	margin-bottom: 0px !important;
+}
+
+#pick-delay {
+	margin-right: 15px;
+	margin-bottom: 0px !important;
+}
+
+#ban-delay {
+	margin-bottom: 0px !important;
+}

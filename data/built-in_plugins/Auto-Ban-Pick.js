@@ -1,6 +1,6 @@
 import axios from "https://cdn.skypack.dev/axios"
-import utils from "../_utils.js"
-import lang from "../configs/Language.js"
+import utils from "./_utils.js"
+import lang from "./Language.js"
 
 if (DataStore.get("Auto-ban-pick")) {
   const request = async (method, url, userBody = null) => {
@@ -27,14 +27,12 @@ if (DataStore.get("Auto-ban-pick")) {
   }
   
   async function getChampionSelectData() {
-    const url = "/lol-champ-select/v1/session"
-    const response = await request("GET", url)
+    const response = await request("GET", "/lol-champ-select/v1/session")
     return await response.json()
   }
   
   async function getGamePhase() {
-    const url = "/lol-gameflow/v1/gameflow-phase"
-    const response = await request("GET", url)
+    const response = await request("GET", "/lol-gameflow/v1/gameflow-phase")
     return await response.json()
   }
   
@@ -100,19 +98,23 @@ const onChampionSelect = async championSelectData => {
       if (action.completed || action.actorCellId != localPlayerCellId) { continue }
 
       if (action.type === "pick" && pickChampion.enabled) {
-        for (const championId of pickChampion.champions) {
-          if (allBans.some(bannedChampionId => bannedChampionId == championId)) { continue }
-          if (allPicks.some(player => player.championId == championId)) { continue }
-          if (await selectChampion(action.id, championId)) { return }
-        }
+        window.setTimeout(async ()=> {
+          for (const championId of pickChampion.champions) {
+            if (allBans.some(bannedChampionId => bannedChampionId == championId)) { continue }
+            if (allPicks.some(player => player.championId == championId)) { continue }
+            if (await selectChampion(action.id, championId)) { return }
+          }
+        }, DataStore.get("pick-delay"))
       }
 
       if (action.type === "ban" && banChampion.enabled) {
-        for (const championId of banChampion.champions) {
-          if (allBans.some(bannedChampionId => bannedChampionId == championId)) { continue }
-          if (!banChampion.force && myTeam.some(ally => ally.championPickIntent == championId)) { continue }
-          if (await selectChampion(action.id, championId)) { return } else { break }
-        }
+        window.setTimeout(async ()=> {
+          for (const championId of banChampion.champions) {
+            if (allBans.some(bannedChampionId => bannedChampionId == championId)) { continue }
+            if (!banChampion.force && myTeam.some(ally => ally.championPickIntent == championId)) { continue }
+            if (await selectChampion(action.id, championId)) { return } else { break }
+          }
+        }, DataStore.get("ban-delay"))
       }
     }
   }
@@ -219,7 +221,20 @@ const onMutation = () => {
   pickDropdownContainer.element.append(firstPickDropdown.element, secondPickDropdown.element)
   banDropdownContainer.element.append(firstBanDropdown.element, secondBanDropdown.element)
 
-  socialContainer.append(checkBoxContainer.element, pickDropdownContainer.element, banDropdownContainer.element)
+  const newSection = document.createElement("lol-social-roster-group");
+  newSection.classList.add("group", "group-label");
+  newSection.addEventListener("click", () => {
+    const nextElement = newSection.nextElementSibling;
+    nextElement.style.display = nextElement.style.display === "none" ? "block" : "none";
+    newSection.querySelector(".arrow").toggleAttribute("open");
+  });
+
+  const newDiv = document.createElement("div");
+  newDiv.append(checkBoxContainer.element, pickDropdownContainer.element, banDropdownContainer.element);
+  socialContainer.append(newSection, newDiv);
+
+  newSection.querySelector("span").textContent = "Auto ban/pick";
+  newSection.querySelector(".group-header").removeAttribute("draggable");
 }
 
 window.addEventListener("load", async () => {

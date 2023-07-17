@@ -681,7 +681,17 @@ const injectSettings = (panel) => {
                      autobpel.setAttribute("class", "checked")
                   }
                }
-            )
+            ),
+            UI.Row("BanPick-Delay",[
+               UI.Row("pick-delay",[
+                  UI.Label(`${selectedLang["pick-delay"]}`, "pick-delay-Text"),
+                  UI.Input("pick-delay"),
+               ]),
+               UI.Row("ban-delay",[
+                  UI.Label(`${selectedLang["ban-delay"]}`, "ban-delay-Text"),
+                  UI.Input("ban-delay")
+               ])
+            ])
          ]),
          UI.Row("j1_4",[
             UI.CheckBox(
