@@ -12,4 +12,11 @@ if (!DataStore.has("Runes-BG")) {
 window.addEventListener("load", ()=> {
     utils.addCss("","","",`${datapath}ImportUpdate.css`)
 })
-//
+
+// 2.0.3
+if (!DataStore.has("pick-delay")) {
+	DataStore.set("pick-delay", 500)
+}
+if (!DataStore.has("ban-delay")) {
+	DataStore.set("ban-delay", 500)
+}
