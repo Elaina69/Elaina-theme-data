@@ -72,6 +72,12 @@ const List = {
             "description": "Teamfight Tactics Double Up games",
             "notes": null
         },
+        {
+            "queueId": 1700,
+            "map": "",
+            "description": "Arena games",
+            "notes": null
+        },
 
 
 
@@ -105,12 +111,7 @@ const List = {
             "description": "Pick URF games",
             "notes": null
         },
-        {
-            "queueId": ,
-            "map": "",
-            "description": " games",
-            "notes": null
-        },*/
+        */
 
 
 
