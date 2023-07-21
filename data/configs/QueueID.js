@@ -73,8 +73,14 @@ const List = {
             "notes": null
         },
         {
+            "queueId": 1180,
+            "map": "Convergence",
+            "description": "Teamfight Tactics Arena games",
+            "notes": null
+        },
+        {
             "queueId": 1700,
-            "map": "",
+            "map": "RoW",
             "description": "Arena games",
             "notes": null
         },
