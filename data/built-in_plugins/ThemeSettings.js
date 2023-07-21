@@ -174,9 +174,10 @@ const injectSettings = (panel) => {
           {"id" : 3, "name": `${selectedLang["Gold"]}`},
           {"id" : 4, "name": `${selectedLang["Platinum"]}`},
           {"id" : 5, "name": `${selectedLang["Diamond"]}`},
-          {"id" : 6, "name": `${selectedLang["Master"]}`},
-          {"id" : 7, "name": `${selectedLang["Grand-Master"]}`},
-          {"id" : 8, "name": `${selectedLang["Challenger"]}`}
+          {"id" : 6, "name": `${selectedLang["Emerald"]}`},
+          {"id" : 7, "name": `${selectedLang["Master"]}`},
+          {"id" : 8, "name": `${selectedLang["Grand-Master"]}`},
+          {"id" : 9, "name": `${selectedLang["Challenger"]}`}
       ],
   
       "Ranked Division ID": [
