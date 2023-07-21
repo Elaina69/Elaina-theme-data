@@ -8,15 +8,18 @@ if (DataStore.get(`Update-${update}`)) {
 		// Add this ""+"\n"+
 
 		`ElainaV3 Update ${update}`+"\n"+
-		"- Fix Custom rank (again)"+"\n"+
-		"- Add custom runes page backgrounds"+"\n"+
-		"- Update Auto queue list"+"\n"+
-		"- Update Css"+"\n"+
-		"- Add Dev mode (turn on; DataStore.set(\"Dev-mode\", true) )"+"\n"+
+		"- Add 5vs5 practice room button"+"\n"+
+		"- Delete unused settings"+"\n"+
+		"- Add AI game mode for auto queue"+"\n"+
+		"- Add new gamemode for auto queue"+"\n"+
+		"- Add ban/pick delay for auto ban/pick"+"\n"+
 		""+"\n"+
-		"You must download update version from github to get newest function"+"\n"+
+		"This update already installed"+"\n"+
 		""+"\n"+
-		"Sorry for this inconvenience"+"\n"
+		"You don't have to do anything"+"\n"
+		//"You must download update version from github to get newest function"+"\n"+
+		//""+"\n"+
+		//"Sorry for this inconvenience"+"\n"
 	)
 	DataStore.set(`Update-${update}`, false)
 }
