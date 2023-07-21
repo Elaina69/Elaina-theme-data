@@ -3,7 +3,7 @@ if (DataStore.set("Custom-Rank-Hover-card")) {
                         "RANKED_TFT","RANKED_TFT_TURBO","RANKED_TFT_DOUBLE_UP",
     ]
     let tierOptions = ["IRON","BRONZE","SILVER","GOLD","PLATINUM",
-                    "DIAMOND","MASTER","GRANDMASTER","CHALLENGER"
+                    "DIAMOND","EMERALD","MASTER","GRANDMASTER","CHALLENGER"
     ]
     let divisionOptions = ["I", "II", "III", "IV"];
     let requestBody = {
