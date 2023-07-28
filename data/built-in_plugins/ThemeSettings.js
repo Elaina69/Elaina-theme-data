@@ -238,25 +238,6 @@ const injectSettings = (panel) => {
             }
          ),
          document.createElement('br'),
-         /*UI.CheckBox(
-            `${selectedLang["continues-song"]}`,"conAudio","conAudiobox",
-            ()=>{
-               let conAudioel = document.getElementById("conAudio")
-               let conAudiobox = document.getElementById("conAudiobox")
-
-               if (DataStore.get("Continues_Audio")) {
-                  conAudiobox.checked = false
-                  DataStore.set("Continues_Audio", false)
-                  conAudioel.removeAttribute("class")
-               }
-               else {
-                  conAudiobox.checked = true
-                  DataStore.set("Continues_Audio", true)
-                  conAudioel.setAttribute("class", "checked")
-               }
-            }
-         ),
-         document.createElement('br'),*/
          UI.CheckBox(
             `${selectedLang["sidebar-transparent"]}`,'sbt','sbtbox',
             ()=>{
@@ -441,25 +422,6 @@ const injectSettings = (panel) => {
          ),
          document.createElement('br'),
          UI.CheckBox(
-            `${selectedLang["custom-avatar"]}`,'cusav','cusavbox',
-            ()=>{
-               let cusavel = document.getElementById("cusav")
-               let cusavbox = document.getElementById("cusavbox")
-
-               if (DataStore.get("Custom-Avatar")) {
-                  cusavbox.checked = false
-                  DataStore.set("Custom-Avatar", false)
-                  cusavel.removeAttribute("class")
-               }
-               else {
-                  cusavbox.checked = true
-                  DataStore.set("Custom-Avatar", true)
-                  cusavel.setAttribute("class", "checked")
-               }
-            }
-         ),
-         document.createElement('br'),
-         UI.CheckBox(
             `${selectedLang["custom-icon"]}`,'cusicon','cusiconbox',
             ()=>{
                let cusiconel = document.getElementById("cusicon")
@@ -478,6 +440,179 @@ const injectSettings = (panel) => {
             }
          ),
          document.createElement('br'),
+         UI.Row("Custom-icon-list",[
+            UI.CheckBox(
+               `${selectedLang["custom-avatar"]}`,'cusav','cusavbox',
+               ()=>{
+                  let cusavel = document.getElementById("cusav")
+                  let cusavbox = document.getElementById("cusavbox")
+   
+                  if (DataStore.get("Custom-Avatar")) {
+                     cusavbox.checked = false
+                     DataStore.set("Custom-Avatar", false)
+                     cusavel.removeAttribute("class")
+                  }
+                  else {
+                     cusavbox.checked = true
+                     DataStore.set("Custom-Avatar", true)
+                     cusavel.setAttribute("class", "checked")
+                  }
+               }
+            ),
+            document.createElement('br'),
+            UI.CheckBox(
+               `${selectedLang["Custom-Border"]}`,'cusbor','cusborbox',
+               ()=>{
+                  let cusborel = document.getElementById("cusbor")
+                  let cusborbox = document.getElementById("cusborbox")
+   
+                  if (DataStore.get("Custom-Border")) {
+                     cusborbox.checked = false
+                     DataStore.set("Custom-Border", false)
+                     cusborel.removeAttribute("class")
+                  }
+                  else {
+                     cusborbox.checked = true
+                     DataStore.set("Custom-Border", true)
+                     cusborel.setAttribute("class", "checked")
+                  }
+               }
+            ),
+            document.createElement('br'),
+            UI.CheckBox(
+               `${selectedLang["Custom-RP-Icon"]}`,'cusrpi','cusrpibox',
+               ()=>{
+                  let cusrpiel = document.getElementById("cusrpi")
+                  let cusrpibox = document.getElementById("cusrpibox")
+   
+                  if (DataStore.get("Custom-RP-Icon")) {
+                     cusrpibox.checked = false
+                     DataStore.set("Custom-RP-Icon", false)
+                     cusrpiel.removeAttribute("class")
+                  }
+                  else {
+                     cusrpibox.checked = true
+                     DataStore.set("Custom-RP-Icon", true)
+                     cusrpiel.setAttribute("class", "checked")
+                  }
+               }
+            ),
+            document.createElement('br'),
+            UI.CheckBox(
+               `${selectedLang["Custom-BE-Icon"]}`,'cusbei','cusbeibox',
+               ()=>{
+                  let cusbeiel = document.getElementById("cusbei")
+                  let cusbeibox = document.getElementById("cusbeibox")
+   
+                  if (DataStore.get("Custom-BE-Icon")) {
+                     cusbeibox.checked = false
+                     DataStore.set("Custom-BE-Icon", false)
+                     cusbeiel.removeAttribute("class")
+                  }
+                  else {
+                     cusbeibox.checked = true
+                     DataStore.set("Custom-BE-Icon", true)
+                     cusbeiel.setAttribute("class", "checked")
+                  }
+               }
+            ),
+            document.createElement('br'),
+            UI.CheckBox(
+               `${selectedLang["Custom-Rank-Icon"]}`,'cusranki','cusrankibox',
+               ()=>{
+                  let cusrankiel = document.getElementById("cusranki")
+                  let cusrankibox = document.getElementById("cusrankibox")
+   
+                  if (DataStore.get("Custom-Rank-Icon")) {
+                     cusrankibox.checked = false
+                     DataStore.set("Custom-Rank-Icon", false)
+                     cusrankiel.removeAttribute("class")
+                  }
+                  else {
+                     cusrankibox.checked = true
+                     DataStore.set("Custom-Rank-Icon", true)
+                     cusrankiel.setAttribute("class", "checked")
+                  }
+               }
+            ),
+            document.createElement('br'),
+            UI.CheckBox(
+               `${selectedLang["Custom-Emblem"]}`,'cusemi','cusemibox',
+               ()=>{
+                  let cusemiel = document.getElementById("cusemi")
+                  let cusemibox = document.getElementById("cusemibox")
+   
+                  if (DataStore.get("Custom-Emblem")) {
+                     cusemibox.checked = false
+                     DataStore.set("Custom-Emblem", false)
+                     cusemiel.removeAttribute("class")
+                  }
+                  else {
+                     cusemibox.checked = true
+                     DataStore.set("Custom-Emblem", true)
+                     cusemiel.setAttribute("class", "checked")
+                  }
+               }
+            ),
+            document.createElement('br'),
+            UI.CheckBox(
+               `${selectedLang["Custom-Clash-banner"]}`,'cusclassb','cusclassbbox',
+               ()=>{
+                  let cusclassbel = document.getElementById("cusclassb")
+                  let cusclassbbox = document.getElementById("cusclassbbox")
+   
+                  if (DataStore.get("Custom-Clash-banner")) {
+                     cusclassbbox.checked = false
+                     DataStore.set("Custom-Clash-banner", false)
+                     cusclassbel.removeAttribute("class")
+                  }
+                  else {
+                     cusclassbbox.checked = true
+                     DataStore.set("Custom-Clash-banner", true)
+                     cusclassbel.setAttribute("class", "checked")
+                  }
+               }
+            ),
+            document.createElement('br'),
+            UI.CheckBox(
+               `${selectedLang["Custom-Ticker"]}`,'custick','custickbox',
+               ()=>{
+                  let custickel = document.getElementById("custick")
+                  let custickbox = document.getElementById("custickbox")
+   
+                  if (DataStore.get("Custom-Ticker")) {
+                     custickbox.checked = false
+                     DataStore.set("Custom-Ticker", false)
+                     custickel.removeAttribute("class")
+                  }
+                  else {
+                     custickbox.checked = true
+                     DataStore.set("Custom-Ticker", true)
+                     custickel.setAttribute("class", "checked")
+                  }
+               }
+            ),
+            document.createElement('br'),
+            UI.CheckBox(
+               `${selectedLang["Custom-Trophy"]}`,'custrophy','custrophybox',
+               ()=>{
+                  let custrophyel = document.getElementById("custrophy")
+                  let custrophybox = document.getElementById("custrophybox")
+   
+                  if (DataStore.get("Custom-Trophy")) {
+                     custrophybox.checked = false
+                     DataStore.set("Custom-Trophy", false)
+                     custrophyel.removeAttribute("class")
+                  }
+                  else {
+                     custrophybox.checked = true
+                     DataStore.set("Custom-Trophy", true)
+                     custrophyel.setAttribute("class", "checked")
+                  }
+               }
+            ),
+            document.createElement('br')
+         ]),
          UI.CheckBox(
             `${selectedLang["custom-runes-bg"]}`,'rsbg','rsbgbox',
             ()=>{
@@ -557,25 +692,82 @@ const injectSettings = (panel) => {
             }
          ),
          document.createElement('br'),
-         /*UI.CheckBox(
-            `${selectedLang["new-gamesearch-queue"]}`,"ngsd","ngsdbox",
-            () => {
-               let ngsdel = document.getElementById("ngsd")
-               let ngsdbox = document.getElementById("ngsdbox")
+         UI.CheckBox(
+            `${selectedLang["hide-overview"]}`,'hideovertab','hideovertabbox',
+            ()=>{
+               let hideovertabel = document.getElementById("hideovertab")
+               let hideovertabbox = document.getElementById("hideovertabbox")
 
-               if (DataStore.get("new-gamesearch-queue")) {
-                  ngsdbox.checked = false
-                  DataStore.set("new-gamesearch-queue", false)
-                  ngsdel.removeAttribute("class")
+               if (DataStore.get("hide-overview")) {
+                  hideovertabbox.checked = false
+                  DataStore.set("hide-overview", false)
+                  hideovertabel.removeAttribute("class")
                }
                else {
-                  ngsdbox.checked = true
-                  DataStore.set("new-gamesearch-queue", true)
-                  ngsdel.setAttribute("class", "checked")
+                  hideovertabbox.checked = true
+                  DataStore.set("hide-overview", true)
+                  hideovertabel.setAttribute("class", "checked")
                }
             }
          ),
-         document.createElement('br'),*/
+         document.createElement('br'),
+         UI.CheckBox(
+            `${selectedLang["hide-merch"]}`,'hidemerchtab','hidemerchtabbox',
+            ()=>{
+               let hidemerchtabel = document.getElementById("hidemerchtab")
+               let hidemerchtabbox = document.getElementById("hidemerchtabbox")
+
+               if (DataStore.get("hide-merch")) {
+                  hidemerchtabbox.checked = false
+                  DataStore.set("hide-merch", false)
+                  hidemerchtabel.removeAttribute("class")
+               }
+               else {
+                  hidemerchtabbox.checked = true
+                  DataStore.set("hide-merch", true)
+                  hidemerchtabel.setAttribute("class", "checked")
+               }
+            }
+         ),
+         document.createElement('br'),
+         UI.CheckBox(
+            `${selectedLang["hide-patch-note"]}`,'hidepn','hidepnbox',
+            ()=>{
+               let hidepnel = document.getElementById("hidepn")
+               let hidepnbox = document.getElementById("hidepnbox")
+
+               if (DataStore.get("hide-patch-note")) {
+                  hidepnbox.checked = false
+                  DataStore.set("hide-patch-note", false)
+                  hidepnel.removeAttribute("class")
+               }
+               else {
+                  hidepnbox.checked = true
+                  DataStore.set("hide-patch-note", true)
+                  hidepnel.setAttribute("class", "checked")
+               }
+            }
+         ),
+         document.createElement('br'),
+         UI.CheckBox(
+            `${selectedLang["hide-esport"]}`,'hideesptab','hideesptabbox',
+            ()=>{
+               let hideesptabel = document.getElementById("hideesptab")
+               let hideesptabbox = document.getElementById("hideesptabbox")
+
+               if (DataStore.get("hide-esport")) {
+                  hideesptabbox.checked = false
+                  DataStore.set("hide-esport", false)
+                  hideesptabel.removeAttribute("class")
+               }
+               else {
+                  hideesptabbox.checked = true
+                  DataStore.set("hide-esport", true)
+                  hideesptabel.setAttribute("class", "checked")
+               }
+            }
+         ),
+         document.createElement('br'),
          document.createElement('br'),
 //________________________________________________________________________________________//
          
@@ -663,36 +855,6 @@ const injectSettings = (panel) => {
                   }
                }
             )
-         ]),
-         UI.Row("autobanpick",[
-            UI.CheckBox(
-               `${selectedLang["auto-ban-pick"]}`,'autobp','autobpbox',
-               ()=>{
-                  let autobpel = document.getElementById("autobp")
-                  let autobpbox = document.getElementById("autobpbox")
-
-                  if (DataStore.get("Auto-ban-pick")) {
-                     autobpbox.checked = false
-                     DataStore.set("Auto-ban-pick", false)
-                     autobpel.removeAttribute("class")
-                  }
-                  else {
-                     autobpbox.checked = true
-                     DataStore.set("Auto-ban-pick", true)
-                     autobpel.setAttribute("class", "checked")
-                  }
-               }
-            ),
-            UI.Row("BanPick-Delay",[
-               UI.Row("pick-delay",[
-                  UI.Label(`${selectedLang["pick-delay"]}`, "pick-delay-Text"),
-                  UI.Input("pick-delay"),
-               ]),
-               UI.Row("ban-delay",[
-                  UI.Label(`${selectedLang["ban-delay"]}`, "ban-delay-Text"),
-                  UI.Input("ban-delay")
-               ])
-            ])
          ]),
          UI.Row("j1_4",[
             UI.CheckBox(
@@ -897,7 +1059,6 @@ window.addEventListener('load', async () => {
             if (panel && mutations.some((record) => Array.from(record.addedNodes).includes(panel))) {
                injectSettings(panel)
                const check = setInterval (()=>{
-                  //let conAudioel = document.getElementById("conAudio");
                   let sbtel = document.getElementById("sbt");
                   let hidechampartel = document.getElementById("hidechampart");
                   let cusfontel = document.getElementById("cusfont");
@@ -910,7 +1071,6 @@ window.addEventListener('load', async () => {
                   let cuscursorel = document.getElementById("cuscursor");
                   let oldllel = document.getElementById("oldll");
                   let Aramel = document.getElementById("Aram only");
-                  let autobpel = document.getElementById("autobp");
                   let autoqel = document.getElementById("autoq");
                   let cusrankhoverel = document.getElementById("cusrankhover");
                   let cusstael = document.getElementById("cussta");
@@ -922,7 +1082,6 @@ window.addEventListener('load', async () => {
                   let hideveriaccel = document.getElementById("hideveriacc");
                   let hidelinksetel = document.getElementById("hidelinkset");
                   let Arambox = document.getElementById("Aram only checkbox");
-                  //let conAudiobox = document.getElementById("conAudiobox");
                   let sbtbox = document.getElementById("sbtbox");
                   let cusrpbox = document.getElementById("cusrpbox");
                   let hidechampartbox = document.getElementById("hidechampartbox");
@@ -934,7 +1093,6 @@ window.addEventListener('load', async () => {
                   let cusavbox = document.getElementById("cusavbox");
                   let cusiconbox = document.getElementById("cusiconbox");
                   let oldllbox = document.getElementById("oldllbox");
-                  let autobpbox = document.getElementById("autobpbox");
                   let cusrankhoverbox = document.getElementById("cusrankhoverbox");
                   let autoqbox = document.getElementById("autoqbox");
                   let cusstabox = document.getElementById("cusstabox");
@@ -945,8 +1103,6 @@ window.addEventListener('load', async () => {
                   let oldpnbbox = document.getElementById("oldpnbbox");
                   let hidelinksetbox = document.getElementById("hidelinksetbox");
                   let hideveriaccbox = document.getElementById("hideveriaccbox");
-                  //let ngsdel = document.getElementById("ngsd");
-                  //let ngsdbox = document.getElementById("ngsdbox");
                   let rdsel = document.getElementById("rds");
                   let rdsbox = document.getElementById("rdsbox");
                   let bycel = document.getElementById("byc");
@@ -957,7 +1113,30 @@ window.addEventListener('load', async () => {
                   let hidevlbox = document.getElementById("hidevlbox");
                   let rsbgel = document.getElementById("rsbg")
                   let rsbgbox = document.getElementById("rsbgbox")
-
+                  let cusborel = document.getElementById("cusbor")
+                  let cusborbox = document.getElementById("cusborbox")
+                  let cusrpiel = document.getElementById("cusrpi")
+                  let cusrpibox = document.getElementById("cusrpibox")
+                  let cusbeiel = document.getElementById("cusbei")
+                  let cusbeibox = document.getElementById("cusbeibox")
+                  let cusrankiel = document.getElementById("cusranki")
+                  let cusrankibox = document.getElementById("cusrankibox")
+                  let cusemiel = document.getElementById("cusemi")
+                  let cusemibox = document.getElementById("cusemibox")
+                  let cusclassbel = document.getElementById("cusclassb")
+                  let cusclassbbox = document.getElementById("cusclassbbox")
+                  let custickel = document.getElementById("custick")
+                  let custickbox = document.getElementById("custickbox")
+                  let custrophyel = document.getElementById("custrophy")
+                  let custrophybox = document.getElementById("custrophybox")
+                  let hideovertabel = document.getElementById("hideovertab")
+                  let hideovertabbox = document.getElementById("hideovertabbox")
+                  let hidemerchtabel = document.getElementById("hidemerchtab")
+                  let hidemerchtabbox = document.getElementById("hidemerchtabbox")
+                  let hideesptabel = document.getElementById("hideesptab")
+                  let hideesptabbox = document.getElementById("hideesptabbox")
+                  let hidepnel = document.getElementById("hidepn")
+                  let hidepnbox = document.getElementById("hidepnbox")
 
                   if (document.getElementById("Aram only")) {
                      clearInterval(check)
@@ -974,11 +1153,23 @@ window.addEventListener('load', async () => {
                      //DeleteElcheck("pandoru",`${datapath}built-in_plugins/Pandoru.js`)
                      DeleteElcheck("namespoof",`${datapath}built-in_plugins/NameSpoofer.js`)
 
+                     //tickcheck(DataStore.get(""), el, box)
+                     tickcheck(DataStore.get("hide-overview"), hideovertabel, hideovertabbox)
+                     tickcheck(DataStore.get("hide-merch"), hidemerchtabel, hidemerchtabbox)
+                     tickcheck(DataStore.get("hide-patch-note"), hidepnel, hidepnbox)
+                     tickcheck(DataStore.get("hide-esport"), hideesptabel, hideesptabbox)
+                     tickcheck(DataStore.get("Custom-Border"), cusborel, cusborbox)
+                     tickcheck(DataStore.get("Custom-RP-Icon"), cusrpiel, cusrpibox)
+                     tickcheck(DataStore.get("Custom-BE-Icon"), cusbeiel, cusbeibox)
+                     tickcheck(DataStore.get("Custom-Rank-Icon"), cusrankiel, cusrankibox)
+                     tickcheck(DataStore.get("Custom-Emblem"), cusemiel, cusemibox)
+                     tickcheck(DataStore.get("Custom-Clash-banner"), cusclassbel, cusclassbbox)
+                     tickcheck(DataStore.get("Custom-Ticker"), custickel, custickbox)
+                     tickcheck(DataStore.get("Custom-Trophy"), custrophyel, custrophybox)
                      tickcheck(DataStore.get("Runes-BG"), rsbgel, rsbgbox)
                      tickcheck(DataStore.get("Name-Spoofer"), namespfel, namespfbox)
                      tickcheck(DataStore.get("hide-vertical-lines"), hidevlel, hidevlbox)
                      tickcheck(DataStore.get("aram-only"), Aramel, Arambox)
-                     //tickcheck(DataStore.get("Continues_Audio"), conAudioel, conAudiobox)
                      tickcheck(DataStore.get("Sidebar-Transparent"), sbtel, sbtbox)
                      tickcheck(DataStore.get("Hide-Champions-Splash-Art"), hidechampartel, hidechampartbox)
                      tickcheck(DataStore.get("Custom-Font"), cusfontel, cusfontbox)
@@ -990,7 +1181,6 @@ window.addEventListener('load', async () => {
                      tickcheck(DataStore.get("Custom-Icon"), cusiconel, cusiconbox)
                      tickcheck(DataStore.get("Custom-Cursor"), cuscursorel, cuscursorbox)
                      tickcheck(DataStore.get("Old-League-Loader-Settings"), oldllel, oldllbox)
-                     tickcheck(DataStore.get("Auto-ban-pick"), autobpel, autobpbox)
                      tickcheck(DataStore.get("Auto-Find-Queue"), autoqel, autoqbox)
                      tickcheck(DataStore.get("Custom-Status"), cusstael, cusstabox)
                      tickcheck(DataStore.get("April fool` joke"), _1_4el, _1_4box)
@@ -1000,7 +1190,6 @@ window.addEventListener('load', async () => {
                      tickcheck(DataStore.get("old-prev/next-button"), oldpnbel, oldpnbbox)
                      tickcheck(DataStore.get("Hide-linking-settings"), hidelinksetel, hidelinksetbox)
                      tickcheck(DataStore.get("Hide-verify-acc"), hideveriaccel, hideveriaccbox)
-                     //tickcheck(DataStore.get("new-gamesearch-queue"),ngsdel, ngsdbox)
                      tickcheck(DataStore.get("random-skin"), rdsel, rdsbox)
                      tickcheck(DataStore.get("buy-all-champs"), bycel, bycbox)
                      tickcheck(DataStore.get("Custom-rank"), cusrankhoverel, cusrankhoverbox)

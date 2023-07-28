@@ -8,16 +8,16 @@ if (DataStore.get(`Update-${update}`)) {
 		// Add this ""+"\n"+
 
 		`ElainaV3 Update ${update}`+"\n"+
-		"- Add 5vs5 practice room button"+"\n"+
-		"- Delete unused settings"+"\n"+
-		"- Add AI game mode for auto queue"+"\n"+
-		"- Add new gamemode for auto queue"+"\n"+
-		"- Add ban/pick delay for auto ban/pick"+"\n"+
+		""+"\n"+
+		""+"\n"+
+		""+"\n"+
+		""+"\n"+
 		""+"\n"+
 		"This update already installed"+"\n"+
 		""+"\n"+
 		"You don't have to do anything"+"\n"
 		//"You must download update version from github to get newest function"+"\n"+
+		//"If not, your theme still can run probably without new one"+"\n"+
 		//""+"\n"+
 		//"Sorry for this inconvenience"+"\n"
 	)
