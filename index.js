@@ -8,7 +8,6 @@
 import "./data/ImportUpdate.js"
 import "./data/Update-message.js"
 import "./data/built-in_plugins/Auto-accept.js"
-import "./data/built-in_plugins/Auto-Ban-Pick.js"
 import "./data/built-in_plugins/Auto-Find-Queue.js"
 import "./data/built-in_plugins/Buy-all-champs.js"
 import "./data/built-in_plugins/Custom-BE_RP.js"
