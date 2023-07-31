@@ -1036,13 +1036,6 @@ window.addEventListener('load', async () => {
       }
       catch{}
    }
-   async function DeleteElcheck (target, link) {
-      try{
-         let origin = document.getElementById(target)
-         try {await fetch(link)}
-         catch{origin.remove()}
-      }catch{}
-   }
    function tickcheck (Data, el, box) {
       if (Data && el.getAttribute("class") == "") {
          box.checked = true
@@ -1144,14 +1137,6 @@ window.addEventListener('load', async () => {
                      DeleteEl(".lol-settings-account-verification-row.ember-view", DataStore.get("Hide-verify-acc"))
                      DeleteEl(".linking-settings.ember-view", DataStore.get("Hide-linking-settings"))
                      DeleteEl(".vng-publisher-settings.ember-view", DataStore.get("Hide-linking-settings"))
-
-                     DeleteElcheck("j1_4",`${datapath}built-in_plugins/FakeIP.js`)
-                     DeleteElcheck("autobanpick",`${datapath}built-in_plugins/Auto-Ban-Pick.js`)
-                     DeleteElcheck("loothelp",`${datapath}built-in_plugins/LootHelper.js`)
-                     DeleteElcheck("rdskin",`${datapath}built-in_plugins/RandomSkin.js`)
-                     DeleteElcheck("buyallchamp",`${datapath}built-in_plugins/Buy-all-champs.js`)
-                     //DeleteElcheck("pandoru",`${datapath}built-in_plugins/Pandoru.js`)
-                     DeleteElcheck("namespoof",`${datapath}built-in_plugins/NameSpoofer.js`)
 
                      //tickcheck(DataStore.get(""), el, box)
                      tickcheck(DataStore.get("hide-overview"), hideovertabel, hideovertabbox)
