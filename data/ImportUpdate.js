@@ -14,12 +14,12 @@ window.addEventListener("load", ()=> {
 })
 
 // 2.0.3
-if (!DataStore.has("pick-delay")) {
-	DataStore.set("pick-delay", 500)
-}
-if (!DataStore.has("ban-delay")) {
-	DataStore.set("ban-delay", 500)
-}
+// if (!DataStore.has("pick-delay")) {
+// 	DataStore.set("pick-delay", 500)
+// }
+// if (!DataStore.has("ban-delay")) {
+// 	DataStore.set("ban-delay", 500)
+// }
 
 //2.0.4
 if (!DataStore.has("hide-overview")) {
@@ -90,3 +90,11 @@ let updateV204 = async (node) => {
 window.addEventListener("load", ()=> {
 	utils.mutationObserverAddCallback(updateV204, ["screen-root"])
 })
+
+//2.0.5
+if (!DataStore.has("Custom-Regalia-Banner")) {
+	DataStore.set("Custom-Regalia-Banner", true)
+}
+if (!DataStore.has("Custom-Hover-card-backdrop")) {
+	DataStore.set("Custom-Hover-card-backdrop", true)
+}
