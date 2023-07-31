@@ -480,6 +480,44 @@ const injectSettings = (panel) => {
             ),
             document.createElement('br'),
             UI.CheckBox(
+               `${selectedLang["Custom-Regalia-Banner"]}`,'cusregabnr','cusregabnrbox',
+               ()=>{
+                  let cusregabnrel = document.getElementById("cusregabnr")
+                  let cusregabnrbox = document.getElementById("cusregabnrbox")
+   
+                  if (DataStore.get("Custom-Regalia-Banner")) {
+                     cusregabnrbox.checked = false
+                     DataStore.set("Custom-Regalia-Banner", false)
+                     cusregabnrel.removeAttribute("class")
+                  }
+                  else {
+                     cusregabnrbox.checked = true
+                     DataStore.set("Custom-Regalia-Banner", true)
+                     cusregabnrel.setAttribute("class", "checked")
+                  }
+               }
+            ),
+            document.createElement('br'),
+            UI.CheckBox(
+               `${selectedLang["Custom-Hover-card-backdrop"]}`,'cushvbdrop','cushvbdropbox',
+               ()=>{
+                  let cushvbdropel = document.getElementById("cushvbdrop")
+                  let cushvbdropbox = document.getElementById("cushvbdropbox")
+   
+                  if (DataStore.get("Custom-Hover-card-backdrop")) {
+                     cushvbdropbox.checked = false
+                     DataStore.set("Custom-Hover-card-backdrop", false)
+                     cushvbdropel.removeAttribute("class")
+                  }
+                  else {
+                     cushvbdropbox.checked = true
+                     DataStore.set("Custom-Hover-card-backdrop", true)
+                     cushvbdropel.setAttribute("class", "checked")
+                  }
+               }
+            ),
+            document.createElement('br'),
+            UI.CheckBox(
                `${selectedLang["Custom-RP-Icon"]}`,'cusrpi','cusrpibox',
                ()=>{
                   let cusrpiel = document.getElementById("cusrpi")
@@ -575,25 +613,6 @@ const injectSettings = (panel) => {
             ),
             document.createElement('br'),
             UI.CheckBox(
-               `${selectedLang["Custom-Ticker"]}`,'custick','custickbox',
-               ()=>{
-                  let custickel = document.getElementById("custick")
-                  let custickbox = document.getElementById("custickbox")
-   
-                  if (DataStore.get("Custom-Ticker")) {
-                     custickbox.checked = false
-                     DataStore.set("Custom-Ticker", false)
-                     custickel.removeAttribute("class")
-                  }
-                  else {
-                     custickbox.checked = true
-                     DataStore.set("Custom-Ticker", true)
-                     custickel.setAttribute("class", "checked")
-                  }
-               }
-            ),
-            document.createElement('br'),
-            UI.CheckBox(
                `${selectedLang["Custom-Trophy"]}`,'custrophy','custrophybox',
                ()=>{
                   let custrophyel = document.getElementById("custrophy")
@@ -608,6 +627,25 @@ const injectSettings = (panel) => {
                      custrophybox.checked = true
                      DataStore.set("Custom-Trophy", true)
                      custrophyel.setAttribute("class", "checked")
+                  }
+               }
+            ),
+            document.createElement('br'),
+            UI.CheckBox(
+               `${selectedLang["Custom-Ticker"]}`,'custick','custickbox',
+               ()=>{
+                  let custickel = document.getElementById("custick")
+                  let custickbox = document.getElementById("custickbox")
+   
+                  if (DataStore.get("Custom-Ticker")) {
+                     custickbox.checked = false
+                     DataStore.set("Custom-Ticker", false)
+                     custickel.removeAttribute("class")
+                  }
+                  else {
+                     custickbox.checked = true
+                     DataStore.set("Custom-Ticker", true)
+                     custickel.setAttribute("class", "checked")
                   }
                }
             ),
@@ -1130,6 +1168,10 @@ window.addEventListener('load', async () => {
                   let hideesptabbox = document.getElementById("hideesptabbox")
                   let hidepnel = document.getElementById("hidepn")
                   let hidepnbox = document.getElementById("hidepnbox")
+                  let cusregabnrel = document.getElementById("cusregabnr")
+                  let cusregabnrbox = document.getElementById("cusregabnrbox")
+                  let cushvbdropel = document.getElementById("cushvbdrop")
+                  let cushvbdropbox = document.getElementById("cushvbdropbox")
 
                   if (document.getElementById("Aram only")) {
                      clearInterval(check)
@@ -1139,6 +1181,8 @@ window.addEventListener('load', async () => {
                      DeleteEl(".vng-publisher-settings.ember-view", DataStore.get("Hide-linking-settings"))
 
                      //tickcheck(DataStore.get(""), el, box)
+                     tickcheck(DataStore.get("Custom-Regalia-Banner"), cusregabnrel, cusregabnrbox)
+                     tickcheck(DataStore.get("Custom-Hover-card-backdrop"), cushvbdropel, cushvbdropbox)
                      tickcheck(DataStore.get("hide-overview"), hideovertabel, hideovertabbox)
                      tickcheck(DataStore.get("hide-merch"), hidemerchtabel, hidemerchtabbox)
                      tickcheck(DataStore.get("hide-patch-note"), hidepnel, hidepnbox)
