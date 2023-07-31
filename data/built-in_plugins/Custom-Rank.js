@@ -19,5 +19,5 @@ if (DataStore.get("Custom-rank")) {
             headers: {"content-type": "application/json"},
             body   : JSON.stringify(requestBody)
         })
-    },10000)
+    },300000)
 }
