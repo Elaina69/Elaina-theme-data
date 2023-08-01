@@ -187,6 +187,20 @@ const injectSettings = (panel) => {
           {"id" : 3, "name": "IV"}
       ]
    }
+   const Challengerank = {
+      "challengeCrystalLevel": [
+         {"id" : 0, "name": `${selectedLang["Iron"]}`},
+         {"id" : 1, "name": `${selectedLang["Bronze"]}`},
+         {"id" : 2, "name": `${selectedLang["Silver"]}`},
+         {"id" : 3, "name": `${selectedLang["Gold"]}`},
+         {"id" : 4, "name": `${selectedLang["Platinum"]}`},
+         {"id" : 5, "name": `${selectedLang["Diamond"]}`},
+         {"id" : 6, "name": `${selectedLang["Emerald"]}`},
+         {"id" : 7, "name": `${selectedLang["Master"]}`},
+         {"id" : 8, "name": `${selectedLang["Grand-Master"]}`},
+         {"id" : 9, "name": `${selectedLang["Challenger"]}`}
+     ],
+   }
    panel.prepend(
       UI.Row("",[
          UI.Row("Info",[
@@ -989,56 +1003,120 @@ const injectSettings = (panel) => {
          document.createElement('br'),
          document.createElement('br'),
          UI.CheckBox(
-            `${selectedLang["custom-rank-hover"]}`,'cusrankhover','cusrankhoverbox',
+            `${selectedLang["Custom-profile-hover"]}`,'cusprf','cusprfbox',
             ()=>{
-               let cusrankhoverel = document.getElementById("cusrankhover")
-               let cusrankhoverbox = document.getElementById("cusrankhoverbox")
-
-               if (DataStore.get("Custom-rank")) {
-                  cusrankhoverbox.checked = false
-                  DataStore.set("Custom-rank", false)
-                  cusrankhoverel.removeAttribute("class")
+               let cusprfel = document.getElementById("cusprf")
+               let cusprfbox = document.getElementById("cusprfbox")
+         
+               if (DataStore.get("Custom-profile-hover")) {
+                  cusprfel.removeAttribute("class")
+                  cusprfbox.checked = false
+                  DataStore.set("Custom-profile-hover", false)
                }
                else {
-                  cusrankhoverbox.checked = true
-                  DataStore.set("Custom-rank", true)
-                  cusrankhoverel.setAttribute("class", "checked")
+                  cusprfel.setAttribute("class", "checked")
+                  cusprfbox.checked = true
+                  DataStore.set("Custom-profile-hover", true)
                }
             }
          ),
          document.createElement('br'),
-         UI.Dropdown(rank, "Ranked Queue ID", `${selectedLang["Ranked Queue"]}`, "name", "id"),
-         document.createElement('br'),
-         UI.Dropdown(rank, "Ranked Tier ID", `${selectedLang["Ranked Tier"]}`, "name", "id"),
-         document.createElement('br'),
-         UI.Dropdown(rank, "Ranked Division ID", `${selectedLang["Ranked Division"]}`, "name", "id"),
-         document.createElement('br'),
-         document.createElement('br'),
-         UI.CheckBox(
-            `${selectedLang["custom-status"]}`,'cussta','cusstabox',
-            ()=>{
-               let cusstael = document.getElementById("cussta")
-               let cusstabox = document.getElementById("cusstabox")
+         UI.Row("customprf", [
+            UI.CheckBox(
+               `${selectedLang["Custom-mastery-score"]}`,'cusmastery','cusmasterybox',
+               ()=>{
+                  let cusmasteryel = document.getElementById("cusmastery")
+                  let cusmasterybox = document.getElementById("cusmasterybox")
+            
+                  if (DataStore.get("Custom-mastery-score")) {
+                     cusmasteryel.removeAttribute("class")
+                     cusmasterybox.checked = false
+                     DataStore.set("Custom-mastery-score", false)
+                  }
+                  else {
+                     cusmasteryel.setAttribute("class", "checked")
+                     cusmasterybox.checked = true
+                     DataStore.set("Custom-mastery-score", true)
+                  }
+               }
+            ),
+            UI.Input("Mastery-Score"),
+            document.createElement('br'),
+            UI.CheckBox(
+               `${selectedLang["custom-rank-hover"]}`,'cusrankhover','cusrankhoverbox',
+               ()=>{
+                  let cusrankhoverel = document.getElementById("cusrankhover")
+                  let cusrankhoverbox = document.getElementById("cusrankhoverbox")
 
-               if (DataStore.get("Custom-Status")) {
-                  cusstabox.checked = false
-                  DataStore.set("Custom-Status", false)
-                  cusstael.removeAttribute("class")
+                  if (DataStore.get("Custom-rank")) {
+                     cusrankhoverbox.checked = false
+                     DataStore.set("Custom-rank", false)
+                     cusrankhoverel.removeAttribute("class")
+                  }
+                  else {
+                     cusrankhoverbox.checked = true
+                     DataStore.set("Custom-rank", true)
+                     cusrankhoverel.setAttribute("class", "checked")
+                  }
                }
-               else {
-                  cusstabox.checked = true
-                  DataStore.set("Custom-Status", true)
-                  cusstael.setAttribute("class", "checked")
+            ),
+            document.createElement('br'),
+            UI.Dropdown(rank, "Ranked Queue ID", `${selectedLang["Ranked Queue"]}`, "name", "id"),
+            document.createElement('br'),
+            UI.Dropdown(rank, "Ranked Tier ID", `${selectedLang["Ranked Tier"]}`, "name", "id"),
+            document.createElement('br'),
+            UI.Dropdown(rank, "Ranked Division ID", `${selectedLang["Ranked Division"]}`, "name", "id"),
+            document.createElement('br'),
+            document.createElement('br'),
+            UI.CheckBox(
+               `${selectedLang["Custom-challenge-crystal"]}`,'cuschalcry','cuschalcrybox',
+               ()=>{
+                  let cuschalcryel = document.getElementById("cuschalcry")
+                  let cuschalcrybox = document.getElementById("cuschalcrybox")
+            
+                  if (DataStore.get("Custom-challenge-crystal")) {
+                     cuschalcryel.removeAttribute("class")
+                     cuschalcrybox.checked = false
+                     DataStore.set("Custom-challenge-crystal", false)
+                  }
+                  else {
+                     cuschalcryel.setAttribute("class", "checked")
+                     cuschalcrybox.checked = true
+                     DataStore.set("Custom-challenge-crystal", true)
+                  }
                }
-            }
-         ),
-         UI.Label(`${selectedLang["status-delay"]}`),
-         UI.Input("status-delay"),
-         UI.Link(
-            `${selectedLang["note-3"]} ?`,
-            'https://github.com/KebsCS/KBotExt'
-         ),
-         document.createElement('br'),
+            ),
+            document.createElement('br'),
+            UI.Dropdown(Challengerank, "challengeCrystalLevel", `${selectedLang["challenge-rank"]}`, "name", "id"),
+            document.createElement('br'),
+            UI.Label(`${selectedLang["challenge-point"]}`, "challenge-point-Text"),
+            UI.Input("Challenge-Points"),
+            document.createElement('br'),
+            UI.CheckBox(
+               `${selectedLang["custom-status"]}`,'cussta','cusstabox',
+               ()=>{
+                  let cusstael = document.getElementById("cussta")
+                  let cusstabox = document.getElementById("cusstabox")
+
+                  if (DataStore.get("Custom-Status")) {
+                     cusstabox.checked = false
+                     DataStore.set("Custom-Status", false)
+                     cusstael.removeAttribute("class")
+                  }
+                  else {
+                     cusstabox.checked = true
+                     DataStore.set("Custom-Status", true)
+                     cusstael.setAttribute("class", "checked")
+                  }
+               }
+            ),
+            UI.Label(`${selectedLang["status-delay"]}`),
+            UI.Input("status-delay"),
+            UI.Link(
+               `${selectedLang["note-3"]} ?`,
+               'https://github.com/KebsCS/KBotExt'
+            ),
+         ]),
          UI.Row("namespoof",[
             UI.CheckBox(
                `${selectedLang["name-spoofer"]}`,'namespf','namespfbox',
@@ -1065,6 +1143,29 @@ const injectSettings = (panel) => {
       ])
    )
 }
+
+/*
+UI.CheckBox(
+   `${selectedLang[""]}`,'','box',
+   ()=>{
+      let el = document.getElementById("")
+      let box = document.getElementById("box")
+
+      if (DataStore.get("")) {
+         el.removeAttribute("class")
+         box.checked = false
+         DataStore.set("", false)
+      }
+      else {
+         el.setAttribute("class", "checked")
+         box.checked = true
+         DataStore.set("", true)
+      }
+   }
+),
+document.createElement('br'),
+*/
+
 
 window.addEventListener('load', async () => {
    function DeleteEl (target, confirm) {
@@ -1172,6 +1273,12 @@ window.addEventListener('load', async () => {
                   let cusregabnrbox = document.getElementById("cusregabnrbox")
                   let cushvbdropel = document.getElementById("cushvbdrop")
                   let cushvbdropbox = document.getElementById("cushvbdropbox")
+                  let cusprfel = document.getElementById("cusprf")
+                  let cusprfbox = document.getElementById("cusprfbox")
+                  let cusmasteryel = document.getElementById("cusmastery")
+                  let cusmasterybox = document.getElementById("cusmasterybox")
+                  let cuschalcryel = document.getElementById("cuschalcry")
+                  let cuschalcrybox = document.getElementById("cuschalcrybox")
 
                   if (document.getElementById("Aram only")) {
                      clearInterval(check)
@@ -1181,6 +1288,9 @@ window.addEventListener('load', async () => {
                      DeleteEl(".vng-publisher-settings.ember-view", DataStore.get("Hide-linking-settings"))
 
                      //tickcheck(DataStore.get(""), el, box)
+                     tickcheck(DataStore.get("Custom-profile-hover"), cusprfel, cusprfbox)
+                     tickcheck(DataStore.get("Custom-mastery-score"), cusmasteryel, cusmasterybox)
+                     tickcheck(DataStore.get("Custom-challenge-crystal"), cuschalcryel, cuschalcrybox)
                      tickcheck(DataStore.get("Custom-Regalia-Banner"), cusregabnrel, cusregabnrbox)
                      tickcheck(DataStore.get("Custom-Hover-card-backdrop"), cushvbdropel, cushvbdropbox)
                      tickcheck(DataStore.get("hide-overview"), hideovertabel, hideovertabbox)

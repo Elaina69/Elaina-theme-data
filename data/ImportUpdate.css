@@ -1,7 +1,10 @@
+/* 2.0.1 */
 .ready-check-map-background.ember-view {
     display: none !important;
 }
 
+/* 2.0.3 */
+/* 
 #BanPick-Delay {
 	display: flex;
 	margin-bottom: 0px !important;
@@ -14,8 +17,15 @@
 
 #ban-delay {
 	margin-bottom: 0px !important;
+} 
+*/
+
+/* 2.0.4 */
+#Custom-icon-list {
+	margin-left: 25px !important;
 }
 
-#Custom-icon-list {
+/* 2.0.5 */
+#customprf {
 	margin-left: 25px !important;
 }
