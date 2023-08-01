@@ -49,6 +49,12 @@ function CustomCursor (folder,css) {
 	addCss("","","",css)
 }
 
+async function getSummonerIDByName(name) {
+	let res = await fetch(`/lol-summoner/v1/summoners?name=${name}`)
+	let data = await res.json()
+	return JSON.parse(data["summonerId"])
+}
+
 /**
  * Subscribe to a specific endpoint, and trigger callback function when that endpoint is called
  * @param {string} endpoint Endpoint you wish to monitor. ex: /lol-gameflow/v1/gameflow-phase , send "" to subscribe to all
@@ -74,8 +80,10 @@ async function fetch_riotclient_credentials() {
 				utils.riotclient_port = regex_rc_port.exec(elem)[1];
 		});
 	})
-	//if (debug_sub)
-	//	console.log(utils.riotclient_auth, utils.riotclient_port)
+	if (DataStore.get("Dev-mode")) {
+		if (debug_sub)
+			console.log(utils.riotclient_auth, utils.riotclient_port)
+	}
 }
 
 /** Callback function to be sent in subscribe_endpoint() to update the variable holding user pvp.net infos */
@@ -91,7 +99,12 @@ let updateUserPvpNetInfos = async message => {
 let updatePhaseCallback = async message => { phase = JSON.parse(message["data"])[2]["data"]; }
 
 /** Callback function to be sent in subscribe_endpoint() to log uri & data object */
-//let debugLogEndpoints = async message => { if (debug_sub) console.log(JSON.parse(message["data"])[2]["uri"], JSON.parse(message["data"])[2]["data"]) }
+let debugLogEndpoints = async message => { 
+	if (DataStore.get("Dev-mode")) {
+		if (debug_sub) console.log(JSON.parse(message["data"])[2]["uri"], 
+		JSON.parse(message["data"])[2]["data"]) 
+	}
+}
 
 /**
  * Add function to be called in the MutationObserver API
@@ -110,7 +123,9 @@ window.addEventListener('load', () => {
 	fetch_riotclient_credentials()
 	subscribe_endpoint("/lol-gameflow/v1/gameflow-phase", updatePhaseCallback)
 	subscribe_endpoint("/lol-chat/v1/me", updateUserPvpNetInfos)
-	//subscribe_endpoint("", debugLogEndpoints)
+	if (DataStore.get("Dev-mode")) {
+		subscribe_endpoint("", debugLogEndpoints)
+	}
 	window.setInterval(() => {
 		routines.forEach(routine => {
 			routine.callback()
@@ -146,7 +161,8 @@ let utils = {
 	mutationObserverAddCallback: mutationObserverAddCallback,
 	addCss: addCss,
 	addFont: addFont,
-	CustomCursor: CustomCursor
+	CustomCursor: CustomCursor,
+	getSummonerIDByName: getSummonerIDByName
 }
 
 export default utils
