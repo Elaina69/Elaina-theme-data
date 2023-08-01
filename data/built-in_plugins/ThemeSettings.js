@@ -1040,6 +1040,7 @@ const injectSettings = (panel) => {
                   }
                }
             ),
+            document.createElement('br'),
             UI.Input("Mastery-Score"),
             document.createElement('br'),
             UI.CheckBox(
@@ -1088,7 +1089,6 @@ const injectSettings = (panel) => {
             ),
             document.createElement('br'),
             UI.Dropdown(Challengerank, "challengeCrystalLevel", `${selectedLang["challenge-rank"]}`, "name", "id"),
-            document.createElement('br'),
             UI.Label(`${selectedLang["challenge-point"]}`, "challenge-point-Text"),
             UI.Input("Challenge-Points"),
             document.createElement('br'),

@@ -121,7 +121,7 @@ const lang = {
         "name-spoofer"    : "Name spoofer",
         "Custom-profile-hover"    : "Custom profile(Hover-card)",
         "Custom-mastery-score"    : "Custom mastery score",
-        "Custom-challenge-crystal": "Custom challenge crystal",
+        "Custom-challenge-crystal": "Custom challenge crystal (Testing)",
         "challenge-rank"  : "Challenge rank",
         "challenge-point" : "Challenge point",
     },
@@ -236,7 +236,12 @@ const lang = {
         "1/4-joke"        : "Trò đùa ngày Cá tháng tư",
         "buy-all-champs"  : "Mua toàn bộ tướng",
         "prices"          : "Giá",
-        "name-spoofer"    : "Tên giả (dành cho stream)"
+        "name-spoofer"    : "Tên giả (dành cho stream)",
+        "Custom-profile-hover"    : "Hồ sơ tùy chỉnh (Hover-card)",
+        "Custom-mastery-score"    : "Điểm thông thạo tùy chỉnh",
+        "Custom-challenge-crystal": "Thử thách tùy chỉnh (Testing)",
+        "challenge-rank"  : "Xếp hạng thử thách",
+        "challenge-point" : "Điểm thử thách",
     },
 
     "JP": {
@@ -349,7 +354,12 @@ const lang = {
         "1/4-joke"        : "April fool` joke",
         "buy-all-champs"  : "Buy all champions",
         "prices"          : "Prices",
-        "name-spoofer"    : "Name spoofer"
+        "name-spoofer"    : "Name spoofer",
+        "Custom-profile-hover"    : "Custom profile(Hover-card)",
+        "Custom-mastery-score"    : "Custom mastery score",
+        "Custom-challenge-crystal": "Custom challenge crystal (Testing)",
+        "challenge-rank"  : "Challenge rank",
+        "challenge-point" : "Challenge point",
     },
 
     "PL": {
@@ -462,7 +472,12 @@ const lang = {
         "1/4-joke"        : "Prima aprilisowy żart",
         "buy-all-champs"  : "Buy all champions",
         "prices"          : "Prices",
-        "name-spoofer"    : "Name spoofer"
+        "name-spoofer"    : "Name spoofer",
+        "Custom-profile-hover"    : "Custom profile(Hover-card)",
+        "Custom-mastery-score"    : "Custom mastery score",
+        "Custom-challenge-crystal": "Custom challenge crystal (Testing)",
+        "challenge-rank"  : "Challenge rank",
+        "challenge-point" : "Challenge point",
     },
     "RU": {
 
@@ -574,7 +589,12 @@ const lang = {
         "1/4-joke"        : "Первоапрельская шутка",
         "buy-all-champs"  : "Buy all champions",
         "prices"          : "Prices",
-        "name-spoofer"    : "Name spoofer"
+        "name-spoofer"    : "Name spoofer",
+        "Custom-profile-hover"    : "Custom profile(Hover-card)",
+        "Custom-mastery-score"    : "Custom mastery score",
+        "Custom-challenge-crystal": "Custom challenge crystal (Testing)",
+        "challenge-rank"  : "Challenge rank",
+        "challenge-point" : "Challenge point",
     },
     "MX": {
         "/___Translated by @Legnatbird___/": "",
@@ -685,7 +705,12 @@ const lang = {
         "1/4-joke"        : "April fool` joke",
         "buy-all-champs"  : "Buy all champions",
         "prices"          : "Prices",
-        "name-spoofer"    : "Name spoofer"
+        "name-spoofer"    : "Name spoofer",
+        "Custom-profile-hover"    : "Custom profile(Hover-card)",
+        "Custom-mastery-score"    : "Custom mastery score",
+        "Custom-challenge-crystal": "Custom challenge crystal (Testing)",
+        "challenge-rank"  : "Challenge rank",
+        "challenge-point" : "Challenge point",
     },
     "KR": {
         "/___Translated by @___/": "",
@@ -796,7 +821,12 @@ const lang = {
         "1/4-joke"        : "April fool` joke",
         "buy-all-champs"  : "Buy all champions",
         "prices"          : "Prices",
-        "name-spoofer"    : "Name spoofer"
+        "name-spoofer"    : "Name spoofer",
+        "Custom-profile-hover"    : "Custom profile(Hover-card)",
+        "Custom-mastery-score"    : "Custom mastery score",
+        "Custom-challenge-crystal": "Custom challenge crystal (Testing)",
+        "challenge-rank"  : "Challenge rank",
+        "challenge-point" : "Challenge point",
     },
     "TW": {
         "home"            : "首頁",
@@ -906,7 +936,12 @@ const lang = {
         "1/4-joke"        : "愚人節笑話",
         "buy-all-champs"  : "購買所有英雄",
         "prices"          : "價格",
-        "name-spoofer"    : "名字欺騙"
+        "name-spoofer"    : "名字欺騙",
+        "Custom-profile-hover"    : "Custom profile(Hover-card)",
+        "Custom-mastery-score"    : "Custom mastery score",
+        "Custom-challenge-crystal": "Custom challenge crystal (Testing)",
+        "challenge-rank"  : "Challenge rank",
+        "challenge-point" : "Challenge point",
     },
     "CN": {
         "home"            : "首页",
@@ -1016,7 +1051,12 @@ const lang = {
         "1/4-joke"        : "愚人节笑话",
         "buy-all-champs"  : "购买所有英雄",
         "prices"          : "价格",
-        "name-spoofer"    : "自定义召唤师ID" 
+        "name-spoofer"    : "自定义召唤师ID",
+        "Custom-profile-hover"    : "Custom profile(Hover-card)",
+        "Custom-mastery-score"    : "Custom mastery score",
+        "Custom-challenge-crystal": "Custom challenge crystal (Testing)",
+        "challenge-rank"  : "Challenge rank",
+        "challenge-point" : "Challenge point",
     },
 }
 
