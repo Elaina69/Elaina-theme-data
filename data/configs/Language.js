@@ -22,6 +22,8 @@ const lang = {
         "l.open_plugins"  : "Open Plugins folder",
         "l.theme_releases": "Theme Releases",
         "l.close"         : "Close",
+        "l.open_assets"   : "Open Assets folder",
+        "l.open_configs"  : "Open Configs folder",
 
         "Ranked Queue"               : "Ranked Queue",
         "Ranked Tier"                : "Ranked Tier",
@@ -140,6 +142,8 @@ const lang = {
         "l.open_plugins"  : "Mở thư mục Plugins",
         "l.theme_releases": "Các bản phát hành",
         "l.close"         : "Đóng",
+        "l.open_assets"   : "Mở thư mục Assets",
+        "l.open_configs"  : "Mở thư mục Configs",
         
         "Ranked Queue"               : "Chế độ",
         "Ranked Tier"                : "Xếp hạng",
@@ -258,6 +262,8 @@ const lang = {
         "l.open_plugins"  : "プラグインフォルダを開く",
         "l.theme_releases": "テーマリリース",
         "l.close"         : "近い",
+        "l.open_assets"   : "Open Assets folder",
+        "l.open_configs"  : "Open Configs folder",
         
         "Ranked Queue"               : "Ranked Queue",
         "Ranked Tier"                : "Ranked Tier",
@@ -376,6 +382,8 @@ const lang = {
         "l.open_plugins"  : "Otwórz folder wtyczek",
         "l.theme_releases": "Wydania Motywu",
         "l.close"         : "Zamknij",
+        "l.open_assets"   : "Open Assets folder",
+        "l.open_configs"  : "Open Configs folder",
         
         "Ranked Queue"               : "Kolejka Rankingowa",
         "Ranked Tier"                : "Poziom rankingowy",
@@ -493,6 +501,8 @@ const lang = {
         "l.open_plugin"   : "Открыть папку плагинов",
         "l.theme_releases": "Версии тем",
         "l.close"         : "Закрыть",
+        "l.open_assets"   : "Open Assets folder",
+        "l.open_configs"  : "Open Configs folder",
         
         "Ranked Queue"               : "Ranked Queue",
         "Ranked Tier"                : "Ranked Tier",
@@ -609,6 +619,8 @@ const lang = {
         "l.open_plugins"  : "Abrir carpeta de plugins",
         "l.theme_releases": "Versiones del tema",
         "l.close"         : "Cerrar",
+        "l.open_assets"   : "Open Assets folder",
+        "l.open_configs"  : "Open Configs folder",
         
         "Ranked Queue"               : "Ranked Queue",
         "Ranked Tier"                : "Ranked Tier",
@@ -725,6 +737,8 @@ const lang = {
         "l.open_plugins"  : "플러그인",
         "l.theme_releases": "테마 배포",
         "l.close"         : "닫기",
+        "l.open_assets"   : "Open Assets folder",
+        "l.open_configs"  : "Open Configs folder",
         
         "Ranked Queue"               : "Ranked Queue",
         "Ranked Tier"                : "Ranked Tier",
@@ -840,6 +854,8 @@ const lang = {
         "l.open_plugins"  : "打開插件資料夾",
         "l.theme_releases": "最新主題",
         "l.close"         : "關閉",
+        "l.open_assets"   : "Open Assets folder",
+        "l.open_configs"  : "Open Configs folder",
 
         "Ranked Queue"               : "模式",
         "Ranked Tier"                : "牌位",
@@ -955,6 +971,8 @@ const lang = {
         "l.open_plugins"  : "打开插件文件夹",
         "l.theme_releases": "主题发布页",
         "l.close"         : "关闭",
+        "l.open_assets"   : "Open Assets folder",
+        "l.open_configs"  : "Open Configs folder",
 
         "Ranked Queue"               : "模式",
         "Ranked Tier"                : "牌位",
