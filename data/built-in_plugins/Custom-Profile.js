@@ -22,6 +22,7 @@ if ("Custom-profile-hover") {
         }
     }
 
+    
     window.setInterval(async ()=>{
         if (DataStore.get("Custom-rank")) {
             await fetch("/lol-chat/v1/me", {
@@ -30,7 +31,7 @@ if ("Custom-profile-hover") {
                 body   : JSON.stringify(requestRank)
             })
         }
-    
+
         if (DataStore.get("Custom-challenge-crystal")) {
             await fetch("/lol-chat/v1/me", {
                 method : "PUT",
@@ -38,7 +39,9 @@ if ("Custom-profile-hover") {
                 body   : JSON.stringify(requestChallengeCrystal)
             })
         }
-    
+    }, 180000)
+
+    window.setInterval(async ()=> {
         if (DataStore.get("Custom-mastery-score")) {
             await fetch("/lol-chat/v1/me", {
                 method : "PUT",
@@ -46,5 +49,12 @@ if ("Custom-profile-hover") {
                 body   : JSON.stringify({"lol":{"masteryScore":`${DataStore.get("Mastery-Score")}`}})
             })
         }
-    }, 180000)
-}
+    },10000)
+
+    window.setInterval(async ()=>{
+        if (DataStore.get("Custom-mastery-score")) {
+            try {document.querySelector("div.style-profile-emblem-wrapper > div.style-profile-emblem-header > div.style-profile-champion-mastery-score").innerText = `${DataStore.get("Mastery-Score")}`}catch{}
+            try {document.querySelector("div.collections-routes > div > div.control-panel > div.collection-details > div.collection-totals > div.total-owned.total-count.ember-view").innerText = `${DataStore.get("Mastery-Score")}`} catch{}
+        }
+    },300)
+} 
