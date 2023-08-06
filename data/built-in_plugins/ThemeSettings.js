@@ -1139,6 +1139,25 @@ const injectSettings = (panel) => {
             document.createElement('br'),
             UI.Input("Spoof-name"),
             document.createElement('br'),
+            UI.CheckBox(
+               `${selectedLang["Debug-mode"]}`,'debug','debugbox',
+               ()=>{
+                  let debugel = document.getElementById("debug")
+                  let debugbox = document.getElementById("debugbox")
+            
+                  if (DataStore.get("Debug-mode")) {
+                     debugel.removeAttribute("class")
+                     debugbox.checked = false
+                     DataStore.set("Debug-mode", false)
+                  }
+                  else {
+                     debugel.setAttribute("class", "checked")
+                     debugbox.checked = true
+                     DataStore.set("Debug-mode", true)
+                  }
+               }
+            ),
+            document.createElement('br'),
          ])
       ])
    )
@@ -1279,6 +1298,8 @@ window.addEventListener('load', async () => {
                   let cusmasterybox = document.getElementById("cusmasterybox")
                   let cuschalcryel = document.getElementById("cuschalcry")
                   let cuschalcrybox = document.getElementById("cuschalcrybox")
+                  let debugel = document.getElementById("debug")
+                  let debugbox = document.getElementById("debugbox")
 
                   if (document.getElementById("Aram only")) {
                      clearInterval(check)
@@ -1288,6 +1309,7 @@ window.addEventListener('load', async () => {
                      DeleteEl(".vng-publisher-settings.ember-view", DataStore.get("Hide-linking-settings"))
 
                      //tickcheck(DataStore.get(""), el, box)
+                     tickcheck(DataStore.get("Debug-mode"), debugel, debugbox)
                      tickcheck(DataStore.get("Custom-profile-hover"), cusprfel, cusprfbox)
                      tickcheck(DataStore.get("Custom-mastery-score"), cusmasteryel, cusmasterybox)
                      tickcheck(DataStore.get("Custom-challenge-crystal"), cuschalcryel, cuschalcrybox)
