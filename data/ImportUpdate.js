@@ -98,3 +98,6 @@ if (!DataStore.has("Custom-Regalia-Banner")) {
 if (!DataStore.has("Custom-Hover-card-backdrop")) {
 	DataStore.set("Custom-Hover-card-backdrop", true)
 }
+if (!DataStore.has("Debug-mode")) {
+	DataStore.set("Debug-mode", false)
+}

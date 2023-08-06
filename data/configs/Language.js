@@ -126,6 +126,8 @@ const lang = {
         "Custom-challenge-crystal": "Custom challenge crystal (Testing)",
         "challenge-rank"  : "Challenge rank",
         "challenge-point" : "Challenge point",
+
+        "Debug-mode"      : "Debug mode",
     },
 
     "VN": {
@@ -246,6 +248,8 @@ const lang = {
         "Custom-challenge-crystal": "Thử thách tùy chỉnh (Testing)",
         "challenge-rank"  : "Xếp hạng thử thách",
         "challenge-point" : "Điểm thử thách",
+
+        "Debug-mode"      : "Chế độ gỡ lỗi",
     },
 
     "JP": {
@@ -366,6 +370,8 @@ const lang = {
         "Custom-challenge-crystal": "Custom challenge crystal (Testing)",
         "challenge-rank"  : "Challenge rank",
         "challenge-point" : "Challenge point",
+
+        "Debug-mode"      : "Debug mode",
     },
 
     "PL": {
@@ -486,6 +492,8 @@ const lang = {
         "Custom-challenge-crystal": "Custom challenge crystal (Testing)",
         "challenge-rank"  : "Challenge rank",
         "challenge-point" : "Challenge point",
+
+        "Debug-mode"      : "Debug mode",
     },
     "RU": {
 
@@ -605,6 +613,8 @@ const lang = {
         "Custom-challenge-crystal": "Custom challenge crystal (Testing)",
         "challenge-rank"  : "Challenge rank",
         "challenge-point" : "Challenge point",
+
+        "Debug-mode"      : "Debug mode",
     },
     "MX": {
         "/___Translated by @Legnatbird___/": "",
@@ -723,6 +733,8 @@ const lang = {
         "Custom-challenge-crystal": "Custom challenge crystal (Testing)",
         "challenge-rank"  : "Challenge rank",
         "challenge-point" : "Challenge point",
+
+        "Debug-mode"      : "Debug mode",
     },
     "KR": {
         "/___Translated by @___/": "",
@@ -841,6 +853,8 @@ const lang = {
         "Custom-challenge-crystal": "Custom challenge crystal (Testing)",
         "challenge-rank"  : "Challenge rank",
         "challenge-point" : "Challenge point",
+
+        "Debug-mode"      : "Debug mode",
     },
     "TW": {
         "home"            : "首頁",
@@ -958,6 +972,8 @@ const lang = {
         "Custom-challenge-crystal": "Custom challenge crystal (Testing)",
         "challenge-rank"  : "Challenge rank",
         "challenge-point" : "Challenge point",
+
+        "Debug-mode"      : "Debug mode",
     },
     "CN": {
         "home"            : "首页",
@@ -1075,6 +1091,8 @@ const lang = {
         "Custom-challenge-crystal": "Custom challenge crystal (Testing)",
         "challenge-rank"  : "Challenge rank",
         "challenge-point" : "Challenge point",
+
+        "Debug-mode"      : "Debug mode",
     },
 }
 
