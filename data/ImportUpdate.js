@@ -101,3 +101,12 @@ if (!DataStore.has("Custom-Hover-card-backdrop")) {
 if (!DataStore.has("Debug-mode")) {
 	DataStore.set("Debug-mode", false)
 }
+if (!DataStore.has("")) {
+	DataStore.set("", false)
+}
+if (!DataStore.has("")) {
+	DataStore.set("", false)
+}
+if (!DataStore.has("")) {
+	DataStore.set("", false)
+}

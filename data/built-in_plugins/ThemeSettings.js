@@ -1,8 +1,5 @@
 let datapath = new URL("..", import.meta.url).href
-
-import ChampsP from "../configs/ChampionsPrices.js"
 import lang from "../configs/Language.js"
-import QueueID from "../configs/QueueID.js"
 
 const UI = {
    Row: (id, childs) => {
@@ -157,50 +154,6 @@ const injectSettings = (panel) => {
    const langCode = document.querySelector("html").lang;
    const langMap = lang.langlist
    const selectedLang = lang[langMap[langCode] || "EN"];
-   const rank = {
-      "Ranked Queue ID": [
-          {"id" : 0, "name": `${selectedLang["Ranked Solo 5vs5"]}`},
-          {"id" : 1, "name": `${selectedLang["Ranked Flex Summoner's Rift"]}`},
-          {"id" : 2, "name": `${selectedLang["Ranked Flex TT"]}`},
-          {"id" : 3, "name": `${selectedLang["Ranked TFT"]}`},
-          {"id" : 4, "name": `${selectedLang["Ranked TFT TURBO"]}`},
-          {"id" : 5, "name": `${selectedLang["Ranked TFT DOUBLE UP"]}`}
-      ],
-  
-      "Ranked Tier ID": [
-          {"id" : 0, "name": `${selectedLang["Iron"]}`},
-          {"id" : 1, "name": `${selectedLang["Bronze"]}`},
-          {"id" : 2, "name": `${selectedLang["Silver"]}`},
-          {"id" : 3, "name": `${selectedLang["Gold"]}`},
-          {"id" : 4, "name": `${selectedLang["Platinum"]}`},
-          {"id" : 5, "name": `${selectedLang["Diamond"]}`},
-          {"id" : 6, "name": `${selectedLang["Emerald"]}`},
-          {"id" : 7, "name": `${selectedLang["Master"]}`},
-          {"id" : 8, "name": `${selectedLang["Grand-Master"]}`},
-          {"id" : 9, "name": `${selectedLang["Challenger"]}`}
-      ],
-  
-      "Ranked Division ID": [
-          {"id" : 0, "name": "I"},
-          {"id" : 1, "name": "II"},
-          {"id" : 2, "name": "III"},
-          {"id" : 3, "name": "IV"}
-      ]
-   }
-   const Challengerank = {
-      "challengeCrystalLevel": [
-         {"id" : 0, "name": `${selectedLang["Iron"]}`},
-         {"id" : 1, "name": `${selectedLang["Bronze"]}`},
-         {"id" : 2, "name": `${selectedLang["Silver"]}`},
-         {"id" : 3, "name": `${selectedLang["Gold"]}`},
-         {"id" : 4, "name": `${selectedLang["Platinum"]}`},
-         {"id" : 5, "name": `${selectedLang["Diamond"]}`},
-         {"id" : 6, "name": `${selectedLang["Emerald"]}`},
-         {"id" : 7, "name": `${selectedLang["Master"]}`},
-         {"id" : 8, "name": `${selectedLang["Grand-Master"]}`},
-         {"id" : 9, "name": `${selectedLang["Challenger"]}`}
-     ],
-   }
    panel.prepend(
       UI.Row("",[
          UI.Row("Info",[
@@ -216,16 +169,6 @@ const injectSettings = (panel) => {
             ]),
             UI.Image("Logo.png", "settings-logo")
          ]),
-//________________________________________________________________________________________//
-
-
-
-//________________________________________________________________________________________//
-// Theme Settings
-         UI.Label(
-            `${selectedLang["theme-settings"]}:`
-         ),
-         document.createElement('br'),
          UI.Slider(
             selectedLang["wallpaper-volume"],DataStore.get("wallpaper-volume"),"elaina-bg","wallpaper-volume"
          ),
@@ -707,44 +650,6 @@ const injectSettings = (panel) => {
          ),
          document.createElement('br'),
          UI.CheckBox(
-            `${selectedLang["Hide-linking-settings"]}`,'hidelinkset','hidelinksetbox',
-            ()=>{
-               let hidelinksetel = document.getElementById("hidelinkset")
-               let hidelinksetbox = document.getElementById("hidelinksetbox")
-
-               if (DataStore.get("Hide-linking-settings")) {
-                  hidelinksetbox.checked = false
-                  DataStore.set("Hide-linking-settings", false)
-                  hidelinksetel.removeAttribute("class")
-               }
-               else {
-                  hidelinksetbox.checked = true
-                  DataStore.set("Hide-linking-settings", true)
-                  hidelinksetel.setAttribute("class", "checked")
-               }
-            }
-         ),
-         document.createElement('br'),
-         UI.CheckBox(
-            `${selectedLang["Hide-verify-acc"]}`,'hideveriacc','hideveriaccbox',
-            ()=>{
-               let hideveriaccel = document.getElementById("hideveriacc")
-               let hideveriaccbox = document.getElementById("hideveriaccbox")
-
-               if (DataStore.get("Hide-verify-acc")) {
-                  hideveriaccbox.checked = false
-                  DataStore.set("Hide-verify-acc", false)
-                  hideveriaccel.removeAttribute("class")
-               }
-               else {
-                  hideveriaccbox.checked = true
-                  DataStore.set("Hide-verify-acc", true)
-                  hideveriaccel.setAttribute("class", "checked")
-               }
-            }
-         ),
-         document.createElement('br'),
-         UI.CheckBox(
             `${selectedLang["hide-overview"]}`,'hideovertab','hideovertabbox',
             ()=>{
                let hideovertabel = document.getElementById("hideovertab")
@@ -821,344 +726,6 @@ const injectSettings = (panel) => {
          ),
          document.createElement('br'),
          document.createElement('br'),
-//________________________________________________________________________________________//
-         
-
-
-//________________________________________________________________________________________//
-//Plugins Settings
-         UI.Label(
-            `${selectedLang["plugins-settings"]}`
-         ),
-         UI.CheckBox(
-            `${selectedLang["old-ll-settings"]}`,'oldll','oldllbox',
-            ()=>{
-               let oldllel = document.getElementById("oldll")
-               let oldllbox = document.getElementById("oldllbox")
-
-               if (DataStore.get("Old-League-Loader-Settings")) {
-                  oldllbox.checked = false
-                  DataStore.set("Old-League-Loader-Settings", false)
-                  oldllel.removeAttribute("class")
-               }
-               else {
-                  oldllbox.checked = true
-                  DataStore.set("Old-League-Loader-Settings", true)
-                  oldllel.setAttribute("class", "checked")
-               }
-            }
-         ),
-         document.createElement('br'),
-         UI.Row("loothelp",[
-            UI.CheckBox(
-               `${selectedLang["loot-helper"]}`,'lh','lhbox',
-               ()=>{
-                  let lhel = document.getElementById("lh")
-                  let lhbox = document.getElementById("lhbox")
-
-                  if (DataStore.get("loot-helper")) {
-                     lhbox.checked = false
-                     DataStore.set("loot-helper", false)
-                     lhel.removeAttribute("class")
-                  }
-                  else {
-                     lhbox.checked = true
-                     DataStore.set("loot-helper", true)
-                     lhel.setAttribute("class", "checked")
-                  }
-               }
-            )
-         ]),
-         UI.CheckBox(
-            `${selectedLang["aram-only"]}`, "Aram only", "Aram only checkbox",
-            () => {
-               let Aramel = document.getElementById("Aram only")
-               let Arambox = document.getElementById("Aram only checkbox")
-
-               if (DataStore.get("aram-only")) {
-                  Arambox.checked = false
-                  DataStore.set("aram-only", false)
-                  Aramel.removeAttribute("class")
-               }
-               else {
-                  Arambox.checked = true
-                  DataStore.set("aram-only", true)
-                  Aramel.setAttribute("class", "checked")
-               }
-            }
-         ),
-         document.createElement('br'),
-         UI.Row("rdskin",[
-            UI.CheckBox(
-               `${selectedLang["random-skin"]}`,'rds','rdsbox',
-               ()=>{
-                  let rdsel = document.getElementById("rds")
-                  let rdsbox = document.getElementById("rdsbox")
-   
-                  if (DataStore.get("random-skin")) {
-                     rdsbox.checked = false
-                     DataStore.set("random-skin", false)
-                     rdsel.removeAttribute("class")
-                  }
-                  else {
-                     rdsbox.checked = true
-                     DataStore.set("random-skin", true)
-                     rdsel.setAttribute("class", "checked")
-                  }
-               }
-            )
-         ]),
-         UI.Row("j1_4",[
-            UI.CheckBox(
-               `${selectedLang["1/4-joke"]}`,'_1_4','_1_4box',
-               ()=>{
-                  let _1_4el = document.getElementById("_1_4")
-                  let _1_4box = document.getElementById("_1_4box")
-
-                  if (DataStore.get("April fool` joke")) {
-                     _1_4box.checked = false
-                     DataStore.set("April fool` joke", false)
-                     _1_4el.removeAttribute("class")
-                  }
-                  else {
-                     _1_4box.checked = true
-                     DataStore.set("April fool` joke", true)
-                     _1_4el.setAttribute("class", "checked")
-                  }
-               }
-            )
-         ]),
-         /*UI.Row("pandoru",[
-            UI.CheckBox(
-               `${selectedLang["Santa"]}`,'MC','MCbox',
-               ()=>{
-                  let MCel = document.getElementById("MC")
-                  let MCbox = document.getElementById("MCbox")
-   
-                  if (DataStore.get("Merry-Christmas")) {
-                     MCbox.checked = false
-                     DataStore.set("Merry-Christmas", false)
-                     MCel.removeAttribute("class")
-                  }
-                  else {
-                     MCbox.checked = true
-                     DataStore.set("Merry-Christmas", true)
-                     MCel.setAttribute("class", "checked")
-                  }
-               }
-            )
-         ]),*/
-         UI.Row("buyallchamp",[
-            UI.CheckBox(
-               `${selectedLang["buy-all-champs"]}`,'byc','bycbox',
-               ()=>{
-                  let bycel = document.getElementById("byc")
-                  let bycbox = document.getElementById("bycbox")
-
-                  if (DataStore.get("buy-all-champs")) {
-                     bycbox.checked = false
-                     DataStore.set("buy-all-champs", false)
-                     bycel.removeAttribute("class")
-                  }
-                  else {
-                     bycbox.checked = true
-                     DataStore.set("buy-all-champs", true)
-                     bycel.setAttribute("class", "checked")
-                  }
-               }
-            ),
-            document.createElement('br'),
-            UI.Dropdown(ChampsP, "ChampsPrice", `${selectedLang["prices"]}`, "description", "Cost"),
-            document.createElement('br')
-         ]),
-         UI.CheckBox(
-            `${selectedLang["auto-find-queue"]}`,'autoq','autoqbox',
-            ()=>{
-               let autoqel = document.getElementById("autoq")
-               let autoqbox = document.getElementById("autoqbox")
-
-               if (DataStore.get("Auto-Find-Queue")) {
-                  autoqbox.checked = false
-                  DataStore.set("Auto-Find-Queue", false)
-                  autoqel.removeAttribute("class")
-               }
-               else {
-                  autoqbox.checked = true
-                  DataStore.set("Auto-Find-Queue", true)
-                  autoqel.setAttribute("class", "checked")
-               }
-            }
-         ),
-         UI.Row("Q-Delay",[
-            UI.Row("Create-Delay",[
-               UI.Label(`${selectedLang["Create-Delay"]}`, "Create-Delay-Text"),
-               UI.Input("Create-Delay"),
-            ]),
-            UI.Row("Find-Delay",[
-               UI.Label(`${selectedLang["Find-Delay"]}`, "Find-Delay-Text"),
-               UI.Input("Find-Delay")
-            ])
-         ]),
-         UI.Dropdown(QueueID, "Gamemode", `${selectedLang["Gamemode"]}`, "description", "queueId"),
-         document.createElement('br'),
-         document.createElement('br'),
-         UI.CheckBox(
-            `${selectedLang["Custom-profile-hover"]}`,'cusprf','cusprfbox',
-            ()=>{
-               let cusprfel = document.getElementById("cusprf")
-               let cusprfbox = document.getElementById("cusprfbox")
-         
-               if (DataStore.get("Custom-profile-hover")) {
-                  cusprfel.removeAttribute("class")
-                  cusprfbox.checked = false
-                  DataStore.set("Custom-profile-hover", false)
-               }
-               else {
-                  cusprfel.setAttribute("class", "checked")
-                  cusprfbox.checked = true
-                  DataStore.set("Custom-profile-hover", true)
-               }
-            }
-         ),
-         document.createElement('br'),
-         UI.Row("customprf", [
-            UI.CheckBox(
-               `${selectedLang["Custom-mastery-score"]}`,'cusmastery','cusmasterybox',
-               ()=>{
-                  let cusmasteryel = document.getElementById("cusmastery")
-                  let cusmasterybox = document.getElementById("cusmasterybox")
-            
-                  if (DataStore.get("Custom-mastery-score")) {
-                     cusmasteryel.removeAttribute("class")
-                     cusmasterybox.checked = false
-                     DataStore.set("Custom-mastery-score", false)
-                  }
-                  else {
-                     cusmasteryel.setAttribute("class", "checked")
-                     cusmasterybox.checked = true
-                     DataStore.set("Custom-mastery-score", true)
-                  }
-               }
-            ),
-            document.createElement('br'),
-            UI.Input("Mastery-Score"),
-            document.createElement('br'),
-            UI.CheckBox(
-               `${selectedLang["custom-rank-hover"]}`,'cusrankhover','cusrankhoverbox',
-               ()=>{
-                  let cusrankhoverel = document.getElementById("cusrankhover")
-                  let cusrankhoverbox = document.getElementById("cusrankhoverbox")
-
-                  if (DataStore.get("Custom-rank")) {
-                     cusrankhoverbox.checked = false
-                     DataStore.set("Custom-rank", false)
-                     cusrankhoverel.removeAttribute("class")
-                  }
-                  else {
-                     cusrankhoverbox.checked = true
-                     DataStore.set("Custom-rank", true)
-                     cusrankhoverel.setAttribute("class", "checked")
-                  }
-               }
-            ),
-            document.createElement('br'),
-            UI.Dropdown(rank, "Ranked Queue ID", `${selectedLang["Ranked Queue"]}`, "name", "id"),
-            document.createElement('br'),
-            UI.Dropdown(rank, "Ranked Tier ID", `${selectedLang["Ranked Tier"]}`, "name", "id"),
-            document.createElement('br'),
-            UI.Dropdown(rank, "Ranked Division ID", `${selectedLang["Ranked Division"]}`, "name", "id"),
-            document.createElement('br'),
-            document.createElement('br'),
-            UI.CheckBox(
-               `${selectedLang["Custom-challenge-crystal"]}`,'cuschalcry','cuschalcrybox',
-               ()=>{
-                  let cuschalcryel = document.getElementById("cuschalcry")
-                  let cuschalcrybox = document.getElementById("cuschalcrybox")
-            
-                  if (DataStore.get("Custom-challenge-crystal")) {
-                     cuschalcryel.removeAttribute("class")
-                     cuschalcrybox.checked = false
-                     DataStore.set("Custom-challenge-crystal", false)
-                  }
-                  else {
-                     cuschalcryel.setAttribute("class", "checked")
-                     cuschalcrybox.checked = true
-                     DataStore.set("Custom-challenge-crystal", true)
-                  }
-               }
-            ),
-            document.createElement('br'),
-            UI.Dropdown(Challengerank, "challengeCrystalLevel", `${selectedLang["challenge-rank"]}`, "name", "id"),
-            UI.Label(`${selectedLang["challenge-point"]}`, "challenge-point-Text"),
-            UI.Input("Challenge-Points"),
-            document.createElement('br'),
-            UI.CheckBox(
-               `${selectedLang["custom-status"]}`,'cussta','cusstabox',
-               ()=>{
-                  let cusstael = document.getElementById("cussta")
-                  let cusstabox = document.getElementById("cusstabox")
-
-                  if (DataStore.get("Custom-Status")) {
-                     cusstabox.checked = false
-                     DataStore.set("Custom-Status", false)
-                     cusstael.removeAttribute("class")
-                  }
-                  else {
-                     cusstabox.checked = true
-                     DataStore.set("Custom-Status", true)
-                     cusstael.setAttribute("class", "checked")
-                  }
-               }
-            ),
-            UI.Label(`${selectedLang["status-delay"]}`),
-            UI.Input("status-delay"),
-            UI.Link(
-               `${selectedLang["note-3"]} ?`,
-               'https://github.com/KebsCS/KBotExt'
-            ),
-         ]),
-         UI.Row("namespoof",[
-            UI.CheckBox(
-               `${selectedLang["name-spoofer"]}`,'namespf','namespfbox',
-               ()=>{
-                  let namespfel = document.getElementById("namespf")
-                  let namespfbox = document.getElementById("namespfbox")
-
-                  if (DataStore.get("Name-Spoofer")) {
-                     namespfbox.checked = false
-                     DataStore.set("Name-Spoofer", false)
-                     namespfel.removeAttribute("class")
-                  }
-                  else {
-                     namespfbox.checked = true
-                     DataStore.set("Name-Spoofer", true)
-                     namespfel.setAttribute("class", "checked")
-                  }
-               }
-            ),
-            document.createElement('br'),
-            UI.Input("Spoof-name"),
-            document.createElement('br'),
-            UI.CheckBox(
-               `${selectedLang["Debug-mode"]}`,'debug','debugbox',
-               ()=>{
-                  let debugel = document.getElementById("debug")
-                  let debugbox = document.getElementById("debugbox")
-            
-                  if (DataStore.get("Debug-mode")) {
-                     debugel.removeAttribute("class")
-                     debugbox.checked = false
-                     DataStore.set("Debug-mode", false)
-                  }
-                  else {
-                     debugel.setAttribute("class", "checked")
-                     debugbox.checked = true
-                     DataStore.set("Debug-mode", true)
-                  }
-               }
-            ),
-            document.createElement('br'),
-         ])
       ])
    )
 }
@@ -1187,13 +754,6 @@ document.createElement('br'),
 
 
 window.addEventListener('load', async () => {
-   function DeleteEl (target, confirm) {
-      try {
-         let origin = document.querySelector(target)
-         if (confirm) {origin.remove()}
-      }
-      catch{}
-   }
    function tickcheck (Data, el, box) {
       if (Data && el.getAttribute("class") == "") {
          box.checked = true
@@ -1206,7 +766,7 @@ window.addEventListener('load', async () => {
       if (manager) {
          clearInterval(interval)
          new MutationObserver((mutations) => {
-            const panel = document.querySelector('div.lol-settings-options > lol-uikit-scrollable')
+            const panel = document.querySelector('div.lol-settings-options > lol-uikit-scrollable.theme_settings')
             if (panel && mutations.some((record) => Array.from(record.addedNodes).includes(panel))) {
                injectSettings(panel)
                const check = setInterval (()=>{
@@ -1219,20 +779,8 @@ window.addEventListener('load', async () => {
                   let aniloadel = document.getElementById("aniload");
                   let cusavel = document.getElementById("cusav");
                   let cusiconel = document.getElementById("cusicon");
-                  let cuscursorel = document.getElementById("cuscursor");
-                  let oldllel = document.getElementById("oldll");
-                  let Aramel = document.getElementById("Aram only");
-                  let autoqel = document.getElementById("autoq");
-                  let cusrankhoverel = document.getElementById("cusrankhover");
-                  let cusstael = document.getElementById("cussta");
-                  let _1_4el = document.getElementById("_1_4");
-                  //let MCel = document.getElementById("MC");
-                  let lhel = document.getElementById("lh");
                   let stdiatel = document.getElementById("stdiat");
                   let oldpnbel = document.getElementById("oldpnb");
-                  let hideveriaccel = document.getElementById("hideveriacc");
-                  let hidelinksetel = document.getElementById("hidelinkset");
-                  let Arambox = document.getElementById("Aram only checkbox");
                   let sbtbox = document.getElementById("sbtbox");
                   let cusrpbox = document.getElementById("cusrpbox");
                   let hidechampartbox = document.getElementById("hidechampartbox");
@@ -1240,26 +788,10 @@ window.addEventListener('load', async () => {
                   let cusbebox = document.getElementById("cusbebox");
                   let cusranknamebox = document.getElementById("cusranknamebox");
                   let aniloadbox = document.getElementById("aniloadbox");
-                  let cuscursorbox = document.getElementById("cuscursorbox");
                   let cusavbox = document.getElementById("cusavbox");
                   let cusiconbox = document.getElementById("cusiconbox");
-                  let oldllbox = document.getElementById("oldllbox");
-                  let cusrankhoverbox = document.getElementById("cusrankhoverbox");
-                  let autoqbox = document.getElementById("autoqbox");
-                  let cusstabox = document.getElementById("cusstabox");
-                  //let MCbox = document.getElementById("MCbox");
-                  let _1_4box = document.getElementById("_1_4box");
-                  let lhbox = document.getElementById("lhbox");
                   let stdiatbox = document.getElementById("stdiatbox");
                   let oldpnbbox = document.getElementById("oldpnbbox");
-                  let hidelinksetbox = document.getElementById("hidelinksetbox");
-                  let hideveriaccbox = document.getElementById("hideveriaccbox");
-                  let rdsel = document.getElementById("rds");
-                  let rdsbox = document.getElementById("rdsbox");
-                  let bycel = document.getElementById("byc");
-                  let bycbox = document.getElementById("bycbox");
-                  let namespfel = document.getElementById("namespf");
-                  let namespfbox = document.getElementById("namespfbox");
                   let hidevlel = document.getElementById("hidevl");
                   let hidevlbox = document.getElementById("hidevlbox");
                   let rsbgel = document.getElementById("rsbg")
@@ -1292,27 +824,11 @@ window.addEventListener('load', async () => {
                   let cusregabnrbox = document.getElementById("cusregabnrbox")
                   let cushvbdropel = document.getElementById("cushvbdrop")
                   let cushvbdropbox = document.getElementById("cushvbdropbox")
-                  let cusprfel = document.getElementById("cusprf")
-                  let cusprfbox = document.getElementById("cusprfbox")
-                  let cusmasteryel = document.getElementById("cusmastery")
-                  let cusmasterybox = document.getElementById("cusmasterybox")
-                  let cuschalcryel = document.getElementById("cuschalcry")
-                  let cuschalcrybox = document.getElementById("cuschalcrybox")
-                  let debugel = document.getElementById("debug")
-                  let debugbox = document.getElementById("debugbox")
 
-                  if (document.getElementById("Aram only")) {
+                  if (document.getElementById("Info")) {
                      clearInterval(check)
 
-                     DeleteEl(".lol-settings-account-verification-row.ember-view", DataStore.get("Hide-verify-acc"))
-                     DeleteEl(".linking-settings.ember-view", DataStore.get("Hide-linking-settings"))
-                     DeleteEl(".vng-publisher-settings.ember-view", DataStore.get("Hide-linking-settings"))
-
                      //tickcheck(DataStore.get(""), el, box)
-                     tickcheck(DataStore.get("Debug-mode"), debugel, debugbox)
-                     tickcheck(DataStore.get("Custom-profile-hover"), cusprfel, cusprfbox)
-                     tickcheck(DataStore.get("Custom-mastery-score"), cusmasteryel, cusmasterybox)
-                     tickcheck(DataStore.get("Custom-challenge-crystal"), cuschalcryel, cuschalcrybox)
                      tickcheck(DataStore.get("Custom-Regalia-Banner"), cusregabnrel, cusregabnrbox)
                      tickcheck(DataStore.get("Custom-Hover-card-backdrop"), cushvbdropel, cushvbdropbox)
                      tickcheck(DataStore.get("hide-overview"), hideovertabel, hideovertabbox)
@@ -1328,9 +844,7 @@ window.addEventListener('load', async () => {
                      tickcheck(DataStore.get("Custom-Ticker"), custickel, custickbox)
                      tickcheck(DataStore.get("Custom-Trophy"), custrophyel, custrophybox)
                      tickcheck(DataStore.get("Runes-BG"), rsbgel, rsbgbox)
-                     tickcheck(DataStore.get("Name-Spoofer"), namespfel, namespfbox)
                      tickcheck(DataStore.get("hide-vertical-lines"), hidevlel, hidevlbox)
-                     tickcheck(DataStore.get("aram-only"), Aramel, Arambox)
                      tickcheck(DataStore.get("Sidebar-Transparent"), sbtel, sbtbox)
                      tickcheck(DataStore.get("Hide-Champions-Splash-Art"), hidechampartel, hidechampartbox)
                      tickcheck(DataStore.get("Custom-Font"), cusfontel, cusfontbox)
@@ -1340,20 +854,8 @@ window.addEventListener('load', async () => {
                      tickcheck(DataStore.get("Animate-Loading"), aniloadel,aniloadbox)
                      tickcheck(DataStore.get("Custom-Avatar"), cusavel, cusavbox)
                      tickcheck(DataStore.get("Custom-Icon"), cusiconel, cusiconbox)
-                     tickcheck(DataStore.get("Custom-Cursor"), cuscursorel, cuscursorbox)
-                     tickcheck(DataStore.get("Old-League-Loader-Settings"), oldllel, oldllbox)
-                     tickcheck(DataStore.get("Auto-Find-Queue"), autoqel, autoqbox)
-                     tickcheck(DataStore.get("Custom-Status"), cusstael, cusstabox)
-                     tickcheck(DataStore.get("April fool` joke"), _1_4el, _1_4box)
-                     //tickcheck(DataStore.get("Merry-Christmas"), MCel, MCbox)
-                     tickcheck(DataStore.get("loot-helper"), lhel, lhbox)
                      tickcheck(DataStore.get("settings-dialogs-transparent"), stdiatel, stdiatbox)
                      tickcheck(DataStore.get("old-prev/next-button"), oldpnbel, oldpnbbox)
-                     tickcheck(DataStore.get("Hide-linking-settings"), hidelinksetel, hidelinksetbox)
-                     tickcheck(DataStore.get("Hide-verify-acc"), hideveriaccel, hideveriaccbox)
-                     tickcheck(DataStore.get("random-skin"), rdsel, rdsbox)
-                     tickcheck(DataStore.get("buy-all-champs"), bycel, bycbox)
-                     tickcheck(DataStore.get("Custom-rank"), cusrankhoverel, cusrankhoverbox)
                   }
                },100)
             }

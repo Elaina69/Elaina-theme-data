@@ -8,12 +8,12 @@ if (DataStore.get(`Update-${update}`)) {
 		// Add this ""+"\n"+
 
 		`ElainaV3 Update ${update}`+"\n"+
-		"- Add custom Clash Trophy and Border"+"\n"+
-		"- Fix Custom rank"+"\n"+
-		"- Delete Auto Ban/Pick plugins (Thanks controlado for let me using it in old version)"+"\n"+
-		"- Add \"hide tab\" option"+"\n"+
-		"- Separate custom icon options"+"\n"+
-		"- You still can using auto Ban/Pick plugins by download it from Author's Github"+"\n"+
+		"- Add Open assets and configs folder buttons"+"\n"+
+		"- Add Custom regalia banner"+"\n"+
+		"- Add Custom mastery point"+"\n"+
+		"- Separate custom avatar and custom hover card backdrop"+"\n"+
+		"- Custom icon no more change friend's icons"+"\n"+
+		"- Increase refresh time for custom rank"+"\n"+
 
 		""+"\n"+
 

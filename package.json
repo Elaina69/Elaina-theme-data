@@ -9,12 +9,15 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Elaina69/Elaina-V3"
+    "url": "git+https://github.com/Elaina69/Elaina-V3.git"
   },
   "author": "Elaina Da Catto",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Elaina69/Elaina-V3/issues"
   },
-  "homepage": "https://github.com/Elaina69/Elaina-V3"
+  "homepage": "https://github.com/Elaina69/Elaina-V3",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
 }
