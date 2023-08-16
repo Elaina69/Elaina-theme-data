@@ -123,7 +123,7 @@ const lang = {
         "name-spoofer"    : "Name spoofer",
         "Custom-profile-hover"    : "Custom profile(Hover-card)",
         "Custom-mastery-score"    : "Custom mastery score",
-        "Custom-challenge-crystal": "Custom challenge crystal (May not work in some regions)",
+        "Custom-challenge-crystal": "Custom challenge crystal",
         "challenge-rank"  : "Challenge rank",
         "challenge-point" : "Challenge point",
 
@@ -245,7 +245,7 @@ const lang = {
         "name-spoofer"    : "Tên giả (dành cho stream)",
         "Custom-profile-hover"    : "Hồ sơ tùy chỉnh (Hover-card)",
         "Custom-mastery-score"    : "Điểm thông thạo tùy chỉnh",
-        "Custom-challenge-crystal": "Thử thách tùy chỉnh (Có thể không hoạt động tại một số vùng)",
+        "Custom-challenge-crystal": "Thử thách tùy chỉnh",
         "challenge-rank"  : "Xếp hạng thử thách",
         "challenge-point" : "Điểm thử thách",
 
@@ -367,7 +367,7 @@ const lang = {
         "name-spoofer"    : "Name spoofer",
         "Custom-profile-hover"    : "Custom profile(Hover-card)",
         "Custom-mastery-score"    : "Custom mastery score",
-        "Custom-challenge-crystal": "Custom challenge crystal (May not work in some regions)",
+        "Custom-challenge-crystal": "Custom challenge crystal",
         "challenge-rank"  : "Challenge rank",
         "challenge-point" : "Challenge point",
 
@@ -489,7 +489,7 @@ const lang = {
         "name-spoofer"    : "Name spoofer",
         "Custom-profile-hover"    : "Custom profile(Hover-card)",
         "Custom-mastery-score"    : "Custom mastery score",
-        "Custom-challenge-crystal": "Custom challenge crystal (May not work in some regions)",
+        "Custom-challenge-crystal": "Custom challenge crystal",
         "challenge-rank"  : "Challenge rank",
         "challenge-point" : "Challenge point",
 
@@ -610,7 +610,7 @@ const lang = {
         "name-spoofer"    : "Name spoofer",
         "Custom-profile-hover"    : "Custom profile(Hover-card)",
         "Custom-mastery-score"    : "Custom mastery score",
-        "Custom-challenge-crystal": "Custom challenge crystal (May not work in some regions)",
+        "Custom-challenge-crystal": "Custom challenge crystal",
         "challenge-rank"  : "Challenge rank",
         "challenge-point" : "Challenge point",
 
@@ -730,7 +730,7 @@ const lang = {
         "name-spoofer"    : "Name spoofer",
         "Custom-profile-hover"    : "Custom profile(Hover-card)",
         "Custom-mastery-score"    : "Custom mastery score",
-        "Custom-challenge-crystal": "Custom challenge crystal (May not work in some regions)",
+        "Custom-challenge-crystal": "Custom challenge crystal",
         "challenge-rank"  : "Challenge rank",
         "challenge-point" : "Challenge point",
 
@@ -850,7 +850,7 @@ const lang = {
         "name-spoofer"    : "Name spoofer",
         "Custom-profile-hover"    : "Custom profile(Hover-card)",
         "Custom-mastery-score"    : "Custom mastery score",
-        "Custom-challenge-crystal": "Custom challenge crystal (May not work in some regions)",
+        "Custom-challenge-crystal": "Custom challenge crystal",
         "challenge-rank"  : "Challenge rank",
         "challenge-point" : "Challenge point",
 
@@ -969,7 +969,7 @@ const lang = {
         "name-spoofer"    : "名字欺騙",
         "Custom-profile-hover"    : "Custom profile(Hover-card)",
         "Custom-mastery-score"    : "Custom mastery score",
-        "Custom-challenge-crystal": "Custom challenge crystal (May not work in some regions)",
+        "Custom-challenge-crystal": "Custom challenge crystal",
         "challenge-rank"  : "Challenge rank",
         "challenge-point" : "Challenge point",
 
@@ -1088,7 +1088,7 @@ const lang = {
         "name-spoofer"    : "自定义召唤师ID",
         "Custom-profile-hover"    : "Custom profile(Hover-card)",
         "Custom-mastery-score"    : "Custom mastery score",
-        "Custom-challenge-crystal": "Custom challenge crystal (May not work in some regions)",
+        "Custom-challenge-crystal": "Custom challenge crystal",
         "challenge-rank"  : "Challenge rank",
         "challenge-point" : "Challenge point",
 
