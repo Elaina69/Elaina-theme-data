@@ -128,6 +128,7 @@ const lang = {
         "challenge-point" : "Challenge point",
 
         "Debug-mode"      : "Debug mode",
+        "Developer-Mode"  : "Developer mode",
     },
 
     "VN": {
@@ -250,6 +251,7 @@ const lang = {
         "challenge-point" : "Điểm thử thách",
 
         "Debug-mode"      : "Chế độ gỡ lỗi",
+        "Developer-Mode"  : "Chế độ nhà phát triển",
     },
 
     "JP": {
@@ -372,6 +374,7 @@ const lang = {
         "challenge-point" : "Challenge point",
 
         "Debug-mode"      : "Debug mode",
+        "Developer-Mode"  : "Developer mode",
     },
 
     "PL": {
@@ -494,6 +497,7 @@ const lang = {
         "challenge-point" : "Challenge point",
 
         "Debug-mode"      : "Debug mode",
+        "Developer-Mode"  : "Developer mode",
     },
     "RU": {
 
@@ -615,6 +619,7 @@ const lang = {
         "challenge-point" : "Challenge point",
 
         "Debug-mode"      : "Debug mode",
+        "Developer-Mode"  : "Developer mode",
     },
     "MX": {
         "/___Translated by @Legnatbird___/": "",
@@ -735,6 +740,7 @@ const lang = {
         "challenge-point" : "Challenge point",
 
         "Debug-mode"      : "Debug mode",
+        "Developer-Mode"  : "Developer mode",
     },
     "KR": {
         "/___Translated by @___/": "",
@@ -855,6 +861,7 @@ const lang = {
         "challenge-point" : "Challenge point",
 
         "Debug-mode"      : "Debug mode",
+        "Developer-Mode"  : "Developer mode",
     },
     "TW": {
         "home"            : "首頁",
@@ -974,6 +981,7 @@ const lang = {
         "challenge-point" : "Challenge point",
 
         "Debug-mode"      : "Debug mode",
+        "Developer-Mode"  : "Developer mode",
     },
     "CN": {
         "home"            : "首页",
@@ -1093,6 +1101,7 @@ const lang = {
         "challenge-point" : "Challenge point",
 
         "Debug-mode"      : "Debug mode",
+        "Developer-Mode"  : "Developer mode",
     },
 }
 
