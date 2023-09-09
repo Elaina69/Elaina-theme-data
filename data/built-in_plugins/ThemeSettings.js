@@ -167,7 +167,7 @@ const injectSettings = (panel) => {
                ),
                UI.Button (`${selectedLang["reload-client"]}`,'reload', ()=>{window.restartClient()}),
             ]),
-            UI.Image("Logo.png", "settings-logo")
+            UI.Image("Logo.png", "theme-settings-logo")
          ]),
          UI.Slider(
             selectedLang["wallpaper-volume"],DataStore.get("wallpaper-volume"),"elaina-bg","wallpaper-volume"
@@ -627,7 +627,7 @@ const injectSettings = (panel) => {
             }
          ),
          document.createElement('br'),
-         UI.CheckBox(
+         /*UI.CheckBox(
             `${selectedLang["custom-cursor"]}`,'cuscursor','cuscursorbox',
             ()=>{
                let cuscursorel = document.getElementById("cuscursor")
@@ -648,7 +648,7 @@ const injectSettings = (panel) => {
          UI.Label(
             `*${selectedLang["note"]}: ${selectedLang["note-2"]}`
          ),
-         document.createElement('br'),
+         document.createElement('br'),*/
          UI.CheckBox(
             `${selectedLang["hide-overview"]}`,'hideovertab','hideovertabbox',
             ()=>{

@@ -67,7 +67,7 @@ export function init(context) {
             isEnabled: () => true,
         })
 
-        api._modalManager._registeredCategoryGroups.splice(0, 0, newGroup)
+        api._modalManager._registeredCategoryGroups.splice(1, 0, newGroup)
         api._modalManager._refreshCategoryGroups()
     })
 
@@ -136,7 +136,7 @@ export function init(context) {
                     window.__SETTINGS_OBJECT = this
 
                     this.addTemplate('el-theme-settings', ember.HTMLBars.template({
-                        id: "3zvqXgt7",
+                        id: "ElainaThemeSettings",
                         block: JSON.stringify(themeTab),
                         meta: {}
                     }))

@@ -69,10 +69,12 @@ const UI = {
       origIn.appendChild(searchbox)
       return origIn
    },
-   CheckBox: (text, ID, boxID, check) => {
+   CheckBox: (text, ID, boxID, check, confirm) => {
+      const container = document.createElement("div")
       const origin = document.createElement("lol-uikit-flat-checkbox")
       const checkbox = document.createElement("input")
       const label = document.createElement("label")
+      const none = document.createElement("div")
 
       origin.setAttribute("class",'')
       origin.id = ID
@@ -85,10 +87,17 @@ const UI = {
       label.innerHTML = text
       label.setAttribute("slot", "label")
 
-      origin.appendChild(checkbox)
-      origin.appendChild(label)
+      if (confirm) {
+         container.appendChild(origin)
+         origin.appendChild(checkbox)
+         origin.appendChild(label)
 
-      return origin
+         return container
+      }
+      else {
+         container.appendChild(none)
+         return container
+      }
    },
    Slider: (text, value, target, setValue) => {
       const div        = document.createElement("div")
@@ -214,7 +223,7 @@ const injectSettings = (panel) => {
                ),
                UI.Button (`${selectedLang["reload-client"]}`,'reload', ()=>{window.restartClient()}),
             ]),
-            UI.Image("Logo.png", "settings-logo")
+            UI.Image("Logo.png", "plugins-settings-logo")
          ]),
          UI.Label(
             `${selectedLang["plugins-settings"]}`
@@ -235,7 +244,7 @@ const injectSettings = (panel) => {
                   DataStore.set("Old-League-Loader-Settings", true)
                   oldllel.setAttribute("class", "checked")
                }
-            }
+            },true
          ),
          document.createElement('br'),
          UI.Row("loothelp",[
@@ -255,7 +264,7 @@ const injectSettings = (panel) => {
                      DataStore.set("loot-helper", true)
                      lhel.setAttribute("class", "checked")
                   }
-               }
+               },true
             )
          ]),
          UI.CheckBox(
@@ -274,29 +283,9 @@ const injectSettings = (panel) => {
                   DataStore.set("aram-only", true)
                   Aramel.setAttribute("class", "checked")
                }
-            }
+            },true
          ),
          document.createElement('br'),
-         UI.Row("rdskin",[
-            UI.CheckBox(
-               `${selectedLang["random-skin"]}`,'rds','rdsbox',
-               ()=>{
-                  let rdsel = document.getElementById("rds")
-                  let rdsbox = document.getElementById("rdsbox")
-   
-                  if (DataStore.get("random-skin")) {
-                     rdsbox.checked = false
-                     DataStore.set("random-skin", false)
-                     rdsel.removeAttribute("class")
-                  }
-                  else {
-                     rdsbox.checked = true
-                     DataStore.set("random-skin", true)
-                     rdsel.setAttribute("class", "checked")
-                  }
-               }
-            )
-         ]),
          UI.Row("j1_4",[
             UI.CheckBox(
                `${selectedLang["1/4-joke"]}`,'_1_4','_1_4box',
@@ -314,7 +303,7 @@ const injectSettings = (panel) => {
                      DataStore.set("April fool` joke", true)
                      _1_4el.setAttribute("class", "checked")
                   }
-               }
+               },true
             )
          ]),
          /*UI.Row("pandoru",[
@@ -334,7 +323,7 @@ const injectSettings = (panel) => {
                      DataStore.set("Merry-Christmas", true)
                      MCel.setAttribute("class", "checked")
                   }
-               }
+               },true
             )
          ]),*/
          UI.Row("buyallchamp",[
@@ -354,7 +343,7 @@ const injectSettings = (panel) => {
                      DataStore.set("buy-all-champs", true)
                      bycel.setAttribute("class", "checked")
                   }
-               }
+               },true
             ),
             document.createElement('br'),
             UI.Dropdown(ChampsP, "ChampsPrice", `${selectedLang["prices"]}`, "description", "Cost"),
@@ -376,7 +365,7 @@ const injectSettings = (panel) => {
                   DataStore.set("Auto-Find-Queue", true)
                   autoqel.setAttribute("class", "checked")
                }
-            }
+            },true
          ),
          UI.Row("Q-Delay",[
             UI.Row("Create-Delay",[
@@ -407,7 +396,7 @@ const injectSettings = (panel) => {
                   cusprfbox.checked = true
                   DataStore.set("Custom-profile-hover", true)
                }
-            }
+            },true
          ),
          document.createElement('br'),
          UI.Row("customprf", [
@@ -427,7 +416,7 @@ const injectSettings = (panel) => {
                      cusmasterybox.checked = true
                      DataStore.set("Custom-mastery-score", true)
                   }
-               }
+               },true
             ),
             document.createElement('br'),
             UI.Input("Mastery-Score"),
@@ -448,7 +437,7 @@ const injectSettings = (panel) => {
                      DataStore.set("Custom-rank", true)
                      cusrankhoverel.setAttribute("class", "checked")
                   }
-               }
+               },true
             ),
             document.createElement('br'),
             UI.Dropdown(rank, "Ranked Queue ID", `${selectedLang["Ranked Queue"]}`, "name", "id"),
@@ -474,7 +463,7 @@ const injectSettings = (panel) => {
                      cuschalcrybox.checked = true
                      DataStore.set("Custom-challenge-crystal", true)
                   }
-               }
+               },true
             ),
             document.createElement('br'),
             UI.Dropdown(Challengerank, "challengeCrystalLevel", `${selectedLang["challenge-rank"]}`, "name", "id"),
@@ -497,7 +486,7 @@ const injectSettings = (panel) => {
                      DataStore.set("Custom-Status", true)
                      cusstael.setAttribute("class", "checked")
                   }
-               }
+               },true
             ),
             UI.Label(`${selectedLang["status-delay"]}`),
             UI.Input("status-delay"),
@@ -523,31 +512,52 @@ const injectSettings = (panel) => {
                      DataStore.set("Name-Spoofer", true)
                      namespfel.setAttribute("class", "checked")
                   }
-               }
+               },true
             ),
             document.createElement('br'),
             UI.Input("Spoof-name"),
-            document.createElement('br'),
-            UI.CheckBox(
-               `${selectedLang["Debug-mode"]}`,'debug','debugbox',
-               ()=>{
-                  let debugel = document.getElementById("debug")
-                  let debugbox = document.getElementById("debugbox")
-            
-                  if (DataStore.get("Debug-mode")) {
-                     debugel.removeAttribute("class")
-                     debugbox.checked = false
-                     DataStore.set("Debug-mode", false)
-                  }
-                  else {
-                     debugel.setAttribute("class", "checked")
-                     debugbox.checked = true
-                     DataStore.set("Debug-mode", true)
-                  }
+         ]),
+         UI.CheckBox(
+            `${selectedLang["Debug-mode"]}`,'debug','debugbox',
+            ()=>{
+               let debugel = document.getElementById("debug")
+               let debugbox = document.getElementById("debugbox")
+         
+               if (DataStore.get("Debug-mode")) {
+                  debugel.removeAttribute("class")
+                  debugbox.checked = false
+                  DataStore.set("Debug-mode", false)
                }
-            ),
-            document.createElement('br'),
-         ])
+               else {
+                  debugel.setAttribute("class", "checked")
+                  debugbox.checked = true
+                  DataStore.set("Debug-mode", true)
+               }
+            },true
+         ),
+         document.createElement('br'),
+         UI.CheckBox(
+            `${selectedLang["Developer-Mode"]}`,'devbutton','devbuttonbox',
+            ()=>{
+               let devbuttonel = document.getElementById("devbutton")
+               let devbuttonbox = document.getElementById("devbuttonbox")
+         
+               if (DataStore.get("Dev-mode")) {
+                  devbuttonel.removeAttribute("class")
+                  devbuttonbox.checked = false
+                  DataStore.set("Dev-mode", false)
+               }
+               else {
+                  devbuttonel.setAttribute("class", "checked")
+                  devbuttonbox.checked = true
+                  DataStore.set("Dev-mode", true)
+                  window.alert(
+                     "You just turned on developer mode \nIf you are not a developer, please turn it off right now \nOtherwise the whole theme will not work properly"
+                  )
+               }
+            },DataStore.get("Dev-button")
+         ),
+         document.createElement('br'),
       ])
    )
 }
@@ -569,7 +579,7 @@ UI.CheckBox(
          box.checked = true
          DataStore.set("", true)
       }
-   }
+   },true
 ),
 document.createElement('br'),
 */
@@ -587,6 +597,19 @@ window.addEventListener('load', async () => {
       if (Data && el.getAttribute("class") == "") {
          box.checked = true
       }
+   }
+   function multiclick (target, data, clicktime, data2, value, text) {
+      try {
+         let origin = document.querySelector(target)
+         origin.addEventListener("click", ()=> {
+            DataStore.set(`${data}`, DataStore.get(`${data}`) + 1)
+            if (DataStore.get(`${data}`) == clicktime) {
+               DataStore.set(`${data2}`, value)
+               console.log(text)
+            }
+         })
+      }
+      catch{}
    }
    const interval = setInterval(() => {
       const manager = document.getElementById(
@@ -615,8 +638,6 @@ window.addEventListener('load', async () => {
                   //let MCbox = document.getElementById("MCbox");
                   let _1_4box = document.getElementById("_1_4box");
                   let lhbox = document.getElementById("lhbox");
-                  let rdsel = document.getElementById("rds");
-                  let rdsbox = document.getElementById("rdsbox");
                   let bycel = document.getElementById("byc");
                   let bycbox = document.getElementById("bycbox");
                   let namespfel = document.getElementById("namespf");
@@ -633,6 +654,13 @@ window.addEventListener('load', async () => {
                   if (document.getElementById("Info")) {
                      clearInterval(check)
 
+                     multiclick(".plugins-settings-logo","Active-dev-button",20,"Dev-button",true,"Developer mode button has appeared !")
+
+                     if (DataStore.get("Dev-button")) {
+                        let devbuttonel = document.getElementById("devbutton")
+                        let devbuttonbox = document.getElementById("devbuttonbox")
+                        tickcheck(DataStore.get("Dev-mode"), devbuttonel, devbuttonbox)
+                     }
                      //tickcheck(DataStore.get(""), el, box)
                      tickcheck(DataStore.get("Debug-mode"), debugel, debugbox)
                      tickcheck(DataStore.get("Custom-profile-hover"), cusprfel, cusprfbox)
@@ -646,7 +674,6 @@ window.addEventListener('load', async () => {
                      tickcheck(DataStore.get("April fool` joke"), _1_4el, _1_4box)
                      //tickcheck(DataStore.get("Merry-Christmas"), MCel, MCbox)
                      tickcheck(DataStore.get("loot-helper"), lhel, lhbox)
-                     tickcheck(DataStore.get("random-skin"), rdsel, rdsbox)
                      tickcheck(DataStore.get("buy-all-champs"), bycel, bycbox)
                      tickcheck(DataStore.get("Custom-rank"), cusrankhoverel, cusrankhoverbox)
                   }
