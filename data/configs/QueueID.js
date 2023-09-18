@@ -78,12 +78,7 @@ const List = {
             "description": "Teamfight Tactics Arena games",
             "notes": null
         },
-        {
-            "queueId": 1700,
-            "map": "RoW",
-            "description": "Arena games",
-            "notes": null
-        },
+        
 
 
 
@@ -115,6 +110,12 @@ const List = {
             "queueId": 1900,
             "map": "Summoner's Rift",
             "description": "Pick URF games",
+            "notes": null
+        },
+        {
+            "queueId": 1700,
+            "map": "RoW",
+            "description": "Arena games",
             "notes": null
         },
         */
