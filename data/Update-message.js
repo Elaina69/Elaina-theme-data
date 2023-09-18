@@ -49,6 +49,7 @@ if (DataStore.get(`Update-${update}`)) {
 										<p class="Elaina-Update">- Now auto q only work when after game</p>
 										<p class="Elaina-Update">- Update ElainaV3 Console log color</p>
 										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update">You must download update version from github to get newest function</p>
 										<p class="Elaina-Update">You must using Pengu loader v1.0.6 for this update</p>
 										<p class="Elaina-Update">Sorry for this inconvenient</p>
 										<p class="Elaina-Update"></p>
