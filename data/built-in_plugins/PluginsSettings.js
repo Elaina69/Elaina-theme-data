@@ -1,4 +1,6 @@
 let datapath = new URL("..", import.meta.url).href
+let eConsole = "%c ElainaV3 "
+let eCss = "color: #ffffff; background-color: #f77fbe"
 
 import ChampsP from "../configs/ChampionsPrices.js"
 import lang from "../configs/Language.js"
@@ -598,19 +600,6 @@ window.addEventListener('load', async () => {
          box.checked = true
       }
    }
-   function multiclick (target, data, clicktime, data2, value, text) {
-      try {
-         let origin = document.querySelector(target)
-         origin.addEventListener("click", ()=> {
-            DataStore.set(`${data}`, DataStore.get(`${data}`) + 1)
-            if (DataStore.get(`${data}`) == clicktime) {
-               DataStore.set(`${data2}`, value)
-               console.log(text)
-            }
-         })
-      }
-      catch{}
-   }
    const interval = setInterval(() => {
       const manager = document.getElementById(
          'lol-uikit-layer-manager-wrapper'
@@ -654,7 +643,20 @@ window.addEventListener('load', async () => {
                   if (document.getElementById("Info")) {
                      clearInterval(check)
 
-                     multiclick(".plugins-settings-logo","Active-dev-button",20,"Dev-button",true,"Developer mode button has appeared !")
+                     try {
+                        let origin = document.querySelector(".plugins-settings-logo")
+                        origin.addEventListener("click", ()=> {
+                           DataStore.set(`${"Active-dev-button"}`, DataStore.get(`${"Active-dev-button"}`) + 1)
+                           if (DataStore.get(`${"Active-dev-button"}`) == 20) {
+                              DataStore.set(`${"Dev-button"}`, true)
+                              console.log(eConsole+"%c Developer mode button has appeared !",eCss,"")
+                           }
+                           else if (DataStore.get(`${"Active-dev-button"}`) > 20) {
+                              console.log(eConsole+"%c You already become developer !",eCss,"")
+                           }
+                        })
+                     }
+                     catch{}
 
                      if (DataStore.get("Dev-button")) {
                         let devbuttonel = document.getElementById("devbutton")

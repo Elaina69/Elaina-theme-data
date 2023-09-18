@@ -1,9 +1,12 @@
 import utils from "../_utils.js"
 
+let eConsole = "%c ElainaV3 "
+let eCss = "color: #ffffff; background-color: #f77fbe"
 let AutoQueue = (node) => {
     let pagename = node.getAttribute("data-screen-name")
 
-	if (pagename == "rcp-fe-lol-home-main") {
+	if (pagename == "rcp-fe-lol-postgame") {
+		console.log(eConsole+` %cAuto Queue will start after %c${DataStore.get("Create-Delay")/1000} %cseconds...`,eCss,"","color: #0070ff","")
 		window.setTimeout(async () => {
 			if (DataStore.get("Auto-Find-Queue") && !DataStore.get("aram-only")) {
 				await fetch('/lol-lobby/v2/lobby', {

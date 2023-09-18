@@ -16,10 +16,12 @@ function get_status() {
 }
 
 let switch_between_status = async () => {
+	let eConsole = "%c ElainaV3 "
+	let eCss = "color: #ffffff; background-color: #f77fbe"
 	let status = get_status()
 	let availability = (status == "chat") ? "mobile" : (status == "mobile") ? "dnd" : (status == "dnd") ? "away" : (status == "away") ? "offline" : (status == "offline") ? "chat" : "chat"
 
-	console.log("pass 1")
+	console.log(eConsole+"%c Changed status",eCss,"")
 	await fetch("/lol-chat/v1/me", {
 		"headers": {
 			"content-type": "application/json",

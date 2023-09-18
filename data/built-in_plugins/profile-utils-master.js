@@ -58,7 +58,7 @@ async function setupBadgesFunctions() {
     const playerPreferences = await getPlayerPreferences()
 
     if (!playerPreferences.challengeIds.length) {
-      console.debug(`${plugin.name}: The player does not have a defined badge.`)
+      console.debug(`The player does not have a defined badge.`)
       return
     }
 
@@ -70,7 +70,7 @@ async function setupBadgesFunctions() {
     const playerPreferences = await getPlayerPreferences()
 
     if (!playerPreferences.challengeIds.length) {
-      console.debug(`${plugin.name}: The player badges are already empty.`)
+      console.debug(`The player badges are already empty.`)
       return
     }
 

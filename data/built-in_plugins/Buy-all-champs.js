@@ -2,6 +2,9 @@ import utils from "../_utils.js"
 import axios from "https://cdn.skypack.dev/axios"
 import ChampsP from '../configs/ChampionsPrices.js'
 
+let eConsole = "%c ElainaV3 "
+let eCss = "color: #ffffff; background-color: #f77fbe"
+
 export class Store {
     constructor() {
         this.url = null
@@ -100,10 +103,10 @@ const onMutation = () => {
                     let availableChampions = await store.getAvailableChampionsByCost(ChampsP["ChampsPrice"][i].Cost)
                     if (availableChampions.length > 0) {
                         await store.buyChampions(availableChampions)
-                        console.log(`Successfully bought ${availableChampions.length} champions`)
+                        console.log(eConsole+`%c Successfully bought %c${availableChampions.length} %cchampions`,eCss,"","color: #0070ff","")
                     }
                     else if (availableChampions.length == 0) {
-                        console.log("No champions can buy")
+                        console.log(eConsole+"%c No champions can buy",eCss,"")
                     }
                 }
             }
@@ -114,10 +117,10 @@ const onMutation = () => {
                 let availableChampions = await store.getAvailableChampionsByCost(DataStore.get("ChampsPrice"))
                 if (availableChampions.length > 0) {
                 await store.buyChampions(availableChampions)
-                console.log(`Successfully bought ${availableChampions.length} champions`)
+                console.log(eConsole+`%c Successfully bought %c${availableChampions.length} %cchampions`,eCss,"","color: #0070ff","")
                 }
                 else if (availableChampions.length == 0) {
-                console.log("No champions can buy")
+                console.log(eConsole+"%c No champions can buy",eCss,"")
                 }
             }
             finally { buyChampionButton.removeAttribute("disabled") }

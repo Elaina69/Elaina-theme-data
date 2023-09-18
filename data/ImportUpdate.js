@@ -1,12 +1,6 @@
 import utils from "./_utils"
 let datapath = new URL(".", import.meta.url).href
 
-// 2.0.2
-window.addEventListener("load", ()=> {
-    utils.addCss("","","",`${datapath}ImportUpdate.css`)
-})
-
-//2.0.4
 let updateV204 = async (node) => {
     let pagename, previous_page
     pagename = node.getAttribute("data-screen-name")
@@ -37,5 +31,6 @@ let updateV204 = async (node) => {
 }
 
 window.addEventListener("load", ()=> {
+	utils.addCss("","","",`${datapath}ImportUpdate.css`)
 	utils.mutationObserverAddCallback(updateV204, ["screen-root"])
 })
