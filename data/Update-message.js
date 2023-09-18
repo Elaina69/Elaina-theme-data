@@ -42,7 +42,12 @@ if (DataStore.get(`Update-${update}`)) {
 										<p class="Elaina-Update">- Update old LeagueLoader settings</p>
 										<p class="Elaina-Update">- New Update message tab</p>
 										<p class="Elaina-Update">- New pure theme/plugins settings page </p>
-										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update">- Remove Custom cursor settings</p>
+										<p class="Elaina-Update">- Remove Skin Randomize plugins (Thanks DmitryFisk fot let me using it in old version)</p>
+										<p class="Elaina-Update">- Fix datastore problem when first time install Elaina-V3</p>
+										<p class="Elaina-Update">- Fix Auto Q plugins</p>
+										<p class="Elaina-Update">- Now auto q only work when after game</p>
+										<p class="Elaina-Update">- Update Elaina V3 Console log color</p>
 										<p class="Elaina-Update"></p>
 	
 									</lol-uikit-content-block>
