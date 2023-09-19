@@ -1,1 +1,1 @@
-import //plugins/Elaina-V3/test.js
+import "//plugins/Elaina-V3/test.js"
