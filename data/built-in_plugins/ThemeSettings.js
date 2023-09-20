@@ -754,8 +754,17 @@ document.createElement('br'),
 
 
 window.addEventListener('load', async () => {
-   function tickcheck (Data, el, box) {
-      if (Data && el.getAttribute("class") == "") {
+   function DeleteEl (target, confirm) {
+      try {
+         let origin = document.querySelector(target)
+         if (confirm) {origin.remove()}
+      }
+      catch{}
+   }
+   function tickcheck (Data, el, checkbox) {
+      let element = document.getElementById(el)
+      let box = document.getElementById(checkbox)
+      if (Data && element.getAttribute("class") == "") {
          box.checked = true
       }
    }
@@ -770,92 +779,37 @@ window.addEventListener('load', async () => {
             if (panel && mutations.some((record) => Array.from(record.addedNodes).includes(panel))) {
                injectSettings(panel)
                const check = setInterval (()=>{
-                  let sbtel = document.getElementById("sbt");
-                  let hidechampartel = document.getElementById("hidechampart");
-                  let cusfontel = document.getElementById("cusfont");
-                  let cusrpel = document.getElementById("cusrp");
-                  let cusbeel = document.getElementById("cusbe");
-                  let cusranknameel = document.getElementById("cusrankname");
-                  let aniloadel = document.getElementById("aniload");
-                  let cusavel = document.getElementById("cusav");
-                  let cusiconel = document.getElementById("cusicon");
-                  let stdiatel = document.getElementById("stdiat");
-                  let oldpnbel = document.getElementById("oldpnb");
-                  let sbtbox = document.getElementById("sbtbox");
-                  let cusrpbox = document.getElementById("cusrpbox");
-                  let hidechampartbox = document.getElementById("hidechampartbox");
-                  let cusfontbox = document.getElementById("cusfontbox");
-                  let cusbebox = document.getElementById("cusbebox");
-                  let cusranknamebox = document.getElementById("cusranknamebox");
-                  let aniloadbox = document.getElementById("aniloadbox");
-                  let cusavbox = document.getElementById("cusavbox");
-                  let cusiconbox = document.getElementById("cusiconbox");
-                  let stdiatbox = document.getElementById("stdiatbox");
-                  let oldpnbbox = document.getElementById("oldpnbbox");
-                  let hidevlel = document.getElementById("hidevl");
-                  let hidevlbox = document.getElementById("hidevlbox");
-                  let rsbgel = document.getElementById("rsbg")
-                  let rsbgbox = document.getElementById("rsbgbox")
-                  let cusborel = document.getElementById("cusbor")
-                  let cusborbox = document.getElementById("cusborbox")
-                  let cusrpiel = document.getElementById("cusrpi")
-                  let cusrpibox = document.getElementById("cusrpibox")
-                  let cusbeiel = document.getElementById("cusbei")
-                  let cusbeibox = document.getElementById("cusbeibox")
-                  let cusrankiel = document.getElementById("cusranki")
-                  let cusrankibox = document.getElementById("cusrankibox")
-                  let cusemiel = document.getElementById("cusemi")
-                  let cusemibox = document.getElementById("cusemibox")
-                  let cusclassbel = document.getElementById("cusclassb")
-                  let cusclassbbox = document.getElementById("cusclassbbox")
-                  let custickel = document.getElementById("custick")
-                  let custickbox = document.getElementById("custickbox")
-                  let custrophyel = document.getElementById("custrophy")
-                  let custrophybox = document.getElementById("custrophybox")
-                  let hideovertabel = document.getElementById("hideovertab")
-                  let hideovertabbox = document.getElementById("hideovertabbox")
-                  let hidemerchtabel = document.getElementById("hidemerchtab")
-                  let hidemerchtabbox = document.getElementById("hidemerchtabbox")
-                  let hideesptabel = document.getElementById("hideesptab")
-                  let hideesptabbox = document.getElementById("hideesptabbox")
-                  let hidepnel = document.getElementById("hidepn")
-                  let hidepnbox = document.getElementById("hidepnbox")
-                  let cusregabnrel = document.getElementById("cusregabnr")
-                  let cusregabnrbox = document.getElementById("cusregabnrbox")
-                  let cushvbdropel = document.getElementById("cushvbdrop")
-                  let cushvbdropbox = document.getElementById("cushvbdropbox")
-
                   if (document.getElementById("Info")) {
                      clearInterval(check)
-
+                     
                      //tickcheck(DataStore.get(""), el, box)
-                     tickcheck(DataStore.get("Custom-Regalia-Banner"), cusregabnrel, cusregabnrbox)
-                     tickcheck(DataStore.get("Custom-Hover-card-backdrop"), cushvbdropel, cushvbdropbox)
-                     tickcheck(DataStore.get("hide-overview"), hideovertabel, hideovertabbox)
-                     tickcheck(DataStore.get("hide-merch"), hidemerchtabel, hidemerchtabbox)
-                     tickcheck(DataStore.get("hide-patch-note"), hidepnel, hidepnbox)
-                     tickcheck(DataStore.get("hide-esport"), hideesptabel, hideesptabbox)
-                     tickcheck(DataStore.get("Custom-Border"), cusborel, cusborbox)
-                     tickcheck(DataStore.get("Custom-RP-Icon"), cusrpiel, cusrpibox)
-                     tickcheck(DataStore.get("Custom-BE-Icon"), cusbeiel, cusbeibox)
-                     tickcheck(DataStore.get("Custom-Rank-Icon"), cusrankiel, cusrankibox)
-                     tickcheck(DataStore.get("Custom-Emblem"), cusemiel, cusemibox)
-                     tickcheck(DataStore.get("Custom-Clash-banner"), cusclassbel, cusclassbbox)
-                     tickcheck(DataStore.get("Custom-Ticker"), custickel, custickbox)
-                     tickcheck(DataStore.get("Custom-Trophy"), custrophyel, custrophybox)
-                     tickcheck(DataStore.get("Runes-BG"), rsbgel, rsbgbox)
-                     tickcheck(DataStore.get("hide-vertical-lines"), hidevlel, hidevlbox)
-                     tickcheck(DataStore.get("Sidebar-Transparent"), sbtel, sbtbox)
-                     tickcheck(DataStore.get("Hide-Champions-Splash-Art"), hidechampartel, hidechampartbox)
-                     tickcheck(DataStore.get("Custom-Font"), cusfontel, cusfontbox)
-                     tickcheck(DataStore.get("Custom_RP"), cusrpel, cusrpbox)
-                     tickcheck(DataStore.get("Custom_BE"), cusbeel, cusbebox)
-                     tickcheck(DataStore.get("Custom-Rank-Name"), cusranknameel, cusranknamebox)
-                     tickcheck(DataStore.get("Animate-Loading"), aniloadel,aniloadbox)
-                     tickcheck(DataStore.get("Custom-Avatar"), cusavel, cusavbox)
-                     tickcheck(DataStore.get("Custom-Icon"), cusiconel, cusiconbox)
-                     tickcheck(DataStore.get("settings-dialogs-transparent"), stdiatel, stdiatbox)
-                     tickcheck(DataStore.get("old-prev/next-button"), oldpnbel, oldpnbbox)
+                     tickcheck(DataStore.get("Custom-Regalia-Banner"), "cusregabnr", "cusregabnrbox")
+                     tickcheck(DataStore.get("Custom-Hover-card-backdrop"), "cushvbdrop", "cushvbdropbox")
+                     tickcheck(DataStore.get("hide-overview"), "hideovertab", "hideovertabbox")
+                     tickcheck(DataStore.get("hide-merch"), "hidemerchtab", "hidemerchtabbox")
+                     tickcheck(DataStore.get("hide-patch-note"), "hidepn", "hidepnbox")
+                     tickcheck(DataStore.get("hide-esport"), "hideesptab", "hideesptabbox")
+                     tickcheck(DataStore.get("Custom-Border"), "cusbor", "cusborbox")
+                     tickcheck(DataStore.get("Custom-RP-Icon"), "cusrpi", "cusrpibox")
+                     tickcheck(DataStore.get("Custom-BE-Icon"), "cusbei", "cusbeibox")
+                     tickcheck(DataStore.get("Custom-Rank-Icon"), "cusranki", "cusrankibox")
+                     tickcheck(DataStore.get("Custom-Emblem"), "cusemi", "cusemibox")
+                     tickcheck(DataStore.get("Custom-Clash-banner"), "cusclassb", "cusclassbbox")
+                     tickcheck(DataStore.get("Custom-Ticker"), "custick", "custickbox")
+                     tickcheck(DataStore.get("Custom-Trophy"), "custrophy", "custrophybox")
+                     tickcheck(DataStore.get("Runes-BG"), "rsbg", "rsbgbox")
+                     tickcheck(DataStore.get("hide-vertical-lines"), "hidevl", "hidevlbox")
+                     tickcheck(DataStore.get("Sidebar-Transparent"), "sbt", "sbtbox")
+                     tickcheck(DataStore.get("Hide-Champions-Splash-Art"), "hidechampart", "hidechampart")
+                     tickcheck(DataStore.get("Custom-Font"), "cusfont", "cusfontbox")
+                     tickcheck(DataStore.get("Custom_RP"), "cusrp", "cusrpbox")
+                     tickcheck(DataStore.get("Custom_BE"), "cusbe", "cusbebox")
+                     tickcheck(DataStore.get("Custom-Rank-Name"), "cusrankname", "cusranknamebox")
+                     tickcheck(DataStore.get("Animate-Loading"), "aniload","aniloadbox")
+                     tickcheck(DataStore.get("Custom-Avatar"), "cusav", "cusavbox")
+                     tickcheck(DataStore.get("Custom-Icon"), "cusicon", "cusiconbox")
+                     tickcheck(DataStore.get("settings-dialogs-transparent"), "stdiat", "stdiatbox")
+                     tickcheck(DataStore.get("old-prev/next-button"), "oldpnb", "oldpnbbox")
                   }
                },100)
             }

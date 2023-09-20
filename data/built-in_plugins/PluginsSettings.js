@@ -595,8 +595,10 @@ window.addEventListener('load', async () => {
       }
       catch{}
    }
-   function tickcheck (Data, el, box) {
-      if (Data && el.getAttribute("class") == "") {
+   function tickcheck (Data, el, checkbox) {
+      let element = document.getElementById(el)
+      let box = document.getElementById(checkbox)
+      if (Data && element.getAttribute("class") == "") {
          box.checked = true
       }
    }
@@ -611,38 +613,8 @@ window.addEventListener('load', async () => {
             if (panel && mutations.some((record) => Array.from(record.addedNodes).includes(panel))) {
                injectSettings(panel)
                const check = setInterval (()=>{
-                  let oldllel = document.getElementById("oldll");
-                  let Aramel = document.getElementById("Aram only");
-                  let autoqel = document.getElementById("autoq");
-                  let cusrankhoverel = document.getElementById("cusrankhover");
-                  let cusstael = document.getElementById("cussta");
-                  let _1_4el = document.getElementById("_1_4");
-                  //let MCel = document.getElementById("MC");
-                  let lhel = document.getElementById("lh");
-                  let Arambox = document.getElementById("Aram only checkbox");
-                  let oldllbox = document.getElementById("oldllbox");
-                  let cusrankhoverbox = document.getElementById("cusrankhoverbox");
-                  let autoqbox = document.getElementById("autoqbox");
-                  let cusstabox = document.getElementById("cusstabox");
-                  //let MCbox = document.getElementById("MCbox");
-                  let _1_4box = document.getElementById("_1_4box");
-                  let lhbox = document.getElementById("lhbox");
-                  let bycel = document.getElementById("byc");
-                  let bycbox = document.getElementById("bycbox");
-                  let namespfel = document.getElementById("namespf");
-                  let namespfbox = document.getElementById("namespfbox");
-                  let cusprfel = document.getElementById("cusprf")
-                  let cusprfbox = document.getElementById("cusprfbox")
-                  let cusmasteryel = document.getElementById("cusmastery")
-                  let cusmasterybox = document.getElementById("cusmasterybox")
-                  let cuschalcryel = document.getElementById("cuschalcry")
-                  let cuschalcrybox = document.getElementById("cuschalcrybox")
-                  let debugel = document.getElementById("debug")
-                  let debugbox = document.getElementById("debugbox")
-
                   if (document.getElementById("Info")) {
                      clearInterval(check)
-
                      try {
                         let origin = document.querySelector(".plugins-settings-logo")
                         origin.addEventListener("click", ()=> {
@@ -657,27 +629,24 @@ window.addEventListener('load', async () => {
                         })
                      }
                      catch{}
-
                      if (DataStore.get("Dev-button")) {
-                        let devbuttonel = document.getElementById("devbutton")
-                        let devbuttonbox = document.getElementById("devbuttonbox")
-                        tickcheck(DataStore.get("Dev-mode"), devbuttonel, devbuttonbox)
+                        tickcheck(DataStore.get("Dev-mode"), "devbutton", "devbuttonbox")
                      }
                      //tickcheck(DataStore.get(""), el, box)
-                     tickcheck(DataStore.get("Debug-mode"), debugel, debugbox)
-                     tickcheck(DataStore.get("Custom-profile-hover"), cusprfel, cusprfbox)
-                     tickcheck(DataStore.get("Custom-mastery-score"), cusmasteryel, cusmasterybox)
-                     tickcheck(DataStore.get("Custom-challenge-crystal"), cuschalcryel, cuschalcrybox)
-                     tickcheck(DataStore.get("Name-Spoofer"), namespfel, namespfbox)
-                     tickcheck(DataStore.get("aram-only"), Aramel, Arambox)
-                     tickcheck(DataStore.get("Old-League-Loader-Settings"), oldllel, oldllbox)
-                     tickcheck(DataStore.get("Auto-Find-Queue"), autoqel, autoqbox)
-                     tickcheck(DataStore.get("Custom-Status"), cusstael, cusstabox)
-                     tickcheck(DataStore.get("April fool` joke"), _1_4el, _1_4box)
-                     //tickcheck(DataStore.get("Merry-Christmas"), MCel, MCbox)
-                     tickcheck(DataStore.get("loot-helper"), lhel, lhbox)
-                     tickcheck(DataStore.get("buy-all-champs"), bycel, bycbox)
-                     tickcheck(DataStore.get("Custom-rank"), cusrankhoverel, cusrankhoverbox)
+                     tickcheck(DataStore.get("Debug-mode"), "debug", "debugbox")
+                     tickcheck(DataStore.get("Custom-profile-hover"), "cusprf", "cusprfbox")
+                     tickcheck(DataStore.get("Custom-mastery-score"), "cusmastery", "cusmasterybox")
+                     tickcheck(DataStore.get("Custom-challenge-crystal"), "cuschalcry", "cuschalcrybox")
+                     tickcheck(DataStore.get("Name-Spoofer"), "namespf", "namespfbox")
+                     tickcheck(DataStore.get("aram-only"), "Aram only", "Aram only checkbox")
+                     tickcheck(DataStore.get("Old-League-Loader-Settings"), "oldll", "oldllbox")
+                     tickcheck(DataStore.get("Auto-Find-Queue"), "autoq", "autoqbox")
+                     tickcheck(DataStore.get("Custom-Status"), "cussta", "cusstabox")
+                     tickcheck(DataStore.get("April fool` joke"), "_1_4", "_1_4box")
+                     //tickcheck(DataStore.get("Merry-Christmas"), "MC", "MCbox")
+                     tickcheck(DataStore.get("loot-helper"), "lh", "lhbox")
+                     tickcheck(DataStore.get("buy-all-champs"), "byc", "bycbox")
+                     tickcheck(DataStore.get("Custom-rank"), "cusrankhover", "cusrankhoverbox")
                   }
                },100)
             }
