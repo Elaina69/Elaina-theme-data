@@ -6,7 +6,7 @@ let AutoQueue = (node) => {
     let pagename = node.getAttribute("data-screen-name")
 
 	if (pagename == "rcp-fe-lol-postgame") {
-		console.log(eConsole+` %cAuto Queue will start after %c${DataStore.get("Create-Delay")/1000} %cseconds...`,eCss,"","color: #0070ff","")
+		console.log(eConsole+` %cAuto Queue will start in %c${DataStore.get("Create-Delay")/1000} %cseconds...`,eCss,"","color: #0070ff","")
 		window.setTimeout(async () => {
 			if (DataStore.get("Auto-Find-Queue") && !DataStore.get("aram-only")) {
 				await fetch('/lol-lobby/v2/lobby', {
