@@ -2,9 +2,6 @@ import utils from "../_utils.js"
 import axios from "https://cdn.skypack.dev/axios"
 import ChampsP from '../configs/ChampionsPrices.js'
 
-let eConsole = "%c ElainaV3 "
-let eCss = "color: #ffffff; background-color: #f77fbe"
-
 export class Store {
     constructor() {
         this.url = null
@@ -76,60 +73,66 @@ export class Store {
         return await response.json()
     }
 }
-const buttonId = "buy-450-champions-button"
-const onMutation = () => {
-    const frameStore = document.querySelector("#rcp-fe-lol-store-iframe > iframe")
-    const storeDocument = frameStore?.contentDocument.documentElement
-    const store = new Store()
-    const buyChampionButton = document.createElement("lol-uikit-flat-button")
 
-    if (!frameStore || storeDocument.querySelector(`#${buttonId}`)) { return }
-    buyChampionButton.id = buttonId
-    window.setInterval(()=> {
-        if (DataStore.get("ChampsPrice") == "All") {
-            buyChampionButton.textContent = `Buy All Champs`
-        }
-        else {
-            buyChampionButton.textContent = `Buy ${DataStore.get("ChampsPrice")}BE Champs`
-        }
-    },1000)
-    buyChampionButton.style.marginRight = "15px"
-    buyChampionButton.onclick = async () => {
-        buyChampionButton.setAttribute("disabled", "true")
-        if (DataStore.get("ChampsPrice") == "All") {
-            try {
-                const allchamps = ChampsP["ChampsPrice"].length - 1
-                for(let i = 0; i < allchamps; i++) {
-                    let availableChampions = await store.getAvailableChampionsByCost(ChampsP["ChampsPrice"][i].Cost)
+if (DataStore.get("buy-all-champs")) {
+    let eConsole = "%c ElainaV3 "
+    let eCss = "color: #ffffff; background-color: #f77fbe"
+
+    const buttonId = "buy-450-champions-button"
+    const onMutation = () => {
+        const frameStore = document.querySelector("#rcp-fe-lol-store-iframe > iframe")
+        const storeDocument = frameStore?.contentDocument.documentElement
+        const store = new Store()
+        const buyChampionButton = document.createElement("lol-uikit-flat-button")
+
+        if (!frameStore || storeDocument.querySelector(`#${buttonId}`)) { return }
+        buyChampionButton.id = buttonId
+        window.setInterval(()=> {
+            if (DataStore.get("ChampsPrice") == "All") {
+                buyChampionButton.textContent = `Buy All Champs`
+            }
+            else {
+                buyChampionButton.textContent = `Buy ${DataStore.get("ChampsPrice")}BE Champs`
+            }
+        },1000)
+        buyChampionButton.style.marginRight = "15px"
+        buyChampionButton.onclick = async () => {
+            buyChampionButton.setAttribute("disabled", "true")
+            if (DataStore.get("ChampsPrice") == "All") {
+                try {
+                    const allchamps = ChampsP["ChampsPrice"].length - 1
+                    for(let i = 0; i < allchamps; i++) {
+                        let availableChampions = await store.getAvailableChampionsByCost(ChampsP["ChampsPrice"][i].Cost)
+                        if (availableChampions.length > 0) {
+                            await store.buyChampions(availableChampions)
+                            console.log(eConsole+`%c Successfully bought %c${availableChampions.length} %cchampions`,eCss,"","color: #0070ff","")
+                        }
+                        else if (availableChampions.length == 0) {
+                            console.log(eConsole+"%c No champions can buy",eCss,"")
+                        }
+                    }
+                }
+                finally { buyChampionButton.removeAttribute("disabled") }
+            }
+            else {
+                try {
+                    let availableChampions = await store.getAvailableChampionsByCost(DataStore.get("ChampsPrice"))
                     if (availableChampions.length > 0) {
-                        await store.buyChampions(availableChampions)
-                        console.log(eConsole+`%c Successfully bought %c${availableChampions.length} %cchampions`,eCss,"","color: #0070ff","")
+                    await store.buyChampions(availableChampions)
+                    console.log(eConsole+`%c Successfully bought %c${availableChampions.length} %cchampions`,eCss,"","color: #0070ff","")
                     }
                     else if (availableChampions.length == 0) {
-                        console.log(eConsole+"%c No champions can buy",eCss,"")
+                    console.log(eConsole+"%c No champions can buy",eCss,"")
                     }
                 }
+                finally { buyChampionButton.removeAttribute("disabled") }
             }
-            finally { buyChampionButton.removeAttribute("disabled") }
         }
-        else {
-            try {
-                let availableChampions = await store.getAvailableChampionsByCost(DataStore.get("ChampsPrice"))
-                if (availableChampions.length > 0) {
-                await store.buyChampions(availableChampions)
-                console.log(eConsole+`%c Successfully bought %c${availableChampions.length} %cchampions`,eCss,"","color: #0070ff","")
-                }
-                else if (availableChampions.length == 0) {
-                console.log(eConsole+"%c No champions can buy",eCss,"")
-                }
-            }
-            finally { buyChampionButton.removeAttribute("disabled") }
-        }
+        const navBar = storeDocument.querySelector(".nav.nav-right")
+        navBar.insertBefore(buyChampionButton, navBar.firstChild)
     }
-    const navBar = storeDocument.querySelector(".nav.nav-right")
-    navBar.insertBefore(buyChampionButton, navBar.firstChild)
-}
 
-window.addEventListener("load", () => {
-  utils.routineAddCallback(onMutation, ["rcp-fe-lol-store-iframe"])
-})
+    window.addEventListener("load", () => {
+    utils.routineAddCallback(onMutation, ["rcp-fe-lol-store-iframe"])
+    })
+}
