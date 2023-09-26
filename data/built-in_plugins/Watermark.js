@@ -33,6 +33,9 @@ function ElainaTrigger() {
 	const goOutSide   = document.createElement("button")
 	const answer4     = document.createElement("p")
 	const answer5     = document.createElement("p")
+	const mainDiv = document.createElement("div")
+
+	mainDiv.id = "EasterEgg1Div"
 
 	container0.classList.add ("watermark-text")
 	container2.classList.add ("Elaina1ImageCon")
@@ -62,11 +65,6 @@ function ElainaTrigger() {
 	headpat.classList.add  ("Headpat")
 	boobs.classList.add    ("Boobs")
 	goOutSide.classList.add("GoOutSide")
-		
-	Elaina1Text.classList.add ("Elaina1Text")
-	Elaina1Image.classList.add("Elaina1Image")
-	Elaina1Image.setAttribute ("src", `${datapath}assets/Icon/Plugins-icons/ElainaCB.png`)	
-	Elaina1Image.style.visibility = "hidden"
 			
 	answer1.id = "answer1"
 	answer2.id = "answer2"
@@ -78,12 +76,15 @@ function ElainaTrigger() {
 	let Headpatcount = 0;
 	let answer2clicked = 0;
 	let showcontainer = document.getElementsByClassName("rcp-fe-lol-home")[0]
+	showcontainer.appendChild(mainDiv)
 	
 	wtmark.addEventListener("click", () => {
 		count += 1;
 		if (count > 5) {
-			wtmark.style.visibility = "hidden"
-			Elaina1Image.style.visibility = "visible"
+			wtmark.remove()
+			Elaina1Text.classList.add ("Elaina1Text")
+			Elaina1Image.classList.add("Elaina1Image")
+			Elaina1Image.setAttribute ("src", `${datapath}assets/Icon/Plugins-icons/ElainaCB.png`)
 			Elaina1Text.innerHTML =  "Huh ?";
 
 			function generateGreeting(date) {
@@ -114,10 +115,10 @@ function ElainaTrigger() {
 			})();
 			  
 			
-			showcontainer.appendChild(container10)
-			showcontainer.appendChild(container4)
-			showcontainer.appendChild(container5)
-			showcontainer.appendChild(container6)
+			mainDiv.append(container10)
+			mainDiv.append(container4)
+			mainDiv.append(container5)
+			mainDiv.append(container6)
 
 			container10.append(goOutSidediv)
 			container4.append(Greeting)
@@ -156,8 +157,8 @@ function ElainaTrigger() {
 				headpat.style.visibility = "hidden"
 				goOutSide.style.visibility = "hidden"
 
-				showcontainer.appendChild(container11)
-				showcontainer.appendChild(container12)
+				mainDiv.append(container11)
+				mainDiv.append(container12)
 
 				container11.append(answer4)
 				container12.append(answer5)
@@ -232,7 +233,7 @@ function ElainaTrigger() {
 					container8.remove()
 	
 					if (answer2clicked > 0) {
-						showcontainer.appendChild(container9)
+						mainDiv.append(container9)
 						container9.append(answer3)
 
 						Greeting.innerHTML = " "
@@ -254,8 +255,8 @@ function ElainaTrigger() {
 					}
 				}, false);
 
-				showcontainer.appendChild(container7)
-				showcontainer.appendChild(container8)
+				mainDiv.append(container7)
+				mainDiv.append(container8)
 
 				container7.append(answer1)
 				container8.append(answer2)
@@ -266,9 +267,9 @@ function ElainaTrigger() {
 		}
 	}, false);
 
-	showcontainer.appendChild(container2)
-	showcontainer.appendChild(container0)
-	showcontainer.appendChild(container3)
+	mainDiv.append(container2)
+	mainDiv.append(container0)
+	mainDiv.append(container3)
 
 	container0.append(watermark)
 	container2.append(Elaina1ImageDiv)
@@ -281,36 +282,18 @@ function ElainaTrigger() {
 
 function DelElainaTrigger() {
     try {
-        document.getElementsByClassName("watermark-text")[0].remove()
-        document.getElementsByClassName("Elaina1ImageCon")[0].remove()
-        document.getElementsByClassName("Elaina1TextCon")[0].remove()
-        document.getElementsByClassName("Greeting-con")[0].remove()
-        document.getElementsByClassName("Headpat-con")[0].remove()
-        document.getElementsByClassName("Boobs-con")[0].remove()
-        document.getElementsByClassName("goOutSide-con")[0].remove()
-        document.getElementsByClassName("answer1-con")[0].remove()
-        document.getElementsByClassName("answer2-con")[0].remove()
-        document.getElementsByClassName("answer3-con")[0].remove()
-    }
-    catch{}
-    try {
-        document.getElementsByClassName("answer3-con")[0].remove()
-    }
-    catch{}
-    try {
-        document.getElementsByClassName("answer4-con")[0].remove()
-        document.getElementsByClassName("answer5-con")[0].remove()
+        document.getElementById("EasterEgg1Div").remove()
     }
     catch{}
 }
 
 let addWatermark = (node) => {
 	let pagename = node.getAttribute("data-screen-name")
-	if (pagename == "rcp-fe-lol-home-main") {
+	if (pagename == "rcp-fe-lol-home-main" && !document.getElementById("EasterEgg1Div")) {
 		ElainaTrigger()
 	}
-	else if (pagename != "rcp-fe-lol-navigation-screen" && pagename != "window-controls" && pagename != "rcp-fe-lol-home" && pagename != "social") {
-		if (document.getElementsByClassName("webm-bottom-buttons-container").length) {
+	else if (pagename != "rcp-fe-lol-home-main" && pagename != "social") {
+		if (document.getElementById("EasterEgg1Div")) {
 			DelElainaTrigger()
 		}
 	}
