@@ -29,7 +29,8 @@ function fetch_or_create_champselect_buttons_container() {
 	}
 }
 
-let autoAcceptCallback = async message => {
+if (DataStore.get("auto_accept_button")) {
+	let autoAcceptCallback = async message => {
 	utils.phase = JSON.parse(message["data"])[2]["data"]
 	if (utils.phase == "ReadyCheck" && DataStore.get("auto_accept") && !queue_accepted) {
 		await acceptMatchmaking(),
@@ -73,3 +74,4 @@ window.addEventListener('load', () => {
 	utils.subscribe_endpoint('/lol-gameflow/v1/gameflow-phase', autoAcceptCallback)
 	utils.routineAddCallback(autoAcceptMutationObserver, ["v2-footer-notifications.ember-view"])
 })
+}

@@ -1,4 +1,3 @@
-let forceUpdate = false
 let updateType
 
 import update from './configs/Version.js'
@@ -7,18 +6,19 @@ import lang from "./configs/Language.js"
 if (!DataStore.has(`Update-${update}`)) {
 	DataStore.set(`Update-${update}`, true)
 }
-if (!DataStore.has(`Force-Update-${update}`)) {
-	DataStore.set(`Force-Update-${update}`, forceUpdate)
+
+if (!DataStore.has(`Force-Update`)) {
+	DataStore.set(`Force-Update`, true)
 }
 
-if (DataStore.get(`Force-Update-${update}`)) {
+if (DataStore.get(`Force-Update`)) {
 	updateType = "Manual"
 }
 else {
 	updateType = "Auto"
 }
 
-if (DataStore.get(`Force-Update-${update}`) && DataStore.get(`Update-${update}`)) {
+if (DataStore.get(`Force-Update`)) {
 	async function createLoaderMenu(root) {
 		const langCode = document.querySelector("html").lang;
 		const langMap = lang.langlist
@@ -34,7 +34,7 @@ if (DataStore.get(`Force-Update-${update}`) && DataStore.get(`Update-${update}`)
 							  <lol-uikit-dialog-frame class="dialog-frame" orientation="bottom" close-button="false">
 								<div class="dialog-content">
 									<lol-uikit-content-block class="app-controls-exit-dialog" type="dialog-small" style="width: 500px;">
-										<h5>Elaina_V3 - ${updateType} Update ${update}</h5>
+										<h5>Elaina_V3 - ${updateType} Update</h5>
 										<hr class="heading-spacer" />
 										<hr class="heading-spacer" />
 										<p class="Elaina-Update" style="text-align: center">New theme updates are available</p>
@@ -45,7 +45,7 @@ if (DataStore.get(`Force-Update-${update}`) && DataStore.get(`Update-${update}`)
 									</lol-uikit-content-block>
 								</div>
 								<lol-uikit-flat-button-group type="dialog-frame">
-									<lol-uikit-flat-button tabindex="1" class="button-decline" onClick=${() => {window.open(`https://github.com/Elaina69/Elaina-V3/releases/tag/v${update}`,);DataStore.set(`Force-Update-${update}`, false)}}>${_t['l.download']}</lol-uikit-flat-button>
+									<lol-uikit-flat-button tabindex="1" onClick=${() => {window.open(`https://github.com/Elaina69/Elaina-V3/releases/tag/v${update}`,)}}>${_t['l.download']}</lol-uikit-flat-button>
 								</lol-uikit-flat-button-group>
 							  </lol-uikit-dialog-frame>
 						</div>
@@ -70,7 +70,7 @@ if (DataStore.get(`Force-Update-${update}`) && DataStore.get(`Update-${update}`)
 		})
 	})
 }
-else if (DataStore.get(`Update-${update}`) && !DataStore.get(`Force-Update-${update}`)) {
+else if (DataStore.get(`Update-${update}`) && !DataStore.get(`Force-Update`)) {
 	async function createLoaderMenu(root) {
 		const langCode = document.querySelector("html").lang;
 		const langMap = lang.langlist
