@@ -270,6 +270,25 @@ const injectSettings = (panel) => {
             )
          ]),
          UI.CheckBox(
+            `${selectedLang["auto_accept_button"]}`,'autoacceptbutton','autoacceptbuttonbox',
+            ()=>{
+               let autoacceptbuttonel = document.getElementById("autoacceptbutton")
+               let autoacceptbuttonbox = document.getElementById("autoacceptbuttonbox")
+         
+               if (DataStore.get("auto_accept_button")) {
+                  autoacceptbuttonel.removeAttribute("class")
+                  autoacceptbuttonbox.checked = false
+                  DataStore.set("auto_accept_button", false)
+               }
+               else {
+                  autoacceptbuttonel.setAttribute("class", "checked")
+                  autoacceptbuttonbox.checked = true
+                  DataStore.set("auto_accept_button", true)
+               }
+            },true
+         ),
+         document.createElement('br'),
+         UI.CheckBox(
             `${selectedLang["aram-only"]}`, "Aram only", "Aram only checkbox",
             () => {
                let Aramel = document.getElementById("Aram only")
@@ -647,6 +666,7 @@ window.addEventListener('load', async () => {
                      tickcheck(DataStore.get("loot-helper"), "lh", "lhbox")
                      tickcheck(DataStore.get("buy-all-champs"), "byc", "bycbox")
                      tickcheck(DataStore.get("Custom-rank"), "cusrankhover", "cusrankhoverbox")
+                     tickcheck(DataStore.get("auto_accept_button"), "autoacceptbutton", "autoacceptbuttonbox")
                   }
                },100)
             }

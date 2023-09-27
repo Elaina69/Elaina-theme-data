@@ -6,9 +6,9 @@ let AutoQueue = (node) => {
     let pagename = node.getAttribute("data-screen-name")
 
 	if (pagename == "rcp-fe-lol-postgame") {
-		console.log(eConsole+` %cAuto Queue will start in %c${DataStore.get("Create-Delay")/1000} %cseconds...`,eCss,"","color: #0070ff","")
 		window.setTimeout(async () => {
 			if (DataStore.get("Auto-Find-Queue") && !DataStore.get("aram-only")) {
+				console.log(eConsole+`%c Auto Queue will start in %c${DataStore.get("Create-Delay")/1000} %cseconds...`,eCss,"","color: #0070ff","")
 				await fetch('/lol-lobby/v2/lobby', {
 					method: 'POST',
 					body: JSON.stringify({ queueId: DataStore.get("Gamemode") }),
@@ -23,6 +23,7 @@ let AutoQueue = (node) => {
 				},DataStore.get("Find-Delay"))
 			}
 			else if (DataStore.get("Auto-Find-Queue") && DataStore.get("aram-only")) {
+				console.log(eConsole+`%c Auto Queue will start in %c${DataStore.get("Create-Delay")/1000} %cseconds...`,eCss,"","color: #0070ff","")
 				await fetch('/lol-lobby/v2/lobby', {
 					method: 'POST',
 					body: JSON.stringify({ queueId: 450 }),

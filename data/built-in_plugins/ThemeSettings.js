@@ -650,6 +650,25 @@ const injectSettings = (panel) => {
          ),
          document.createElement('br'),*/
          UI.CheckBox(
+            `${selectedLang["hide-theme-usage-time"]}`,'hideusetime','hideusetimebox',
+            ()=>{
+               let hideusetimeel = document.getElementById("hideusetime")
+               let hideusetimebox = document.getElementById("hideusetimebox")
+         
+               if (DataStore.get("hide-theme-usage-time")) {
+                  hideusetimeel.removeAttribute("class")
+                  hideusetimebox.checked = false
+                  DataStore.set("hide-theme-usage-time", false)
+               }
+               else {
+                  hideusetimeel.setAttribute("class", "checked")
+                  hideusetimebox.checked = true
+                  DataStore.set("hide-theme-usage-time", true)
+               }
+            }
+         ),
+         document.createElement('br'),
+         UI.CheckBox(
             `${selectedLang["hide-overview"]}`,'hideovertab','hideovertabbox',
             ()=>{
                let hideovertabel = document.getElementById("hideovertab")
@@ -783,6 +802,7 @@ window.addEventListener('load', async () => {
                      clearInterval(check)
                      
                      //tickcheck(DataStore.get(""), el, box)
+                     tickcheck(DataStore.get("hide-theme-usage-time"), "hideusetime", "hideusetimebox")
                      tickcheck(DataStore.get("Custom-Regalia-Banner"), "cusregabnr", "cusregabnrbox")
                      tickcheck(DataStore.get("Custom-Hover-card-backdrop"), "cushvbdrop", "cushvbdropbox")
                      tickcheck(DataStore.get("hide-overview"), "hideovertab", "hideovertabbox")

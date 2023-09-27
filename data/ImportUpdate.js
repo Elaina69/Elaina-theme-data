@@ -34,3 +34,13 @@ window.addEventListener("load", ()=> {
 	utils.addCss("","","",`${datapath}ImportUpdate.css`)
 	utils.mutationObserverAddCallback(updateV204, ["screen-root"])
 })
+
+if (!DataStore.has("hide-theme-usage-time")) {
+	DataStore.set("hide-theme-usage-time", false)
+}
+if (!DataStore.has("auto_accept_button")) {
+	DataStore.set("auto_accept_button", true)
+}
+if (!DataStore.has("")) {
+	DataStore.set("", true)
+}

@@ -127,6 +127,8 @@ const lang = {
         "Custom-challenge-crystal": "Custom challenge crystal",
         "challenge-rank"  : "Challenge rank",
         "challenge-point" : "Challenge point",
+        "auto_accept_button": "Auto Accept button",
+        "hide-theme-usage-time": "Hide theme usage time",
 
         "Debug-mode"      : "Debug mode",
         "Developer-Mode"  : "Developer mode",
@@ -251,6 +253,8 @@ const lang = {
         "Custom-challenge-crystal": "Thử thách tùy chỉnh",
         "challenge-rank"  : "Xếp hạng thử thách",
         "challenge-point" : "Điểm thử thách",
+        "auto_accept_button": "Nút tự động chấp thuận",
+        "hide-theme-usage-time": "Ẩn thời gian sử dụng theme",
 
         "Debug-mode"      : "Chế độ gỡ lỗi",
         "Developer-Mode"  : "Chế độ nhà phát triển",
@@ -375,6 +379,8 @@ const lang = {
         "Custom-challenge-crystal": "Custom challenge crystal",
         "challenge-rank"  : "Challenge rank",
         "challenge-point" : "Challenge point",
+        "auto_accept_button": "Auto Accept button",
+        "hide-theme-usage-time": "Hide theme usage time",
 
         "Debug-mode"      : "Debug mode",
         "Developer-Mode"  : "Developer mode",
@@ -499,6 +505,8 @@ const lang = {
         "Custom-challenge-crystal": "Custom challenge crystal",
         "challenge-rank"  : "Challenge rank",
         "challenge-point" : "Challenge point",
+        "auto_accept_button": "Auto Accept button",
+        "hide-theme-usage-time": "Hide theme usage time",
 
         "Debug-mode"      : "Debug mode",
         "Developer-Mode"  : "Developer mode",
@@ -622,6 +630,8 @@ const lang = {
         "Custom-challenge-crystal": "Custom challenge crystal",
         "challenge-rank"  : "Challenge rank",
         "challenge-point" : "Challenge point",
+        "auto_accept_button": "Auto Accept button",
+        "hide-theme-usage-time": "Hide theme usage time",
 
         "Debug-mode"      : "Debug mode",
         "Developer-Mode"  : "Developer mode",
@@ -744,6 +754,8 @@ const lang = {
         "Custom-challenge-crystal": "Custom challenge crystal",
         "challenge-rank"  : "Challenge rank",
         "challenge-point" : "Challenge point",
+        "auto_accept_button": "Auto Accept button",
+        "hide-theme-usage-time": "Hide theme usage time",
 
         "Debug-mode"      : "Debug mode",
         "Developer-Mode"  : "Developer mode",
@@ -866,6 +878,8 @@ const lang = {
         "Custom-challenge-crystal": "Custom challenge crystal",
         "challenge-rank"  : "Challenge rank",
         "challenge-point" : "Challenge point",
+        "auto_accept_button": "Auto Accept button",
+        "hide-theme-usage-time": "Hide theme usage time",
 
         "Debug-mode"      : "Debug mode",
         "Developer-Mode"  : "Developer mode",
@@ -987,6 +1001,8 @@ const lang = {
         "Custom-challenge-crystal": "Custom challenge crystal",
         "challenge-rank"  : "Challenge rank",
         "challenge-point" : "Challenge point",
+        "auto_accept_button": "Auto Accept button",
+        "hide-theme-usage-time": "Hide theme usage time",
 
         "Debug-mode"      : "Debug mode",
         "Developer-Mode"  : "Developer mode",
@@ -1108,6 +1124,8 @@ const lang = {
         "Custom-challenge-crystal": "Custom challenge crystal",
         "challenge-rank"  : "Challenge rank",
         "challenge-point" : "Challenge point",
+        "auto_accept_button": "Auto Accept button",
+        "hide-theme-usage-time": "Hide theme usage time",
 
         "Debug-mode"      : "Debug mode",
         "Developer-Mode"  : "Developer mode",
