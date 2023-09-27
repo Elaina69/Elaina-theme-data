@@ -107,19 +107,19 @@ const injectSettings = (panel) => {
             ]),
             UI.Label("Contributors:","contributors"),
             UI.Row("Contributors-row",[
-                UI.Contributor("About-Us/Nomi.jfif","Nomi-san","Support, Plugins provider"),
+                UI.Contributor("About-Us/Nomi.png","Nomi-san","Support, Plugins provider"),
                 UI.Contributor("About-Us/BakaFT.png","BakaFT","Support, Translator"),
             ]),
             UI.Row("Contributors-row",[
                 UI.Contributor("About-Us/Sarah.png","Sarah Engel","Support, Plugins provider"),
-                UI.Contributor("About-Us/Soulmare.jfif","Soulmare","Support, Translator"),
+                UI.Contributor("About-Us/Soulmare.png","Soulmare","Support, Translator"),
             ]),
             UI.Row("Contributors-row",[
-                UI.Contributor("About-Us/balaclava.jfif","Balaclava","Plugins provider"),
-                UI.Contributor("About-Us/DmitryFisk.jfif","DmitryFisk","Plugins provider"),
+                UI.Contributor("About-Us/balaclava.png","Balaclava","Plugins provider"),
+                UI.Contributor("About-Us/DmitryFisk.png","DmitryFisk","Plugins provider"),
             ]),
             UI.Row("Contributors-row",[
-                UI.Contributor("About-Us/Legnatbird.jfif","Legnatbird","Support, Translator"),
+                UI.Contributor("About-Us/Legnatbird.png","Legnatbird","Support, Translator"),
                 UI.Contributor("About-Us/Flirip.png","Flirip","Translator"),
             ]),
             UI.Row("Donation-row",[
