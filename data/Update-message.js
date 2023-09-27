@@ -89,7 +89,7 @@ else if (DataStore.get(`Update-${update}`) && !DataStore.get(`Force-Update`)) {
 										<h5>Elaina_V3 - ${updateType} Update ${update}</h5>
 										<hr class="heading-spacer" />
 
-										<p class="Elaina-Update">- Add Manual update message (only available for new theme user or new fresh install</p>
+										<p class="Elaina-Update">- Add Manual update message (only available for new theme user or new fresh install)</p>
 										<p class="Elaina-Update">- Fix watermark bug</p>
 										<p class="Elaina-Update">- Fix custom profile</p>
 										<p class="Elaina-Update">- Add About Us tab on Settings</p>
