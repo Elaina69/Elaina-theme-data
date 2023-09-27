@@ -25,6 +25,19 @@ export function init(context) {
         "blocks":[],
         "hasPartials":false
     }
+    const about = {
+        "statements":[
+            ["open-element","lol-uikit-scrollable",[]],
+            ["static-attr","class","aboutus_settings"],
+            ["flush-element"],
+                ["close-element"]
+        ],
+        "locals":[],
+        "named":[],
+        "yields":[],
+        "blocks":[],
+        "hasPartials":false
+    }
 
     context.rcp.postInit('rcp-fe-lol-settings', async (api) => {
         window.__RCP_SETTINGS_API = api
@@ -66,6 +79,19 @@ export function init(context) {
             }),
             isEnabled: () => true,
         })
+        newGroup.categories.push({
+            name: 'el-aboutus-settings',
+            titleKey: 'el_aboutus-settings',
+            routeName: 'el-aboutus-settings',
+            group: newGroup,
+            loginStatus: true,
+            requireLogin: false,
+            forceDisabled: false,
+            computeds: ember.Object.create({
+                disabled: false
+            }),
+            isEnabled: () => true,
+        })
 
         api._modalManager._registeredCategoryGroups.splice(1, 0, newGroup)
         api._modalManager._refreshCategoryGroups()
@@ -83,6 +109,7 @@ export function init(context) {
             result.map(function() {
                 this.route('el-theme-settings')
                 this.route('el-plugins-settings')
+                this.route('el-aboutus-settings')
             })
 
             return result
@@ -100,6 +127,7 @@ export function init(context) {
                     case 'el_title_capital': return 'ELAINA-V3'
                     case 'el_theme-settings': return 'THEME SETTINGS'
                     case 'el_plugins-settings': return 'PLUGINS SETTINGS'
+                    case 'el_aboutus-settings': return 'ABOUT US'
                     default: break;
                 }
             }
@@ -119,6 +147,7 @@ export function init(context) {
             result.map(function() {
                 this.route('el-theme-settings')
                 this.route('el-plugins-settings')
+                this.route('el-aboutus-settings')
             })
 
             return result
@@ -143,6 +172,11 @@ export function init(context) {
                     this.addTemplate('el-plugins-settings', ember.HTMLBars.template({
                         id: "ElainaPluginsSettings",
                         block: JSON.stringify(pluginsTab),
+                        meta: {}
+                    }))
+                    this.addTemplate('el-aboutus-settings', ember.HTMLBars.template({
+                        id: "ElainaAboutUsSettings",
+                        block: JSON.stringify(about),
                         meta: {}
                     }))
                 }
