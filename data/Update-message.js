@@ -89,14 +89,14 @@ else if (DataStore.get(`Update-${update}`) && !DataStore.get(`Force-Update`)) {
 										<h5>Elaina_V3 - ${updateType} Update ${update}</h5>
 										<hr class="heading-spacer" />
 
-										<p class="Elaina-Update">- Add Manual update message (only available for new theme user or new fresh install)</p>
-										<p class="Elaina-Update">- Fix watermark bug</p>
-										<p class="Elaina-Update">- Fix custom profile</p>
-										<p class="Elaina-Update">- Add About Us tab on Settings</p>
-										<p class="Elaina-Update">- Add Donate message (only show after you using theme at least 1 hour)</p>
-										<p class="Elaina-Update">- Add theme usage time</p>
-										<p class="Elaina-Update">- Fix Auto q Console log</p>
-										<p class="Elaina-Update">- Update language file</p>
+										<p class="Elaina-Update">- Fix custom mastery point bug</p>
+										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update"></p>
 										<p class="Elaina-Update"></p>
 										<p class="Elaina-Update"></p>
 										<p class="Elaina-Update"></p>
