@@ -14,22 +14,16 @@ async function dodgeQueue(){
 
 function generateDodgeAndExitButton(t){
     const e=document.createElement("div"),
-          o=document.createElement("div"),
-          i=document.createElement("div");
+          o=document.createElement("div")
     
         o.setAttribute("class","dodge-button-container"),
         o.setAttribute("style","position: absolute;right: 0px;bottom: 57px;display: flex;align-items: flex-end;"),
 
         e.setAttribute("class","quit-button ember-view"),
         e.setAttribute("onclick","window.dodgeQueue()"),
-        e.setAttribute("id","dodgeButton"),
+        e.setAttribute("id","dodgeButton")
 
-        i.setAttribute("class","quit-button ember-view"),
-        i.setAttribute("onclick","window.exitClient()"),
-        i.setAttribute("id","exitButton");
-
-    const n=document.createElement("lol-uikit-flat-button"),
-        d=document.createElement("lol-uikit-flat-button");
+    const d=document.createElement("lol-uikit-flat-button");
 
 
 //___________________________________________________________________________//
@@ -38,7 +32,6 @@ function generateDodgeAndExitButton(t){
         const selectedLang = lang[langMap[langCode] || "EN"];
 
         d.innerHTML = selectedLang["dodge"];
-        n.innerHTML = selectedLang["exit"]; 
 //___________________________________________________________________________//
         
         
