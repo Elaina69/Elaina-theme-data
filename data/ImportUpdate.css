@@ -1,9 +1,7 @@
-/* 2.0.1 */
 .ready-check-map-background.ember-view {
     display: none !important;
 }
 
-/* 2.0.3 */
 /* 
 #BanPick-Delay {
 	display: flex;
@@ -20,17 +18,14 @@
 } 
 */
 
-/* 2.0.4 */
 #Custom-icon-list {
 	margin-left: 25px !important;
 }
 
-/* 2.0.5 */
 #customprf {
 	margin-left: 25px !important;
 }
 
-/* 2.1.12*/
 .donate {
 	width: 60px;
 	margin-left: 10px;
@@ -122,4 +117,8 @@
 #Donation-row {
     display: flex;
     justify-content: center;
+}
+
+div[data-screen-name=rcp-fe-lol-navigation-screen] {
+    border-top: 1.8px solid #785a28 !important;
 }
