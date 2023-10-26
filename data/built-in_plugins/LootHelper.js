@@ -1,5 +1,7 @@
 let datapath = new URL("..", import.meta.url).href
 import lang from "../configs/Language.js"
+let eConsole = "%c ElainaV3 "
+let eCss = "color: #ffffff; background-color: #f77fbe"
 
 if (DataStore.get("loot-helper")) {
     function AddElement(parent, tag, params = [], classes = [], content = null) {
@@ -135,6 +137,7 @@ if (DataStore.get("loot-helper")) {
         document.querySelectorAll('.loot-category-information').forEach(elem => {
             elem.remove();
         });
+        CreateCategoryInformation()
     }
     
     function OnClickOpenChestsButton() {
@@ -441,7 +444,11 @@ if (DataStore.get("loot-helper")) {
 		));
 	    document.body.appendChild(NStyle)
     
-        window.setInterval(async () => {
+        let create = window.setInterval(async () => {
+            if (document.querySelector(".loot-category-information")) {
+                window.clearInterval(create)
+                console.log(eConsole+"%c Loot helper loaded",eCss,"color: #e4c2b3")
+            }
             CreateRefreshButton();
             CreateOpenChestsButton();
             CreateBlueEssenceButton();
