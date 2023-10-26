@@ -511,10 +511,6 @@ const injectSettings = (panel) => {
             ),
             UI.Label(`${selectedLang["status-delay"]}`),
             UI.Input("status-delay"),
-            UI.Link(
-               `${selectedLang["note-3"]} ?`,
-               'https://github.com/KebsCS/KBotExt'
-            ),
          ]),
          UI.Row("namespoof",[
             UI.CheckBox(
