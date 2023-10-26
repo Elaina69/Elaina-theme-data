@@ -1,6 +1,42 @@
 let datapath = new URL("..", import.meta.url).href
 import lang from "../configs/Language.js"
 
+async function createMenu(root) {
+	let langCode = document.querySelector("html").lang;
+	let langMap = lang.langlist
+	let _t = lang[langMap[langCode] || "EN"];
+	const { Component, jsx, render } = await import('//esm.run/nano-jsx')
+	
+	class LoaderMenu extends Component {
+		render() {
+			return jsx/*html*/`
+				<div class="modal" style="position: absolute; inset: 0px; z-index: 8500;" id="oneHour">
+					<lol-uikit-full-page-backdrop class="backdrop" style="display: flex; align-items: center; justify-content: center; position: absolute; inset: 0px;"></lol-uikit-full-page-backdrop>
+					<div class="dialog-confirm" style="display: flex; align-items: center; justify-content: center; position: absolute; inset: 0px;">
+						<lol-uikit-dialog-frame class="dialog-frame" orientation="bottom" close-button="false">
+							<div class="dialog-content">
+								<lol-uikit-content-block class="app-controls-exit-dialog" type="dialog-small" style="width: 500px;">
+									<h5 class="Elaina-Update" style="text-align: center">Thanks for using Elaina_V3 !!</p>
+									<hr class="heading-spacer" />
+									<hr class="heading-spacer" />
+									<p class="Elaina-Update" style="text-align: center">If you love ElainaV3, you can support me by sharing this theme to your friend</p>
+									<p class="Elaina-Update" style="text-align: center">or donating me</p>
+									<div id="donate"></div>
+									<p class="Elaina-Update" style="text-align: center">Meow ~~~</p>
+								</lol-uikit-content-block>
+							</div>
+							<lol-uikit-flat-button-group type="dialog-frame">
+								<lol-uikit-flat-button tabindex="1" class="button-decline" onClick=${() => {document.getElementById("oneHour").hidden = true}}>${_t['l.close']}</lol-uikit-flat-button>
+							</lol-uikit-flat-button-group>
+						</lol-uikit-dialog-frame>
+					</div>
+				</div>
+			`
+		}
+	}
+	render(jsx`<${LoaderMenu} />`, root)
+}
+
 function onlineTime() {
 	if (!DataStore.has("seconds1")) {
 		DataStore.set("seconds1",0)
@@ -27,41 +63,6 @@ function onlineTime() {
 			if (DataStore.get("hours2") == 0 && DataStore.get("hours1") == 1 
 			&& DataStore.get("minutes2") == 0 && DataStore.get("minutes1") == 0 
 			&& DataStore.get("seconds2") == 0 && DataStore.get("seconds1") == 0) {
-				async function createMenu(root) {
-					let langCode = document.querySelector("html").lang;
-					let langMap = lang.langlist
-					let _t = lang[langMap[langCode] || "EN"];
-					const { Component, jsx, render } = await import('//esm.run/nano-jsx')
-					
-					class LoaderMenu extends Component {
-						render() {
-							return jsx/*html*/`
-								<div class="modal" style="position: absolute; inset: 0px; z-index: 8500;" id="oneHour">
-									<lol-uikit-full-page-backdrop class="backdrop" style="display: flex; align-items: center; justify-content: center; position: absolute; inset: 0px;"></lol-uikit-full-page-backdrop>
-									<div class="dialog-confirm" style="display: flex; align-items: center; justify-content: center; position: absolute; inset: 0px;">
-										<lol-uikit-dialog-frame class="dialog-frame" orientation="bottom" close-button="false">
-											<div class="dialog-content">
-												<lol-uikit-content-block class="app-controls-exit-dialog" type="dialog-small" style="width: 500px;">
-													<h5 class="Elaina-Update" style="text-align: center">Thanks for using Elaina_V3 !!</p>
-													<hr class="heading-spacer" />
-													<hr class="heading-spacer" />
-													<p class="Elaina-Update" style="text-align: center">If you love ElainaV3, you can support me by sharing this theme to your friend</p>
-													<p class="Elaina-Update" style="text-align: center">or donating me</p>
-													<div id="donate"></div>
-													<p class="Elaina-Update" style="text-align: center">Meow ~~~</p>
-												</lol-uikit-content-block>
-											</div>
-											<lol-uikit-flat-button-group type="dialog-frame">
-												<lol-uikit-flat-button tabindex="1" class="button-decline" onClick=${() => {document.getElementById("oneHour").hidden = true}}>${_t['l.close']}</lol-uikit-flat-button>
-											</lol-uikit-flat-button-group>
-										</lol-uikit-dialog-frame>
-									</div>
-								</div>
-							`
-						}
-					}
-					render(jsx`<${LoaderMenu} />`, root)
-				}
 				window.addEventListener("load", async ()=> {
 					const manager = () => document.getElementById('lol-uikit-layer-manager-wrapper')
 					const root    = document.createElement('div')
@@ -70,7 +71,7 @@ function onlineTime() {
 					manager().prepend(root)
 					window.setInterval(()=>{
 						try {
-							let closeButton = document.querySelector("#oneHour > div > lol-uikit-dialog-frame").shadowRoot.querySelector("div > div.lol-uikit-dialog-frame-close-button > lol-uikit-close-button")
+							let closeButton = document.querySelector("#oneHour lol-uikit-dialog-frame").shadowRoot.querySelector("div.lol-uikit-dialog-frame-close-button > lol-uikit-close-button")
 							closeButton.addEventListener("click", ()=> {document.getElementById("oneHour").hidden = true})
 
 							//Don't ask me why am I doing this .-.
