@@ -62,11 +62,12 @@ if (DataStore.get(`Force-Update`)) {
 		while (!manager()) await new Promise(r => setTimeout(r, 200))
 		await createLoaderMenu(root)
 		manager().prepend(root)
-		window.setInterval(()=>{
+		let close = window.setInterval(()=>{
 			try {
-				let closeButton = document.querySelector("#Elaina-Update > div > lol-uikit-dialog-frame").shadowRoot.querySelector("div > div.lol-uikit-dialog-frame-close-button > lol-uikit-close-button")
+				let closeButton = document.querySelector("#Elaina-Update lol-uikit-dialog-frame").shadowRoot.querySelector("div.lol-uikit-dialog-frame-close-button > lol-uikit-close-button")
 				closeButton.addEventListener("click", ()=> {document.getElementById("Elaina-Update").hidden = true})
 			}catch{}
+			window.clearInterval(close)
 		})
 	})
 }
@@ -89,14 +90,14 @@ else if (DataStore.get(`Update-${update}`) && !DataStore.get(`Force-Update`)) {
 										<h5>Elaina_V3 - ${updateType} Update ${update}</h5>
 										<hr class="heading-spacer" />
 
-										<p class="Elaina-Update">- Fix custom mastery point bug</p>
-										<p class="Elaina-Update"></p>
-										<p class="Elaina-Update"></p>
-										<p class="Elaina-Update"></p>
-										<p class="Elaina-Update"></p>
-										<p class="Elaina-Update"></p>
-										<p class="Elaina-Update"></p>
-										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update">- Update languages file</p>
+										<p class="Elaina-Update">- Removed exit button on "dodge button" plugin</p>
+										<p class="Elaina-Update">- Fix hompage css</p>
+										<p class="Elaina-Update">- Update Utils</p>
+										<p class="Elaina-Update">- Update Aram mode plugin</p>
+										<p class="Elaina-Update">- Add restart key combine ( alt + R )</p>
+										<p class="Elaina-Update">- Optimizing loadCss file</p>
+										<p class="Elaina-Update">- Fix datastore problem when first time install</p>
 										<p class="Elaina-Update"></p>
 										<p class="Elaina-Update"></p>
 										<p class="Elaina-Update"></p>
@@ -121,12 +122,13 @@ else if (DataStore.get(`Update-${update}`) && !DataStore.get(`Force-Update`)) {
 		while (!manager()) await new Promise(r => setTimeout(r, 200))
 		await createLoaderMenu(root)
 		manager().prepend(root)
-		window.setInterval(()=>{
+		let close = window.setInterval(()=>{
 			try {
-				let closeButton = document.querySelector("#Elaina-Update > div > lol-uikit-dialog-frame").shadowRoot.querySelector("div > div.lol-uikit-dialog-frame-close-button > lol-uikit-close-button")
+				let closeButton = document.querySelector("#Elaina-Update lol-uikit-dialog-frame").shadowRoot.querySelector("div.lol-uikit-dialog-frame-close-button > lol-uikit-close-button")
 				closeButton.addEventListener("click", ()=> {
 					document.getElementById("Elaina-Update").hidden = true
 				})
+				window.clearInterval(close)
 			}catch{}
 		})
 	})
