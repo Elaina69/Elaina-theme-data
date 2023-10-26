@@ -22,5 +22,5 @@ const addPrac5 = () => {
     }
 }
 window.addEventListener("load", ()=> {
-    utils.routineAddCallback(addPrac5, ["rcp-fe-lol-parties"])
+    if (!DataStore.get("aram-only")) {utils.routineAddCallback(addPrac5, ["rcp-fe-lol-parties"])}
 })
