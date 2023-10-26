@@ -87,7 +87,7 @@ else if (DataStore.get(`Update-${update}`) && !DataStore.get(`Force-Update`)) {
 							  <lol-uikit-dialog-frame class="dialog-frame" orientation="bottom" close-button="false">
 								<div class="dialog-content">
 									<lol-uikit-content-block class="app-controls-exit-dialog" type="dialog-small" style="width: 500px;">
-										<h5>Elaina_V3 - ${updateType} Update ${update}</h5>
+										<h5>Elaina_V3 - Update ${update}</h5>
 										<hr class="heading-spacer" />
 
 										<p class="Elaina-Update">- Update languages file</p>
@@ -98,7 +98,7 @@ else if (DataStore.get(`Update-${update}`) && !DataStore.get(`Force-Update`)) {
 										<p class="Elaina-Update">- Add restart key combine ( alt + R )</p>
 										<p class="Elaina-Update">- Optimizing loadCss file</p>
 										<p class="Elaina-Update">- Fix datastore problem when first time install</p>
-										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update">- Fix custom RP plugin in v13.21</p>
 										<p class="Elaina-Update"></p>
 										<p class="Elaina-Update"></p>
 	

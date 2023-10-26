@@ -1,7 +1,7 @@
 window.addEventListener('load', ()=> {
 	window.setInterval(()=> {
 		let BE = document.querySelector(".currency-be-component.ember-view")
-		let RP = document.querySelector("div.currency-rp")
+		let RP = document.querySelector(".currency-rp-top-up-enabled")
 		if (DataStore.get("Custom_RP") && RP) {
 			RP.innerHTML = `${DataStore.get("RP-data")}`
 		}
