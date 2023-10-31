@@ -16,16 +16,15 @@ async function fetch_riotclient_credentials() {
 		"method": "GET",
 	}).then(response => response.json()).then(data => {
 		data.forEach(elem => {
-			if (regex_rc_auth.exec(elem))
+			if (regex_rc_auth.exec(elem)) {
 				riotclient_auth = regex_rc_auth.exec(elem)[1];
-			else if (regex_rc_port.exec(elem))
+			}
+			else if (regex_rc_port.exec(elem)) {
 				riotclient_port = regex_rc_port.exec(elem)[1];
+			}
 		});
 	})
-	if (DataStore.get("Debug-mode")) {
-		if (debug_sub)
-			console.log(utils.riotclient_auth, utils.riotclient_port)
-	}
+	console.log(riotclient_auth, riotclient_port)
 }
 
 let debugLogEndpoints = async message => { 

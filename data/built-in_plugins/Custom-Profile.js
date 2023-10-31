@@ -1,4 +1,4 @@
-if ("Custom-profile-hover") {
+if (DataStore.get("Custom-profile-hover")) {
     let queueOptions = ["RANKED_SOLO_5x5","RANKED_FLEX_SR","RANKED_FLEX_TT",
                         "RANKED_TFT","RANKED_TFT_TURBO","RANKED_TFT_DOUBLE_UP",
     ]
@@ -9,7 +9,7 @@ if ("Custom-profile-hover") {
 
     window.setInterval(async ()=>{
         try {
-            if (document.querySelector("#lol-uikit-tooltip-root > div > div > div.hover-card.right.has-regalia.regalia-loaded")) {
+            if (document.querySelector("#lol-uikit-tooltip-root div.hover-card.right.has-regalia.regalia-loaded")) {
                 if (DataStore.get("Custom-challenge-crystal")) {
                     try {
                         let requestChallengeCrystal = {
@@ -18,8 +18,8 @@ if ("Custom-profile-hover") {
                                 "challengeCrystalLevel" : `${tierOptions[DataStore.get("challengeCrystalLevel")]}`
                             }
                         }
-                        let checkID = document.querySelector("#lol-uikit-tooltip-root > div > div > div.hover-card.right.has-regalia.regalia-loaded > div > div.hover-card-info-container > div.hover-card-identity > lol-regalia-hovercard-v2-element").getAttribute("summoner-id")
-                        let text = document.querySelector("#lol-uikit-tooltip-root > div > div > div.hover-card.right.has-regalia.regalia-loaded > div > div.hover-card-info-container > div.hover-card-info > div > div.hover-card-challenge-crystal").innerText
+                        let checkID = document.querySelector("#lol-uikit-tooltip-root lol-regalia-hovercard-v2-element").getAttribute("summoner-id")
+                        let text = document.querySelector("#lol-uikit-tooltip-root div.hover-card-challenge-crystal").innerText
                         let check = text.includes(`${DataStore.get("Challenge-Points")}`)
                         if (!check && checkID == DataStore.get("Summoner-ID")) {
                             await fetch("/lol-chat/v1/me", {
@@ -32,12 +32,12 @@ if ("Custom-profile-hover") {
                 }
             }
             if (DataStore.get("Custom-mastery-score")) {
-                try {document.querySelector("div.style-profile-emblem-wrapper > div.style-profile-emblem-header > div.style-profile-champion-mastery-score").innerText = `${DataStore.get("Mastery-Score")}`}catch{}
-                try {document.querySelector("div.collections-routes > div > div.control-panel > div.collection-details > div.collection-totals > div.total-owned.total-count.ember-view").innerText = `${DataStore.get("Mastery-Score")}`} catch{}
+                try {document.querySelector("div.style-profile-emblem-wrapper div.style-profile-champion-mastery-score").innerText = `${DataStore.get("Mastery-Score")}`}catch{}
+                try {document.querySelector("div.collections-routes div.total-owned.total-count.ember-view").innerText = `${DataStore.get("Mastery-Score")}`} catch{}
                 try {
                     let text = document.querySelector("#hover-card-header > div.hover-card-header-left > span.hover-card-mastery-score").innerText
                     let check = text.includes(`${DataStore.get("Mastery-Score")}`)
-                    let checkID = document.querySelector("#lol-uikit-tooltip-root > div > div > div.hover-card.right.has-regalia.regalia-loaded > div > div.hover-card-info-container > div.hover-card-identity > lol-regalia-hovercard-v2-element").getAttribute("summoner-id")
+                    let checkID = document.querySelector("#lol-uikit-tooltip-root lol-regalia-hovercard-v2-element").getAttribute("summoner-id")
                     if (!check && checkID == DataStore.get("Summoner-ID")) {
                         await fetch("/lol-chat/v1/me", {
                             method : "PUT",

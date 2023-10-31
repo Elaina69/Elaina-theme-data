@@ -36,11 +36,7 @@ function generateDodgeAndExitButton(t){
         
         
         e.appendChild(d),
-        i.appendChild(n),
         o.appendChild(e),
-        o.appendChild(i),
-    
-    console.log(o),
 
     t.parentNode.insertBefore(o,t)
 }

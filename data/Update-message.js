@@ -90,15 +90,15 @@ else if (DataStore.get(`Update-${update}`) && !DataStore.get(`Force-Update`)) {
 										<h5>Elaina_V3 - Update ${update}</h5>
 										<hr class="heading-spacer" />
 
-										<p class="Elaina-Update">- Update languages file</p>
-										<p class="Elaina-Update">- Removed exit button on "dodge button" plugin</p>
-										<p class="Elaina-Update">- Fix hompage css</p>
-										<p class="Elaina-Update">- Update Utils</p>
-										<p class="Elaina-Update">- Update Aram mode plugin</p>
-										<p class="Elaina-Update">- Add restart key combine ( alt + R )</p>
-										<p class="Elaina-Update">- Optimizing loadCss file</p>
-										<p class="Elaina-Update">- Fix datastore problem when first time install</p>
-										<p class="Elaina-Update">- Fix custom RP plugin in v13.21</p>
+										<p class="Elaina-Update">- Remove unused code</p>
+										<p class="Elaina-Update">- Fix "Dodge button" and "Custom profile" plugins</p>
+										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update">- HAPPY NNN DAY !!</p>
+										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update"></p>
 										<p class="Elaina-Update"></p>
 										<p class="Elaina-Update"></p>
 	
