@@ -1,4 +1,5 @@
 let updateType
+let autoUpdate = false
 
 import update from './configs/Version.js'
 import lang from "./configs/Language.js"
@@ -7,15 +8,23 @@ if (!DataStore.has(`Update-${update}`)) {
 	DataStore.set(`Update-${update}`, true)
 }
 
-if (!DataStore.has(`Force-Update`)) {
-	DataStore.set(`Force-Update`, true)
-}
-
-if (DataStore.get(`Force-Update`)) {
-	updateType = "Manual"
-}
-else {
+if (!autoUpdate) {updateType = "Manual"}
+else if (autoUpdate && DataStore.get(`Update-${update}`)){
 	updateType = "Auto"
+	let downloadUpdate = new Promise((resolve, reject) => {
+		setTimeout(() => {
+		  	if (true)
+				resolve()
+		  	else
+				reject()
+		}, 3000)
+	})
+	  
+	Toast.promise(downloadUpdate, {
+		loading: 'Theme is automatically updating...',
+		success: 'Auto update successfully!!',
+		error: 'Can not update automatically'
+	})
 }
 
 if (DataStore.get(`Force-Update`)) {
@@ -87,7 +96,7 @@ else if (DataStore.get(`Update-${update}`) && !DataStore.get(`Force-Update`)) {
 							  <lol-uikit-dialog-frame class="dialog-frame" orientation="bottom" close-button="false">
 								<div class="dialog-content">
 									<lol-uikit-content-block class="app-controls-exit-dialog" type="dialog-small" style="width: 500px;">
-										<h5>Elaina_V3 - Update ${update}</h5>
+										<h5>Elaina_V3 - ${updateType} Update ${update}</h5>
 										<hr class="heading-spacer" />
 
 										<p class="Elaina-Update">- Remove unused code</p>
