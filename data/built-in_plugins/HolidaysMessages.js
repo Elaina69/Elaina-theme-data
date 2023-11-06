@@ -11,17 +11,17 @@ let newdate = day + "/" + month
 let message,imageLink,filter
 
 function Holiday() {
-    if (newdate == config[newdate]["Day"]) {
-        message = config[newdate]["Text"]
-        imageLink = `${datapath}assets/Image/${config[newdate]["Image"]}`
-        filter = config[newdate]["filters"]
-        console.log(message)
-        DataStore.set("Day", newdate)
-        DataStore.set("Holiday", true)
+    try {
+        if (newdate == config[newdate]["Day"]) {
+            message = config[newdate]["Text"]
+            imageLink = `${datapath}assets/Image/${config[newdate]["Image"]}`
+            filter = config[newdate]["filters"]
+            console.log(message)
+            DataStore.set("Day", newdate)
+            DataStore.set("Holiday", true)
+        }
     }
-    else {
-        DataStore.set("Day", newdate)
-    }
+    catch {DataStore.set("Day", newdate)}
 }
 if (DataStore.has("Day") && newdate != DataStore.get("Day")) {Holiday()}
 if (DataStore.get("Holiday")) {
