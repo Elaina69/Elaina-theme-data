@@ -5,7 +5,8 @@
  * @Nyan Meow~~~
  */
 
-let pvp_net_id /* automatically updated to your pvp.net id */,
+let 
+	pvp_net_id /* automatically updated to your pvp.net id */,
 	summoner_id /* automatically updated to your summonerId */,
 	phase /* automatically updated to current gameflow phase */
 let routines = [] // array of functions that will be called routinely
@@ -26,8 +27,9 @@ function addCss (cssvar,folder,name,css) {
 	document.body.appendChild(NStyle)
 }
 
-function addFont (folder,font,font_family) {
+function addFont (folder,font,font_id,font_family) {
 	let Font = document.createElement('style')
+		Font.id = font_id
 		Font.appendChild(document.createTextNode(
 			'@font-face {font-family: '+font_family+'; src: url('+folder+'/'+font+')}'
 		))

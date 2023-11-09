@@ -104,6 +104,7 @@ const lang = {
         "hide-patch-note" : "Hide Patch note tab",
         "hide-esport"     : "Hide Esport tab",
 
+        "prevent-manual-update": "Don't receive notifications about future manual updates",
         "plugins-settings": "Plugins Settings",
         "old-ll-settings" : "Old League Loader settings",
         "aram-only"       : "Aram only mode",
@@ -229,6 +230,7 @@ const lang = {
         "hide-patch-note" : "Ẩn tab patch note (không tồn tại ở client VNG)",
         "hide-esport"     : "ẩn tab esport (không tồn tại ở client VNG)",
 
+        "prevent-manual-update": "Không nhận thông báo về các bản cập nhật thủ công trong tương lai",
         "plugins-settings": "Cài đặt plugins",
         "old-ll-settings" : "Bảng cài đặt League loader cũ",
         "aram-only"       : "Main Aram (\")>",
@@ -354,6 +356,7 @@ const lang = {
         "hide-patch-note" : "Hide Patch note tab",
         "hide-esport"     : "Hide Esport tab",
 
+        "prevent-manual-update": "Don't receive notifications about future manual updates",
         "plugins-settings": "Plugins Settings",
         "old-ll-settings" : "Old League Loader settings",
         "aram-only"       : "Aram only mode",
@@ -479,6 +482,7 @@ const lang = {
         "hide-patch-note" : "Hide Patch note tab",
         "hide-esport"     : "Hide Esport tab",
 
+        "prevent-manual-update": "Don't receive notifications about future manual updates",
         "plugins-settings": "Ustawienia wtyczek",
         "old-ll-settings" : "Stare ustawienia League Loadera",
         "aram-only"       : "Tryb samych Aramów",
@@ -603,6 +607,7 @@ const lang = {
         "hide-patch-note" : "Hide Patch note tab",
         "hide-esport"     : "Hide Esport tab",
 
+        "prevent-manual-update": "Don't receive notifications about future manual updates",
         "plugins-settings": "Настройки плагинов",
         "old-ll-settings" : "Старые настройки загрузчика",
         "aram-only"       : "Только Aram",
@@ -726,6 +731,7 @@ const lang = {
         "hide-patch-note" : "Hide Patch note tab",
         "hide-esport"     : "Hide Esport tab",
 
+        "prevent-manual-update": "Don't receive notifications about future manual updates",
         "plugins-settings": "Plugins Settings",
         "old-ll-settings" : "Old League Loader settings",
         "aram-only"       : "Aram only mode",
@@ -849,6 +855,7 @@ const lang = {
         "hide-patch-note" : "Hide Patch note tab",
         "hide-esport"     : "Hide Esport tab",
 
+        "prevent-manual-update": "Don't receive notifications about future manual updates",
         "plugins-settings": "Plugins Settings",
         "old-ll-settings" : "Old League Loader settings",
         "aram-only"       : "Aram only mode",
@@ -971,6 +978,7 @@ const lang = {
         "hide-patch-note" : "Hide Patch note tab",
         "hide-esport"     : "Hide Esport tab",
 
+        "prevent-manual-update": "Don't receive notifications about future manual updates",
         "plugins-settings": "插件設定",
         "old-ll-settings" : "舊版載入設定",
         "aram-only"       : "ARAM唯一模式",
@@ -1094,6 +1102,7 @@ const lang = {
         "hide-patch-note" : "Hide Patch note tab",
         "hide-esport"     : "Hide Esport tab",
 
+        "prevent-manual-update": "Don't receive notifications about future manual updates",
         "plugins-settings": "插件设置",
         "old-ll-settings" : "旧版League-Loader设置",
         "aram-only"       : "只显示大乱斗",

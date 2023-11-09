@@ -1,5 +1,6 @@
 let datapath = new URL("..", import.meta.url).href
 import lang from "../configs/Language.js"
+import utils from "../_utils.js"
 
 const UI = {
    Row: (id, childs) => {
@@ -148,6 +149,31 @@ const UI = {
 		}
       return origin
    },
+
+   DropdownCustomFont: () => {
+      const origin = document.createElement("div")
+      const dropdown = document.createElement("lol-uikit-framed-dropdown")
+
+      origin.classList.add("Dropdown-div")
+      dropdown.classList.add("lol-settings-general-dropdown")
+      origin.append(dropdown)
+      for (let i = 0; i < DataStore.get("Font-list").length; i++) {
+			const opt = DataStore.get("Font-list")[i]
+			const el = document.createElement("lol-uikit-dropdown-option")
+			el.setAttribute("slot", "lol-uikit-dropdown-option")
+			el.innerText = opt
+			el.onclick = () => {
+				DataStore.set("CurrentFont", opt)
+            document.querySelector("#Custom-font").remove()
+            utils.addFont(DataStore.get("Font-folder"),DataStore.get("CurrentFont"),"Custom-font","Custom")
+			}
+			if (DataStore.get("CurrentFont") == opt) {
+				el.setAttribute("selected", "true")
+			}
+			dropdown.appendChild(el)
+		}
+      return origin
+   },
 }
 
 const injectSettings = (panel) => {
@@ -174,6 +200,25 @@ const injectSettings = (panel) => {
          ),
          UI.Slider(
             selectedLang["music-volume"],DataStore.get("audio-volume"),"bg-audio","audio-volume"
+         ),
+         document.createElement('br'),
+         UI.CheckBox(
+            `${selectedLang["prevent-manual-update"]}`,'prvtup','prvtupbox',
+            ()=>{
+               let prvtupel = document.getElementById("prvtup")
+               let prvtupbox = document.getElementById("prvtupbox")
+         
+               if (DataStore.get("prevent-manual-update")) {
+                  prvtupel.removeAttribute("class")
+                  prvtupbox.checked = false
+                  DataStore.set("prevent-manual-update", false)
+               }
+               else {
+                  prvtupel.setAttribute("class", "checked")
+                  prvtupbox.checked = true
+                  DataStore.set("prevent-manual-update", true)
+               }
+            }
          ),
          document.createElement('br'),
          UI.CheckBox(
@@ -289,6 +334,8 @@ const injectSettings = (panel) => {
                }
             }
          ),
+         document.createElement('br'),
+         UI.DropdownCustomFont(),
          document.createElement('br'),
          UI.Row("Custom-Curency",[
             UI.Row("custom-rp",[
@@ -802,6 +849,7 @@ window.addEventListener('load', async () => {
                      clearInterval(check)
                      
                      //tickcheck(DataStore.get(""), el, box)
+                     tickcheck(DataStore.get("prevent-manual-update"), "prvtup", "prvtupbox")
                      tickcheck(DataStore.get("hide-theme-usage-time"), "hideusetime", "hideusetimebox")
                      tickcheck(DataStore.get("Custom-Regalia-Banner"), "cusregabnr", "cusregabnrbox")
                      tickcheck(DataStore.get("Custom-Hover-card-backdrop"), "cushvbdrop", "cushvbdropbox")
