@@ -50,11 +50,11 @@ function onlineTime() {
 	window.setInterval(()=>{
 		try {
 			DataStore.set("seconds1",DataStore.get("seconds1")+1)
-			if (DataStore.get("seconds1") == 10) {DataStore.set("seconds2",DataStore.get("seconds2")+1), DataStore.set("seconds1",0)}
-			if (DataStore.get("seconds2") == 6) {DataStore.set("minutes1",DataStore.get("minutes1")+1);DataStore.set("seconds1",0),DataStore.set("seconds2",0)}
-			if (DataStore.get("minutes1") == 10) {DataStore.set("minutes2",DataStore.get("minutes2")+1);DataStore.set("minutes1",0);DataStore.set("seconds1",0),DataStore.set("seconds2",0)}
-			if (DataStore.get("minutes2") == 6) {DataStore.set("hours1",DataStore.get("hours1")+1);DataStore.set("minutes2",0);DataStore.set("minutes1",0);DataStore.set("seconds2",0);DataStore.set("seconds1",0)}
-			if (DataStore.get("hours1") == 10) {DataStore.set("hours2",DataStore.get("hours2")+1);DataStore.set("hours1",0);DataStore.set("minutes2",0);DataStore.set("minutes1",0);DataStore.set("seconds2",0);DataStore.set("seconds1",0)}
+			if (DataStore.get("seconds1") >= 10) {DataStore.set("seconds2",DataStore.get("seconds2")+1), DataStore.set("seconds1",0)}
+			if (DataStore.get("seconds2") >= 6) {DataStore.set("minutes1",DataStore.get("minutes1")+1);DataStore.set("seconds1",0),DataStore.set("seconds2",0)}
+			if (DataStore.get("minutes1") >= 10) {DataStore.set("minutes2",DataStore.get("minutes2")+1);DataStore.set("minutes1",0);DataStore.set("seconds1",0),DataStore.set("seconds2",0)}
+			if (DataStore.get("minutes2") >= 6) {DataStore.set("hours1",DataStore.get("hours1")+1);DataStore.set("minutes2",0);DataStore.set("minutes1",0);DataStore.set("seconds2",0);DataStore.set("seconds1",0)}
+			if (DataStore.get("hours1") >= 10) {DataStore.set("hours2",DataStore.get("hours2")+1);DataStore.set("hours1",0);DataStore.set("minutes2",0);DataStore.set("minutes1",0);DataStore.set("seconds2",0);DataStore.set("seconds1",0)}
 			if (DataStore.get("hide-theme-usage-time")) {document.querySelector("span.friend-header").innerHTML = ""}
 			else {document.querySelector("span.friend-header").innerHTML = `${DataStore.get("hours2")}${DataStore.get("hours1")}:${DataStore.get("minutes2")}${DataStore.get("minutes1")}:${DataStore.get("seconds2")}${DataStore.get("seconds1")}`}
 
