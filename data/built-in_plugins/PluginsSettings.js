@@ -4,7 +4,6 @@ let eCss = "color: #ffffff; background-color: #f77fbe"
 
 import ChampsP from "../configs/ChampionsPrices.js"
 import lang from "../configs/Language.js"
-import QueueID from "../configs/QueueID.js"
 
 const UI = {
    Row: (id, childs) => {
