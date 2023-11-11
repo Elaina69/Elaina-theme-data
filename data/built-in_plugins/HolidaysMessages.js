@@ -1,16 +1,20 @@
 import lang from "../configs/Language.js"
 import config from "../configs/Holiday.js"
 
+if(!DataStore.has("Day")) {
+    DataStore.set("Day", "0/0")
+}
+
 let datapath = new URL("..", import.meta.url).href
 
 let dateObj = new Date();
 let month = dateObj.getUTCMonth() + 1;
 let day = dateObj.getUTCDate();
-let newdate = day + "/" + month
+let newdate = day+"/"+month
 
 let message,imageLink,filter
 
-function Holiday() {
+if (DataStore.has("Day") && newdate != DataStore.get("Day")) {
     try {
         if (newdate == config[newdate]["Day"]) {
             message = config[newdate]["Text"]
@@ -23,7 +27,7 @@ function Holiday() {
     }
     catch {DataStore.set("Day", newdate)}
 }
-if (DataStore.has("Day") && newdate != DataStore.get("Day")) {Holiday()}
+
 if (DataStore.get("Holiday")) {
     async function createLoaderMenu(root) {
         const langCode = document.querySelector("html").lang;
