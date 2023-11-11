@@ -398,7 +398,7 @@ const injectSettings = (panel) => {
                UI.Input("Find-Delay")
             ])
          ]),
-         UI.Dropdown(QueueID, "Gamemode", `${selectedLang["Gamemode"]}`, "description", "queueId"),
+         UI.Dropdown(DataStore.get("queueList"), "Gamemode", `${selectedLang["Gamemode"]}`, "description", "queueId"),
          document.createElement('br'),
          document.createElement('br'),
          UI.CheckBox(
