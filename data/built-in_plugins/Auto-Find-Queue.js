@@ -1,14 +1,29 @@
 import utils from "../_utils.js"
 
-let eConsole = "%c ElainaV3 "
-let eCss = "color: #ffffff; background-color: #f77fbe"
+let LCUfetch = await fetch('/lol-game-queues/v1/queues')
+let queue = await LCUfetch.json()
+let queueList = {"Gamemode":[]}
+
+for(let i = 0; i < queue.length ; i++) {
+	let Availability = queue[i]["queueAvailability"]
+	let queueID = queue[i]["id"]
+	let invalidID = [700,720,1110,2010,2020,2000]
+
+    if (Availability == "Available" && !invalidID.includes(queueID)) {
+        let queueInfo = {"queueId":queueID,"description":queue[i]["name"]}
+        queueList["Gamemode"].push(queueInfo)
+    }
+}
+queueList["Gamemode"].sort((a, b) => {return a.queueId - b.queueId});
+
+DataStore.set("queueList", queueList)
+
 let AutoQueue = (node) => {
     let pagename = node.getAttribute("data-screen-name")
 
 	if (pagename == "rcp-fe-lol-postgame") {
 		window.setTimeout(async () => {
 			if (DataStore.get("Auto-Find-Queue") && !DataStore.get("aram-only")) {
-				console.log(eConsole+`%c Auto Queue will start in %c${DataStore.get("Create-Delay")/1000} %cseconds...`,eCss,"","color: #0070ff","")
 				await fetch('/lol-lobby/v2/lobby', {
 					method: 'POST',
 					body: JSON.stringify({ queueId: DataStore.get("Gamemode") }),
@@ -23,7 +38,6 @@ let AutoQueue = (node) => {
 				},DataStore.get("Find-Delay"))
 			}
 			else if (DataStore.get("Auto-Find-Queue") && DataStore.get("aram-only")) {
-				console.log(eConsole+`%c Auto Queue will start in %c${DataStore.get("Create-Delay")/1000} %cseconds...`,eCss,"","color: #0070ff","")
 				await fetch('/lol-lobby/v2/lobby', {
 					method: 'POST',
 					body: JSON.stringify({ queueId: 450 }),
