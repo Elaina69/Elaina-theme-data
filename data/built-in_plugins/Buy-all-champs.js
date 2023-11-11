@@ -79,10 +79,11 @@ if (DataStore.get("buy-all-champs")) {
     let eCss = "color: #ffffff; background-color: #f77fbe"
 
     const buttonId = "buy-450-champions-button"
+    const store = new Store()
+    
     const onMutation = () => {
         const frameStore = document.querySelector("#rcp-fe-lol-store-iframe > iframe")
         const storeDocument = frameStore?.contentDocument.documentElement
-        const store = new Store()
         const buyChampionButton = document.createElement("lol-uikit-flat-button")
 
         if (!frameStore || storeDocument.querySelector(`#${buttonId}`)) { return }
