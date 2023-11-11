@@ -1,49 +1,26 @@
+let LCUfetch_a = await fetch('/lol-chat/v1/friends')
+let LCUfetch_b = await fetch('/lol-chat/v1/friend-groups')
+DataStore.set("friendslist", await LCUfetch_a.json())
+DataStore.set("grouplist", await LCUfetch_b.json())
+
 let routines = []
+
+if (!DataStore.has("frGroupName")) {
+    DataStore.set("frGroupName", 0)
+}
+
 function routineAddCallback(callback, target) {
 	routines.push({ "callback": callback, "targets": target })
 }
 
-async function InviteAll () {
-    let LCUfetch = await fetch('/lol-chat/v1/friends')
-    let friendslist = await LCUfetch.json()
-    let Invited = 0
-
-    let fakerun = new Promise(async () => { //uhh....
-        setTimeout(() => {if (true) {}})
-    })
-    Toast.promise(fakerun, {
-        loading: 'Inviting all...',
-        success: "",
-        error: ""
-    })
-
-    for(let i = 0; i < friendslist.length ; i++) {
-        let summonerID = friendslist[i]["summonerId"]
-        let availability = friendslist[i]["availability"]
-
-        if (DataStore.get("frGroupName") == friendslist[i]["groupName"]) {
-            let invite = await fetch("/lol-lobby/v2/lobby/invitations",{
-                method: 'POST',
-                headers: {"content-type": "application/json"},
-                body: JSON.stringify([{"toSummonerId": summonerID}])
-            })
-            if (invite.status == 200 && availability != "offline" && availability != "dnd" && availability != "mobile") {Invited++}
-        }
-    }
-
-    Toast.success(`Invited ${Invited} friends`)
-}
-
 let addInviteAllButton = async () => {
 	if (document.querySelector(".lobby-header-buttons-container") != null) {
-        let LCUfetch = await fetch('/lol-chat/v1/friends')
-        let friendslist = await LCUfetch.json()
-        let origin = []
+        let groupList = {"name":[],"id":[]}
 
-        for(let i = 0; i < friendslist.length ; i++) {
-            origin.push(friendslist[i]["groupName"])
+        for(let i = 0; i < DataStore.get("grouplist").length ; i++) {
+            groupList["id"].push(DataStore.get("grouplist")[i]["id"])
+            groupList["name"].push(DataStore.get("grouplist")[i]["name"])
         }
-        let groupList = [...new Set(origin)]
 
         const mainDiv = document.createElement("div")
         mainDiv.id = "inviteAllDiv"
@@ -51,7 +28,32 @@ let addInviteAllButton = async () => {
 
         let button = document.createElement("lol-uikit-flat-button")
         button.textContent = "Invite all"
-        button.onclick = async () => {InviteAll()}
+        button.onclick = async () => {
+            let Invited = 0
+            let fakerun = new Promise(async () => { //uhh....
+                setTimeout(() => {if (true) {}})
+            })
+            Toast.promise(fakerun, {
+                loading: 'Inviting all...',
+                success: "",
+                error: ""
+            })
+
+            for(let i = 0; i < DataStore.get("friendslist").length ; i++) {
+                let invalidAvail = ["offline",/*"dnd",*/"mobile"]
+
+                if (DataStore.get("frGroupName") == DataStore.get("friendslist")[i]["groupId"]) {
+                    let invite = await fetch("/lol-lobby/v2/lobby/invitations",{
+                        method: 'POST',
+                        headers: {"content-type": "application/json"},
+                        body: JSON.stringify([{"toSummonerId": DataStore.get("friendslist")[i]["summonerId"]}])
+                    })
+                    if (invite.status == 200 && !invalidAvail.includes(DataStore.get("friendslist")[i]["availability"])) {Invited++}
+                }
+            }
+
+            Toast.success(`Invited ${Invited} friends`)
+        }
 
         let div = document.createElement("div")
         div.classList.add("Dropdown-div")
@@ -61,30 +63,45 @@ let addInviteAllButton = async () => {
         dropdown.style.marginRight = "10px"
         dropdown.style.width = "198px"
 
-        div.append(dropdown)
-
-        for (let i = 0; i < groupList.length; i++) {
-            let opt = groupList[i]
+        for (let i = 0; i < groupList["id"].length; i++) {
             let el = document.createElement("lol-uikit-dropdown-option")
+
             el.setAttribute("slot", "lol-uikit-dropdown-option")
-            el.innerText = opt
+            el.innerText = groupList["name"][i]
             el.onclick = () => {
-                DataStore.set("frGroupName", opt)
+                DataStore.set("frGroupName", groupList["id"][i])
             }
-            if (DataStore.get("frGroupName") == opt) {
+
+            if (DataStore.get("frGroupName") == groupList["id"][i]) {
                 el.setAttribute("selected", "true")
             }
             dropdown.appendChild(el)
         }
 
+        div.append(dropdown)
         mainDiv.append(div,button)
 
         let gameBar = document.querySelector(".lobby-header-buttons-container")
-            if (!document.querySelector("#inviteAllDiv")) {
-                gameBar.insertBefore(mainDiv, gameBar.children[1])
-            }
+        if (!document.querySelector("#inviteAllDiv")) {
+            gameBar.insertBefore(mainDiv, gameBar.children[1])
+        }
 	}
 }
+
+window.setInterval(async ()=> {
+    try {
+        let CurrentGroup = document.querySelector("div.lol-social-lower-pane-container .roster-block").querySelectorAll("lol-social-roster-group").length
+        if (DataStore.get("grouplist").length != CurrentGroup) {
+            let LCUfetch_a = await fetch('/lol-chat/v1/friends')
+            let LCUfetch_b = await fetch('/lol-chat/v1/friend-groups')
+            DataStore.set("friendslist", await LCUfetch_a.json())
+            DataStore.set("grouplist", await LCUfetch_b.json())
+    
+            document.getElementById("inviteAllDiv").remove()
+            addInviteAllButton()
+        }
+    }catch{}
+}, 1000) 
 
 window.addEventListener('load', () => {
     window.setInterval(() => {
