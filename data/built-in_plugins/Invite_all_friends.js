@@ -1,8 +1,3 @@
-let LCUfetch_a = await fetch('/lol-chat/v1/friends')
-let LCUfetch_b = await fetch('/lol-chat/v1/friend-groups')
-DataStore.set("friendslist", await LCUfetch_a.json())
-DataStore.set("grouplist", await LCUfetch_b.json())
-
 let routines = []
 
 if (!DataStore.has("frGroupName")) {
@@ -12,6 +7,22 @@ if (!DataStore.has("frGroupName")) {
 function routineAddCallback(callback, target) {
 	routines.push({ "callback": callback, "targets": target })
 }
+
+window.setInterval(async ()=> {
+    try {
+        let CurrentGroup = document.querySelector("div.lol-social-lower-pane-container .roster-block").querySelectorAll("lol-social-roster-group").length
+        let CurrentFriend = document.querySelector("div.lol-social-lower-pane-container .roster-block").querySelectorAll("lol-social-roster-member").length
+        if (DataStore.get("grouplist").length != CurrentGroup || DataStore.get("friendslist").length != CurrentFriend) {
+            let LCUfetch_a = await fetch('/lol-chat/v1/friends')
+            let LCUfetch_b = await fetch('/lol-chat/v1/friend-groups')
+            DataStore.set("friendslist", await LCUfetch_a.json())
+            DataStore.set("grouplist", await LCUfetch_b.json())
+        
+            document.getElementById("inviteAllDiv").remove()
+            addInviteAllButton()
+        }
+    }catch{}
+},1000)
 
 let addInviteAllButton = async () => {
 	if (document.querySelector(".lobby-header-buttons-container") != null) {
@@ -88,21 +99,6 @@ let addInviteAllButton = async () => {
 	}
 }
 
-window.setInterval(async ()=> {
-    try {
-        let CurrentGroup = document.querySelector("div.lol-social-lower-pane-container .roster-block").querySelectorAll("lol-social-roster-group").length
-        if (DataStore.get("grouplist").length != CurrentGroup) {
-            let LCUfetch_a = await fetch('/lol-chat/v1/friends')
-            let LCUfetch_b = await fetch('/lol-chat/v1/friend-groups')
-            DataStore.set("friendslist", await LCUfetch_a.json())
-            DataStore.set("grouplist", await LCUfetch_b.json())
-    
-            document.getElementById("inviteAllDiv").remove()
-            addInviteAllButton()
-        }
-    }catch{}
-}, 1000) 
-
 window.addEventListener('load', () => {
     window.setInterval(() => {
 		routines.forEach(routine => {
@@ -111,3 +107,5 @@ window.addEventListener('load', () => {
 	}, 1000)
 	routineAddCallback(addInviteAllButton, ["v2-header-component.ember-view"])
 })
+
+console.log("Invite all friends loaded")
