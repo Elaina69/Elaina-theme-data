@@ -1,3 +1,5 @@
+import { autoHonor } from "./Auto_honor.js"
+
 export function init(context) {
     const themeTab = {
         "statements":[
@@ -185,5 +187,7 @@ export function init(context) {
             }
             return builder
         }
-    })
-)}
+    }))
+    
+    autoHonor(context)
+}
