@@ -1,2 +1,2 @@
-let newVersion = "2.2.0"
+let newVersion = "2.2.1"
 export default newVersion
