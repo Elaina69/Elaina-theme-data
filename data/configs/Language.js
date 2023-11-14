@@ -129,6 +129,8 @@ const lang = {
         "challenge-point" : "Challenge point",
         "auto_accept_button": "Auto Accept button",
         "hide-theme-usage-time": "Hide theme usage time",
+        "Enable-Invite-Fr": "Enable invite all friends plugins",
+        "Auto-Honor": "Auto honor player",
 
         "Debug-mode"      : "Debug mode",
         "Developer-Mode"  : "Developer mode",
@@ -255,6 +257,8 @@ const lang = {
         "challenge-point" : "Điểm thử thách",
         "auto_accept_button": "Nút tự động chấp thuận",
         "hide-theme-usage-time": "Ẩn thời gian sử dụng theme",
+        "Enable-Invite-Fr": 'Kích hoạt plugin "Mời toàn bộ bạn bè"',
+        "Auto-Honor": "Tự động vinh danh người chơi",
 
         "Debug-mode"      : "Chế độ gỡ lỗi",
         "Developer-Mode"  : "Chế độ nhà phát triển",
@@ -381,6 +385,8 @@ const lang = {
         "challenge-point" : "Challenge point",
         "auto_accept_button": "Auto Accept button",
         "hide-theme-usage-time": "Hide theme usage time",
+        "Enable-Invite-Fr": "Enable invite all friends plugins",
+        "Auto-Honor": "Auto honor player",
 
         "Debug-mode"      : "Debug mode",
         "Developer-Mode"  : "Developer mode",
@@ -507,6 +513,8 @@ const lang = {
         "challenge-point" : "Challenge point",
         "auto_accept_button": "Auto Accept button",
         "hide-theme-usage-time": "Hide theme usage time",
+        "Enable-Invite-Fr": "Enable invite all friends plugins",
+        "Auto-Honor": "Auto honor player",
 
         "Debug-mode"      : "Debug mode",
         "Developer-Mode"  : "Developer mode",
@@ -632,6 +640,8 @@ const lang = {
         "challenge-point" : "Challenge point",
         "auto_accept_button": "Auto Accept button",
         "hide-theme-usage-time": "Hide theme usage time",
+        "Enable-Invite-Fr": "Enable invite all friends plugins",
+        "Auto-Honor": "Auto honor player",
 
         "Debug-mode"      : "Debug mode",
         "Developer-Mode"  : "Developer mode",
@@ -756,6 +766,8 @@ const lang = {
         "challenge-point" : "Challenge point",
         "auto_accept_button": "Auto Accept button",
         "hide-theme-usage-time": "Hide theme usage time",
+        "Enable-Invite-Fr": "Enable invite all friends plugins",
+        "Auto-Honor": "Auto honor player",
 
         "Debug-mode"      : "Debug mode",
         "Developer-Mode"  : "Developer mode",
@@ -880,6 +892,8 @@ const lang = {
         "challenge-point" : "Challenge point",
         "auto_accept_button": "Auto Accept button",
         "hide-theme-usage-time": "Hide theme usage time",
+        "Enable-Invite-Fr": "Enable invite all friends plugins",
+        "Auto-Honor": "Auto honor player",
 
         "Debug-mode"      : "Debug mode",
         "Developer-Mode"  : "Developer mode",
@@ -1003,6 +1017,8 @@ const lang = {
         "challenge-point" : "Challenge point",
         "auto_accept_button": "Auto Accept button",
         "hide-theme-usage-time": "Hide theme usage time",
+        "Enable-Invite-Fr": "Enable invite all friends plugins",
+        "Auto-Honor": "Auto honor player",
 
         "Debug-mode"      : "Debug mode",
         "Developer-Mode"  : "Developer mode",
@@ -1127,6 +1143,8 @@ const lang = {
         "challenge-point" : "成就点数",
         "auto_accept_button": "自动接受对局按钮",
         "hide-theme-usage-time": "关闭主题使用时间显示",
+        "Enable-Invite-Fr": "Enable invite all friends plugins",
+        "Auto-Honor": "Auto honor player",
 
         "Debug-mode"      : "调试模式",
         "Developer-Mode"  : "开发者模式",

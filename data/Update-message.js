@@ -1,5 +1,5 @@
 let updateType
-let autoUpdate = false
+let autoUpdate = true
 
 import update from './configs/Version.js'
 import lang from "./configs/Language.js"
@@ -99,21 +99,21 @@ else if (DataStore.get(`Update-${update}`) && !DataStore.get(`Force-Update`)) {
 										<h5>Elaina_V3 - ${updateType} Update ${update}</h5>
 										<hr class="heading-spacer" />
 
-										<p class="Elaina-Update">- Now you don't have to change configs to add new wallpaper, audio and custom font</p>
-										<p class="Elaina-Update">- Now you can stop receiving notifications about future manual updates</p>
-										<p class="Elaina-Update">- Add "Invite all friends" and "Force Jungle/Lane" plugins</p>
-										<p class="Elaina-Update">- Add new messages for special days</p>
-										<p class="Elaina-Update">- Add two new custom font</p>
-										<p class="Elaina-Update">- Add popup message for checking theme version</p>
-										<p class="Elaina-Update">- Fix old LL setiings's lag</p>
-										<p class="Elaina-Update">- Fix key combines bug</p>
-										<p class="Elaina-Update">- Fix custom status bug (still run even already disable in settings)</p>
-										<p class="Elaina-Update">- Fix some css bug</p>
-										<p class="Elaina-Update">- Fix timer bug</p>
-										<p class="Elaina-Update">- Update utils file</p>
-										<p class="Elaina-Update">- Update Auto queue plugins</p>
-										<p class="Elaina-Update">- Change default settings for new user</p>
-										<p class="Elaina-Update">- Optimizing theme</p>
+										<p class="Elaina-Update">- Add auto honor plugins</p>
+										<p class="Elaina-Update">- Update invite all plugins</p>
+										<p class="Elaina-Update">- Fix plugins settings</p>
+										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update"></p>
 										<p class="Elaina-Update"></p>
 	
 									</lol-uikit-content-block>
