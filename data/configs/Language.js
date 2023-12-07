@@ -134,6 +134,8 @@ const lang = {
         "Check"           : "Check",
         "Valid-username"  : "Valid username",
         "Invalid-username": "Invalid username",
+        "Honor-self-1"    : "You cannot honoring yourself",
+        "Honor-self-2"    : "Seriously? You really want to honor yourself ?",
     },
 
     "VN": {
@@ -261,6 +263,8 @@ const lang = {
         "Check"           : "Kiểm tra",
         "Valid-username"  : "Tên người chơi hợp lệ",
         "Invalid-username": "Tên người chơi không hợp lệ",
+        "Honor-self-1"    : "Bạn không thể tự vinh danh chính mình",
+        "Honor-self-2"    : "Nghiêm túc đó à ? bạn thật sự muốn vinh danh bản thân ?",
     },
 
     "JP": {
@@ -388,6 +392,8 @@ const lang = {
         "Check"           : "Check",
         "Valid-username"  : "Valid username",
         "Invalid-username": "Invalid username",
+        "Honor-self-1"    : "You cannot honoring yourself",
+        "Honor-self-2"    : "Seriously? You really want to honor yourself ?",
     },
 
     "PL": {
@@ -515,6 +521,8 @@ const lang = {
         "Check"           : "Check",
         "Valid-username"  : "Valid username",
         "Invalid-username": "Invalid username",
+        "Honor-self-1"    : "You cannot honoring yourself",
+        "Honor-self-2"    : "Seriously? You really want to honor yourself ?",
     },
 
     "RU": {
@@ -642,6 +650,8 @@ const lang = {
         "Check"           : "Check",
         "Valid-username"  : "Valid username",
         "Invalid-username": "Invalid username",
+        "Honor-self-1"    : "You cannot honoring yourself",
+        "Honor-self-2"    : "Seriously? You really want to honor yourself ?",
     },
 
     "MX": {
@@ -769,6 +779,8 @@ const lang = {
         "Check"           : "Check",
         "Valid-username"  : "Valid username",
         "Invalid-username": "Invalid username",
+        "Honor-self-1"    : "You cannot honoring yourself",
+        "Honor-self-2"    : "Seriously? You really want to honor yourself ?",
     },
 
     "KR": {
@@ -896,6 +908,8 @@ const lang = {
         "Check"           : "Check",
         "Valid-username"  : "Valid username",
         "Invalid-username": "Invalid username",
+        "Honor-self-1"    : "You cannot honoring yourself",
+        "Honor-self-2"    : "Seriously? You really want to honor yourself ?",
     },
 
     "TW": {
@@ -1021,6 +1035,8 @@ const lang = {
         "Check"           : "Check",
         "Valid-username"  : "Valid username",
         "Invalid-username": "Invalid username",
+        "Honor-self-1"    : "You cannot honoring yourself",
+        "Honor-self-2"    : "Seriously? You really want to honor yourself ?",
     },
 
     "CN": {
@@ -1148,6 +1164,8 @@ const lang = {
         "Check"           : "Check",
         "Valid-username"  : "Valid username",
         "Invalid-username": "Invalid username",
+        "Honor-self-1"    : "You cannot honoring yourself",
+        "Honor-self-2"    : "Seriously? You really want to honor yourself ?",
     },
 }
 
