@@ -4,6 +4,12 @@ if (DataStore.get("Enable-Invite-Fr")) {
     if (!DataStore.has("frGroupName")) {
         DataStore.set("frGroupName", 0)
     }
+    if (!DataStore.has("grouplist")) {
+        DataStore.set("grouplist", [])
+    }
+    if (!DataStore.has("friendslist")) {
+        DataStore.set("friendslist", [])
+    }
 
     function routineAddCallback(callback, target) {
         routines.push({ "callback": callback, "targets": target })
@@ -72,8 +78,7 @@ if (DataStore.get("Enable-Invite-Fr")) {
 
             let dropdown = document.createElement("lol-uikit-framed-dropdown")
             dropdown.classList.add("lol-settings-general-dropdown")
-            dropdown.style.marginRight = "10px"
-            dropdown.style.width = "198px"
+            dropdown.style.cssText = "margin-right: 10px; width: 198px;"
 
             for (let i = 0; i < groupList["id"].length; i++) {
                 let el = document.createElement("lol-uikit-dropdown-option")

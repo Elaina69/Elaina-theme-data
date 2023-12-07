@@ -792,6 +792,26 @@ const injectSettings = (panel) => {
          ),
          document.createElement('br'),
          document.createElement('br'),
+         UI.CheckBox(
+            `${selectedLang["NSFW-Content"]}`,'nsfw','nsfwbox',
+            ()=>{
+               let nsfwel = document.getElementById("nsfw")
+               let nsfwbox = document.getElementById("nsfwbox")
+         
+               if (DataStore.get("NSFW-Content")) {
+                  nsfwel.removeAttribute("class")
+                  nsfwbox.checked = false
+                  DataStore.set("NSFW-Content", false)
+               }
+               else {
+                  nsfwel.setAttribute("class", "checked")
+                  nsfwbox.checked = true
+                  DataStore.set("NSFW-Content", true)
+               }
+            }
+         ),
+         document.createElement('br'),
+         document.createElement('br'),
       ])
    )
 }
@@ -849,6 +869,7 @@ window.addEventListener('load', async () => {
                      clearInterval(check)
                      
                      //tickcheck(DataStore.get(""), el, box)
+                     tickcheck(DataStore.get("NSFW-Content"), "nsfw", "nsfwbox")
                      tickcheck(DataStore.get("prevent-manual-update"), "prvtup", "prvtupbox")
                      tickcheck(DataStore.get("hide-theme-usage-time"), "hideusetime", "hideusetimebox")
                      tickcheck(DataStore.get("Custom-Regalia-Banner"), "cusregabnr", "cusregabnrbox")

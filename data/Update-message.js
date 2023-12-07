@@ -1,5 +1,5 @@
 let updateType
-let autoUpdate = true
+let autoUpdate = false
 
 import update from './configs/Version.js'
 import lang from "./configs/Language.js"
@@ -99,15 +99,15 @@ else if (DataStore.get(`Update-${update}`) && !DataStore.get(`Force-Update`)) {
 										<h5>Elaina_V3 - ${updateType} Update ${update}</h5>
 										<hr class="heading-spacer" />
 
-										<p class="Elaina-Update">- Add auto honor plugins</p>
-										<p class="Elaina-Update">- Update invite all plugins</p>
-										<p class="Elaina-Update">- Fix plugins settings</p>
-										<p class="Elaina-Update"></p>
-										<p class="Elaina-Update"></p>
-										<p class="Elaina-Update"></p>
-										<p class="Elaina-Update"></p>
-										<p class="Elaina-Update"></p>
-										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update">- Fix summonerID bug after rito update riotID name</p>
+										<p class="Elaina-Update">- Fix "invite all plugin" bug</p>
+										<p class="Elaina-Update">- Update Css</p>
+										<p class="Elaina-Update">- Update settings</p>
+										<p class="Elaina-Update">- Update translate file (MX)</p>
+										<p class="Elaina-Update">- Update Holiday message</p>
+										<p class="Elaina-Update">- Remove Auto Honor plugin</p>
+										<p class="Elaina-Update">- Update theme's console log</p>
+										<p class="Elaina-Update">- Optimizing theme</p>
 										<p class="Elaina-Update"></p>
 										<p class="Elaina-Update"></p>
 										<p class="Elaina-Update"></p>

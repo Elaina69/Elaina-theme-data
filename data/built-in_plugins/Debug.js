@@ -24,7 +24,6 @@ async function fetch_riotclient_credentials() {
 			}
 		});
 	})
-	console.log(riotclient_auth, riotclient_port)
 }
 
 let debugLogEndpoints = async message => { 

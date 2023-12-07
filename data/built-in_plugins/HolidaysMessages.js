@@ -1,29 +1,37 @@
 import lang from "../configs/Language.js"
 import config from "../configs/Holiday.js"
 
-if(!DataStore.has("Day")) {
+if (!DataStore.has("Day")) {
     DataStore.set("Day", "0/0")
 }
 
 let datapath = new URL("..", import.meta.url).href
 
-let dateObj = new Date();
-let month = dateObj.getUTCMonth() + 1;
-let day = dateObj.getUTCDate();
+let eConsole = "%c ElainaV3 "
+let eCss = "color: #ffffff; background-color: #f77fbe"
+
+let month = new Date().getUTCMonth() + 1;
+let day = new Date().getUTCDate();
 let newdate = day+"/"+month
 
 let message,imageLink,filter
 
+function addData() {
+    message = config[newdate]["Text"]
+    imageLink = `${datapath}assets/Image/${config[newdate]["Image"]}`
+    filter = config[newdate]["filters"]
+    console.log(eConsole+`%c ${message}`,eCss,"")
+    DataStore.set("Day", newdate)
+    DataStore.set("Holiday", true)
+}
+
 if (DataStore.has("Day") && newdate != DataStore.get("Day")) {
     try {
-        if (newdate == config[newdate]["Day"]) {
-            message = config[newdate]["Text"]
-            imageLink = `${datapath}assets/Image/${config[newdate]["Image"]}`
-            filter = config[newdate]["filters"]
-            console.log(message)
-            DataStore.set("Day", newdate)
-            DataStore.set("Holiday", true)
+        if (newdate == config[newdate]["Day"] && !config[newdate]["nsfw"]) addData()
+        else if (newdate == config[newdate]["Day"] && config[newdate]["nsfw"]) {
+            if (DataStore.get("NSFW-Content")) addData()
         }
+        else DataStore.set("Day", newdate)
     }
     catch {DataStore.set("Day", newdate)}
 }
@@ -82,4 +90,4 @@ if (DataStore.get("Holiday")) {
     })
     DataStore.set("Holiday", false)
 }
-console.log(DataStore.get("Day"))
+console.log(eConsole+`%c ${DataStore.get("Day")}`,eCss,"")

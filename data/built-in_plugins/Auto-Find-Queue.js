@@ -18,38 +18,28 @@ queueList["Gamemode"].sort((a, b) => {return a.queueId - b.queueId});
 
 DataStore.set("queueList", queueList)
 
+async function Fecth(data) {
+	await fetch('/lol-lobby/v2/lobby', {
+		method: 'POST',
+		body: JSON.stringify({ queueId: data }),
+		headers: {
+		'Content-Type': 'application/json'
+		}
+	})
+	window.setTimeout(async () => {
+		await fetch('/lol-lobby/v2/lobby/matchmaking/search', {
+			method: 'POST'
+		})
+	},DataStore.get("Find-Delay"))
+}
 let AutoQueue = (node) => {
-    let pagename = node.getAttribute("data-screen-name")
-
-	if (pagename == "rcp-fe-lol-postgame") {
+	if (node.getAttribute("data-screen-name") == "rcp-fe-lol-postgame") {
 		window.setTimeout(async () => {
 			if (DataStore.get("Auto-Find-Queue") && !DataStore.get("aram-only")) {
-				await fetch('/lol-lobby/v2/lobby', {
-					method: 'POST',
-					body: JSON.stringify({ queueId: DataStore.get("Gamemode") }),
-					headers: {
-					'Content-Type': 'application/json'
-					}
-				})
-				window.setTimeout(async () => {
-					await fetch('/lol-lobby/v2/lobby/matchmaking/search', {
-						method: 'POST'
-					})
-				},DataStore.get("Find-Delay"))
+				Fecth(DataStore.get("Gamemode"))
 			}
 			else if (DataStore.get("Auto-Find-Queue") && DataStore.get("aram-only")) {
-				await fetch('/lol-lobby/v2/lobby', {
-					method: 'POST',
-					body: JSON.stringify({ queueId: 450 }),
-					headers: {
-					'Content-Type': 'application/json'
-					}
-				})
-				window.setTimeout(async () => {
-					await fetch('/lol-lobby/v2/lobby/matchmaking/search', {
-						method: 'POST'
-					})
-				},DataStore.get("Find-Delay"))
+				Fecth(450)
 			}
 		},DataStore.get("Create-Delay"))
 	}

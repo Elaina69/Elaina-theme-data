@@ -307,25 +307,6 @@ const injectSettings = (panel) => {
          ),
          document.createElement('br'),
          UI.CheckBox(
-            `${selectedLang["Auto-Honor"]}`,'autoHonor','autoHonorbox',
-            ()=>{
-               let autoHonorel = document.getElementById("autoHonor")
-               let autoHonorbox = document.getElementById("autoHonorbox")
-         
-               if (DataStore.get("Auto-Honor")) {
-                  autoHonorel.removeAttribute("class")
-                  autoHonorbox.checked = false
-                  DataStore.set("Auto-Honor", false)
-               }
-               else {
-                  autoHonorel.setAttribute("class", "checked")
-                  autoHonorbox.checked = true
-                  DataStore.set("Auto-Honor", true)
-               }
-            },true
-         ),
-         document.createElement('br'),
-         UI.CheckBox(
             `${selectedLang["aram-only"]}`, "Aram only", "Aram only checkbox",
             () => {
                let Aramel = document.getElementById("Aram only")
@@ -686,7 +667,6 @@ window.addEventListener('load', async () => {
                      }
                      //tickcheck(DataStore.get(""), el, box)
                      tickcheck(DataStore.get("Enable-Invite-Fr"), 'invfr', "invfrbox")
-                     tickcheck(DataStore.get("Auto-Honor"), "autoHonor", "autoHonorbox")
                      tickcheck(DataStore.get("Debug-mode"), "debug", "debugbox")
                      tickcheck(DataStore.get("Custom-profile-hover"), "cusprf", "cusprfbox")
                      tickcheck(DataStore.get("Custom-mastery-score"), "cusmastery", "cusmasterybox")
