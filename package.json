@@ -4,6 +4,7 @@
   "description": "Data files for ElainaV3 theme",
   "main": "index.js",
   "files": [
+    "cdninit.js",
     "index.js",
     "data"
   ],
