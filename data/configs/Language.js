@@ -136,6 +136,7 @@ const lang = {
         "Invalid-username": "Invalid username",
         "Honor-self-1"    : "You cannot honoring yourself",
         "Honor-self-2"    : "Seriously? You really want to honor yourself ?",
+        'Custom-Gamemode-Icon': "Custom gamemode icon",
     },
 
     "VN": {
@@ -265,6 +266,7 @@ const lang = {
         "Invalid-username": "Tên người chơi không hợp lệ",
         "Honor-self-1"    : "Bạn không thể tự vinh danh chính mình",
         "Honor-self-2"    : "Nghiêm túc đó à ? bạn thật sự muốn vinh danh bản thân ?",
+        'Custom-Gamemode-Icon': "Icon chế độ trận đấu tùy chỉnh",
     },
 
     "JP": {
@@ -394,6 +396,7 @@ const lang = {
         "Invalid-username": "Invalid username",
         "Honor-self-1"    : "You cannot honoring yourself",
         "Honor-self-2"    : "Seriously? You really want to honor yourself ?",
+        'Custom-Gamemode-Icon': "Custom gamemode icon",
     },
 
     "PL": {
@@ -523,6 +526,7 @@ const lang = {
         "Invalid-username": "Invalid username",
         "Honor-self-1"    : "You cannot honoring yourself",
         "Honor-self-2"    : "Seriously? You really want to honor yourself ?",
+        'Custom-Gamemode-Icon': "Custom gamemode icon",
     },
 
     "RU": {
@@ -652,6 +656,7 @@ const lang = {
         "Invalid-username": "Invalid username",
         "Honor-self-1"    : "You cannot honoring yourself",
         "Honor-self-2"    : "Seriously? You really want to honor yourself ?",
+        'Custom-Gamemode-Icon': "Custom gamemode icon",
     },
 
     "MX": {
@@ -781,6 +786,7 @@ const lang = {
         "Invalid-username": "Invalid username",
         "Honor-self-1"    : "You cannot honoring yourself",
         "Honor-self-2"    : "Seriously? You really want to honor yourself ?",
+        'Custom-Gamemode-Icon': "Custom gamemode icon",
     },
 
     "KR": {
@@ -910,6 +916,7 @@ const lang = {
         "Invalid-username": "Invalid username",
         "Honor-self-1"    : "You cannot honoring yourself",
         "Honor-self-2"    : "Seriously? You really want to honor yourself ?",
+        'Custom-Gamemode-Icon': "Custom gamemode icon",
     },
 
     "TW": {
@@ -1037,6 +1044,7 @@ const lang = {
         "Invalid-username": "Invalid username",
         "Honor-self-1"    : "You cannot honoring yourself",
         "Honor-self-2"    : "Seriously? You really want to honor yourself ?",
+        'Custom-Gamemode-Icon': "Custom gamemode icon",
     },
 
     "CN": {
@@ -1166,6 +1174,7 @@ const lang = {
         "Invalid-username": "Invalid username",
         "Honor-self-1"    : "You cannot honoring yourself",
         "Honor-self-2"    : "Seriously? You really want to honor yourself ?",
+        'Custom-Gamemode-Icon': "Custom gamemode icon",
     },
 }
 

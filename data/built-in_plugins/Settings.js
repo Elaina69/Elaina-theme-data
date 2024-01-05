@@ -821,6 +821,7 @@ const themesSettings = (panel) => {
                         }
                     },true
                 ),
+                document.createElement('br'),
                 UI.CheckBox(
                     `${selectedLang['Custom-Gamemode-Icon']}`,'cusgameicon','cusgameiconbox',
                     ()=>{
@@ -839,7 +840,6 @@ const themesSettings = (panel) => {
                         }
                     },true
                 ),
-                document.createElement('br'),
                 document.createElement('br'),
                 UI.CheckBox(
                     `${selectedLang["Custom-Ticker"]}`,'custick','custickbox',
