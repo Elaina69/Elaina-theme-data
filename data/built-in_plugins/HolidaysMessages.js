@@ -1,6 +1,6 @@
 import lang from "../configs/Language.js"
 import config from "../configs/Holiday.js"
-import pandoru from "../configs/pandoru.txt?raw"
+//import pandoru from "../configs/pandoru.txt?raw"
 
 if (!DataStore.has("Day")) {
     DataStore.set("Day", "0/0")
@@ -49,7 +49,7 @@ if (DataStore.has("Day") && newdate != DataStore.get("Day")) {
 }
 
 if (newdate == "25/12" && DataStore.get("Merry-Christmas")){
-    console.log(pandoru)
+    //console.log(pandoru)
 }
 
 if (DataStore.get("Holiday")) {
