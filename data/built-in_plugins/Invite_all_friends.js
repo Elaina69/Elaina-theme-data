@@ -11,6 +11,8 @@ if (DataStore.get("Enable-Invite-Fr")) {
         DataStore.set("friendslist", [])
     }
 
+
+
     function routineAddCallback(callback, target) {
         routines.push({ "callback": callback, "targets": target })
     }
@@ -20,10 +22,18 @@ if (DataStore.get("Enable-Invite-Fr")) {
             let CurrentGroup = document.querySelector("div.lol-social-lower-pane-container .roster-block").querySelectorAll("lol-social-roster-group").length
             let CurrentFriend = document.querySelector("div.lol-social-lower-pane-container .roster-block").querySelectorAll("lol-social-roster-member").length
             if (DataStore.get("grouplist").length != CurrentGroup || DataStore.get("friendslist").length != CurrentFriend) {
-                let LCUfetch_a = await fetch('/lol-chat/v1/friends')
-                let LCUfetch_b = await fetch('/lol-chat/v1/friend-groups')
-                DataStore.set("friendslist", await LCUfetch_a.json())
-                DataStore.set("grouplist", await LCUfetch_b.json())
+                let friends = []
+                let groups = []
+                let a = await (await fetch('/lol-chat/v1/friends')).json()
+                let b = await (await fetch('/lol-chat/v1/friend-groups')).json()
+                for (let i = 0; i < a.length; i++) {
+                    friends.push({"summonerId": a[i]["summonerId"],"groupId": a[i]["groupId"],"availability": a[i]["availability"]})
+                }
+                for (let i = 0; i < b.length; i++) {
+                    groups.push({"id": b[i]["id"],"name": b[i]["name"]})
+                }
+                DataStore.set("friendslist", friends)
+                DataStore.set("grouplist", groups)
             
                 document.getElementById("inviteAllDiv").remove()
                 addInviteAllButton()
@@ -58,7 +68,7 @@ if (DataStore.get("Enable-Invite-Fr")) {
                 })
 
                 for(let i = 0; i < DataStore.get("friendslist").length ; i++) {
-                    let invalidAvail = ["offline",/*"dnd",*/"mobile"]
+                    //let invalidAvail = ["offline","dnd","mobile"]
 
                     if (DataStore.get("frGroupName") == DataStore.get("friendslist")[i]["groupId"]) {
                         let invite = await fetch("/lol-lobby/v2/lobby/invitations",{
@@ -66,7 +76,7 @@ if (DataStore.get("Enable-Invite-Fr")) {
                             headers: {"content-type": "application/json"},
                             body: JSON.stringify([{"toSummonerId": DataStore.get("friendslist")[i]["summonerId"]}])
                         })
-                        if (invite.status == 200 && !invalidAvail.includes(DataStore.get("friendslist")[i]["availability"])) {Invited++}
+                        if (invite.status == 200 /*&& !invalidAvail.includes(DataStore.get("friendslist")[i]["availability"])*/) Invited++
                     }
                 }
 

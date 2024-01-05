@@ -1,6 +1,4 @@
 let datapath = new URL("..", import.meta.url).href
-let eConsole = "%c ElainaV3 "
-let eCss = "color: #ffffff; background-color: #f77fbe"
 
 import lang from "../configs/Language.js"
 

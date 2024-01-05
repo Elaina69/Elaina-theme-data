@@ -1,4 +1,5 @@
 let datapath = new URL("..", import.meta.url).href
+import utils from "../_utils.js";
 import lang from "../configs/Language.js"
 let eConsole = "%c ElainaV3 "
 let eCss = "color: #ffffff; background-color: #f77fbe"
@@ -438,11 +439,20 @@ if (DataStore.get("loot-helper")) {
     
     
     window.addEventListener('load', () => {
-        let NStyle = document.createElement('style');
-		NStyle.appendChild(document.createTextNode(
-			`@import url("${datapath}assets/Css/Addon-Css/LootHelper.css");:root {--OC_button:url("${datapath}assets/Icon/Plugins-icons/button-open-chests.png");--BE_button:url("${datapath}assets/Icon/Plugins-icons/button-blue-essence.png");--BE_hover:url("${datapath}assets/Icon/Plugins-icons/button-blue-essence-hover.png");--BE_active:url("${datapath}assets/Icon/Plugins-icons/button-blue-essence-click.png");--rbutton:url("${datapath}assets/Icon/Plugins-icons/button-refresh.png");--rhover:url("${datapath}assets/Icon/Plugins-icons/button-refresh-hover.png");--ractive:url("${datapath}assets/Icon/Plugins-icons/button-refresh-click.png");--OC_hover:url("${datapath}assets/Icon/Plugins-icons/button-open-chests-hover.png");--OC_active:url("${datapath}assets/Icon/Plugins-icons/button-open-chests-click.png");}`
-		));
-	    document.body.appendChild(NStyle)
+        utils.addStyle(/*css*/`
+            @import url("${datapath}assets/Css/Addon-Css/LootHelper.css");
+            :root {
+                --OC_button:url("${datapath}assets/Icon/Plugins-icons/button-open-chests.png");
+                --BE_button:url("${datapath}assets/Icon/Plugins-icons/button-blue-essence.png");
+                --BE_hover:url("${datapath}assets/Icon/Plugins-icons/button-blue-essence-hover.png");
+                --BE_active:url("${datapath}assets/Icon/Plugins-icons/button-blue-essence-click.png");
+                --rbutton:url("${datapath}assets/Icon/Plugins-icons/button-refresh.png");
+                --rhover:url("${datapath}assets/Icon/Plugins-icons/button-refresh-hover.png");
+                --ractive:url("${datapath}assets/Icon/Plugins-icons/button-refresh-click.png");
+                --OC_hover:url("${datapath}assets/Icon/Plugins-icons/button-open-chests-hover.png");
+                --OC_active:url("${datapath}assets/Icon/Plugins-icons/button-open-chests-click.png");
+            }
+        `)
     
         let create = window.setInterval(async () => {
             if (document.querySelector(".loot-category-information")) {

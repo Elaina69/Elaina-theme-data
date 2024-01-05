@@ -2,8 +2,8 @@ import { jsx, render } from 'https://cdn.jsdelivr.net/npm/nano-jsx/+esm';
 const { default: trans } = await import(window.origin + '/fe/lol-social/trans-player-behavior.json', { assert: { type: 'json' } });
 
 let dateObj = new Date();
-let month = dateObj.getUTCMonth() + 1;
-let day = dateObj.getUTCDate();
+let month = dateObj.getMonth() + 1;
+let day = dateObj.getDate();
 let newdate = day + "/" + month
 
 if (newdate == "1/4" && DataStore.get("April fool` joke")){

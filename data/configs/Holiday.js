@@ -49,8 +49,8 @@ let config = {
         "nsfw"   : false
     },
 
-    // "5/12": {
-    //     "Day"    : "5/12",
+    // "18/12": {
+    //     "Day"    : "18/12",
     //     "Text"   : "Sth to test",
     //     "Image"  : "67987805_p1.jpg",
     //     "filters": "brightness(1.0)",

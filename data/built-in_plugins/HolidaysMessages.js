@@ -1,5 +1,6 @@
 import lang from "../configs/Language.js"
 import config from "../configs/Holiday.js"
+import pandoru from "../configs/pandoru.txt?raw"
 
 if (!DataStore.has("Day")) {
     DataStore.set("Day", "0/0")
@@ -10,8 +11,8 @@ let datapath = new URL("..", import.meta.url).href
 let eConsole = "%c ElainaV3 "
 let eCss = "color: #ffffff; background-color: #f77fbe"
 
-let month = new Date().getUTCMonth() + 1;
-let day = new Date().getUTCDate();
+let month = new Date().getMonth() + 1;
+let day = new Date().getDate();
 let newdate = day+"/"+month
 
 let message,imageLink,filter
@@ -27,13 +28,28 @@ function addData() {
 
 if (DataStore.has("Day") && newdate != DataStore.get("Day")) {
     try {
-        if (newdate == config[newdate]["Day"] && !config[newdate]["nsfw"]) addData()
-        else if (newdate == config[newdate]["Day"] && config[newdate]["nsfw"]) {
-            if (DataStore.get("NSFW-Content")) addData()
+        if (newdate == config[newdate]["Day"]) {
+            if (!config[newdate]["nsfw"]) addData()
+            else if (config[newdate]["nsfw"]) {
+                if (DataStore.get("NSFW-Content")) {
+                    addData()
+                    console.log(eConsole+`%c NSFW content!!`,eCss,"")
+                }
+            }
         }
-        else DataStore.set("Day", newdate)
+        else {
+            console.log(eConsole+`%c Today doesn't have event`,eCss,"")
+            DataStore.set("Day", newdate)
+        }
     }
-    catch {DataStore.set("Day", newdate)}
+    catch {
+        console.log(eConsole+`%c Today doesn't have event`,eCss,"")
+        DataStore.set("Day", newdate)
+    }
+}
+
+if (newdate == "25/12" && DataStore.get("Merry-Christmas")){
+    console.log(pandoru)
 }
 
 if (DataStore.get("Holiday")) {
