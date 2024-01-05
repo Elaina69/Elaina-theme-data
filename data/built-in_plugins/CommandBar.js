@@ -1,4 +1,4 @@
-import pandoru from "../configs/pandoru.txt?raw"
+//import pandoru from "../configs/pandoru.txt?raw"
 
 CommandBar.addAction({
     name: "Show Donate popup",
@@ -31,16 +31,16 @@ CommandBar.addAction({
         },1000)
     }
 })
-CommandBar.addAction({
-    name: "Pandoru",
-    legend: "Pandoru",
-    tags: ["ElainaV3","pandoru"],
-    group: "ElainaV3",
-    hidden: false,
-    perform: () => {
-        console.log(pandoru)
-    }
-})
+// CommandBar.addAction({
+//     name: "Pandoru",
+//     legend: "Pandoru",
+//     tags: ["ElainaV3","pandoru"],
+//     group: "ElainaV3",
+//     hidden: false,
+//     perform: () => {
+//         console.log(pandoru)
+//     }
+// })
 /*
 CommandBar.addAction({
     name: "",
