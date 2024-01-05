@@ -1517,7 +1517,6 @@ window.addEventListener('load', async () => {
                                 tickcheck(DataStore.get("Dev-mode"), "devbutton", "devbuttonbox")
                             }
                             //tickcheck(DataStore.get(""), el, box)
-                            tickcheck(DataStore.get('Custom-Gamemode-Icon'), "cusgameicon", "cusgameiconbox")
                             tickcheck(DataStore.get("Enable-Invite-Fr"), 'invfr', "invfrbox")
                             tickcheck(DataStore.get("Debug-mode"), "debug", "debugbox")
                             tickcheck(DataStore.get("Custom-profile-hover"), "cusprf", "cusprfbox")
@@ -1550,6 +1549,7 @@ window.addEventListener('load', async () => {
                         if (document.getElementById("Info")) {
                             clearInterval(check)
                             //tickcheck(DataStore.get(""), el, box)
+                            tickcheck(DataStore.get('Custom-Gamemode-Icon'), "cusgameicon", "cusgameiconbox")
                             tickcheck(DataStore.get("NSFW-Content"), "nsfw", "nsfwbox")
                             tickcheck(DataStore.get("prevent-manual-update"), "prvtup", "prvtupbox")
                             tickcheck(DataStore.get("hide-theme-usage-time"), "hideusetime", "hideusetimebox")
