@@ -99,24 +99,14 @@ else if (DataStore.get(`Update-${update}`) && !DataStore.get(`Force-Update`)) {
 										<h5>Elaina_V3 - ${updateType} Update ${update}</h5>
 										<hr class="heading-spacer" />
 
-										<p class="Elaina-Update">- Add custom gamemode icon</p>
-										<p class="Elaina-Update">- Add Observer file</p>
-										<p class="Elaina-Update">- Add new custom banner</p>
-										<p class="Elaina-Update">- Add ElainaV3 CommandBar</p>
-										<p class="Elaina-Update">- Add new key combines</p>
-										<p class="Elaina-Update">- Update Utils file</p>
-										<p class="Elaina-Update">- Update css</p>
-										<p class="Elaina-Update">- Update custom banner setting</p>
-										<p class="Elaina-Update">- Update auto queue plugin</p>
-										<p class="Elaina-Update">- Update Custom profile plugin</p>
-										<p class="Elaina-Update">- Update invite all friend plugin</p>
+										<p class="Elaina-Update">- Add backup datastore file</p>
+										<p class="Elaina-Update">- Now can change CDN version manually</p>
 										<p class="Elaina-Update">- Optimizing theme</p>
-										<p class="Elaina-Update">- Fix hextech open background</p>
-										<p class="Elaina-Update">- Testing new easter egg</p>
-										<p class="Elaina-Update">- Rebuild theme for export init function</p>
-										<p class="Elaina-Update">- Fix Datastore issue</p>
-										<p class="Elaina-Update">- Fix wallpaper Elaina1.webm bug</p>
-										<p class="Elaina-Update">- Delete unused files</p>
+										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update"></p>
 										<p class="Elaina-Update"></p>
 	
 									</lol-uikit-content-block>

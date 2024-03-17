@@ -2,10 +2,13 @@ let datapath = new URL("..", import.meta.url).href
 let eConsole = "%c ElainaV3 "
 let eCss = "color: #ffffff; background-color: #f77fbe"
 
+DataStore.set("settingsChangenumber", 0)
+
 import ChampsP from "../configs/ChampionsPrices.js"
 import lang from "../configs/Language.js"
 import utils from "../_utils.js"
-
+import cdnVersion from "../configs/CDNversion-list.js"
+import datastore_list from "../configs/Datastore-default.js"
 
 export function Settings(context) {
     function newSettingsTab(className) {
@@ -153,6 +156,67 @@ export function Settings(context) {
     }))
 }
 
+function writeBackupData() {
+    let keys = Object.keys(datastore_list)
+    let mirage = datastore_list
+    keys.forEach(key => {
+        mirage[key] = DataStore.get(key)
+    })
+    writeBackup(DataStore.get("Summoner-ID"), "datastore.json", JSON.stringify(mirage))
+}
+
+window.writeBackupData = writeBackupData
+
+function restartAfterChange(el, data) {
+    const langCode = document.querySelector("html").lang;
+    const langMap = lang.langlist
+    const selectedLang = lang[langMap[langCode] || "EN"];
+
+    let lastdata = document.getElementById(el).getAttribute("lastdatastore")
+    if (lastdata == JSON.stringify(DataStore.get(data))) {
+        DataStore.set("settingsChangenumber", DataStore.get("settingsChangenumber") + 1)
+    }
+    else {
+        DataStore.set("settingsChangenumber", DataStore.get("settingsChangenumber") - 1)
+    }
+
+    if (!document.querySelector("#restartAfterChangeButton") && DataStore.get("settingsChangenumber") > 0) {
+        let target = document.querySelector(".lol-settings-footer.ember-view")
+        let a = document.createElement("lol-uikit-flat-button-group")
+        let b = document.createElement("lol-uikit-flat-button")
+
+        a.setAttribute("type","window-popup")
+        a.classList.add("lol-settings-close-container")
+        a.style.cssText = "margin-left: 10px"
+        a.id = "restartAfterChangeButton"
+
+        b.classList.add("lol-settings-close-button")
+        b.style.cssText = "width: 150px;"
+        b.textContent = selectedLang["restart-client"]
+        b.id = "restartAfterChange"
+
+        b.addEventListener("click",() => {
+            let keys = Object.keys(datastore_list)
+            let mirage = datastore_list
+            keys.forEach(key => {
+                mirage[key] = DataStore.get(key)
+            })
+            if (DataStore.get("backup-datastore")) writeBackupData()
+            
+            window.setTimeout(()=>{
+                window.restartClient()
+            }, 3000)
+            
+        })
+
+        target.append(a)
+        a.append(b)
+    }
+    else if (DataStore.get("settingsChangenumber") == 0) {
+        document.querySelector("#restartAfterChangeButton").remove()
+    }
+}
+
 const UI = {
     Row: (id, childs) => {
         const row = document.createElement('div')
@@ -218,7 +282,7 @@ const UI = {
         origin.appendChild(searchbox)
         return origin
     },
-    CheckBox: (text, ID, boxID, check, confirm) => {
+    CheckBox: (text, ID, boxID, check, show, datastore_name) => {
         const container = document.createElement("div")
         const origin = document.createElement("lol-uikit-flat-checkbox")
         const checkbox = document.createElement("input")
@@ -227,6 +291,7 @@ const UI = {
 
         origin.setAttribute("class",'')
         origin.id = ID
+        origin.setAttribute("lastDatastore", DataStore.get(datastore_name))
     
         checkbox.type = "checkbox"
         checkbox.id = boxID
@@ -236,7 +301,7 @@ const UI = {
         label.innerHTML = text
         label.setAttribute("slot", "label")
     
-        if (confirm) {
+        if (show) {
             container.appendChild(origin)
             origin.appendChild(checkbox)
             origin.appendChild(label)
@@ -322,11 +387,11 @@ const UI = {
             el.setAttribute("slot", "lol-uikit-dropdown-option")
             el.innerText = opt
             el.onclick = () => {
-                if (DataStore.get("Custom-Font")) {
-                    DataStore.set("CurrentFont", opt)
+                DataStore.set("CurrentFont", opt)
+                try {
                     document.querySelector("#Custom-font").remove()
                     utils.addFont(DataStore.get("Font-folder")+DataStore.get("CurrentFont"),"Custom-font","Custom")
-                }
+                }catch{}
             }
             if (DataStore.get("CurrentFont") == opt) {
                 el.setAttribute("selected", "true")
@@ -357,7 +422,92 @@ const UI = {
         }
         return origin
     },
+    DropdownCDNversion: () => {
+        const origin = document.createElement("div")
+        const dropdown = document.createElement("lol-uikit-framed-dropdown")
+    
+        origin.classList.add("Dropdown-div")
+        dropdown.classList.add("lol-settings-general-dropdown")
+        origin.append(dropdown)
+        for (let i = 0; i < cdnVersion.length; i++) {
+            const opt = cdnVersion[i]
+            const el = document.createElement("lol-uikit-dropdown-option")
+            el.setAttribute("slot", "lol-uikit-dropdown-option")
+            el.innerText = opt
+            el.onclick = () => {
+                DataStore.set("Cdn-version", opt)
+            }
+            if (DataStore.get("Cdn-version") == opt) {
+                el.setAttribute("selected", "true")
+            }
+            dropdown.appendChild(el)
+        }
+        return origin
+    },
+    Contributor: (image,C_name,info) => {
+        const origin = document.createElement("div")
+        const div = document.createElement("div")
+        const img = document.createElement('img')
+        const Name = document.createElement("p")
+        const Info = document.createElement("p")
+
+        origin.append(img)
+        origin.append(div)
+        div.append(Name)
+        div.append(Info)
+
+        origin.id = "Contrib"
+
+        div.style = "margin-left: 10px;"
+
+        img.setAttribute("src", `${datapath}assets/Icon/${image}`)
+        img.classList.add("contributor-img")
+
+        Name.innerText = C_name
+        Name.classList.add('lol-settings-window-size-text')
+        Name.id = "contributor-name"
+
+        Info.classList.add('lol-settings-window-size-text')
+        Info.innerText = info
+        Info.style = "margin: 0px"
+
+        return origin
+    },
+    ImageAndLink: (image, href, onClick) => {
+        const link = document.createElement('a')
+        const img = document.createElement('img')
+
+        img.setAttribute("src", `${datapath}assets/Icon/${image}`)
+        img.classList.add("donate")
+
+        link.target = '_blank'
+        link.href = href
+        link.onclick = onClick || null
+
+        link.append(img)
+
+        return link
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const themesSettings = (panel) => {
     const langCode = document.querySelector("html").lang;
@@ -374,7 +524,6 @@ const themesSettings = (panel) => {
                     UI.Label(
                         `*${selectedLang["note"]}: ${selectedLang["note-1"]}`
                     ),
-                    UI.Button (`${selectedLang["reload-client"]}`,'reload', ()=>{window.restartClient()}),
                 ]),
                 UI.Image("Logo.png", "theme-settings-logo")
             ]),
@@ -384,6 +533,24 @@ const themesSettings = (panel) => {
             UI.Slider(
                 selectedLang["music-volume"],DataStore.get("audio-volume"),"bg-audio","audio-volume"
             ),
+            UI.CheckBox(
+                `${selectedLang["turnoff-audio-ingame"]}`,'offaudio','offaudiobox', ()=>{
+                    let el = document.getElementById("offaudio")
+                    let box = document.getElementById("offaudiobox")
+            
+                    if (DataStore.get("turnoff-audio-ingame")) {
+                        el.removeAttribute("class")
+                        box.checked = false
+                        DataStore.set("turnoff-audio-ingame", false)
+                    }
+                    else {
+                        el.setAttribute("class", "checked")
+                        box.checked = true
+                        DataStore.set("turnoff-audio-ingame", true)
+                    }
+                },true, "turnoff-audio-ingame"
+            ),
+            document.createElement('br'),
             document.createElement('br'),
             UI.CheckBox(
                 `${selectedLang["prevent-manual-update"]}`,'prvtup','prvtupbox',
@@ -405,30 +572,54 @@ const themesSettings = (panel) => {
             ),
             document.createElement('br'),
             UI.CheckBox(
+                `${selectedLang["backup-datastore"]}`,'bakdata','bakdatabox', ()=>{
+                    let el = document.getElementById("bakdata")
+                    let box = document.getElementById("bakdatabox")
+            
+                    if (DataStore.get("backup-datastore")) {
+                        el.removeAttribute("class")
+                        box.checked = false
+                        DataStore.set("backup-datastore", false)
+                        deleteBackup(DataStore.get("Summoner-ID"))
+                    }
+                    else {
+                        el.setAttribute("class", "checked")
+                        box.checked = true
+                        DataStore.set("backup-datastore", true)
+                    }
+                },true
+            ),
+            document.createElement('br'),
+            document.createElement('br'),
+            UI.CheckBox(
                 `${selectedLang["old-prev/next-button"]}`,"oldpnb","oldpnbbox",
                 ()=>{
                     let oldpnbel = document.getElementById("oldpnb")
                     let oldpnbbox = document.getElementById("oldpnbbox")
     
                     if (DataStore.get("old-prev/next-button")) {
-                    oldpnbbox.checked = false
-                    DataStore.set("old-prev/next-button", false)
-                    oldpnbel.removeAttribute("class")
+                        oldpnbbox.checked = false
+                        DataStore.set("old-prev/next-button", false)
+                        oldpnbel.removeAttribute("class")
+                        del_webm_buttons()
+                        create_webm_buttons()
                     }
                     else {
-                    oldpnbbox.checked = true
-                    DataStore.set("old-prev/next-button", true)
-                    oldpnbel.setAttribute("class", "checked")
+                        oldpnbbox.checked = true
+                        DataStore.set("old-prev/next-button", true)
+                        oldpnbel.setAttribute("class", "checked")
+                        del_webm_buttons()
+                        create_webm_buttons()
                     }
                 },true
             ),
             document.createElement('br'),
             UI.CheckBox(
-                `${selectedLang["sidebar-transparent"]}`,'sbt','sbtbox',
+                `${selectedLang["sidebar-transparent"]}`,'sbt','sbtbox', 
                 ()=>{
                     let sbtel = document.getElementById("sbt")
                     let sbtbox = document.getElementById("sbtbox")
-    
+                    restartAfterChange("sbt", "Sidebar-Transparent")
                     if (DataStore.get("Sidebar-Transparent")) {
                     sbtbox.checked = false
                     DataStore.set("Sidebar-Transparent", false)
@@ -439,12 +630,13 @@ const themesSettings = (panel) => {
                     DataStore.set("Sidebar-Transparent", true)
                     sbtel.setAttribute("class", "checked")
                     }
-                },true
+                },true, "Sidebar-Transparent"
             ),
             document.createElement('br'),
             UI.CheckBox(
                 `${selectedLang["settings-dialogs-transparent"]}`,'stdiat','stdiatbox',
                 ()=>{
+                    restartAfterChange("stdiat","settings-dialogs-transparent")
                     let stdiatel = document.getElementById("stdiat")
                     let stdiatbox = document.getElementById("stdiatbox")
     
@@ -458,12 +650,13 @@ const themesSettings = (panel) => {
                     DataStore.set("settings-dialogs-transparent", true)
                     stdiatel.setAttribute("class", "checked")
                     }
-                },true
+                },true, "settings-dialogs-transparent"
             ),
             document.createElement('br'),
             UI.CheckBox(
                 `${selectedLang["hide-champions-splash-art"]}`,'hidechampart','hidechampartbox',
                 ()=>{
+                    restartAfterChange('hidechampart', "Hide-Champions-Splash-Art")
                     let hidechampartel = document.getElementById("hidechampart")
                     let hidechampartbox = document.getElementById("hidechampartbox")
     
@@ -477,12 +670,13 @@ const themesSettings = (panel) => {
                     DataStore.set("Hide-Champions-Splash-Art", true)
                     hidechampartel.setAttribute("class", "checked")
                     }
-                },true
+                },true, "Hide-Champions-Splash-Art"
             ),
             document.createElement('br'),
             UI.CheckBox(
                 `${selectedLang["hide-vertical-lines"]}`,"hidevl","hidevlbox",
                 ()=>{
+                    restartAfterChange("hidevl", "hide-vertical-lines")
                     let hidevlel = document.getElementById("hidevl")
                     let hidevlbox = document.getElementById("hidevlbox")
     
@@ -496,7 +690,7 @@ const themesSettings = (panel) => {
                     DataStore.set("hide-vertical-lines", true)
                     hidevlel.setAttribute("class", "checked")
                     }
-                },true
+                },true, "hide-vertical-lines"
             ),
             document.createElement('br'),
             UI.CheckBox(
@@ -529,6 +723,7 @@ const themesSettings = (panel) => {
                         ()=>{
                             let cusrpel = document.getElementById("cusrp")
                             let cusrpbox = document.getElementById("cusrpbox")
+                            restartAfterChange('cusrp', "Custom_RP")
             
                             if (DataStore.get("Custom_RP")) {
                                 cusrpbox.checked = false
@@ -540,7 +735,7 @@ const themesSettings = (panel) => {
                                 DataStore.set("Custom_RP", true)
                                 cusrpel.setAttribute("class", "checked")
                             }
-                        },true
+                        },true, "Custom_RP"
                     ),
                     document.createElement('br'),
                     UI.Input("RP-data")
@@ -551,6 +746,7 @@ const themesSettings = (panel) => {
                         ()=>{
                             let cusbeel = document.getElementById("cusbe")
                             let cusbebox = document.getElementById("cusbebox")
+                            restartAfterChange('cusbe', "Custom_BE")
             
                             if (DataStore.get("Custom_BE")) {
                                 cusbebox.checked = false
@@ -562,7 +758,7 @@ const themesSettings = (panel) => {
                                 DataStore.set("Custom_BE", true)
                                 cusbeel.setAttribute("class", "checked")
                             }
-                        },true
+                        },true, "Custom_BE"
                     ),
                     document.createElement('br'),
                     UI.Input("BE")
@@ -572,6 +768,7 @@ const themesSettings = (panel) => {
             UI.CheckBox(
                 `${selectedLang["custom-rank-name"]}`,'cusrankname','cusranknamebox',
                 ()=>{
+                    restartAfterChange('cusrankname', "Custom-Rank-Name")
                     let cusranknameel = document.getElementById("cusrankname")
                     let cusranknamebox = document.getElementById("cusranknamebox")
     
@@ -585,7 +782,7 @@ const themesSettings = (panel) => {
                     DataStore.set("Custom-Rank-Name", true)
                     cusranknameel.setAttribute("class", "checked")
                     }
-                },true
+                },true, "Custom-Rank-Name"
             ),
             document.createElement('br'),
             UI.Input("Rank-line1"),
@@ -613,6 +810,7 @@ const themesSettings = (panel) => {
             UI.CheckBox(
                 `${selectedLang["custom-icon"]}`,'cusicon','cusiconbox',
                 ()=>{
+                    restartAfterChange('cusicon', "Custom-Icon")
                     let cusiconel = document.getElementById("cusicon")
                     let cusiconbox = document.getElementById("cusiconbox")
     
@@ -626,13 +824,14 @@ const themesSettings = (panel) => {
                     DataStore.set("Custom-Icon", true)
                     cusiconel.setAttribute("class", "checked")
                     }
-                },true
+                },true, "Custom-Icon"
             ),
             document.createElement('br'),
             UI.Row("Custom-icon-list",[
                 UI.CheckBox(
                     `${selectedLang["custom-avatar"]}`,'cusav','cusavbox',
                     ()=>{
+                        restartAfterChange('cusav', "Custom-Avatar")
                         let cusavel = document.getElementById("cusav")
                         let cusavbox = document.getElementById("cusavbox")
             
@@ -646,12 +845,13 @@ const themesSettings = (panel) => {
                             DataStore.set("Custom-Avatar", true)
                             cusavel.setAttribute("class", "checked")
                         }
-                    },true
+                    },true, "Custom-Avatar"
                 ),
                 document.createElement('br'),
                 UI.CheckBox(
                     `${selectedLang["Custom-Border"]}`,'cusbor','cusborbox',
                     ()=>{
+                        restartAfterChange('cusbor', "Custom-Border")
                         let cusborel = document.getElementById("cusbor")
                         let cusborbox = document.getElementById("cusborbox")
             
@@ -665,12 +865,13 @@ const themesSettings = (panel) => {
                             DataStore.set("Custom-Border", true)
                             cusborel.setAttribute("class", "checked")
                         }
-                    },true
+                    },true, "Custom-Border"
                 ),
                 document.createElement('br'),
                 UI.CheckBox(
                     `${selectedLang["Custom-Regalia-Banner"]}`,'cusregabnr','cusregabnrbox',
                     ()=>{
+                        restartAfterChange('cusregabnr', "Custom-Regalia-Banner")
                         let cusregabnrel = document.getElementById("cusregabnr")
                         let cusregabnrbox = document.getElementById("cusregabnrbox")
             
@@ -684,7 +885,7 @@ const themesSettings = (panel) => {
                             DataStore.set("Custom-Regalia-Banner", true)
                             cusregabnrel.setAttribute("class", "checked")
                         }
-                    },true
+                    },true, "Custom-Regalia-Banner"
                 ),
                 document.createElement('br'),
                 UI.DropdownCustomBanner(),
@@ -692,6 +893,7 @@ const themesSettings = (panel) => {
                 UI.CheckBox(
                     `${selectedLang["Custom-Hover-card-backdrop"]}`,'cushvbdrop','cushvbdropbox',
                     ()=>{
+                        restartAfterChange('cushvbdrop', "Custom-Hover-card-backdrop")
                         let cushvbdropel = document.getElementById("cushvbdrop")
                         let cushvbdropbox = document.getElementById("cushvbdropbox")
             
@@ -705,12 +907,13 @@ const themesSettings = (panel) => {
                             DataStore.set("Custom-Hover-card-backdrop", true)
                             cushvbdropel.setAttribute("class", "checked")
                         }
-                    },true
+                    },true, "Custom-Hover-card-backdrop"
                 ),
                 document.createElement('br'),
                 UI.CheckBox(
                     `${selectedLang["Custom-RP-Icon"]}`,'cusrpi','cusrpibox',
                     ()=>{
+                        restartAfterChange('cusrpi', "Custom-RP-Icon")
                         let cusrpiel = document.getElementById("cusrpi")
                         let cusrpibox = document.getElementById("cusrpibox")
             
@@ -724,12 +927,13 @@ const themesSettings = (panel) => {
                             DataStore.set("Custom-RP-Icon", true)
                             cusrpiel.setAttribute("class", "checked")
                         }
-                    },true
+                    },true, "Custom-RP-Icon"
                 ),
                 document.createElement('br'),
                 UI.CheckBox(
                     `${selectedLang["Custom-BE-Icon"]}`,'cusbei','cusbeibox',
                     ()=>{
+                        restartAfterChange('cusbei', "Custom-BE-Icon")
                         let cusbeiel = document.getElementById("cusbei")
                         let cusbeibox = document.getElementById("cusbeibox")
             
@@ -743,12 +947,13 @@ const themesSettings = (panel) => {
                             DataStore.set("Custom-BE-Icon", true)
                             cusbeiel.setAttribute("class", "checked")
                         }
-                    },true
+                    },true, "Custom-BE-Icon"
                 ),
                 document.createElement('br'),
                 UI.CheckBox(
                     `${selectedLang["Custom-Rank-Icon"]}`,'cusranki','cusrankibox',
                     ()=>{
+                        restartAfterChange('cusranki', "Custom-Rank-Icon")
                         let cusrankiel = document.getElementById("cusranki")
                         let cusrankibox = document.getElementById("cusrankibox")
             
@@ -762,12 +967,13 @@ const themesSettings = (panel) => {
                             DataStore.set("Custom-Rank-Icon", true)
                             cusrankiel.setAttribute("class", "checked")
                         }
-                    },true
+                    },true, "Custom-Rank-Icon"
                 ),
                 document.createElement('br'),
                 UI.CheckBox(
                     `${selectedLang["Custom-Emblem"]}`,'cusemi','cusemibox',
                     ()=>{
+                        restartAfterChange('cusemi',"Custom-Emblem")
                         let cusemiel = document.getElementById("cusemi")
                         let cusemibox = document.getElementById("cusemibox")
             
@@ -781,12 +987,13 @@ const themesSettings = (panel) => {
                             DataStore.set("Custom-Emblem", true)
                             cusemiel.setAttribute("class", "checked")
                         }
-                    },true
+                    },true, "Custom-Emblem"
                 ),
                 document.createElement('br'),
                 UI.CheckBox(
                     `${selectedLang["Custom-Clash-banner"]}`,'cusclassb','cusclassbbox',
                     ()=>{
+                        restartAfterChange('cusclassb', "Custom-Clash-banner")
                         let cusclassbel = document.getElementById("cusclassb")
                         let cusclassbbox = document.getElementById("cusclassbbox")
             
@@ -800,12 +1007,13 @@ const themesSettings = (panel) => {
                             DataStore.set("Custom-Clash-banner", true)
                             cusclassbel.setAttribute("class", "checked")
                         }
-                    },true
+                    },true, "Custom-Clash-banner"
                 ),
                 document.createElement('br'),
                 UI.CheckBox(
                     `${selectedLang["Custom-Trophy"]}`,'custrophy','custrophybox',
                     ()=>{
+                        restartAfterChange('custrophy', "Custom-Trophy")
                         let custrophyel = document.getElementById("custrophy")
                         let custrophybox = document.getElementById("custrophybox")
             
@@ -819,12 +1027,13 @@ const themesSettings = (panel) => {
                             DataStore.set("Custom-Trophy", true)
                             custrophyel.setAttribute("class", "checked")
                         }
-                    },true
+                    },true, "Custom-Trophy"
                 ),
                 document.createElement('br'),
                 UI.CheckBox(
                     `${selectedLang['Custom-Gamemode-Icon']}`,'cusgameicon','cusgameiconbox',
                     ()=>{
+                        restartAfterChange('cusgameicon', 'Custom-Gamemode-Icon')
                         let cusgameiconel = document.getElementById("cusgameicon")
                         let cusgameiconbox = document.getElementById("cusgameiconbox")
             
@@ -838,12 +1047,13 @@ const themesSettings = (panel) => {
                             DataStore.set('Custom-Gamemode-Icon', true)
                             cusgameiconel.setAttribute("class", "checked")
                         }
-                    },true
+                    },true, 'Custom-Gamemode-Icon'
                 ),
                 document.createElement('br'),
                 UI.CheckBox(
                     `${selectedLang["Custom-Ticker"]}`,'custick','custickbox',
                     ()=>{
+                        restartAfterChange('custick', "Custom-Ticker")
                         let custickel = document.getElementById("custick")
                         let custickbox = document.getElementById("custickbox")
             
@@ -857,13 +1067,14 @@ const themesSettings = (panel) => {
                             DataStore.set("Custom-Ticker", true)
                             custickel.setAttribute("class", "checked")
                         }
-                    },true
+                    },true, "Custom-Ticker"
                 ),
                 document.createElement('br')
             ]),
             UI.CheckBox(
                 `${selectedLang["custom-runes-bg"]}`,'rsbg','rsbgbox',
                 ()=>{
+                    restartAfterChange('rsbg', "Runes-BG")
                     let rsbgel = document.getElementById("rsbg")
                     let rsbgbox = document.getElementById("rsbgbox")
     
@@ -877,7 +1088,7 @@ const themesSettings = (panel) => {
                     DataStore.set("Runes-BG", true)
                     rsbgel.setAttribute("class", "checked")
                     }
-                },true
+                },true, "Runes-BG"
             ),
             document.createElement('br'),
             /*UI.CheckBox(
@@ -931,11 +1142,13 @@ const themesSettings = (panel) => {
                     hideovertabbox.checked = false
                     DataStore.set("hide-overview", false)
                     hideovertabel.removeAttribute("class")
+                    applyShowtab()
                     }
                     else {
                     hideovertabbox.checked = true
                     DataStore.set("hide-overview", true)
                     hideovertabel.setAttribute("class", "checked")
+                    applyHidetab()
                     }
                 },true
             ),
@@ -950,11 +1163,13 @@ const themesSettings = (panel) => {
                     hidemerchtabbox.checked = false
                     DataStore.set("hide-merch", false)
                     hidemerchtabel.removeAttribute("class")
+                    applyShowtab()
                     }
                     else {
                     hidemerchtabbox.checked = true
                     DataStore.set("hide-merch", true)
                     hidemerchtabel.setAttribute("class", "checked")
+                    applyHidetab()
                     }
                 },true
             ),
@@ -969,11 +1184,13 @@ const themesSettings = (panel) => {
                     hidepnbox.checked = false
                     DataStore.set("hide-patch-note", false)
                     hidepnel.removeAttribute("class")
+                    applyShowtab()
                     }
                     else {
                     hidepnbox.checked = true
                     DataStore.set("hide-patch-note", true)
                     hidepnel.setAttribute("class", "checked")
+                    applyHidetab()
                     }
                 },true
             ),
@@ -988,11 +1205,13 @@ const themesSettings = (panel) => {
                     hideesptabbox.checked = false
                     DataStore.set("hide-esport", false)
                     hideesptabel.removeAttribute("class")
+                    applyShowtab()
                     }
                     else {
                     hideesptabbox.checked = true
                     DataStore.set("hide-esport", true)
                     hideesptabel.setAttribute("class", "checked")
+                    applyHidetab()
                     }
                 },true
             ),
@@ -1018,9 +1237,50 @@ const themesSettings = (panel) => {
             ),
             document.createElement('br'),
             document.createElement('br'),
+            UI.CheckBox(
+                `${selectedLang["Change-CDN-version"]}`,'cdnver','cdnverbox', ()=>{
+                    let cdnverel = document.getElementById("cdnver")
+                    let cdnverbox = document.getElementById("cdnverbox")
+                    restartAfterChange('cdnver', "Change-CDN-version")
+                
+                    if (DataStore.get("Change-CDN-version")) {
+                        cdnverel.removeAttribute("class")
+                        cdnverbox.checked = false
+                        DataStore.set("Change-CDN-version", false)
+                    }
+                    else {
+                        cdnverel.setAttribute("class", "checked")
+                        cdnverbox.checked = true
+                        DataStore.set("Change-CDN-version", true)
+                    }
+                },true,"Change-CDN-version"
+            ),
+            document.createElement('br'),
+            UI.DropdownCDNversion(),
+            document.createElement('br'),
         ])
     )
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const pluginsSettings = (panel) => {
     const langCode = document.querySelector("html").lang;
     const langMap = lang.langlist
@@ -1080,7 +1340,6 @@ const pluginsSettings = (panel) => {
                     UI.Label(
                     `*${selectedLang["note"]}: ${selectedLang["note-1"]}`
                     ),
-                    UI.Button (`${selectedLang["reload-client"]}`,'reload', ()=>{window.restartClient()}),
                 ]),
                 UI.Image("Logo.png", "plugins-settings-logo")
             ]),
@@ -1090,6 +1349,7 @@ const pluginsSettings = (panel) => {
             UI.CheckBox(
                 `${selectedLang["old-ll-settings"]}`,'oldll','oldllbox',
                 ()=>{
+                    restartAfterChange('oldll',"Old-League-Loader-Settings")
                     let oldllel = document.getElementById("oldll")
                     let oldllbox = document.getElementById("oldllbox")
     
@@ -1103,27 +1363,28 @@ const pluginsSettings = (panel) => {
                     DataStore.set("Old-League-Loader-Settings", true)
                     oldllel.setAttribute("class", "checked")
                     }
-                },true
+                },true,"Old-League-Loader-Settings"
             ),
             document.createElement('br'),
             UI.Row("loothelp",[
                 UI.CheckBox(
                     `${selectedLang["loot-helper"]}`,'lh','lhbox',
                     ()=>{
-                    let lhel = document.getElementById("lh")
-                    let lhbox = document.getElementById("lhbox")
-    
-                    if (DataStore.get("loot-helper")) {
-                        lhbox.checked = false
-                        DataStore.set("loot-helper", false)
-                        lhel.removeAttribute("class")
-                    }
-                    else {
-                        lhbox.checked = true
-                        DataStore.set("loot-helper", true)
-                        lhel.setAttribute("class", "checked")
-                    }
-                    },true
+                        restartAfterChange('lh', "loot-helper")
+                        let lhel = document.getElementById("lh")
+                        let lhbox = document.getElementById("lhbox")
+        
+                        if (DataStore.get("loot-helper")) {
+                            lhbox.checked = false
+                            DataStore.set("loot-helper", false)
+                            lhel.removeAttribute("class")
+                        }
+                        else {
+                            lhbox.checked = true
+                            DataStore.set("loot-helper", true)
+                            lhel.setAttribute("class", "checked")
+                        }
+                    },true, "loot-helper"
                 )
             ]),
             UI.CheckBox(
@@ -1136,6 +1397,7 @@ const pluginsSettings = (panel) => {
                     autoacceptbuttonel.removeAttribute("class")
                     autoacceptbuttonbox.checked = false
                     DataStore.set("auto_accept_button", false)
+                    document.getElementById("autoAcceptQueueButton").remove()
                     }
                     else {
                     autoacceptbuttonel.setAttribute("class", "checked")
@@ -1167,6 +1429,7 @@ const pluginsSettings = (panel) => {
             UI.CheckBox(
                 `${selectedLang["aram-only"]}`, "Aram only", "Aram only checkbox",
                 () => {
+                    restartAfterChange("Aram only", "aram-only")
                     let Aramel = document.getElementById("Aram only")
                     let Arambox = document.getElementById("Aram only checkbox")
     
@@ -1180,7 +1443,7 @@ const pluginsSettings = (panel) => {
                     DataStore.set("aram-only", true)
                     Aramel.setAttribute("class", "checked")
                     }
-                },true
+                },true, "aram-only"
             ),
             document.createElement('br'),
             UI.Row("j1_4",[
@@ -1249,6 +1512,7 @@ const pluginsSettings = (panel) => {
             UI.CheckBox(
                 `${selectedLang["auto-find-queue"]}`,'autoq','autoqbox',
                 ()=>{
+                    restartAfterChange('autoq', "Auto-Find-Queue")
                     let autoqel = document.getElementById("autoq")
                     let autoqbox = document.getElementById("autoqbox")
     
@@ -1262,7 +1526,7 @@ const pluginsSettings = (panel) => {
                     DataStore.set("Auto-Find-Queue", true)
                     autoqel.setAttribute("class", "checked")
                     }
-                },true
+                },true, "Auto-Find-Queue"
             ),
             UI.Row("Q-Delay",[
                 UI.Row("Create-Delay",[
@@ -1280,6 +1544,7 @@ const pluginsSettings = (panel) => {
             UI.CheckBox(
                 `${selectedLang["Custom-profile-hover"]}`,'cusprf','cusprfbox',
                 ()=>{
+                    restartAfterChange('cusprf', "Custom-profile-hover")
                     let cusprfel = document.getElementById("cusprf")
                     let cusprfbox = document.getElementById("cusprfbox")
             
@@ -1293,27 +1558,28 @@ const pluginsSettings = (panel) => {
                     cusprfbox.checked = true
                     DataStore.set("Custom-profile-hover", true)
                     }
-                },true
+                },true, "Custom-profile-hover"
             ),
             document.createElement('br'),
             UI.Row("customprf", [
                 UI.CheckBox(
                     `${selectedLang["Custom-mastery-score"]}`,'cusmastery','cusmasterybox',
                     ()=>{
-                    let cusmasteryel = document.getElementById("cusmastery")
-                    let cusmasterybox = document.getElementById("cusmasterybox")
-                
-                    if (DataStore.get("Custom-mastery-score")) {
-                        cusmasteryel.removeAttribute("class")
-                        cusmasterybox.checked = false
-                        DataStore.set("Custom-mastery-score", false)
-                    }
-                    else {
-                        cusmasteryel.setAttribute("class", "checked")
-                        cusmasterybox.checked = true
-                        DataStore.set("Custom-mastery-score", true)
-                    }
-                    },true
+                        restartAfterChange('cusmastery', "Custom-mastery-score")
+                        let cusmasteryel = document.getElementById("cusmastery")
+                        let cusmasterybox = document.getElementById("cusmasterybox")
+                    
+                        if (DataStore.get("Custom-mastery-score")) {
+                            cusmasteryel.removeAttribute("class")
+                            cusmasterybox.checked = false
+                            DataStore.set("Custom-mastery-score", false)
+                        }
+                        else {
+                            cusmasteryel.setAttribute("class", "checked")
+                            cusmasterybox.checked = true
+                            DataStore.set("Custom-mastery-score", true)
+                        }
+                    },true, "Custom-mastery-score"
                 ),
                 document.createElement('br'),
                 UI.Input("Mastery-Score"),
@@ -1321,6 +1587,7 @@ const pluginsSettings = (panel) => {
                 UI.CheckBox(
                     `${selectedLang["custom-rank-hover"]}`,'cusrankhover','cusrankhoverbox',
                     ()=>{
+                        restartAfterChange('cusrankhover', "Custom-rank")
                     let cusrankhoverel = document.getElementById("cusrankhover")
                     let cusrankhoverbox = document.getElementById("cusrankhoverbox")
     
@@ -1334,7 +1601,7 @@ const pluginsSettings = (panel) => {
                         DataStore.set("Custom-rank", true)
                         cusrankhoverel.setAttribute("class", "checked")
                     }
-                    },true
+                    },true, "Custom-rank"
                 ),
                 document.createElement('br'),
                 UI.Dropdown(rank, "Ranked Queue ID", `${selectedLang["Ranked Queue"]}`, "name", "id"),
@@ -1347,6 +1614,7 @@ const pluginsSettings = (panel) => {
                 UI.CheckBox(
                     `${selectedLang["Custom-challenge-crystal"]}`,'cuschalcry','cuschalcrybox',
                     ()=>{
+                        restartAfterChange('cuschalcry',"Custom-challenge-crystal")
                     let cuschalcryel = document.getElementById("cuschalcry")
                     let cuschalcrybox = document.getElementById("cuschalcrybox")
                 
@@ -1360,7 +1628,7 @@ const pluginsSettings = (panel) => {
                         cuschalcrybox.checked = true
                         DataStore.set("Custom-challenge-crystal", true)
                     }
-                    },true
+                    },true,"Custom-challenge-crystal"
                 ),
                 document.createElement('br'),
                 UI.Dropdown(Challengerank, "challengeCrystalLevel", `${selectedLang["challenge-rank"]}`, "name", "id"),
@@ -1370,6 +1638,7 @@ const pluginsSettings = (panel) => {
                 UI.CheckBox(
                     `${selectedLang["custom-status"]}`,'cussta','cusstabox',
                     ()=>{
+                        restartAfterChange('cussta',"Custom-Status")
                     let cusstael = document.getElementById("cussta")
                     let cusstabox = document.getElementById("cusstabox")
     
@@ -1383,7 +1652,7 @@ const pluginsSettings = (panel) => {
                         DataStore.set("Custom-Status", true)
                         cusstael.setAttribute("class", "checked")
                     }
-                    },true
+                    },true,"Custom-Status"
                 ),
                 UI.Label(`${selectedLang["status-delay"]}`),
                 UI.Input("status-delay"),
@@ -1392,6 +1661,7 @@ const pluginsSettings = (panel) => {
                 UI.CheckBox(
                     `${selectedLang["name-spoofer"]}`,'namespf','namespfbox',
                     ()=>{
+                        restartAfterChange('namespf',"Name-Spoofer")
                     let namespfel = document.getElementById("namespf")
                     let namespfbox = document.getElementById("namespfbox")
     
@@ -1405,7 +1675,7 @@ const pluginsSettings = (panel) => {
                         DataStore.set("Name-Spoofer", true)
                         namespfel.setAttribute("class", "checked")
                     }
-                    },true
+                    },true,"Name-Spoofer"
                 ),
                 document.createElement('br'),
                 UI.Input("Spoof-name"),
@@ -1413,6 +1683,7 @@ const pluginsSettings = (panel) => {
             UI.CheckBox(
                 `${selectedLang["Debug-mode"]}`,'debug','debugbox',
                 ()=>{
+                    restartAfterChange('debug',"Debug-mode")
                     let debugel = document.getElementById("debug")
                     let debugbox = document.getElementById("debugbox")
             
@@ -1426,11 +1697,12 @@ const pluginsSettings = (panel) => {
                     debugbox.checked = true
                     DataStore.set("Debug-mode", true)
                     }
-                },true
+                },true,"Debug-mode"
             ),
             document.createElement('br'),
             UI.CheckBox(
                 `${selectedLang["Developer-Mode"]}`,'devbutton','devbuttonbox', ()=>{
+                    restartAfterChange('devbutton',"Dev-mode")
                     let devbuttonel = document.getElementById("devbutton")
                     let devbuttonbox = document.getElementById("devbuttonbox")
             
@@ -1445,29 +1717,107 @@ const pluginsSettings = (panel) => {
                         DataStore.set("Dev-mode", true)
                         window.alert("You just turned on developer mode \nIf you are not a developer, please turn it off right now \nOtherwise the whole theme will not work properly")
                     }
-                },DataStore.get("Dev-button")
+                },DataStore.get("Dev-button"),"Dev-mode"
             ),
             document.createElement('br'),
         ])
     )
 }
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const aboutustab = (panel) => {
+    panel.prepend(
+        UI.Row("",[
+            UI.Row("Developer",[
+                UI.Row("dev-avatar",[
+                    UI.Row("dev-div",[
+                        UI.Image("About-Us/ElainaDaCatto.png", "dev_ava"),
+                        UI.Label("Elaina Da Catto", "first_line_p"),
+                        UI.Label("Main Developer")
+                    ]),
+                    UI.Row("dev-div",[
+                        UI.Image("About-Us/Lyfhael.webp", "dev_ava"),
+                        UI.Label("Lyfhael", "first_line_b"),
+                        UI.Label("Co-Founder")
+                    ]),
+                ]),
+            ]),
+            UI.Label("Contributors:","contributors"),
+            UI.Row("Contributors-row",[
+                UI.Contributor("About-Us/Nomi.png","Nomi-san","Support, Plugins provider"),
+                UI.Contributor("About-Us/BakaFT.png","BakaFT","Support, Translator"),
+            ]),
+            UI.Row("Contributors-row",[
+                UI.Contributor("About-Us/Sarah.png","Sarah Engel","Support, Plugins provider"),
+                UI.Contributor("About-Us/Soulmare.png","Soulmare","Support, Translator"),
+            ]),
+            UI.Row("Contributors-row",[
+                UI.Contributor("About-Us/balaclava.png","Balaclava","Plugins provider"),
+                UI.Contributor("About-Us/DmitryFisk.png","DmitryFisk","Plugins provider"),
+            ]),
+            UI.Row("Contributors-row",[
+                UI.Contributor("About-Us/Legnatbird.png","Legnatbird","Support, Translator"),
+                UI.Contributor("About-Us/Flirip.png","Flirip","Translator"),
+            ]),
+            UI.Row("Donation-row",[
+                UI.Contributor("About-Us/unproductive.webp","unproductive","Support, Plugins provider"),
+                UI.Contributor("About-Us/Rumi.webp","Rumi","Support"),
+            ]),
+            /*
+            UI.Row("Contributors-row",[
+                UI.Contributor("About-Us/","",""),
+                UI.Contributor("About-Us/","",""),
+            ]),
+            */
+            document.createElement("br"),
+            UI.Row("Donation",[
+                UI.Label("Thanks for using Elaina-V3 :3","first_line"),
+                UI.Label("If you love ElainaV3, you can support me by sharing this theme to your friend"),
+                UI.Label("or donating me"),
+                UI.Row("Donation-row",[
+                    UI.ImageAndLink("ko-fi.webp","https://ko-fi.com/elainadacatto"),
+                    UI.ImageAndLink("momo.svg", "https://me.momo.vn/elainadacatto"),
+                ])
+            ])
+        ])
+    )
+}
+
 /*
 UI.CheckBox(
     `${selectedLang[""]}`,'','box', ()=>{
-    let el = document.getElementById("")
-    let box = document.getElementById("box")
+        restartAfterChange(,)
+        let el = document.getElementById("")
+        let box = document.getElementById("box")
 
-    if (DataStore.get("")) {
-        el.removeAttribute("class")
-        box.checked = false
-        DataStore.set("", false)
-    }
-    else {
-        el.setAttribute("class", "checked")
-        box.checked = true
-        DataStore.set("", true)
-    }
+        if (DataStore.get("")) {
+            el.removeAttribute("class")
+            box.checked = false
+            DataStore.set("", false)
+        }
+        else {
+            el.setAttribute("class", "checked")
+            box.checked = true
+            DataStore.set("", true)
+        }
     },true
 ),
 document.createElement('br'),
@@ -1482,73 +1832,33 @@ window.addEventListener('load', async () => {
         catch{}
     }
     function tickcheck (Data, el, checkbox) {
-        let element = document.getElementById(el)
-        let box = document.getElementById(checkbox)
-        if (Data && element.getAttribute("class") == "") {
-            box.checked = true
+        try {
+            let element = document.getElementById(el)
+            let box = document.getElementById(checkbox)
+            if (Data && element.getAttribute("class") == "") {
+                box.checked = true
+            }
         }
+        catch{ console.error(eConsole+`%c Can't find target's class`,eCss,"") }
     }
     const interval = setInterval(() => {
         const manager = document.getElementById('lol-uikit-layer-manager-wrapper')
         if (manager) {
             clearInterval(interval)
             new MutationObserver((mutations) => {
-                const panel = document.querySelector('div.lol-settings-options > lol-uikit-scrollable.plugins_settings')
-                if (panel && mutations.some((record) => Array.from(record.addedNodes).includes(panel))) {
-                    pluginsSettings(panel)
-                    let check = setInterval (()=>{
-                        if (document.getElementById("Info")) {
-                            clearInterval(check)
-                            try {
-                                let origin = document.querySelector(".plugins-settings-logo")
-                                origin.addEventListener("click", ()=> {
-                                    DataStore.set(`${"Active-dev-button"}`, DataStore.get(`${"Active-dev-button"}`) + 1)
-                                    if (DataStore.get(`${"Active-dev-button"}`) == 20) {
-                                        DataStore.set(`${"Dev-button"}`, true)
-                                        console.log(eConsole+"%c Developer mode button has appeared !",eCss,"")
-                                    }
-                                    else if (DataStore.get(`${"Active-dev-button"}`) > 20) {
-                                        console.log(eConsole+"%c You already become developer !",eCss,"")
-                                    }
-                                })
-                            }
-                            catch{}
-                            if (DataStore.get("Dev-button")) {
-                                tickcheck(DataStore.get("Dev-mode"), "devbutton", "devbuttonbox")
-                            }
-                            //tickcheck(DataStore.get(""), el, box)
-                            tickcheck(DataStore.get("Enable-Invite-Fr"), 'invfr', "invfrbox")
-                            tickcheck(DataStore.get("Debug-mode"), "debug", "debugbox")
-                            tickcheck(DataStore.get("Custom-profile-hover"), "cusprf", "cusprfbox")
-                            tickcheck(DataStore.get("Custom-mastery-score"), "cusmastery", "cusmasterybox")
-                            tickcheck(DataStore.get("Custom-challenge-crystal"), "cuschalcry", "cuschalcrybox")
-                            tickcheck(DataStore.get("Name-Spoofer"), "namespf", "namespfbox")
-                            tickcheck(DataStore.get("aram-only"), "Aram only", "Aram only checkbox")
-                            tickcheck(DataStore.get("Old-League-Loader-Settings"), "oldll", "oldllbox")
-                            tickcheck(DataStore.get("Auto-Find-Queue"), "autoq", "autoqbox")
-                            tickcheck(DataStore.get("Custom-Status"), "cussta", "cusstabox")
-                            tickcheck(DataStore.get("April fool` joke"), "_1_4", "_1_4box")
-                            //tickcheck(DataStore.get("Merry-Christmas"), "MC", "MCbox")
-                            tickcheck(DataStore.get("loot-helper"), "lh", "lhbox")
-                            tickcheck(DataStore.get("buy-all-champs"), "byc", "bycbox")
-                            tickcheck(DataStore.get("Custom-rank"), "cusrankhover", "cusrankhoverbox")
-                            tickcheck(DataStore.get("auto_accept_button"), "autoacceptbutton", "autoacceptbuttonbox")
-                        }
-                    },100)
-                }
-            }).observe(manager, {
-                childList: true,
-                subtree: true
-            })
+                const plugin = document.querySelector('div.lol-settings-options > lol-uikit-scrollable.plugins_settings')
+                const theme = document.querySelector('div.lol-settings-options > lol-uikit-scrollable.theme_settings')
+                const aboutus = document.querySelector('div.lol-settings-options > lol-uikit-scrollable.aboutus_settings')
 
-            new MutationObserver((mutations) => {
-                const panel = document.querySelector('div.lol-settings-options > lol-uikit-scrollable.theme_settings')
-                if (panel && mutations.some((record) => Array.from(record.addedNodes).includes(panel))) {
-                    themesSettings(panel)
+                if (theme && mutations.some((record) => Array.from(record.addedNodes).includes(theme))) {
+                    themesSettings(theme)
                     let check = setInterval (()=>{
                         if (document.getElementById("Info")) {
                             clearInterval(check)
                             //tickcheck(DataStore.get(""), el, box)
+                            tickcheck(DataStore.get("backup-datastore"), "bakdata", "bakdatabox")
+                            tickcheck(DataStore.get("turnoff-audio-ingame"), "offaudio", "offaudiobox")
+                            tickcheck(DataStore.get("Change-CDN-version"), "cdnver", "cdnverbox")
                             tickcheck(DataStore.get('Custom-Gamemode-Icon'), "cusgameicon", "cusgameiconbox")
                             tickcheck(DataStore.get("NSFW-Content"), "nsfw", "nsfwbox")
                             tickcheck(DataStore.get("prevent-manual-update"), "prvtup", "prvtupbox")
@@ -1582,6 +1892,53 @@ window.addEventListener('load', async () => {
                             tickcheck(DataStore.get("old-prev/next-button"), "oldpnb", "oldpnbbox")
                         }
                     },100)
+                }
+
+                else if (plugin && mutations.some((record) => Array.from(record.addedNodes).includes(plugin))) {
+                    pluginsSettings(plugin)
+                    let check = setInterval (()=>{
+                        if (document.getElementById("Info")) {
+                            clearInterval(check)
+                            try {
+                                let origin = document.querySelector(".plugins-settings-logo")
+                                origin.addEventListener("click", ()=> {
+                                    DataStore.set("Active-dev-button", DataStore.get("Active-dev-button") + 1)
+                                    if (DataStore.get("Active-dev-button") == 20) {
+                                        DataStore.set("Dev-button", true)
+                                        console.log(eConsole+"%c Developer mode button has appeared !",eCss,"")
+                                    }
+                                    else if (DataStore.get("Active-dev-button") > 20) {
+                                        DataStore.set("Dev-button", true)
+                                        console.log(eConsole+"%c You already become developer !",eCss,"")
+                                    }
+                                })
+                            }
+                            catch{}
+                            if (DataStore.get("Dev-button")) {
+                                tickcheck(DataStore.get("Dev-mode"), "devbutton", "devbuttonbox")
+                            }
+                            //tickcheck(DataStore.get(""), el, box)
+                            tickcheck(DataStore.get("Enable-Invite-Fr"), 'invfr', "invfrbox")
+                            tickcheck(DataStore.get("Debug-mode"), "debug", "debugbox")
+                            tickcheck(DataStore.get("Custom-profile-hover"), "cusprf", "cusprfbox")
+                            tickcheck(DataStore.get("Custom-mastery-score"), "cusmastery", "cusmasterybox")
+                            tickcheck(DataStore.get("Custom-challenge-crystal"), "cuschalcry", "cuschalcrybox")
+                            tickcheck(DataStore.get("Name-Spoofer"), "namespf", "namespfbox")
+                            tickcheck(DataStore.get("aram-only"), "Aram only", "Aram only checkbox")
+                            tickcheck(DataStore.get("Old-League-Loader-Settings"), "oldll", "oldllbox")
+                            tickcheck(DataStore.get("Auto-Find-Queue"), "autoq", "autoqbox")
+                            tickcheck(DataStore.get("Custom-Status"), "cussta", "cusstabox")
+                            tickcheck(DataStore.get("April fool` joke"), "_1_4", "_1_4box")
+                            //tickcheck(DataStore.get("Merry-Christmas"), "MC", "MCbox")
+                            tickcheck(DataStore.get("loot-helper"), "lh", "lhbox")
+                            tickcheck(DataStore.get("buy-all-champs"), "byc", "bycbox")
+                            tickcheck(DataStore.get("Custom-rank"), "cusrankhover", "cusrankhoverbox")
+                            tickcheck(DataStore.get("auto_accept_button"), "autoacceptbutton", "autoacceptbuttonbox")
+                        }
+                    },100)
+                }
+                else if (aboutus && mutations.some((record) => Array.from(record.addedNodes).includes(aboutus))) {
+                    aboutustab(aboutus)
                 }
             }).observe(manager, {
                 childList: true,
