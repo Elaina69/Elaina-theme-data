@@ -21,7 +21,14 @@ async function createMenu(root) {
 									<hr class="heading-spacer" />
 									<p class="Elaina-Update" style="text-align: center">If you love ElainaV3, you can support me by sharing this theme to your friend</p>
 									<p class="Elaina-Update" style="text-align: center">or donating me</p>
-									<div id="donate"></div>
+									<div id="donate">
+										<a href="https://ko-fi.com/elainadacatto" target="_blank" id="kofi">
+											<img src="${datapath}assets/Icon/ko-fi.webp" class="donate"></img>
+										</a>
+										<a href="https://me.momo.vn/elainadacatto" target="_blank" id="momo">
+											<img src="${datapath}assets/Icon/momo.svg" class="donate"></img>
+										</a>
+									</div>
 									<p class="Elaina-Update" style="text-align: center">Meow ~~~</p>
 								</lol-uikit-content-block>
 							</div>
@@ -37,65 +44,47 @@ async function createMenu(root) {
 	render(jsx`<${LoaderMenu} />`, root)
 }
 
+function checkTime(i) {
+	if (i < 10) {i = "0" + i}
+	return i
+}
+
 function onlineTime() {
 	if (!DataStore.has("seconds1")) {
 		DataStore.set("seconds1",0)
-		DataStore.set("seconds2",0)
-		DataStore.set("minutes2",0)
 		DataStore.set("minutes1",0)
 		DataStore.set("hours1",0)
-		DataStore.set("hours2",0)
 	}
 
 	window.setInterval(()=>{
 		try {
 			DataStore.set("seconds1",DataStore.get("seconds1")+1)
-			if (DataStore.get("seconds1") >= 10) {DataStore.set("seconds2",DataStore.get("seconds2")+1), DataStore.set("seconds1",0)}
-			if (DataStore.get("seconds2") >= 6) {DataStore.set("minutes1",DataStore.get("minutes1")+1);DataStore.set("seconds1",0),DataStore.set("seconds2",0)}
-			if (DataStore.get("minutes1") >= 10) {DataStore.set("minutes2",DataStore.get("minutes2")+1);DataStore.set("minutes1",0);DataStore.set("seconds1",0),DataStore.set("seconds2",0)}
-			if (DataStore.get("minutes2") >= 6) {DataStore.set("hours1",DataStore.get("hours1")+1);DataStore.set("minutes2",0);DataStore.set("minutes1",0);DataStore.set("seconds2",0);DataStore.set("seconds1",0)}
-			if (DataStore.get("hours1") >= 10) {DataStore.set("hours2",DataStore.get("hours2")+1);DataStore.set("hours1",0);DataStore.set("minutes2",0);DataStore.set("minutes1",0);DataStore.set("seconds2",0);DataStore.set("seconds1",0)}
-			if (DataStore.get("hide-theme-usage-time")) {document.querySelector("span.friend-header").innerHTML = ""}
-			else {document.querySelector("span.friend-header").innerHTML = `${DataStore.get("hours2")}${DataStore.get("hours1")}:${DataStore.get("minutes2")}${DataStore.get("minutes1")}:${DataStore.get("seconds2")}${DataStore.get("seconds1")}`}
 
-			if (DataStore.get("hours2") == 0 && DataStore.get("hours1") == 1 && DataStore.get("minutes2") == 0 && DataStore.get("minutes1") == 0 && DataStore.get("seconds2") == 0 && DataStore.get("seconds1") == 0) {
+			if (DataStore.get("seconds1") >= 60) {
+				DataStore.set("minutes1",DataStore.get("minutes1")+1)
+				DataStore.set("seconds1",0)
+			}
+			if (DataStore.get("minutes1") >= 60) {
+				DataStore.set("hours1",DataStore.get("hours1")+1)
+				DataStore.set("minutes1",0)
+				DataStore.set("seconds1",0)
+			}
+			
+			if (DataStore.get("hide-theme-usage-time")) {document.querySelector("span.friend-header").innerHTML = ""}
+			else {
+				document.querySelector("span.friend-header").innerHTML = checkTime(DataStore.get("hours1"))+":"+checkTime(DataStore.get("minutes1"))+":"+checkTime(DataStore.get("seconds1"))
+			}
+
+			if (DataStore.get("hours1") == 1 && DataStore.get("minutes1") == 0 && DataStore.get("seconds1") == 0) {
 				window.addEventListener("load", async ()=> {
 					const manager = () => document.getElementById('lol-uikit-layer-manager-wrapper')
 					const root    = document.createElement('div')
 					while (!manager()) await new Promise(r => setTimeout(r, 200))
 					await createMenu(root)
 					manager().prepend(root)
-					window.setInterval(()=>{
-						try {
-							let closeButton = document.querySelector("#oneHour lol-uikit-dialog-frame").shadowRoot.querySelector("div.lol-uikit-dialog-frame-close-button > lol-uikit-close-button")
-							closeButton.addEventListener("click", ()=> {document.getElementById("oneHour").hidden = true})
-
-							//Don't ask me why am I doing this .-.
-							let donate = document.getElementById("donate")
-							let link1 = document.createElement("a")
-							let link2 = document.createElement("a")
-
-							let img1 = document.createElement("img")
-							let img2 = document.createElement("img")
-
-							link1.setAttribute("href", "https://ko-fi.com/elainadacatto")
-							link1.setAttribute("target", "_blank")
-							link2.setAttribute("href", "https://me.momo.vn/elainadacatto")
-							link2.setAttribute("target", "_blank")
-							link2.id = "momo"
-
-							img1.setAttribute("src", `${datapath}assets/Icon/ko-fi.webp`)
-							img2.setAttribute("src", `${datapath}assets/Icon/momo.svg`)
-							img1.setAttribute("class","donate")
-							img2.setAttribute("class","donate")
-
-							if (!document.getElementById("momo")) {
-								donate.append(link1)
-								donate.append(link2)
-								link1.append(img1)
-								link2.append(img2)
-							}
-						}catch{}
+					let closeButton = document.querySelector("#oneHour lol-uikit-dialog-frame").shadowRoot.querySelector("div.lol-uikit-dialog-frame-close-button > lol-uikit-close-button")
+					closeButton.addEventListener("click", ()=> {
+						document.getElementById("oneHour").hidden = true
 					})
 				})
 			}
