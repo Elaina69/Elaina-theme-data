@@ -99,11 +99,11 @@ else if (DataStore.get(`Update-${update}`) && !DataStore.get(`Force-Update`)) {
 										<h5>Elaina_V3 - ${updateType} Update ${update}</h5>
 										<hr class="heading-spacer" />
 
-										<p class="Elaina-Update">- Add backup datastore file</p>
+										<p class="Elaina-Update">- Add datastore backup feature</p>
 										<p class="Elaina-Update">- Now can change CDN version manually</p>
 										<p class="Elaina-Update">- Optimizing theme</p>
-										<p class="Elaina-Update"></p>
-										<p class="Elaina-Update"></p>
+										<p class="Elaina-Update">- Fix custom font bug</p>
+										<p class="Elaina-Update">- Last update before Vanguard for sure 😭</p>
 										<p class="Elaina-Update"></p>
 										<p class="Elaina-Update"></p>
 										<p class="Elaina-Update"></p>
