@@ -9,4 +9,7 @@ window.addEventListener("keydown", async (event)=>{
     if (key=="F5") {
         window.restartClient()
     }
+    if ((event.ctrlKey && key=="s") || (event.altKey && key =="F4")) {
+        writeBackupData()
+    }
 })

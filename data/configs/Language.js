@@ -17,7 +17,6 @@ const lang = {
         "auto_accept"     : "Auto Accept",
         "l.open_settings" : "Settings",
         "l.open_devtools" : "Open DevTools",
-        "l.reload_client" : "Reload Client",
         "l.open_plugins"  : "Open Plugins folder",
         "l.theme_releases": "Theme Releases",
         "l.close"         : "Close",
@@ -137,6 +136,10 @@ const lang = {
         "Honor-self-1"    : "You cannot honoring yourself",
         "Honor-self-2"    : "Seriously? You really want to honor yourself ?",
         'Custom-Gamemode-Icon': "Custom gamemode icon",
+        "Change-CDN-version"  : "Change CDN version",
+        "restart-client"  : "Restart",
+        "turnoff-audio-ingame": "Turn off music/wallpaper audio when ingame",
+        "backup-datastore": "Backup theme's datastore to cloud",
     },
 
     "VN": {
@@ -147,7 +150,6 @@ const lang = {
         "auto_accept"     : "Tự động chấp thuận",
         "l.open_settings" : "Cài Đặt",
         "l.open_devtools" : "Mở DevTools",
-        "l.reload_client" : "Khởi động lại Client",
         "l.open_plugins"  : "Mở thư mục Plugins",
         "l.theme_releases": "Các bản phát hành",
         "l.close"         : "Đóng",
@@ -267,6 +269,10 @@ const lang = {
         "Honor-self-1"    : "Bạn không thể tự vinh danh chính mình",
         "Honor-self-2"    : "Nghiêm túc đó à ? bạn thật sự muốn vinh danh bản thân ?",
         'Custom-Gamemode-Icon': "Icon chế độ trận đấu tùy chỉnh",
+        "Change-CDN-version"  : "Thay đổi phiên bản CDN",
+        "restart-client"  : "Khởi động lại",
+        "turnoff-audio-ingame": "Tắt nhạc/âm thanh hình nền khi vào trận",
+        "backup-datastore": "Sao lưu dữ liệu chủ đề lên đám mây",
     },
 
     "JP": {
@@ -277,7 +283,6 @@ const lang = {
         "auto_accept"     : "自動承認",
         "l.open_settings" : "設定",
         "l.open_devtools" : "DevTools を開く",
-        "l.reload_client" : "Client リロード",
         "l.open_plugins"  : "プラグインフォルダを開く",
         "l.theme_releases": "テーマリリース",
         "l.close"         : "近い",
@@ -323,7 +328,7 @@ const lang = {
         "up-all-prom"     : "Did you really want to upgrade all champion shards ?",
         "note"            : "Note",
         "note-1"          : "Remember to reload client to take effect after change",
-        "reload-client"   : "Reload Client",
+        "reload-client"   : "Client リロード",
         "theme-settings"  : "Theme settings",
         "wallpaper-volume": "Wallpaper volume",
         "music-volume"    : "Music volume",
@@ -397,6 +402,10 @@ const lang = {
         "Honor-self-1"    : "You cannot honoring yourself",
         "Honor-self-2"    : "Seriously? You really want to honor yourself ?",
         'Custom-Gamemode-Icon': "Custom gamemode icon",
+        "Change-CDN-version"  : "Change CDN version",
+        "restart-client"  : "Restart",
+        "turnoff-audio-ingame": "Turn off music/wallpaper audio when ingame",
+        "backup-datastore": "Backup theme's datastore to cloud",
     },
 
     "PL": {
@@ -407,7 +416,6 @@ const lang = {
         "auto_accept"     : "Automatycznie akceptuj",
         "l.open_settings" : "Ustawienia",
         "l.open_devtools" : "Otwórz DevTools",
-        "l.reload_client" : "Przeładuj klienta",
         "l.open_plugins"  : "Otwórz folder wtyczek",
         "l.theme_releases": "Wydania Motywu",
         "l.close"         : "Zamknij",
@@ -527,6 +535,10 @@ const lang = {
         "Honor-self-1"    : "You cannot honoring yourself",
         "Honor-self-2"    : "Seriously? You really want to honor yourself ?",
         'Custom-Gamemode-Icon': "Custom gamemode icon",
+        "Change-CDN-version"  : "Change CDN version",
+        "restart-client"  : "Restart",
+        "turnoff-audio-ingame": "Turn off music/wallpaper audio when ingame",
+        "backup-datastore": "Backup theme's datastore to cloud",
     },
 
     "RU": {
@@ -537,7 +549,6 @@ const lang = {
         "auto_accept"     : "Автоматическое принятие",
         "l.open_settings" : "Настройки",
         "l.open_devtools" : "Открыть DevTools",
-        "l.reload_client" : "Перезагрузить Клиент",
         "l.open_plugin"   : "Открыть папку плагинов",
         "l.theme_releases": "Версии тем",
         "l.close"         : "Закрыть",
@@ -657,6 +668,10 @@ const lang = {
         "Honor-self-1"    : "You cannot honoring yourself",
         "Honor-self-2"    : "Seriously? You really want to honor yourself ?",
         'Custom-Gamemode-Icon': "Custom gamemode icon",
+        "Change-CDN-version"  : "Change CDN version",
+        "restart-client"  : "Restart",
+        "turnoff-audio-ingame": "Turn off music/wallpaper audio when ingame",
+        "backup-datastore": "Backup theme's datastore to cloud",
     },
 
     "MX": {
@@ -667,7 +682,6 @@ const lang = {
         "auto_accept"     : "Aceptar Automáticamente",
         "l.open_settings" : "Configuración",
         "l.open_devtools" : "Abrir DevTools",
-        "l.reload_client" : "Recargar Cliente",
         "l.open_plugins"  : "Abrir carpeta de plugins",
         "l.theme_releases": "Versiones del tema",
         "l.close"         : "Cerrar",
@@ -787,6 +801,10 @@ const lang = {
         "Honor-self-1"    : "You cannot honoring yourself",
         "Honor-self-2"    : "Seriously? You really want to honor yourself ?",
         'Custom-Gamemode-Icon': "Custom gamemode icon",
+        "Change-CDN-version"  : "Change CDN version",
+        "restart-client"  : "Restart",
+        "turnoff-audio-ingame": "Turn off music/wallpaper audio when ingame",
+        "backup-datastore": "Backup theme's datastore to cloud",
     },
 
     "KR": {
@@ -797,7 +815,6 @@ const lang = {
         "auto_accept"     : "자동 수락",
         "l.open_settings" : "세팅",
         "l.open_devtools" : "개발자 툴",
-        "l.reload_client" : "재접속",
         "l.open_plugins"  : "플러그인",
         "l.theme_releases": "테마 배포",
         "l.close"         : "닫기",
@@ -917,6 +934,10 @@ const lang = {
         "Honor-self-1"    : "You cannot honoring yourself",
         "Honor-self-2"    : "Seriously? You really want to honor yourself ?",
         'Custom-Gamemode-Icon': "Custom gamemode icon",
+        "Change-CDN-version"  : "Change CDN version",
+        "restart-client"  : "Restart",
+        "turnoff-audio-ingame": "Turn off music/wallpaper audio when ingame",
+        "backup-datastore": "Backup theme's datastore to cloud",
     },
 
     "TW": {
@@ -926,7 +947,6 @@ const lang = {
         "auto_accept"     : "自動接受",
         "l.open_settings" : "設定",
         "l.open_devtools" : "打開開發者工具",
-        "l.reload_client" : "重新加載客戶端",
         "l.open_plugins"  : "打開插件資料夾",
         "l.theme_releases": "最新主題",
         "l.close"         : "關閉",
@@ -1045,6 +1065,10 @@ const lang = {
         "Honor-self-1"    : "You cannot honoring yourself",
         "Honor-self-2"    : "Seriously? You really want to honor yourself ?",
         'Custom-Gamemode-Icon': "Custom gamemode icon",
+        "Change-CDN-version"  : "Change CDN version",
+        "restart-client"  : "Restart",
+        "turnoff-audio-ingame": "Turn off music/wallpaper audio when ingame",
+        "backup-datastore": "Backup theme's datastore to cloud",
     },
 
     "CN": {
@@ -1054,7 +1078,6 @@ const lang = {
         "auto_accept"     : "自动接受",
         "l.open_settings" : "设置",
         "l.open_devtools" : "打开开发者工具",
-        "l.reload_client" : "重新加载客户端",
         "l.open_plugins"  : "打开插件文件夹",
         "l.theme_releases": "主题发布页",
         "l.close"         : "关闭",
@@ -1175,6 +1198,10 @@ const lang = {
         "Honor-self-1"    : "You cannot honoring yourself",
         "Honor-self-2"    : "Seriously? You really want to honor yourself ?",
         'Custom-Gamemode-Icon': "Custom gamemode icon",
+        "Change-CDN-version"  : "Change CDN version",
+        "restart-client"  : "Restart",
+        "turnoff-audio-ingame": "Turn off music/wallpaper audio when ingame",
+        "backup-datastore": "Backup theme's datastore to cloud",
     },
 }
 
