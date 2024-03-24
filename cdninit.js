@@ -1,5 +1,5 @@
-import {Settings} from "./data/built-in_plugins/Settings.js"
-import {AutoQueue} from "./data/built-in_plugins/Auto-Find-Queue.js"
+import {Settings} from "./data/Plugins/Settings.js"
+import {AutoQueue} from "./data/Plugins/Auto-Find-Queue.js"
 
 export function Cdninit(context) {
     Settings(context)

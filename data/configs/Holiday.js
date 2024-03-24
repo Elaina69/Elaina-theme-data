@@ -1,4 +1,4 @@
-let config = {
+export default {
     "1/1": {
         "Day"    : "1/1",
         "Text"   : "Happy new year !!",
@@ -65,5 +65,3 @@ let config = {
         "nsfw"   : false
     },
 }
-
-export default config

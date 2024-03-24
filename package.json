@@ -1,7 +1,7 @@
 {
-  "name": "elainav3-data",
-  "version": "2.2.4",
-  "description": "Data files for ElainaV3 theme",
+  "name": "elaina-theme-data",
+  "version": "2.3.15",
+  "description": "Data files for Elaina theme",
   "main": "index.js",
   "files": [
     "cdninit.js",
@@ -10,14 +10,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Elaina69/Elaina-V3.git"
+    "url": "git+https://github.com/Elaina69/Elaina-V4.git"
   },
   "author": "Elaina Da Catto",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Elaina69/Elaina-V3/issues"
+    "url": "https://github.com/Elaina69/Elaina-V4/issues"
   },
-  "homepage": "https://github.com/Elaina69/Elaina-V3",
+  "homepage": "https://github.com/Elaina69/Elaina-V4",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   }

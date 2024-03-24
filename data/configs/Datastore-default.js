@@ -1,12 +1,10 @@
-let list = {
+export default {
 	"Theme-version"					:"",
 	"Cdn-version"					:"",
 	"backup-datastore"				: true,
 	"turnoff-audio-ingame"			: true,
 	"Change-CDN-version"			: false,
 	"Elaina-Plugins"				: true,
-	"Wallpaper-list"				: ["Elaina1.webm","Elaina2.webm"],
-	"Audio-list"					: ["少女レイ-FUMIKIRI_ver.flac","If_there_was_an_Endpoint.mp3"],
 	"Banner-list"					: ["1_winter-noble_2023.png","2_winter-royal_2023.png","3_winter-aurora_2023.png","BEE2023.png","Challenger.png","LNY2023.png","Soul-Fighters_2023.png"],
 	"Font-list"						: ["AegirSeaborn.ttf","Elaina-Herculanum_Roman.ttf","MinecraftRegular-Bmg3.otf","Roboto-Medium.ttf"],
 	"CurrentBanner"					: "BEE2023.png",
@@ -93,7 +91,8 @@ let list = {
   	"Enable-Invite-Fr"				: true,
   	"Auto-Honor"					: true,
 	"Dev-button"					: false,
-	"ElainaV3-First run"			: false,
+	"Elaina-First run"				: false,
+	"seconds1"						: 0,
+	"minutes1"						: 0,
+	"hours1"						: 0,
 }
-
-export default list

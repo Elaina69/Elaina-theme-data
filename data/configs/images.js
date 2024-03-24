@@ -1,7 +1,7 @@
 let datapath = new URL("..", import.meta.url).href
-let icon = `${datapath}assets/Icon`
+let icon = `${datapath}Assets/Icon`
 
-let data = [
+export default [
     `${icon}/Logo.png`,
     `${icon}/momo.svg`,
     `${icon}/ko-fi.webp`,
@@ -28,7 +28,6 @@ let data = [
     `${icon}/Plugins-icons/button-refresh-hover.png`,
     `${icon}/Plugins-icons/ElainaCB.png`,
     `${icon}/Plugins-icons/reroll_button.png`,
-    `${datapath}assets/Champs/miku.png`,
-    `${datapath}assets/Champs/miku_preview.png`,
+    `${datapath}Assets/Champs/miku.png`,
+    `${datapath}Assets/Champs/miku_preview.png`,
 ]
-export default data
