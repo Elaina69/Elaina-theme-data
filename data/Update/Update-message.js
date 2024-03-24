@@ -2,6 +2,7 @@ let updateType
 let autoUpdate = false
 
 import update from '../Update/Version.js'
+import text from "../Update/Update_text.js"
 
 if (!DataStore.has(`Update-${update}`)) {
 	DataStore.set(`Update-${update}`, true)
@@ -93,20 +94,9 @@ else if (DataStore.get(`Update-${update}`) && !DataStore.get(`Force-Update`)) {
 						<div class="dialog-confirm" style="display: flex; align-items: center; justify-content: center; position: absolute; inset: 0px;">
 							  <lol-uikit-dialog-frame class="dialog-frame" orientation="bottom" close-button="false">
 								<div class="dialog-content">
-									<lol-uikit-content-block class="app-controls-exit-dialog" type="dialog-small" style="width: 500px;">
+									<lol-uikit-content-block class="app-controls-exit-dialog" type="dialog-small" style="width: 500px;" id="elaina-update-text">
 										<h5>Elaina_V4 - ${updateType} Update ${update}</h5>
 										<hr class="heading-spacer" />
-
-										<p class="Elaina-Update">- Refactoring Elaina theme's code</p>
-										<p class="Elaina-Update">- Fix all bug from v2.2.4</p>
-										<p class="Elaina-Update">- Now wallpaper/audio list only reload after you reload/restart client</p>
-										<p class="Elaina-Update">- Replace nsfw image link</p>
-										<p class="Elaina-Update">- Last update before Vanguard for sure 😭 (again)</p>
-										<p class="Elaina-Update"></p>
-										<p class="Elaina-Update"></p>
-										<p class="Elaina-Update"></p>
-										<p class="Elaina-Update"></p>
-	
 									</lol-uikit-content-block>
 								</div>
 								<lol-uikit-flat-button-group type="dialog-frame">
@@ -133,9 +123,20 @@ else if (DataStore.get(`Update-${update}`) && !DataStore.get(`Force-Update`)) {
 				closeButton.addEventListener("click", ()=> {
 					document.getElementById("Elaina-Update").hidden = true
 				})
-				window.clearInterval(close)
+
+				let target = document.getElementById("elaina-update-text")
+				if (target) {
+					for (let i = 0; i < text.length; i++) {
+						let updateText = document.createElement("p")
+						updateText.setAttribute("class", "Elaina-Update")
+						updateText.textContent = text[i]
+
+						target.appendChild(updateText)
+					}
+					window.clearInterval(close)
+				}
 			}catch{}
-		})
+		},1000)
 	})
 
 	DataStore.set(`Update-${update}`, false)
