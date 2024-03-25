@@ -1,3 +1,4 @@
+import "./data/Languages/Languages.js"
 import "./data/ImportUpdate.js"
 import "./data/Update/Update-message.js"
 import "./data/Plugins/Auto-accept.js"
