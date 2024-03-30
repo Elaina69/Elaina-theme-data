@@ -9,7 +9,7 @@ async function getString(key) {
         result = lang[key]
     }
     catch {
-        lang = (await (() => import(`${path}Locales/languages.js`))()).default
+        lang = (await (() => import(`${path}Locales/Default.js`))()).default
         result = lang[key]
     }
     return result
