@@ -1,4 +1,5 @@
 export default [
+    "2.3.18",
     "2.3.17",
     
     /* Old version and not supported anymore

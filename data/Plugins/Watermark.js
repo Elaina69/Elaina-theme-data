@@ -96,7 +96,7 @@ function ElainaTrigger() {
 				wtmark.remove()
 				Elaina1Text.classList.add ("Elaina1Text")
 				Elaina1Image.classList.add("Elaina1Image")
-				Elaina1Image.setAttribute ("src", `${datapath}assets/Icon/Plugins-icons/ElainaCB.png`)
+				Elaina1Image.setAttribute ("src", `${datapath}Assets/Icon/Plugins-icons/ElainaCB.png`)
 				Elaina1Text.innerHTML =  "Huh ?";
 	
 				function generateGreeting(date) {
