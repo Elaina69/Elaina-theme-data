@@ -1274,50 +1274,118 @@ const themesSettings = async (panel) => {
 
 
 const pluginsSettings = async (panel) => {
-    const rank = {
+    let rank = {
         "Ranked Queue ID": [
-            {"id" : 0, "name": `${await getString("Ranked Solo 5vs5")}`},
-            {"id" : 1, "name": `${await getString("Ranked Flex Summoner's Rift")}`},
-            {"id" : 2, "name": `${await getString("Ranked Flex TT")}`},
-            {"id" : 3, "name": `${await getString("Ranked TFT")}`},
-            {"id" : 4, "name": `${await getString("Ranked TFT TURBO")}`},
-            {"id" : 5, "name": `${await getString("Ranked TFT DOUBLE UP")}`}
+            {
+                "id" : 0, 
+                "name": `${await getString("Ranked Solo 5vs5")}`, 
+                "Option": "RANKED_SOLO_5x5",
+            },
+            {
+                "id" : 1, 
+                "name": `${await getString("Ranked Flex Summoner's Rift")}`, 
+                "Option": "RANKED_FLEX_SR",
+            },
+            {
+                "id" : 2, 
+                "name": `${await getString("Ranked Flex TT")}`,
+                "Option": "RANKED_FLEX_TT", 
+            },
+            {
+                "id" : 3, 
+                "name": `${await getString("Ranked TFT")}`, 
+                "Option": "RANKED_TFT",
+            },
+            {
+                "id" : 4, 
+                "name": `${await getString("Ranked TFT TURBO")}`, 
+                "Option": "RANKED_TFT_TURBO",
+            },
+            {
+                "id" : 5, 
+                "name": `${await getString("Ranked TFT DOUBLE UP")}`, 
+                "Option": "RANKED_TFT_DOUBLE_UP",
+            },
+            {
+                "id" : 6, 
+                "name": `${await getString("Arena")}`, 
+                "Option": "CHERRY"
+            }
         ],
     
         "Ranked Tier ID": [
-            {"id" : 0, "name": `${await getString("Iron")}`},
-            {"id" : 1, "name": `${await getString("Bronze")}`},
-            {"id" : 2, "name": `${await getString("Silver")}`},
-            {"id" : 3, "name": `${await getString("Gold")}`},
-            {"id" : 4, "name": `${await getString("Platinum")}`},
-            {"id" : 5, "name": `${await getString("Diamond")}`},
-            {"id" : 6, "name": `${await getString("Emerald")}`},
-            {"id" : 7, "name": `${await getString("Master")}`},
-            {"id" : 8, "name": `${await getString("Grand-Master")}`},
-            {"id" : 9, "name": `${await getString("Challenger")}`}
+            {
+                "id" : 0, 
+                "name": `${await getString("Iron")}`,
+                "Option": "IRON",
+            },
+            {
+                "id" : 1, 
+                "name": `${await getString("Bronze")}`,
+                "Option": "BRONZE",
+            },
+            {
+                "id" : 2, 
+                "name": `${await getString("Silver")}`,
+                "Option": "SILVER",
+            },
+            {
+                "id" : 3, 
+                "name": `${await getString("Gold")}`,
+                "Option": "GOLD",
+            },
+            {
+                "id" : 4, 
+                "name": `${await getString("Platinum")}`,
+                "Option": "PLATINUM",
+            },
+            {
+                "id" : 5, 
+                "name": `${await getString("Diamond")}`,
+                "Option": "DIAMOND",
+            },
+            {
+                "id" : 6,
+                "name": `${await getString("Emerald")}`,
+                "Option": "EMERALD",
+            },
+            {
+                "id" : 7, 
+                "name": `${await getString("Master")}`,
+                "Option": "MASTER",
+            },
+            {
+                "id" : 8, 
+                "name": `${await getString("Grand-Master")}`,
+                "Option": "GRANDMASTER",
+            },
+            {
+                "id" : 9, 
+                "name": `${await getString("Challenger")}`,
+                "Option": "CHALLENGER"
+            }
         ],
     
         "Ranked Division ID": [
-            {"id" : 0, "name": "I"},
-            {"id" : 1, "name": "II"},
-            {"id" : 2, "name": "III"},
-            {"id" : 3, "name": "IV"}
+            {
+                "id" : 0, 
+                "name": "I"
+            },
+            {
+                "id" : 1, 
+                "name": "II"
+            },
+            {
+                "id" : 2, 
+                "name": "III"
+            },
+            {
+                "id" : 3, 
+                "name": "IV"
+            }
         ]
     }
-    const Challengerank = {
-        "challengeCrystalLevel": [
-            {"id" : 0, "name": `${await getString("Iron")}`},
-            {"id" : 1, "name": `${await getString("Bronze")}`},
-            {"id" : 2, "name": `${await getString("Silver")}`},
-            {"id" : 3, "name": `${await getString("Gold")}`},
-            {"id" : 4, "name": `${await getString("Platinum")}`},
-            {"id" : 5, "name": `${await getString("Diamond")}`},
-            {"id" : 6, "name": `${await getString("Emerald")}`},
-            {"id" : 7, "name": `${await getString("Master")}`},
-            {"id" : 8, "name": `${await getString("Grand-Master")}`},
-            {"id" : 9, "name": `${await getString("Challenger")}`}
-        ],
-    }
+
     panel.prepend(
         UI.Row("",[
             UI.Row("Info",[
@@ -1573,25 +1641,41 @@ const pluginsSettings = async (panel) => {
                 document.createElement('br'),
                 UI.Input("Mastery-Score"),
                 document.createElement('br'),
-                UI.CheckBox(
-                    `${await getString("custom-rank-hover")}`,'cusrankhover','cusrankhoverbox',
-                    ()=>{
-                        restartAfterChange('cusrankhover', "Custom-rank")
-                    let cusrankhoverel = document.getElementById("cusrankhover")
-                    let cusrankhoverbox = document.getElementById("cusrankhoverbox")
-    
-                    if (DataStore.get("Custom-rank")) {
-                        cusrankhoverbox.checked = false
-                        DataStore.set("Custom-rank", false)
-                        cusrankhoverel.removeAttribute("class")
-                    }
-                    else {
-                        cusrankhoverbox.checked = true
-                        DataStore.set("Custom-rank", true)
-                        cusrankhoverel.setAttribute("class", "checked")
-                    }
-                    },true, "Custom-rank"
-                ),
+                UI.Row("customrank_checkbox", [
+                    UI.CheckBox(
+                        `${await getString("custom-rank-hover")}`,'cusrankhover','cusrankhoverbox',
+                        ()=>{
+                            restartAfterChange('cusrankhover', "Custom-rank")
+                        let cusrankhoverel = document.getElementById("cusrankhover")
+                        let cusrankhoverbox = document.getElementById("cusrankhoverbox")
+        
+                        if (DataStore.get("Custom-rank")) {
+                            cusrankhoverbox.checked = false
+                            DataStore.set("Custom-rank", false)
+                            cusrankhoverel.removeAttribute("class")
+                        }
+                        else {
+                            cusrankhoverbox.checked = true
+                            DataStore.set("Custom-rank", true)
+                            cusrankhoverel.setAttribute("class", "checked")
+                        }
+                        },true, "Custom-rank"
+                    ),
+                    UI.Button(await getString("Refresh"), "refresh_option", async () => {
+                        let requestRank = {
+                            "lol": {
+                                "rankedLeagueQueue"    : rank["Ranked Queue ID"][DataStore.get("Ranked Queue ID")]["Option"],
+                                "rankedLeagueTier"     : rank["Ranked Tier ID"][DataStore.get("Ranked Tier ID")]["Option"],
+                                "rankedLeagueDivision" : rank["Ranked Division ID"][DataStore.get("Ranked Division ID")]["name"]
+                            }
+                        }
+                        await fetch("/lol-chat/v1/me", {
+                            method: "PUT",
+                            headers: {"content-type": "application/json"},
+                            body: JSON.stringify(requestRank)
+                        })
+                    })
+                ]),
                 document.createElement('br'),
                 UI.Dropdown(rank, "Ranked Queue ID", `${await getString("Ranked Queue")}`, "name", "id"),
                 document.createElement('br'),
@@ -1620,7 +1704,7 @@ const pluginsSettings = async (panel) => {
                     },true,"Custom-challenge-crystal"
                 ),
                 document.createElement('br'),
-                UI.Dropdown(Challengerank, "challengeCrystalLevel", `${await getString("challenge-rank")}`, "name", "id"),
+                UI.Dropdown(rank, "Ranked Tier ID", `${await getString("challenge-rank")}`, "name", "id"),
                 UI.Label(`${await getString("challenge-point")}`, "challenge-point-Text"),
                 UI.Input("Challenge-Points"),
                 document.createElement('br'),

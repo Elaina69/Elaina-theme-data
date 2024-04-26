@@ -21,6 +21,7 @@ export default {
     "Ranked TFT"                 : "Đấu trường chân lý",
     "Ranked TFT TURBO"           : "Đấu trường chân lý (TURBO)",
     "Ranked TFT DOUBLE UP"       : "Đấu trường chân lý (DOUBLE UP)",
+    "Arena"                      : "Võ đài",
     "Iron"                       : "Sắt",
     "Bronze"                     : "Đồng",
     "Silver"                     : "Bạc",

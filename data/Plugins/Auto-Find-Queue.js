@@ -58,4 +58,8 @@ export function AutoQueue(context) {
 	})
 }
 
-window.addEventListener("load",()=>{ getQueueList() })
+window.addEventListener("load",()=>{ 
+	window.setInterval(()=> {
+		if (DataStore.get("queueList")["Gamemode"] = []) getQueueList()
+	}, 1000) 
+})

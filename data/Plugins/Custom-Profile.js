@@ -1,27 +1,131 @@
 import utils from '../Utilities/_utils.js'
 import * as observer from "../Utilities/_observer.js"
+let rank = {
+    "Ranked Queue ID": [
+        {
+            "id" : 0, 
+            "name": `${await getString("Ranked Solo 5vs5")}`, 
+            "Option": "RANKED_SOLO_5x5",
+        },
+        {
+            "id" : 1, 
+            "name": `${await getString("Ranked Flex Summoner's Rift")}`, 
+            "Option": "RANKED_FLEX_SR",
+        },
+        {
+            "id" : 2, 
+            "name": `${await getString("Ranked Flex TT")}`,
+            "Option": "RANKED_FLEX_TT", 
+        },
+        {
+            "id" : 3, 
+            "name": `${await getString("Ranked TFT")}`, 
+            "Option": "RANKED_TFT",
+        },
+        {
+            "id" : 4, 
+            "name": `${await getString("Ranked TFT TURBO")}`, 
+            "Option": "RANKED_TFT_TURBO",
+        },
+        {
+            "id" : 5, 
+            "name": `${await getString("Ranked TFT DOUBLE UP")}`, 
+            "Option": "RANKED_TFT_DOUBLE_UP",
+        },
+        {
+            "id" : 6, 
+            "name": `${await getString("Arena")}`, 
+            "Option": "CHERRY"
+        }
+    ],
 
-let queueOptions = ["RANKED_SOLO_5x5","RANKED_FLEX_SR","RANKED_FLEX_TT",
-                    "RANKED_TFT","RANKED_TFT_TURBO","RANKED_TFT_DOUBLE_UP",
-]
-let tierOptions = ["IRON","BRONZE","SILVER","GOLD","PLATINUM",
-                "DIAMOND","EMERALD","MASTER","GRANDMASTER","CHALLENGER"
-]
-let divisionOptions = ["I", "II", "III", "IV"];
+    "Ranked Tier ID": [
+        {
+            "id" : 0, 
+            "name": `${await getString("Iron")}`,
+            "Option": "IRON",
+        },
+        {
+            "id" : 1, 
+            "name": `${await getString("Bronze")}`,
+            "Option": "BRONZE",
+        },
+        {
+            "id" : 2, 
+            "name": `${await getString("Silver")}`,
+            "Option": "SILVER",
+        },
+        {
+            "id" : 3, 
+            "name": `${await getString("Gold")}`,
+            "Option": "GOLD",
+        },
+        {
+            "id" : 4, 
+            "name": `${await getString("Platinum")}`,
+            "Option": "PLATINUM",
+        },
+        {
+            "id" : 5, 
+            "name": `${await getString("Diamond")}`,
+            "Option": "DIAMOND",
+        },
+        {
+            "id" : 6,
+            "name": `${await getString("Emerald")}`,
+            "Option": "EMERALD",
+        },
+        {
+            "id" : 7, 
+            "name": `${await getString("Master")}`,
+            "Option": "MASTER",
+        },
+        {
+            "id" : 8, 
+            "name": `${await getString("Grand-Master")}`,
+            "Option": "GRANDMASTER",
+        },
+        {
+            "id" : 9, 
+            "name": `${await getString("Challenger")}`,
+            "Option": "CHALLENGER"
+        }
+    ],
+
+    "Ranked Division ID": [
+        {
+            "id" : 0, 
+            "name": "I"
+        },
+        {
+            "id" : 1, 
+            "name": "II"
+        },
+        {
+            "id" : 2, 
+            "name": "III"
+        },
+        {
+            "id" : 3, 
+            "name": "IV"
+        }
+    ]
+}
 
 let requestChallengeCrystal = {
     "lol": {
         "challengePoints"       : `${DataStore.get("Challenge-Points")}`,
-        "challengeCrystalLevel" : `${tierOptions[DataStore.get("challengeCrystalLevel")]}`
+        "challengeCrystalLevel" : `${rank["Ranked Tier ID"][DataStore.get("challengeCrystalLevel")]["Option"]}`
     }
 }
 let requestRank = {
     "lol": {
-        "rankedLeagueQueue"    : queueOptions[DataStore.get("Ranked Queue ID")],
-        "rankedLeagueTier"     : tierOptions[DataStore.get("Ranked Tier ID")],
-        "rankedLeagueDivision" : divisionOptions[DataStore.get("Ranked Division ID")]
+        "rankedLeagueQueue"    : rank["Ranked Queue ID"][DataStore.get("Ranked Queue ID")]["Option"],
+        "rankedLeagueTier"     : rank["Ranked Tier ID"][DataStore.get("Ranked Tier ID")]["Option"],
+        "rankedLeagueDivision" : rank["Ranked Division ID"][DataStore.get("Ranked Division ID")]["name"]
     }
 }
+
 let requestMasteryScore = {
     "lol": {
         "masteryScore":`${DataStore.get("Mastery-Score")}`
@@ -42,7 +146,8 @@ async function request(method, endpoint, { headers = {}, body = {} } = {}) {
     }
     return await fetch(endpoint, requestOptions)
 }
-  
+
+
 async function getPlayerPreferences() {
     const endpoint = "/lol-challenges/v1/summary-player-data/local-player"
     const response = await request("GET", endpoint)
@@ -134,6 +239,8 @@ function freezeProperties(object, properties) {
 }
 
 if (DataStore.get("Custom-profile-hover")) {
+
+    // Change mastery score and challenge point when hover summoner card
     observer.subscribeToElementCreation("#lol-uikit-tooltip-root",async (element)=>{
         try{
             let checkID = element.querySelector(`lol-regalia-hovercard-v2-element`).getAttribute("summoner-id")
@@ -156,6 +263,7 @@ if (DataStore.get("Custom-profile-hover")) {
             }
         }catch{}
     })
+
     if (DataStore.get("Custom-mastery-score")) {
         observer.subscribeToElementCreation(".collection-totals",(element)=>{
             let a = element.querySelector(".total-owned.total-count.ember-view")
@@ -182,9 +290,9 @@ if (DataStore.get("Custom-profile-hover")) {
                 let a = element.querySelector(".contents > div:nth-child(1)")
                 let b = element.querySelector(".total-points")
 
-                a.setAttribute("class", `crystal-image ${tierOptions[DataStore.get("challengeCrystalLevel")]}`)
+                a.setAttribute("class", `crystal-image ${rank["Ranked Tier ID"][DataStore.get("Ranked Tier ID")]["Option"]}`)
                 b.innerText = `${DataStore.get("Challenge-Points")}`
-                element.querySelector(".level").innerText = tierOptions[DataStore.get("challengeCrystalLevel")].toLowerCase()
+                element.querySelector(".level").innerText = rank["Ranked Tier ID"][DataStore.get("Ranked Tier ID")]["Option"].toLowerCase()
             })
         }
     }, 10000)

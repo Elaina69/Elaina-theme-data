@@ -20,6 +20,7 @@ export default {
     "Ranked TFT"                 : "Ranked TFT",
     "Ranked TFT TURBO"           : "Ranked TFT TURBO",
     "Ranked TFT DOUBLE UP"       : "Ranked TFT DOUBLE UP",
+    "Arena"                      : "Arena",
     "Iron"                       : "Iron",
     "Bronze"                     : "Bronze",
     "Silver"                     : "Silver",

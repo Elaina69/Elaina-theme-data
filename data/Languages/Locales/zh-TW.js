@@ -20,6 +20,7 @@ export default {
     "Ranked TFT"                 : "聯盟戰旗",
     "Ranked TFT TURBO"           : "超級抽抽樂",
     "Ranked TFT DOUBLE UP"       : "雙人戰旗",
+    "Arena"                      : "Arena",
     "Iron"                       : "鐵牌",
     "Bronze"                     : "銅牌",
     "Silver"                     : "銀牌",

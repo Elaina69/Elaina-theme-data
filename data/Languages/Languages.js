@@ -16,3 +16,5 @@ async function getString(key) {
 }
 
 window.getString = getString
+
+export default getString

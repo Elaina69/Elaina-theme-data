@@ -20,6 +20,7 @@ export default {
     "Ranked TFT"                 : "云顶排位",
     "Ranked TFT TURBO"           : "云顶狂暴模式排位",
     "Ranked TFT DOUBLE UP"       : "云顶双人模式排位",
+    "Arena"                      : "Arena",
     "Iron"                       : "黑铁",
     "Bronze"                     : "青铜",
     "Silver"                     : "白银",
