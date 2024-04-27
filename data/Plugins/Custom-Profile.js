@@ -34,6 +34,11 @@ let rank = {
         },
         {
             "id" : 6, 
+            "name": `${await getString("Ranked TFT PAIRS")}`, 
+            "Option": "RANKED_TFT_PAIRS",
+        },
+        {
+            "id" : 7, 
             "name": `${await getString("Arena")}`, 
             "Option": "CHERRY"
         }
