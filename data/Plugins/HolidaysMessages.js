@@ -18,7 +18,7 @@ let message,imageLink,filter
 
 function addData() {
     message = config[newdate]["Text"]
-    imageLink = `${datapath}assets/Image/${config[newdate]["Image"]}`
+    imageLink = `${datapath}Assets/Image/${config[newdate]["Image"]}`
     filter = config[newdate]["filters"]
     console.log(eConsole+`%c ${message}`,eCss,"")
     DataStore.set("Day", newdate)
