@@ -29,6 +29,7 @@ export function Settings(context) {
 
     const themeTab = newSettingsTab("theme_settings")
     const pluginsTab = newSettingsTab("plugins_settings")
+    const backupRestore = newSettingsTab("backup_restore_settings")
     const about = newSettingsTab("aboutus_settings")
 
     context.rcp.postInit('rcp-fe-lol-settings', async (api) => {
@@ -62,6 +63,7 @@ export function Settings(context) {
 
         newGroupPush('el-theme-settings','el_theme-settings')
         newGroupPush('el-plugins-settings','el_plugins-settings')
+        newGroupPush('el-backup-restore-settings','el_backup-restore-settings')
         newGroupPush('el-aboutus-settings','el_aboutus-settings')
 
         api._modalManager._registeredCategoryGroups.splice(1, 0, newGroup)
@@ -80,6 +82,7 @@ export function Settings(context) {
             result.map(function() {
                 this.route('el-theme-settings')
                 this.route('el-plugins-settings')
+                this.route('el-backup-restore-settings')
                 this.route('el-aboutus-settings')
             })
 
@@ -98,6 +101,7 @@ export function Settings(context) {
                     case 'el_title_capital': return 'ELAINA THEME'
                     case 'el_theme-settings': return 'THEME SETTINGS'
                     case 'el_plugins-settings': return 'PLUGINS SETTINGS'
+                    case 'el_backup-restore-settings': return 'BACKUP & RESTORE'
                     case 'el_aboutus-settings': return 'ABOUT US'
                     default: break;
                 }
@@ -118,6 +122,7 @@ export function Settings(context) {
             result.map(function() {
                 this.route('el-theme-settings')
                 this.route('el-plugins-settings')
+                this.route('el-backup-restore-settings')
                 this.route('el-aboutus-settings')
             })
 
@@ -145,6 +150,7 @@ export function Settings(context) {
 
                     addTab('el-theme-settings',"ElainaThemeSettings",themeTab)
                     addTab('el-plugins-settings',"ElainaPluginsSettings",pluginsTab)
+                    addTab('el-backup-restore-settings',"ElainaBackupRestoreSettings",backupRestore)
                     addTab('el-aboutus-settings',"ElainaAboutUsSettings",about)
                 }
                 
@@ -162,6 +168,20 @@ function writeBackupData() {
         mirage[key] = DataStore.get(key)
     })
     writeBackup(DataStore.get("Summoner-ID"), "datastore.json", JSON.stringify(mirage))
+}
+
+function setDefaultData(list, restore) {
+	Object.entries(list).forEach(([key, value]) => {
+	  	if (!DataStore.has(key)) {
+			DataStore.set(key, value);
+			console.log(`${key} data restored`)
+	  	}
+		else if (DataStore.has(key) && restore) {
+			DataStore.set(key, value);
+			console.log(`${key} data restored`)
+	  	}
+
+	});
 }
 
 window.writeBackupData = writeBackupData
@@ -196,12 +216,13 @@ async function restartAfterChange(el, data) {
             keys.forEach(key => {
                 mirage[key] = DataStore.get(key)
             })
-            if (DataStore.get("backup-datastore")) writeBackupData()
-            
-            window.setTimeout(()=>{
-                window.restartClient()
-            }, 3000)
-            
+            if (DataStore.get("backup-datastore")) {
+                writeBackupData()
+                window.setTimeout(()=>{
+                    window.restartClient()
+                }, 3000)
+            }
+            else window.restartClient()
         })
 
         target.append(a)
@@ -233,7 +254,7 @@ const UI = {
         img.classList.add(cls)
         return img
     },
-    Link: (text, href, onClick) => {
+    Link: (text, href, onClick, ID) => {
         const link = document.createElement('p')
         link.classList.add('lol-settings-code-of-conduct-link')
         link.classList.add('lol-settings-window-size-text')
@@ -243,6 +264,8 @@ const UI = {
         a.target = '_blank'
         a.href = href
         a.onclick = onClick || null
+        a.download
+        a.id = ID || null
     
         link.append(a)
         return link
@@ -273,6 +296,40 @@ const UI = {
                 },
             }
             DataStore.set(target, input.value)
+        }
+        origin.appendChild(searchbox)
+        return origin
+    },
+    SpeedInput: (target) => {
+        const origin = document.createElement('lol-uikit-flat-input')
+        const searchbox = document.createElement('input')
+    
+        origin.classList.add(target)
+        origin.style.marginBottom = '12px'
+    
+        searchbox.type = 'url'
+        searchbox.placeholder = DataStore.get(target)
+        searchbox.style.width = '75px'
+        searchbox.style.textAlign = "end"
+        searchbox.name = 'name'
+        searchbox.oninput = async ()=>{
+            let input = {
+                get value() {
+                    return searchbox.value
+                },
+            }
+
+            if (input.value >= 6.25 && input.value <= 300) {
+                DataStore.set(target, input.value)
+                document.getElementById("speed-check").textContent = ""
+                document.getElementById("speed-check").style.color = ""
+            }
+            else {
+                document.getElementById("speed-check").textContent = await getString("speed-check-deny")
+                document.getElementById("speed-check").style.color = "red"
+            }
+
+            document.getElementById('elaina-bg').playbackRate = DataStore.get("Playback-speed")/100
         }
         origin.appendChild(searchbox)
         return origin
@@ -482,6 +539,16 @@ const UI = {
         link.append(img)
 
         return link
+    },
+    fileInput: (Id, acceptFile, onChange) => {
+        const input = document.createElement("input")
+        input.type = "file"
+        input.accept = acceptFile
+        input.id = Id
+        input.onchange = onChange
+        input.style.display = "none"
+
+        return input
     }
 }
 
@@ -522,6 +589,13 @@ const themesSettings = async (panel) => {
             UI.Slider(
                 await getString("wallpaper-volume"),DataStore.get("wallpaper-volume"),"elaina-bg","wallpaper-volume"
             ),
+            UI.Label(await getString("Wallpaper-Speed"), ""),
+            UI.Row("changePlaybackRow",[
+                UI.SpeedInput("Playback-speed"),
+                UI.Label("%","playback-percent"),
+            ]),
+            UI.Label("", "speed-check"),
+            document.createElement('br'),
             UI.Slider(
                 await getString("music-volume"),DataStore.get("audio-volume"),"bg-audio","audio-volume"
             ),
@@ -563,25 +637,25 @@ const themesSettings = async (panel) => {
                 },true
             ),
             document.createElement('br'),
+            document.createElement('br'),
             UI.CheckBox(
-                `${await getString("backup-datastore")}`,'bakdata','bakdatabox', ()=>{
-                    let el = document.getElementById("bakdata")
-                    let box = document.getElementById("bakdatabox")
+                `${await getString("Custom-Navbar-Css")}`,'cusnavcss','cusnavcssbox', ()=>{
+                    restartAfterChange("cusnavcss","Custom-Navbar-Css")
+                    let el = document.getElementById("cusnavcss")
+                    let box = document.getElementById("cusnavcssbox")
             
-                    if (DataStore.get("backup-datastore")) {
+                    if (DataStore.get("Custom-Navbar-Css")) {
                         el.removeAttribute("class")
                         box.checked = false
-                        DataStore.set("backup-datastore", false)
-                        deleteBackup(DataStore.get("Summoner-ID"))
+                        DataStore.set("Custom-Navbar-Css", false)
                     }
                     else {
                         el.setAttribute("class", "checked")
                         box.checked = true
-                        DataStore.set("backup-datastore", true)
+                        DataStore.set("Custom-Navbar-Css", true)
                     }
-                },true
+                },true, "Custom-Navbar-Css"
             ),
-            document.createElement('br'),
             document.createElement('br'),
             UI.CheckBox(
                 `${await getString("old-prev/next-button")}`,"oldpnb","oldpnbbox",
@@ -1821,6 +1895,184 @@ const pluginsSettings = async (panel) => {
 
 
 
+const backuprestoretab = async (panel) => {
+    async function CheckBackupFile() {
+        try {
+            document.getElementById("datastore-cloud-checking").textContent = `${await getString("Loading")}...`
+            document.getElementById("datastore-cloud-checking").style.color = "#a09b8c"
+        }catch{}
+        window.setTimeout(async ()=>{
+            let a = document.querySelector(".restore-data-button")
+            let b = document.querySelector(".delete-data-button")
+            let c = document.getElementById("datastore-cloud-checking")
+            let checkFile = await readfile(`DataStore-backup/${await utils.getSummonerID()}/datastore.json`)
+            if (checkFile.success) {
+                console.log("You have backup file on cloud, ready to restore it.")
+                c.textContent = `${await getString("Check-Backup.success")}`
+                c.style.color = "green"
+                a.style.visibility = "visible"
+                b.style.visibility = "visible"
+            }
+            else {
+                console.log("You don't have backup file on cloud yet.")
+                c.textContent = `${await getString("Check-Backup.error")}`
+                c.style.color = "red"
+                a.style.visibility = "hidden"
+                b.style.visibility = "hidden"
+            }
+        }, 2000)
+    }
+    CheckBackupFile()
+
+    panel.prepend(
+        UI.Row("",[
+            UI.Label("Manual backup and restore", ""),
+            document.createElement('br'),
+            UI.Row("manualRestoreBackup", [
+                UI.Button("Backup", "ManualBackup", async () => {
+                    let sumID = await utils.getSummonerID()
+                    let keys = Object.keys(datastore_list)
+                    let mirage = datastore_list
+                    keys.forEach(key => {
+                        mirage[key] = DataStore.get(key)
+                    })
+
+                    let blob = new Blob([JSON.stringify(mirage)], { type: 'application/json' })
+                    let a = document.getElementById("downloadBackup")
+                    
+                    a.href = URL.createObjectURL(blob)
+                    a.download = `${sumID}.json`
+                    a.click()
+                    a.href = ""
+                }),
+                document.createElement('br'),
+                UI.Row("RestoreRow", [
+                    UI.Button(await getString("Restore-Data"),"ManualRestore", () => {
+                        document.getElementById("manualRestoreInput").click()
+                    }),
+                    UI.Label("", "restoreFileInfo")
+                ]),
+                UI.fileInput("manualRestoreInput", ".json", async (event)=> {
+                    const file = event.target.files[0]
+                    let text = document.getElementById("restoreFileInfo")
+                    
+                    if (file && file.type === "application/json") {
+                        const reader = new FileReader();
+                    
+                        reader.onload = async (e) => {
+                            text.textContent = await getString("Manual-restore-inProgress")
+                            text.style.color = "blue"
+                            try {
+                                const json = JSON.parse(e.target.result);
+                                let restoreData = new Promise((resolve, reject) => {
+                                    setTimeout(async () => {
+                                        try { 
+                                            setDefaultData(json, true)
+                                            resolve()
+                                            window.setTimeout(()=>window.restartClient(),2000)
+                                        }
+                                        catch {
+                                            reject()
+                                            console.log(eConsole+`%c Datastore file not found, avoid restoring`,eCss,"")
+                                        }
+                                    },5000)
+                                })
+                                
+                                Toast.promise(restoreData, {
+                                    loading: 'Restoring Datastore...',
+                                    success: 'Restore complete!',
+                                    error: 'Error while restoring data, check console for more info!'
+                                })
+                            } catch {
+                                text.textContent = await getString("Invalid-JSON")
+                                text.style.color = "red"
+                            }
+                        };
+                    
+                        reader.readAsText(file);
+                    } else {
+                        text.textContent = await getString("JSON-file-only")
+                        text.style.color = "red"
+                    }
+                }),
+                UI.Link("", ``, ()=> {}, "downloadBackup")
+            ]),
+            UI.CheckBox(
+                `${await getString("backup-datastore")}`,'bakdata','bakdatabox',()=>{
+                    let el = document.getElementById("bakdata")
+                    let box = document.getElementById("bakdatabox")
+            
+                    if (DataStore.get("backup-datastore")) {
+                        el.removeAttribute("class")
+                        box.checked = false
+                        DataStore.set("backup-datastore", false)
+                        //deleteBackup(DataStore.get("Summoner-ID"))
+                    }
+                    else {
+                        el.setAttribute("class", "checked")
+                        box.checked = true
+                        DataStore.set("backup-datastore", true)
+                        CheckBackupFile()
+                        writeBackupData()
+                    }
+                },true
+            ),
+            UI.Label(`${await getString("Loading")}...`, "datastore-cloud-checking"),
+            document.createElement('br'),
+            UI.Row("restoreAndDeleteData", [
+                UI.Button(`${await getString("Restore-Data")}`, "restore-data-button", () => {
+                    let restoreData = new Promise((resolve, reject) => {
+                        setTimeout(async () => {
+                            try { 
+                                let summonerID = await utils.getSummonerID()
+                                let cloud = await readBackup(summonerID, "datastore.json")
+                                if (cloud.success) {
+                                    setDefaultData(JSON.parse(cloud.content), true)
+                                    resolve()
+                                    window.setTimeout(()=>window.restartClient(),2000)
+                                }
+                            }
+                            catch {
+                                reject()
+                                console.log(eConsole+`%c Datastore file not found, avoid restoring`,eCss,"")
+                            }
+                        },5000)
+                    })
+                    
+                    Toast.promise(restoreData, {
+                        loading: 'Restoring Datastore...',
+                        success: 'Restore complete!',
+                        error: 'Error while restoring data, check console for more info!'
+                    })
+                }),
+                UI.Button(`${await getString("Delete-Data")}`, "delete-data-button",async () => {
+                    deleteBackup(DataStore.get("Summoner-ID"))
+                    CheckBackupFile()
+                }),
+            ]),
+        ])
+    )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const aboutustab = (panel) => {
     panel.prepend(
         UI.Row("",[
@@ -1927,6 +2179,7 @@ window.addEventListener('load', async () => {
                 const plugin = document.querySelector('div.lol-settings-options > lol-uikit-scrollable.plugins_settings')
                 const theme = document.querySelector('div.lol-settings-options > lol-uikit-scrollable.theme_settings')
                 const aboutus = document.querySelector('div.lol-settings-options > lol-uikit-scrollable.aboutus_settings')
+                const backupandrestore = document.querySelector('div.lol-settings-options > lol-uikit-scrollable.backup_restore_settings')
 
                 if (theme && mutations.some((record) => Array.from(record.addedNodes).includes(theme))) {
                     themesSettings(theme)
@@ -1934,6 +2187,7 @@ window.addEventListener('load', async () => {
                         if (document.getElementById("Info")) {
                             clearInterval(check)
                             //tickcheck(DataStore.get(""), el, box)
+                            tickcheck(DataStore.get("Custom-Navbar-Css"), "cusnavcss", "cusnavcssbox")
                             tickcheck(DataStore.get("backup-datastore"), "bakdata", "bakdatabox")
                             tickcheck(DataStore.get("turnoff-audio-ingame"), "offaudio", "offaudiobox")
                             tickcheck(DataStore.get("Change-CDN-version"), "cdnver", "cdnverbox")
@@ -2012,6 +2266,16 @@ window.addEventListener('load', async () => {
                             tickcheck(DataStore.get("buy-all-champs"), "byc", "bycbox")
                             tickcheck(DataStore.get("Custom-rank"), "cusrankhover", "cusrankhoverbox")
                             tickcheck(DataStore.get("auto_accept_button"), "autoacceptbutton", "autoacceptbuttonbox")
+                        }
+                    },100)
+                }
+                else if (backupandrestore && mutations.some((record) => Array.from(record.addedNodes).includes(backupandrestore))) {
+                    backuprestoretab(backupandrestore)
+                    let check = setInterval (()=>{
+                        if (document.getElementById("bakdata")) {
+                            clearInterval(check)
+                            //tickcheck(DataStore.get(""), el, box)
+                            tickcheck(DataStore.get("backup-datastore"), "bakdata", "bakdatabox")
                         }
                     },100)
                 }
