@@ -1,7 +1,7 @@
 export default {
 	"Theme-version"					:"",
 	"Cdn-version"					:"",
-	"backup-datastore"				: true,
+	"backup-datastore"				: false,
 	"turnoff-audio-ingame"			: true,
 	"Change-CDN-version"			: false,
 	"Elaina-Plugins"				: true,
@@ -95,4 +95,5 @@ export default {
 	"seconds1"						: 0,
 	"minutes1"						: 0,
 	"hours1"						: 0,
+	"Custom-Navbar-Css"				: true,
 }
