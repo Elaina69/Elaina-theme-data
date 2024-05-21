@@ -1,4 +1,17 @@
 export default [
-    "Fix custom animate gamemode icon (I forgot this actually))",
-    "Add some comment things"
+    "Update new homepage",
+    "Update Css",
+    "New default wallpaper",
+    "Add progress bar for music",
+    "Add wallpaper speed setting",
+    "Add custom-2nd-navbar-css checkbox on settings",
+    "Separate backup tab on settings",
+    "Now you can backup/restore file by save it locally",
+    "Remove LOR shortcut",
+    "Fix backup link",
+    "Change default datastore",
+    "",
+    "",
+    "Upcoming update (will available right after install pengu v1.2.0 (or sth else i dunnu))",
+    "Wallpaper/music will start where they stop",
 ]
