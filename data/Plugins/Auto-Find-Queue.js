@@ -60,6 +60,9 @@ export function AutoQueue(context) {
 
 window.addEventListener("load",()=>{ 
 	let getList = window.setInterval(()=> {
-		if (!DataStore.get("queueList") || DataStore.get("queueList")["Gamemode"] == []) getQueueList()
+		getQueueList()
+		window.setTimeout(()=> {
+			window.clearInterval(getList)
+		},5000)
 	}, 1000) 
 })

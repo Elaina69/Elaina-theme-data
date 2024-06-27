@@ -19,8 +19,13 @@ async function createMenu(root) {
 									<p class="Elaina-Update" style="text-align: center">If you love Elaina theme, you can support me by sharing this theme to your friend</p>
 									<p class="Elaina-Update" style="text-align: center">or donating me</p>
 									<div id="donate">
+										<!--
 										<a href="https://ko-fi.com/elainadacatto" target="_blank" id="kofi">
 											<img src="${datapath}Assets/Icon/ko-fi.webp" class="donate"></img>
+										</a>
+										-->
+										<a href="https://www.paypal.com/paypalme/ElainaDaCattoRiel" target="_blank" id="paypal">
+											<img src="${datapath}Assets/Icon/paypal.png" class="donate"></img>
 										</a>
 										<a href="https://me.momo.vn/elainadacatto" target="_blank" id="momo">
 											<img src="${datapath}Assets/Icon/momo.svg" class="donate"></img>

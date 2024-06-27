@@ -8,157 +8,50 @@ import ChampsP from "../Configs/ChampionsPrices.js"
 import utils from '../Utilities/_utils'
 import cdnVersion from "../Update/CDNversion-list.js"
 import datastore_list from "../Configs/Datastore-default.js"
+import { settingsUtils } from "https://unpkg.com/blank-settings-utils@latest/Settings-Utils.js"
+
+let data = [
+    {
+        "groupName": 'elaina-v4',
+        "titleKey": 'el_title',
+        "titleName": 'Elaina theme',
+        "capitalTitleKey": 'el_title_capital',
+        "capitalTitleName": 'ELAINA THEME',
+        "element": [
+            {
+                "name": "el-theme-settings",
+                "title": "el_theme-settings",
+                "titleName": "THEME SETTINGS",
+                "class": "theme_settings",
+                "id": "ElainaThemeSettings",
+            },
+            {
+                "name": "el-plugins-settings",
+                "title": "el_plugins-settings",
+                "titleName": "PLUGINS SETTINGS",
+                "class": "plugins_settings",
+                "id": "ElainaPluginsSettings",
+            },
+            {
+                "name": "el-backup-restore-settings",
+                "title": "el_backup-restore-settings",
+                "titleName": "BACKUP & RESTORE",
+                "class": "backup_restore_settings",
+                "id": "ElainaBackupRestoreSettings",
+            },
+            {
+                "name": "el-aboutus-settings",
+                "title": "el_aboutus-settings",
+                "titleName": "ABOUT US",
+                "class": "aboutus_settings",
+                "id": "ElainaAboutUsSettings",
+            },
+        ],
+    },
+]
 
 export function Settings(context) {
-    function newSettingsTab(className) {
-        let tab = {
-            "statements":[
-                ["open-element","lol-uikit-scrollable",[]],
-                ["static-attr","class",className],
-                ["flush-element"],
-                    ["close-element"]
-            ],
-            "locals":[],
-            "named":[],
-            "yields":[],
-            "blocks":[],
-            "hasPartials":false
-        }
-        return tab
-    }
-
-    const themeTab = newSettingsTab("theme_settings")
-    const pluginsTab = newSettingsTab("plugins_settings")
-    const backupRestore = newSettingsTab("backup_restore_settings")
-    const about = newSettingsTab("aboutus_settings")
-
-    context.rcp.postInit('rcp-fe-lol-settings', async (api) => {
-        window.__RCP_SETTINGS_API = api
-
-        let ember_api = window.__RCP_EMBER_API
-        let ember = await ember_api.getEmber()
-
-        let newGroup = {
-            name: 'elaina-v4',
-            titleKey: 'el_title',
-            capitalTitleKey: 'el_title_capital',
-            categories:[]
-        }
-
-        let newGroupPush = (Name, Title) => {
-            newGroup.categories.push({
-                name: Name,
-                titleKey: Title,
-                routeName: Name,
-                group: newGroup,
-                loginStatus: true,
-                requireLogin: false,
-                forceDisabled: false,
-                computeds: ember.Object.create({
-                    disabled: false
-                }),
-                isEnabled: () => true,
-            })
-        }
-
-        newGroupPush('el-theme-settings','el_theme-settings')
-        newGroupPush('el-plugins-settings','el_plugins-settings')
-        newGroupPush('el-backup-restore-settings','el_backup-restore-settings')
-        newGroupPush('el-aboutus-settings','el_aboutus-settings')
-
-        api._modalManager._registeredCategoryGroups.splice(1, 0, newGroup)
-        api._modalManager._refreshCategoryGroups()
-    })
-
-    context.rcp.postInit('rcp-fe-ember-libs', async (api) => {
-        window.__RCP_EMBER_API = api
-
-        let ember = await api.getEmber()
-
-        let originalExtend = ember.Router.extend
-        ember.Router.extend = function() {
-            let result = originalExtend.apply(this, arguments)
-
-            result.map(function() {
-                this.route('el-theme-settings')
-                this.route('el-plugins-settings')
-                this.route('el-backup-restore-settings')
-                this.route('el-aboutus-settings')
-            })
-
-            return result
-        }
-    },
-
-    context.rcp.postInit('rcp-fe-lol-l10n', async (api) => {
-        let tra = api.tra()
-
-        let originalGet = tra.__proto__.get
-        tra.__proto__.get = function(key) {
-            if (key.startsWith('el_')) {
-                switch (key) {
-                    case 'el_title': return 'Elaina theme'
-                    case 'el_title_capital': return 'ELAINA THEME'
-                    case 'el_theme-settings': return 'THEME SETTINGS'
-                    case 'el_plugins-settings': return 'PLUGINS SETTINGS'
-                    case 'el_backup-restore-settings': return 'BACKUP & RESTORE'
-                    case 'el_aboutus-settings': return 'ABOUT US'
-                    default: break;
-                }
-            }
-
-            return originalGet.apply(this, [key]);
-        }
-    }),
-
-    context.rcp.postInit('rcp-fe-ember-libs', async (api) => {
-        window.__RCP_EMBER_API = api
-
-        let ember = await api.getEmber()
-
-        let originalExtend = ember.Router.extend
-        ember.Router.extend = function() {
-            let result = originalExtend.apply(this, arguments)
-            result.map(function() {
-                this.route('el-theme-settings')
-                this.route('el-plugins-settings')
-                this.route('el-backup-restore-settings')
-                this.route('el-aboutus-settings')
-            })
-
-            return result
-        }
-
-        let factory = await api.getEmberApplicationFactory()
-
-        let originalBuilder = factory.factoryDefinitionBuilder
-        factory.factoryDefinitionBuilder = function() {
-            let builder = originalBuilder.apply(this, arguments)
-            let originalBuild = builder.build
-            builder.build = function() {
-                let name = this.getName()
-                if (name == 'rcp-fe-lol-settings') {
-                    window.__SETTINGS_OBJECT = this
-
-                    let addTab = (Name,Id,Tab) => {
-                        this.addTemplate(Name, ember.HTMLBars.template({
-                            id: Id,
-                            block: JSON.stringify(Tab),
-                            meta: {}
-                        }))
-                    }
-
-                    addTab('el-theme-settings',"ElainaThemeSettings",themeTab)
-                    addTab('el-plugins-settings',"ElainaPluginsSettings",pluginsTab)
-                    addTab('el-backup-restore-settings',"ElainaBackupRestoreSettings",backupRestore)
-                    addTab('el-aboutus-settings',"ElainaAboutUsSettings",about)
-                }
-                
-                return originalBuild.apply(this, arguments)
-            }
-            return builder
-        }
-    }))
+    settingsUtils(context, data)
 }
 
 function writeBackupData() {
@@ -1319,7 +1212,7 @@ const themesSettings = async (panel) => {
                         cdnverbox.checked = true
                         DataStore.set("Change-CDN-version", true)
                     }
-                },true,"Change-CDN-version"
+                },DataStore.get("Dev-button"),"Change-CDN-version"
             ),
             document.createElement('br'),
             UI.DropdownCDNversion(),
@@ -1599,7 +1492,7 @@ const pluginsSettings = async (panel) => {
                         DataStore.set("April fool` joke", true)
                         _1_4el.setAttribute("class", "checked")
                     }
-                    },true
+                    },DataStore.get("Dev-button")
                 )
             ]),
             /*UI.Row("pandoru",[
@@ -1740,20 +1633,20 @@ const pluginsSettings = async (panel) => {
                         }
                         },true, "Custom-rank"
                     ),
-                    UI.Button(await getString("Refresh"), "refresh_option", async () => {
-                        let requestRank = {
-                            "lol": {
-                                "rankedLeagueQueue"    : rank["Ranked Queue ID"][DataStore.get("Ranked Queue ID")]["Option"],
-                                "rankedLeagueTier"     : rank["Ranked Tier ID"][DataStore.get("Ranked Tier ID")]["Option"],
-                                "rankedLeagueDivision" : rank["Ranked Division ID"][DataStore.get("Ranked Division ID")]["name"]
-                            }
-                        }
-                        await fetch("/lol-chat/v1/me", {
-                            method: "PUT",
-                            headers: {"content-type": "application/json"},
-                            body: JSON.stringify(requestRank)
-                        })
-                    })
+                    // UI.Button(await getString("Refresh"), "refresh_option", async () => {
+                    //     let requestRank = {
+                    //         "lol": {
+                    //             "rankedLeagueQueue"    : rank["Ranked Queue ID"][DataStore.get("Ranked Queue ID")]["Option"],
+                    //             "rankedLeagueTier"     : rank["Ranked Tier ID"][DataStore.get("Ranked Tier ID")]["Option"],
+                    //             "rankedLeagueDivision" : rank["Ranked Division ID"][DataStore.get("Ranked Division ID")]["name"]
+                    //         }
+                    //     }
+                    //     await fetch("/lol-chat/v1/me", {
+                    //         method: "PUT",
+                    //         headers: {"content-type": "application/json"},
+                    //         body: JSON.stringify(requestRank)
+                    //     })
+                    // })
                 ]),
                 document.createElement('br'),
                 UI.Dropdown(rank, "Ranked Queue ID", `${await getString("Ranked Queue")}`, "name", "id"),
@@ -1849,7 +1742,7 @@ const pluginsSettings = async (panel) => {
                     debugbox.checked = true
                     DataStore.set("Debug-mode", true)
                     }
-                },true,"Debug-mode"
+                },DataStore.get("Dev-button"),"Debug-mode"
             ),
             document.createElement('br'),
             UI.CheckBox(
@@ -2123,7 +2016,8 @@ const aboutustab = (panel) => {
                 UI.Label("If you love Elaina theme, you can support me by sharing this theme to your friend"),
                 UI.Label("or donating me"),
                 UI.Row("Donation-row",[
-                    UI.ImageAndLink("ko-fi.webp","https://ko-fi.com/elainadacatto"),
+                    //UI.ImageAndLink("ko-fi.webp","https://ko-fi.com/elainadacatto"),
+                    UI.ImageAndLink("paypal.png","https://www.paypal.com/paypalme/ElainaDaCattoRiel"),
                     UI.ImageAndLink("momo.svg", "https://me.momo.vn/elainadacatto"),
                 ])
             ])
@@ -2212,7 +2106,7 @@ window.addEventListener('load', async () => {
                             tickcheck(DataStore.get("Runes-BG"), "rsbg", "rsbgbox")
                             tickcheck(DataStore.get("hide-vertical-lines"), "hidevl", "hidevlbox")
                             tickcheck(DataStore.get("Sidebar-Transparent"), "sbt", "sbtbox")
-                            tickcheck(DataStore.get("Hide-Champions-Splash-Art"), "hidechampart", "hidechampart")
+                            tickcheck(DataStore.get("Hide-Champions-Splash-Art"), "hidechampart", "hidechampartbox")
                             tickcheck(DataStore.get("Custom-Font"), "cusfont", "cusfontbox")
                             tickcheck(DataStore.get("Custom_RP"), "cusrp", "cusrpbox")
                             tickcheck(DataStore.get("Custom_BE"), "cusbe", "cusbebox")
