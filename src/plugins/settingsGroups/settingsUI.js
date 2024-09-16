@@ -316,6 +316,15 @@ const UI = {
         input.style.display = "none"
 
         return input
+    },
+    colorPicker: (Id, targetDataStore, onChange) => {
+        const input = document.createElement("input")
+        input.type = "color"
+        input.id = Id
+        input.value = DataStore.get(targetDataStore)
+        input.onchange = onChange
+
+        return input
     }
 }
 

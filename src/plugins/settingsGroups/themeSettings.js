@@ -499,6 +499,39 @@ async function themesSettings(panel) {
             UI.Input("Rank-line2"),
             document.createElement('br'),
             UI.CheckBox(
+                `${await getString("change-nickname-color")}`,'nicknamecolor','nicknamecolorbox', ()=>{
+                    let el = document.getElementById("nicknamecolor")
+                    let box = document.getElementById("nicknamecolorbox")
+            
+                    if (DataStore.get("change-nickname-color")) {
+                        el.removeAttribute("class")
+                        box.checked = false
+                        DataStore.set("change-nickname-color", false)
+                    }
+                    else {
+                        el.setAttribute("class", "checked")
+                        box.checked = true
+                        DataStore.set("change-nickname-color", true)
+                    }
+                },true
+            ),
+            document.createElement('br'),
+            UI.colorPicker("nickname-color", "nickname-color", () => {
+                if (DataStore.get("change-nickname-color")) {
+                    let input = document.getElementById("nickname-color")
+                    DataStore.set("nickname-color", input.value)
+                    try {
+                        document.getElementById("nickname-color-css").remove()
+                    }catch{}
+                    utils.addStyleWithID("nickname-color-css", /*css*/`
+                        span.player-name__force-locale-text-direction {
+                            color: ${input.value};
+                        }
+                    `)
+                }
+            }),
+            document.createElement('br'),
+            UI.CheckBox(
                 `${await getString("animate-loading")}`,'aniload','aniloadbox',
                 ()=>{
                     let aniloadel = document.getElementById("aniload")
@@ -1031,6 +1064,7 @@ function themeSettingsCheckbox() {
     tickcheck(DataStore.get("settings-dialogs-transparent"), "stdiat", "stdiatbox")
     tickcheck(DataStore.get("old-prev/next-button"), "oldpnb", "oldpnbbox")
     tickcheck(DataStore.get("lobby-transparent-filter"), 'ltf', 'ltfbox')
+    tickcheck(DataStore.get("change-nickname-color"), 'nicknamecolor', 'nicknamecolorbox')
 }
 
 export { themesSettings, themeSettingsCheckbox }
