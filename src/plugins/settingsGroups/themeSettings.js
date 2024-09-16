@@ -531,6 +531,7 @@ async function themesSettings(panel) {
                 }
             }),
             document.createElement('br'),
+            document.createElement('br'),
             UI.CheckBox(
                 `${await getString("animate-loading")}`,'aniload','aniloadbox',
                 ()=>{
