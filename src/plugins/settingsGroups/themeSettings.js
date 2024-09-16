@@ -16,7 +16,7 @@ async function themesSettings(panel) {
                 ]),
                 UI.Image("Logo.png", "theme-settings-logo")
             ]),
-            UI.Label(await getString("add-background-manually")),
+            UI.Label(await getString("update-list-manually")),
             UI.Row("add-background-manually-row", [
                 UI.Label(" ", "add-background-manual-message"),
                 UI.Label(await getString("wallpaper")),
