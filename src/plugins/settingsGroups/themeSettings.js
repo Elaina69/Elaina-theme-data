@@ -507,22 +507,26 @@ async function themesSettings(panel) {
                         el.removeAttribute("class")
                         box.checked = false
                         DataStore.set("change-nickname-color", false)
+                        document.getElementById("nickname-color-css").remove()
                     }
                     else {
                         el.setAttribute("class", "checked")
                         box.checked = true
                         DataStore.set("change-nickname-color", true)
+                        utils.addStyleWithID("nickname-color-css", /*css*/`
+                            span.player-name__force-locale-text-direction {
+                                color: ${DataStore.get("nickname-color")};
+                            }
+                        `)
                     }
                 },true
             ),
             document.createElement('br'),
             UI.colorPicker("nickname-color", "nickname-color", () => {
+                let input = document.getElementById("nickname-color")
+                DataStore.set("nickname-color", input.value)
                 if (DataStore.get("change-nickname-color")) {
-                    let input = document.getElementById("nickname-color")
-                    DataStore.set("nickname-color", input.value)
-                    try {
-                        document.getElementById("nickname-color-css").remove()
-                    }catch{}
+                    document.getElementById("nickname-color-css").remove()
                     utils.addStyleWithID("nickname-color-css", /*css*/`
                         span.player-name__force-locale-text-direction {
                             color: ${input.value};
@@ -1053,8 +1057,8 @@ function themeSettingsCheckbox() {
     tickcheck(DataStore.get("Custom-Trophy"), "custrophy", "custrophybox")
     tickcheck(DataStore.get("Runes-BG"), "rsbg", "rsbgbox")
     tickcheck(DataStore.get("hide-vertical-lines"), "hidevl", "hidevlbox")
-    tickcheck(DataStore.get("Sidebar-Transparent"), "sbt", "sbtbox")
-    tickcheck(DataStore.get("Hide-Champions-Splash-Art"), "hidechampart", "hidechampartbox")
+    tickcheck(DataStore.get("sidebar-transparent"), "sbt", "sbtbox")
+    tickcheck(DataStore.get("hide-champions-splash-art"), "hidechampart", "hidechampartbox")
     tickcheck(DataStore.get("Custom-Font"), "cusfont", "cusfontbox")
     tickcheck(DataStore.get("Custom_RP"), "cusrp", "cusrpbox")
     tickcheck(DataStore.get("Custom_BE"), "cusbe", "cusbebox")
