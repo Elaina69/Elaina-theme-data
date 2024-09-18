@@ -152,4 +152,5 @@ export default {
     "open-background-folder"    : "Mở thư mục backgrounds",
     "lobby-transparent-filter"  : "Filter trong suốt cho sảnh chờ",
     "change-nickname-color"     : "Đổi màu tên người chơi",
+    "opacity"   : "Độ mờ",
 }

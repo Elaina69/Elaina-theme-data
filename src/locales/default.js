@@ -151,4 +151,5 @@ export default {
     "open-background-folder"    : "Open backgrounds's folder",
     "lobby-transparent-filter"  : "Lobby transparent filter",
     "change-nickname-color"     : "Change nickname color",
+    "opacity"   : "Opacity",
 }
