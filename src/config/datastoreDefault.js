@@ -102,5 +102,7 @@ export default {
 	"manual-font-name"				: "Ex: Font.ttf",
 	"change-nickname-color"			: true,
 	"nickname-color"				: "#f2c1d0",
+	"nickname-opacity"				: "ff",
+	"nickname-color-with-opacity"	: "#f2c1d0ff",
 	"lobby-transparent-filter"		: true,
 }

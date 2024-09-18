@@ -147,7 +147,6 @@ const UI = {
     
         origin.setAttribute("class", "lol-settings-slider")
         origin.setAttribute("value", `${value}`* 100)
-        origin.setAttribute("percentage", "")
         origin.addEventListener("change", ()=>{
             audio.volume = origin.value / 100;
             DataStore.set(`${setValue}`, origin.value / 100)
@@ -325,7 +324,65 @@ const UI = {
         input.onchange = onChange
 
         return input
-    }
+    },
+    opacitySlider: (Id, text, opacityHexData, onChange) => {
+        const div        = document.createElement("div")
+        const title      = document.createElement("div")
+        const row        = document.createElement('div')
+        const origin     = document.createElement("lol-uikit-slider")
+        const slider     = document.createElement("div")
+        const sliderbase = document.createElement("div")
+    
+        row.setAttribute("class", "lol-settings-sound-row-slider")
+        title.setAttribute("class", "lol-settings-sound-title")
+        title.id = Id+"-title"
+    
+        origin.id = Id
+        origin.setAttribute("class", "lol-settings-slider")
+        origin.setAttribute("value", parseInt(DataStore.get(opacityHexData).slice(0, 2), 16) / 255 * 100)
+        origin.addEventListener("change", onChange)
+    
+        title.innerHTML = `${text}: ${parseInt(DataStore.get(opacityHexData).slice(0, 2), 16) / 255 * 100}%`
+    
+        slider.setAttribute("class", "lol-uikit-slider-wrapper horizontal")
+        sliderbase.setAttribute("class", "lol-uikit-slider-base")
+    
+        div.appendChild(title)
+        div.appendChild(row)
+        row.appendChild(origin)
+        origin.appendChild(slider)
+        slider.appendChild(sliderbase)
+    
+        return div
+    },
+    gradientsCss: (target) => {
+        const origin = document.createElement("div")
+        const dropdown = document.createElement("lol-uikit-framed-dropdown")
+        const gradients = ["Liner gradients", "Radial gradients", "Conic gradients"]
+    
+        origin.classList.add("Dropdown-div")
+        dropdown.classList.add("lol-settings-general-dropdown")
+        origin.append(dropdown)
+        for (let i = 0; i < gradients.length; i++) {
+            const opt = gradients[i]
+            const el = document.createElement("lol-uikit-dropdown-option")
+            el.setAttribute("slot", "lol-uikit-dropdown-option")
+            el.innerText = opt
+            el.onclick = () => {
+                DataStore.set(target, opt)
+                try {
+                    document.querySelector(target).remove()
+                    utils.addStyleWithID(target)
+                }
+                catch{}
+            }
+            if (DataStore.get("CurrentFont") == opt) {
+                el.setAttribute("selected", "true")
+            }
+            dropdown.appendChild(el)
+        }
+        return origin
+    },
 }
 
 export { UI }

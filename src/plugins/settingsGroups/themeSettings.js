@@ -515,27 +515,57 @@ async function themesSettings(panel) {
                         DataStore.set("change-nickname-color", true)
                         utils.addStyleWithID("nickname-color-css", /*css*/`
                             span.player-name__force-locale-text-direction {
-                                color: ${DataStore.get("nickname-color")};
+                                color: ${DataStore.get("nickname-color-with-opacity")};
                             }
                         `)
                     }
                 },true
             ),
             document.createElement('br'),
-            UI.colorPicker("nickname-color", "nickname-color", () => {
-                let input = document.getElementById("nickname-color")
-                DataStore.set("nickname-color", input.value)
-                if (DataStore.get("change-nickname-color")) {
-                    document.getElementById("nickname-color-css").remove()
-                    utils.addStyleWithID("nickname-color-css", /*css*/`
-                        span.player-name__force-locale-text-direction {
-                            color: ${input.value};
+            UI.Row("change-nickname-color-row", [
+                UI.Row("nickname-color-with-text", [
+                    UI.colorPicker("nickname-color", "nickname-color", () => {
+                        let input = document.getElementById("nickname-color")
+        
+                        DataStore.set("nickname-color", input.value)
+                        DataStore.set("nickname-color-with-opacity", input.value + DataStore.get("nickname-opacity"))
+    
+                        document.getElementById("nickname-color-text").innerHTML = DataStore.get("nickname-color-with-opacity")
+        
+                        if (DataStore.get("change-nickname-color")) {
+                            document.getElementById("nickname-color-css").remove()
+        
+                            utils.addStyleWithID("nickname-color-css", /*css*/`
+                                span.player-name__force-locale-text-direction {
+                                    color: ${DataStore.get("nickname-color-with-opacity")};
+                                }
+                            `)
                         }
-                    `)
-                }
-            }),
-            document.createElement('br'),
-            document.createElement('br'),
+                    }),
+                    UI.Label(DataStore.get("nickname-color-with-opacity"), "nickname-color-text")
+                ]),
+                UI.opacitySlider("change-nickname-opacity", await getString("opacity"), "nickname-opacity", async ()=> {
+                    let origin = document.getElementById("change-nickname-opacity")
+                    let title = document.getElementById("change-nickname-opacity-title")
+    
+                    DataStore.set("nickname-opacity", Math.round(origin.value / 100 * 255).toString(16).padStart(2, '0'))
+                    DataStore.set("nickname-color-with-opacity", DataStore.get("nickname-color")+DataStore.get("nickname-opacity"))
+    
+                    title.innerHTML = `${await getString("opacity")}: ${origin.value}%`
+    
+                    document.getElementById("nickname-color-text").innerHTML = DataStore.get("nickname-color-with-opacity")
+    
+                    if ("change-nickname-color") {
+                        document.getElementById("nickname-color-css").remove()
+    
+                        utils.addStyleWithID("nickname-color-css", /*css*/`
+                            span.player-name__force-locale-text-direction {
+                                color: ${DataStore.get("nickname-color-with-opacity")};
+                            }
+                        `)
+                    }
+                }),
+            ]),
             UI.CheckBox(
                 `${await getString("animate-loading")}`,'aniload','aniloadbox',
                 ()=>{
