@@ -1,7 +1,31 @@
 import { UI } from "./settingsUI.js"
 import { tickcheck, restartAfterChange, utils } from "../settings.js"
 
+function updateGradientOptionsVisibility() {
+    const gradientOptions = document.getElementById("gradient-options");
+    if (gradientOptions) {
+        gradientOptions.style.display = DataStore.get("use-gradient-nickname-color") ? "block" : "none";
+    }
+}
+
+function updateGradientCheckboxState() {
+    const el = document.getElementById("gradientnickname")
+    const box = document.getElementById("gradientnicknamecolorbox")
+    if (el && box) {
+        const isEnabled = DataStore.get("use-gradient-nickname-color", false)
+        if (isEnabled) {
+            el.setAttribute("class", "checked")
+            box.checked = true
+            updateGradientNicknameCSS()
+        } else {
+            el.removeAttribute("class")
+            box.checked = false
+        }
+    }
+}
+
 async function themesSettings(panel) {
+    try {
     panel.prepend(
         UI.Row("",[
             UI.Row("Info",[
@@ -515,57 +539,65 @@ async function themesSettings(panel) {
                         DataStore.set("change-nickname-color", true)
                         utils.addStyleWithID("nickname-color-css", /*css*/`
                             span.player-name__force-locale-text-direction {
-                                color: ${DataStore.get("nickname-color-with-opacity")};
+                                color: ${DataStore.get("nickname-color")};
                             }
                         `)
                     }
                 },true
             ),
             document.createElement('br'),
-            UI.Row("change-nickname-color-row", [
-                UI.Row("nickname-color-with-text", [
-                    UI.colorPicker("nickname-color", "nickname-color", () => {
-                        let input = document.getElementById("nickname-color")
-        
-                        DataStore.set("nickname-color", input.value)
-                        DataStore.set("nickname-color-with-opacity", input.value + DataStore.get("nickname-opacity"))
-    
-                        document.getElementById("nickname-color-text").innerHTML = DataStore.get("nickname-color-with-opacity")
-        
-                        if (DataStore.get("change-nickname-color")) {
-                            document.getElementById("nickname-color-css").remove()
-        
-                            utils.addStyleWithID("nickname-color-css", /*css*/`
-                                span.player-name__force-locale-text-direction {
-                                    color: ${DataStore.get("nickname-color-with-opacity")};
-                                }
-                            `)
+            UI.colorPicker("nickname-color", "nickname-color", () => {
+                let input = document.getElementById("nickname-color")
+                DataStore.set("nickname-color", input.value)
+                if (DataStore.get("change-nickname-color")) {
+                    document.getElementById("nickname-color-css").remove()
+                    utils.addStyleWithID("nickname-color-css", /*css*/`
+                        span.player-name__force-locale-text-direction {
+                            color: ${input.value};
                         }
-                    }),
-                    UI.Label(DataStore.get("nickname-color-with-opacity"), "nickname-color-text")
-                ]),
-                UI.opacitySlider("change-nickname-opacity", await getString("opacity"), "nickname-opacity", async ()=> {
-                    let origin = document.getElementById("change-nickname-opacity")
-                    let title = document.getElementById("change-nickname-opacity-title")
-    
-                    DataStore.set("nickname-opacity", Math.round(origin.value / 100 * 255).toString(16).padStart(2, '0'))
-                    DataStore.set("nickname-color-with-opacity", DataStore.get("nickname-color")+DataStore.get("nickname-opacity"))
-    
-                    title.innerHTML = `${await getString("opacity")}: ${origin.value}%`
-    
-                    document.getElementById("nickname-color-text").innerHTML = DataStore.get("nickname-color-with-opacity")
-    
-                    if ("change-nickname-color") {
-                        document.getElementById("nickname-color-css").remove()
-    
-                        utils.addStyleWithID("nickname-color-css", /*css*/`
-                            span.player-name__force-locale-text-direction {
-                                color: ${DataStore.get("nickname-color-with-opacity")};
-                            }
-                        `)
+                    `)
+                }
+            }),
+            document.createElement('br'),            
+            document.createElement('br'),
+            UI.CheckBox(
+                `${await getString("use-gradient-nickname-color")}`,
+                'gradientnickname',
+                'gradientnicknamecolorbox',
+                () => {
+                    const newState = !DataStore.get("use-gradient-nickname-color");
+                    DataStore.set("use-gradient-nickname-color", newState);
+                    updateGradientCheckboxState();
+                    updateGradientOptionsVisibility();
+                    if (!newState) {
+                        let styleElement = document.getElementById("gradient-nickname-color-css")
+                        if (styleElement) {
+                            styleElement.remove()
+                        }
                     }
+                },
+                true,
+                "use-gradient-nickname-color"
+            ),
+            document.createElement('br'),
+            UI.Row("gradient-options", [
+                UI.gradientsCss("nickname-gradient-type"),
+                document.createElement('br'),
+                UI.Row("gradient-colors-container", [
+                    UI.Label(await getString("gradient-colors")),
+                    UI.Row("gradient-colors", []),
+                    UI.Button(await getString("add-color"), "add-gradient-color", addGradientColor)
+                ]),
+                document.createElement('br'),
+                UI.opacitySlider("gradient-opacity", await getString("gradient-opacity"), "gradient-opacity", async (event) => {
+                    const opacityValue = Math.round(event.target.value);
+                    const opacityHex = Math.round(opacityValue * 255 / 100).toString(16).padStart(2, '0');
+                    DataStore.set("gradient-opacity", opacityHex);
+                    document.getElementById("gradient-opacity-title").innerHTML = `${await getString("gradient-opacity")}: ${opacityValue}%`;
+                    updateGradientNicknameCSS();
                 }),
             ]),
+            updateGradientColorPickers(),
             UI.CheckBox(
                 `${await getString("animate-loading")}`,'aniload','aniloadbox',
                 ()=>{
@@ -1038,6 +1070,16 @@ async function themesSettings(panel) {
             // document.createElement('br'),
         ])
     )
+
+setTimeout(() => {
+    updateGradientCheckboxState();
+    updateGradientColorPickers();
+    updateGradientOptionsVisibility();
+}, 0);
+} catch (error) {
+    console.error("Error in themesSettings:", error);
+    console.log("Error occurred at or near:", error.stack);
+}
 }
 
 /*
@@ -1061,6 +1103,135 @@ UI.CheckBox(
 ),
 document.createElement('br'),
 */
+
+export function updateGradientNicknameCSS() {
+    if (!DataStore.get("use-gradient-nickname-color", false)) {
+        return;  
+    }
+
+    const type = DataStore.get("nickname-gradient-type", "linear-gradient");
+    const colors = JSON.parse(DataStore.get("gradient-colors", '["#000000", "#FFFFFF"]'));
+    const opacity = parseInt(DataStore.get("gradient-opacity", "FF").slice(0, 2), 16) / 255;
+
+    let gradientString;
+    if (type === "linear-gradient") {
+        gradientString = `linear-gradient(to right, ${colors.join(', ')})`;
+    } else if (type === "radial-gradient") {
+        gradientString = `radial-gradient(circle, ${colors.join(', ')})`;
+    } else {
+        gradientString = `conic-gradient(${colors.join(', ')})`;
+    }
+
+    const styleContent = `
+        span.player-name__force-locale-text-direction {
+            background-image: ${gradientString};
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: ${opacity};
+        }
+    `;
+
+    let styleElement = document.getElementById("gradient-nickname-color-css");
+    if (styleElement) {
+        styleElement.textContent = styleContent;
+    } else {
+        styleElement = document.createElement('style');
+        styleElement.id = "gradient-nickname-color-css";
+        styleElement.textContent = styleContent;
+        document.head.appendChild(styleElement);
+    }
+}
+
+function createColorPicker(index) {
+    const colorPickerContainer = document.createElement('div');
+    colorPickerContainer.className = 'color-picker-container';
+    
+    const colors = JSON.parse(DataStore.get("gradient-colors", '["#000000", "#FFFFFF"]'));
+    const colorPicker = UI.colorPicker(`gradient-color-${index}`, `gradient-color-${index}`, (event) => {
+        colors[index] = event.target.value;
+        DataStore.set("gradient-colors", JSON.stringify(colors));
+        updateGradientNicknameCSS();
+    });
+    colorPicker.value = colors[index];
+    colorPickerContainer.appendChild(colorPicker);
+    
+    if (index >= 2) {
+        colorPicker.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            removeGradientColor(index);
+        });
+    }
+    
+    return colorPickerContainer;
+}
+
+function updateGradientColorPickers() {
+    const colorPickersContainer = document.getElementById('gradient-colors');
+    if (!colorPickersContainer) return; 
+
+    colorPickersContainer.innerHTML = '';
+    
+    const colors = JSON.parse(DataStore.get("gradient-colors", '["#000000", "#FFFFFF"]'));
+    colors.forEach((color, index) => {
+        colorPickersContainer.appendChild(createColorPicker(index));
+    });
+
+   
+    const addColorButton = document.getElementById('add-gradient-color');
+    if (addColorButton && addColorButton.parentNode !== colorPickersContainer) {
+        colorPickersContainer.appendChild(addColorButton);
+    }
+}
+
+function addGradientColor() {
+    const colors = JSON.parse(DataStore.get("gradient-colors", '["#000000", "#FFFFFF"]'));
+    colors.push(colors[colors.length - 1]); 
+    DataStore.set("gradient-colors", JSON.stringify(colors));
+    updateGradientColorPickers();
+    updateGradientNicknameCSS();
+}
+
+function removeGradientColor(index) {
+    const colors = JSON.parse(DataStore.get("gradient-colors", '["#000000", "#FFFFFF"]'));
+    if (colors.length > 2 && index < colors.length) {
+        colors.splice(index, 1);
+        DataStore.set("gradient-colors", JSON.stringify(colors));
+        updateGradientColorPickers();
+        updateGradientNicknameCSS();
+    }
+}
+
+
+
+if (!DataStore.has("nickname-gradient-type")) {
+    DataStore.set("nickname-gradient-type", "linear-gradient");
+}
+
+if (!DataStore.has("gradient-colors")) {
+    DataStore.set("gradient-colors", JSON.stringify(["#000000", "#FFFFFF"]));
+}
+
+if (!DataStore.has("gradient-color-1")) {
+    DataStore.set("gradient-color-1", "#000000");
+}
+
+if (!DataStore.has("gradient-color-2")) {
+    DataStore.set("gradient-color-2", "#FFFFFF");
+}
+
+if (!DataStore.has("gradient-opacity")) {
+    DataStore.set("gradient-opacity", "FF");
+}
+
+if (DataStore.get("use-gradient-nickname-color", false)) {
+    updateGradientNicknameCSS();
+}
+
+if (!DataStore.has("use-gradient-nickname-color")) {
+    DataStore.set("use-gradient-nickname-color", false);
+}
+
 
 function themeSettingsCheckbox() {
     //tickcheck(DataStore.get(""), el, box)
@@ -1101,5 +1272,7 @@ function themeSettingsCheckbox() {
     tickcheck(DataStore.get("lobby-transparent-filter"), 'ltf', 'ltfbox')
     tickcheck(DataStore.get("change-nickname-color"), 'nicknamecolor', 'nicknamecolorbox')
 }
+
+
 
 export { themesSettings, themeSettingsCheckbox }
