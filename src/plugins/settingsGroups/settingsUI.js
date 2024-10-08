@@ -1,24 +1,12 @@
 import { datapath, utils, cdnVersion } from "../settings.js"
-import { updateGradientNicknameCSS } from './themeSettings.js';
-
 
 const UI = {
     Row: (id, childs) => {
-        const row = document.createElement('div');
-        row.classList.add('lol-settings-general-row');
-        row.id = id;
-        if (Array.isArray(childs)) {
-            childs.forEach((el, index) => {
-                if (el instanceof Node) {
-                    row.appendChild(el);
-                } else if (typeof el === 'string') {
-                    row.appendChild(document.createTextNode(el));
-                } else {
-                    console.warn(`Invalid child element at index ${index}:`, el);
-                }
-            });
-        }
-        return row;
+        const row = document.createElement('div')
+        row.classList.add('lol-settings-general-row')
+        row.id = id
+        if (Array.isArray(childs)) childs.forEach((el) => row.appendChild(el))
+        return row
     },
     Label: (text, id) => {
         const label = document.createElement('p')
@@ -119,7 +107,7 @@ const UI = {
         const checkbox = document.createElement("input")
         const label = document.createElement("label")
         const none = document.createElement("div")
-    
+
         origin.setAttribute("class",'')
         origin.id = ID
         origin.setAttribute("lastDatastore", DataStore.get(datastore_name))
@@ -198,30 +186,6 @@ const UI = {
                 DataStore.set(target, opt[id])
             }
             if (DataStore.get(target) == opt[id]) {
-                el.setAttribute("selected", "true")
-            }
-            dropdown.appendChild(el)
-        }
-        return origin
-    },
-    gradientsCss: (target) => {
-        const origin = document.createElement("div")
-        const dropdown = document.createElement("lol-uikit-framed-dropdown")
-        const gradients = ["linear-gradient", "radial-gradient", "conic-gradient"]
-    
-        origin.classList.add("Dropdown-div")
-        dropdown.classList.add("lol-settings-general-dropdown")
-        origin.append(dropdown)
-        for (let i = 0; i < gradients.length; i++) {
-            const opt = gradients[i]
-            const el = document.createElement("lol-uikit-dropdown-option")
-            el.setAttribute("slot", "lol-uikit-dropdown-option")
-            el.innerText = opt
-            el.onclick = () => {
-                DataStore.set(target, opt)
-                updateGradientNicknameCSS()
-            }
-            if (DataStore.get(target) === opt) {
                 el.setAttribute("selected", "true")
             }
             dropdown.appendChild(el)
@@ -357,7 +321,8 @@ const UI = {
         input.type = "color"
         input.id = Id
         input.value = DataStore.get(targetDataStore)
-        input.oninput = onChange 
+        input.onchange = onChange
+
         return input
     },
     opacitySlider: (Id, text, opacityHexData, onChange) => {
@@ -377,11 +342,8 @@ const UI = {
         origin.setAttribute("value", parseInt(DataStore.get(opacityHexData).slice(0, 2), 16) / 255 * 100)
         origin.addEventListener("change", onChange)
     
-        const opacityValue = DataStore.get(opacityHexData, "FF");
-        const opacityPercentage = Math.round(parseInt(opacityValue.slice(0, 2), 16) / 255 * 100);
-        origin.setAttribute("value", opacityPercentage);
-        title.innerHTML = `${text}: ${opacityPercentage}%`    
-        
+        title.innerHTML = `${text}: ${parseInt(DataStore.get(opacityHexData).slice(0, 2), 16) / 255 * 100}%`
+    
         slider.setAttribute("class", "lol-uikit-slider-wrapper horizontal")
         sliderbase.setAttribute("class", "lol-uikit-slider-base")
     
@@ -396,7 +358,7 @@ const UI = {
     gradientsCss: (target) => {
         const origin = document.createElement("div")
         const dropdown = document.createElement("lol-uikit-framed-dropdown")
-        const gradients = ["linear-gradient", "radial-gradient", "conic-gradient"]
+        const gradients = ["Liner gradients", "Radial gradients", "Conic gradients"]
     
         origin.classList.add("Dropdown-div")
         dropdown.classList.add("lol-settings-general-dropdown")
@@ -408,10 +370,13 @@ const UI = {
             el.innerText = opt
             el.onclick = () => {
                 DataStore.set(target, opt)
-                updateGradientNicknameCSS()
-                dropdown.selectedIndex = i
+                try {
+                    document.querySelector(target).remove()
+                    utils.addStyleWithID(target)
+                }
+                catch{}
             }
-            if (DataStore.get(target) === opt) {
+            if (DataStore.get("CurrentFont") == opt) {
                 el.setAttribute("selected", "true")
             }
             dropdown.appendChild(el)
