@@ -1,12 +1,12 @@
 {
   "name": "elaina-theme-data",
-  "version": "4.0.2",
+  "version": "4.1.12",
   "description": "Data files for Elaina theme",
   "main": "index.js",
   "files": [
     "cdninit.js",
     "index.js",
-    "data"
+    "src"
   ],
   "repository": {
     "type": "git",

@@ -14,7 +14,7 @@ async function themesSettings(panel) {
                         `*${await getString("note")}: ${await getString("note-1")}`
                     ),
                 ]),
-                UI.Image("Logo.png", "theme-settings-logo")
+                UI.Image("logo.png", "theme-settings-logo")
             ]),
             UI.Label(await getString("update-list-manually")),
             UI.Row("add-background-manually-row", [

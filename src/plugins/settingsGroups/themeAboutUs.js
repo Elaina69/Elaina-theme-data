@@ -11,7 +11,7 @@ export function aboutustab(panel) {
                         UI.Label("Optimizing theme")
                     ]),
                     UI.Row("dev-div",[
-                        UI.ImageAndLink(true, "About-Us/ElainaDaCatto.png", "dev_ava", "https://github.com/Elaina69"),
+                        UI.ImageAndLink(true, "about-us/elainadacatto.png", "dev_ava", "https://github.com/Elaina69"),
                         UI.Label("Elaina Da Catto", "first_line_elaina"),
                         UI.Label("Main Developer")
                     ]),
@@ -29,24 +29,24 @@ export function aboutustab(panel) {
             ]),
             UI.Row("Contributors-row",[
                 UI.Contributor(false, "https://avatars.githubusercontent.com/u/45071533","Sarah Engel","Support, Plugins provider"),
-                UI.Contributor(true, "About-Us/Soulmare.png","Soulmare","Support, Translator"),
+                UI.Contributor(true, "about-us/soulmare.png","Soulmare","Support, Translator"),
             ]),
             UI.Row("Contributors-row",[
-                UI.Contributor(true, "About-Us/balaclava.png","Balaclava","Plugins provider"),
-                UI.Contributor(true, "About-Us/DmitryFisk.png","DmitryFisk","Plugins provider"),
+                UI.Contributor(true, "about-us/balaclava.png","Balaclava","Plugins provider"),
+                UI.Contributor(true, "about-us/dmitryfisk.png","DmitryFisk","Plugins provider"),
             ]),
             UI.Row("Contributors-row",[
-                UI.Contributor(true, "About-Us/Legnatbird.png","Legnatbird","Support, Translator"),
-                UI.Contributor(true, "About-Us/Flirip.png","Flirip","Translator"),
+                UI.Contributor(true, "about-us/legnatbird.png","Legnatbird","Support, Translator"),
+                UI.Contributor(true, "about-us/flirip.png","Flirip","Translator"),
             ]),
             UI.Row("Donation-row",[
-                UI.Contributor(true, "About-Us/unproductive.webp","unproductive","Support, Plugins provider"),
+                UI.Contributor(true, "about-us/unproductive.webp","unproductive","Support, Plugins provider"),
                 UI.Contributor(false, "https://avatars.githubusercontent.com/u/59478113","Rumi","Support"),
             ]),
             /*
             UI.Row("Contributors-row",[
-                UI.Contributor("About-Us/","",""),
-                UI.Contributor("About-Us/","",""),
+                UI.Contributor("about-us/","",""),
+                UI.Contributor("about-us/","",""),
             ]),
             */
             document.createElement("br"),
