@@ -3,7 +3,7 @@ import { datapath, utils, cdnVersion } from "../settings.js"
 const UI = {
     Row: (id, childs) => {
         const row = document.createElement('div')
-        row.classList.add('lol-settings-general-row')
+        row.classList.add('elaina-theme-settings-row')
         row.id = id
         if (Array.isArray(childs)) childs.forEach((el) => row.appendChild(el))
         return row

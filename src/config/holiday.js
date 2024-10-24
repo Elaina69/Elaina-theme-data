@@ -2,14 +2,14 @@ export default {
     "1/1": {
         "Day"    : "1/1",
         "Text"   : "Happy new year !!",
-        "Image"  : "83110343_p1.jpg",
-        "filters": "brightness(1.0)",
+        "Image"  : "ny2025.jpg",
+        "filters": "brightness(0.8)",
         "nsfw"   : false
     },
     "1/2": {
         "Day"    : "1/2",
-        "Text"   : "Elaina theme's 1st Anniversary !!",
-        "Image"  : "",
+        "Text"   : "Elaina theme's 2rd Anniversary !!",
+        "Image"  : "Anni2rd",
         "filters": "brightness(1.0)",
         "nsfw"   : false
     },
@@ -20,10 +20,17 @@ export default {
         "filters": "brightness(1.0)",
         "nsfw"   : false
     },
+    "17/10": {
+        "Day"    : "17/10",
+        "Text"   : "Happy birthday Elaina !!",
+        "Image"  : "hb2024.jpg",
+        "filters": "brightness(1.0)",
+        "nsfw"   : false
+    },
     "31/10": {
         "Day"    : "31/10",
         "Text"   : "I'm pretty sure I'm dressed as a maid right now (=^ ◡ ^=)",
-        "Image"  : "24.jpg",
+        "Image"  : "hw2024.jpg",
         "filters": "brightness(1.0)",
         "nsfw"   : false
     },
@@ -34,12 +41,19 @@ export default {
         "filters": "brightness(0.8)",
         "nsfw"   : false
     },
+    "19/11": {
+        "Day"    : "19/11",
+        "Text"   : "Wolrd Skabidi Toilet Day!!",
+        "Image"  : "skabidi-toilet.webp",
+        "filters": "brightness(1.0)",
+        "nsfw"   : false
+    },
     "1/12": {
         "Day"    : "1/12",
         "Text"   : "Goodbye, NNN and Welcoom, DDD !!",
         "Image"  : "85133902_p0.png",
         "filters": "brightness(0.9)",
-        "nsfw"   : true
+        "nsfw"   : false
     },
     "25/12": {
         "Day"    : "25/12",

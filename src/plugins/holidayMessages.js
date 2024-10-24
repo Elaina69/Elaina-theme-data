@@ -51,7 +51,9 @@ if (newdate == "25/12" && DataStore.get("Merry-Christmas")){
     //console.log(pandoru)
 }
 
-if (DataStore.get("Holiday")) {
+function showMessage(force) {
+    if (force) addData()
+        
     async function createLoaderMenu(root) {
         let close = await getString('l.close')
         const { Component, jsx, render } = await import('//esm.run/nano-jsx')
@@ -103,4 +105,9 @@ if (DataStore.get("Holiday")) {
     })
     DataStore.set("Holiday", false)
 }
+
+if (DataStore.get("Holiday")) showMessage(false)
+
+export { showMessage }
+
 console.log(eConsole+`%c ${DataStore.get("Day")}`,eCss,"")

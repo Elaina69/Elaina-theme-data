@@ -10,20 +10,29 @@ async function CheckBackupFile() {
         let a = document.querySelector(".restore-data-button")
         let b = document.querySelector(".delete-data-button")
         let c = document.getElementById("datastore-cloud-checking")
-        let checkFile = await readfile(`DataStore-backup/${await utils.getSummonerID()}/datastore.json`)
-        if (checkFile.success) {
-            console.log("You have backup file on cloud, ready to restore it.")
-            c.textContent = `${await getString("Check-Backup.success")}`
-            c.style.color = "green"
-            a.style.visibility = "visible"
-            b.style.visibility = "visible"
+        try {
+            let checkFile = await readfile(`DataStore-backup/${await utils.getSummonerID()}/datastore.json`)
+            if (checkFile.success) {
+                console.log("You have backup file on cloud, ready to restore it.")
+                a.style.visibility = "visible"
+                b.style.visibility = "visible"
+                c.style.color = "green"
+                c.textContent = `${await getString("Check-Backup.success")}`
+            }
+            else {
+                console.log("You don't have backup file on cloud yet.")
+                a.style.visibility = "hidden"
+                b.style.visibility = "hidden"
+                c.style.color = "red"
+                c.textContent = `${await getString("Check-Backup.error")}`
+            }
         }
-        else {
+        catch { 
             console.log("You don't have backup file on cloud yet.")
-            c.textContent = `${await getString("Check-Backup.error")}`
-            c.style.color = "red"
             a.style.visibility = "hidden"
             b.style.visibility = "hidden"
+            c.style.color = "red"
+            c.textContent = `${await getString("Check-Backup.serverError")}`
         }
     }, 2000)
 }
