@@ -1,5 +1,5 @@
 import { UI } from "./settingsUI.js"
-import { tickcheck, restartAfterChange, ChampsP } from "../settings.js"
+import { tickcheck, restartAfterChange } from "../settings.js"
 
 let rank = {
     "Ranked Queue ID": [
@@ -256,49 +256,49 @@ async function pluginsSettings(panel) {
                     },DataStore.get("Dev-button")
                 )
             ]),
-            /*UI.Row("pandoru",[
-                UI.CheckBox(
-                    `${await getString("Santa")}`,'MC','MCbox',
-                    ()=>{
-                    let MCel = document.getElementById("MC")
-                    let MCbox = document.getElementById("MCbox")
+            // UI.Row("pandoru",[
+            //     UI.CheckBox(
+            //         `${await getString("Santa")}`,'MC','MCbox',
+            //         ()=>{
+            //         let MCel = document.getElementById("MC")
+            //         let MCbox = document.getElementById("MCbox")
         
-                    if (DataStore.get("Merry-Christmas")) {
-                        MCbox.checked = false
-                        DataStore.set("Merry-Christmas", false)
-                        MCel.removeAttribute("class")
-                    }
-                    else {
-                        MCbox.checked = true
-                        DataStore.set("Merry-Christmas", true)
-                        MCel.setAttribute("class", "checked")
-                    }
-                    },true
-                )
-            ]),*/
-            UI.Row("buyallchamp",[
-                UI.CheckBox(
-                    `${await getString("buy-all-champs")}`,'byc','bycbox',
-                    ()=>{
-                    let bycel = document.getElementById("byc")
-                    let bycbox = document.getElementById("bycbox")
+            //         if (DataStore.get("Merry-Christmas")) {
+            //             MCbox.checked = false
+            //             DataStore.set("Merry-Christmas", false)
+            //             MCel.removeAttribute("class")
+            //         }
+            //         else {
+            //             MCbox.checked = true
+            //             DataStore.set("Merry-Christmas", true)
+            //             MCel.setAttribute("class", "checked")
+            //         }
+            //         },true
+            //     )
+            // ]),
+            // UI.Row("buyallchamp",[
+            //     UI.CheckBox(
+            //         `${await getString("buy-all-champs")}`,'byc','bycbox',
+            //         ()=>{
+            //         let bycel = document.getElementById("byc")
+            //         let bycbox = document.getElementById("bycbox")
     
-                    if (DataStore.get("buy-all-champs")) {
-                        bycbox.checked = false
-                        DataStore.set("buy-all-champs", false)
-                        bycel.removeAttribute("class")
-                    }
-                    else {
-                        bycbox.checked = true
-                        DataStore.set("buy-all-champs", true)
-                        bycel.setAttribute("class", "checked")
-                    }
-                    },true
-                ),
-                document.createElement('br'),
-                UI.Dropdown(ChampsP, "ChampsPrice", `${await getString("prices")}`, "description", "Cost"),
-                document.createElement('br')
-            ]),
+            //         if (DataStore.get("buy-all-champs")) {
+            //             bycbox.checked = false
+            //             DataStore.set("buy-all-champs", false)
+            //             bycel.removeAttribute("class")
+            //         }
+            //         else {
+            //             bycbox.checked = true
+            //             DataStore.set("buy-all-champs", true)
+            //             bycel.setAttribute("class", "checked")
+            //         }
+            //         },true
+            //     ),
+            //     document.createElement('br'),
+            //     UI.Dropdown(ChampsP, "ChampsPrice", `${await getString("prices")}`, "description", "Cost"),
+            //     document.createElement('br')
+            // ]),
             // UI.CheckBox(
             //     `${await getString("auto-find-queue")}`,'autoq','autoqbox',
             //     ()=>{

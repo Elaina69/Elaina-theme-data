@@ -1,4 +1,5 @@
 const cdnModulesToImport = [
+    "./src/update/updateMessage.js",
     "./src/importupdate.js",
     "./src/languages.js",
     "./src/plugins/watermark.js",

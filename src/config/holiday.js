@@ -9,7 +9,7 @@ export default {
     "1/2": {
         "Day"    : "1/2",
         "Text"   : "Elaina theme's 2rd Anniversary !!",
-        "Image"  : "Anni2rd",
+        "Image"  : "anni2rd.png",
         "filters": "brightness(1.0)",
         "nsfw"   : false
     },
@@ -37,7 +37,7 @@ export default {
     "1/11": {
         "Day"    : "1/11",
         "Text"   : "Happy NNN day !!",
-        "Image"  : "Image8.png",
+        "Image"  : "nnn2024.png",
         "filters": "brightness(0.8)",
         "nsfw"   : false
     },
@@ -51,14 +51,14 @@ export default {
     "1/12": {
         "Day"    : "1/12",
         "Text"   : "Goodbye, NNN and Welcoom, DDD !!",
-        "Image"  : "85133902_p0.png",
+        "Image"  : "ddd2024.gif",
         "filters": "brightness(0.9)",
         "nsfw"   : false
     },
     "25/12": {
         "Day"    : "25/12",
         "Text"   : "Merry Christmas !!",
-        "Image"  : "67987805_p1.jpg",
+        "Image"  : "xmas2024.jpg",
         "filters": "brightness(1.0)",
         "nsfw"   : false
     },

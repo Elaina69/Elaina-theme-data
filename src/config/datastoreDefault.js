@@ -5,7 +5,7 @@ export default {
 	"turnoff-audio-ingame"			: true,
 	"Change-CDN-version"			: false,
 	"Elaina-Plugins"				: true,
-	"Banner-list"					: ["1_winter-noble_2023.png","2_winter-royal_2023.png","3_winter-aurora_2023.png","bee2023.png","challenger.png","lny2023.png","soul-fighters_2023.png"],
+	"Banner-list"					: ["1_winter-noble_2023.png","2_winter-royal_2023.png","3_winter-aurora_2023.png","bee2023.png","challenger.png","lny2023.png","soul-fighters_2023.png", "faker_1.png", "faker_2.png"],
 	"Font-list"						: ["aegirseaborn.ttf","elaina-herculanum_roman.ttf","minecraftregular-bmg3.otf","roboto-medium.ttf"],
 	"CurrentBanner"					: "bee2023.png",
   	"old-prev/next-button"			: false,

@@ -4,7 +4,6 @@ let datapath = new URL("..", import.meta.url).href
 
 DataStore.set("settingsChangenumber", 0)
 
-import ChampsP from "../config/championPrices.js"
 import utils from '../utils/utils.js'
 import cdnVersion from "../update/cdnVersionList.js"
 import datastore_list from "../config/datastoreDefault.js"
@@ -73,7 +72,7 @@ function writeBackupData() {
 }
 window.writeBackupData = writeBackupData
 
-export { datapath, ChampsP, utils, cdnVersion, tickcheck, restartAfterChange, datastore_list }
+export { datapath, utils, cdnVersion, tickcheck, restartAfterChange, datastore_list }
 
 import data from "./settingsGroups/settingsStructure.js"
 import { settingsUtils } from "../utils/settingsUtils.js"
