@@ -210,7 +210,7 @@ async function themesSettings(panel) {
             ], true),
             UI.Label(await getString("wallpaper/audio-settings")),
             UI.Row("background-settings",[
-                UI.Button(await getString("open-background-folder"), "open-background-folder", () => { window.openPluginsFolder(`${DataStore.get("Plugin-folder-name")}/src/assets/backgrounds`) }),
+                UI.Button(await getString("open-background-folder"), "open-background-folder", () => { window.openPluginsFolder(`${DataStore.get("Plugin-folder-name")}/assets/backgrounds`) }),
                 UI.Slider(
                     await getString("wallpaper-volume"),DataStore.get("wallpaper-volume"),"elaina-bg","wallpaper-volume"
                 ),
