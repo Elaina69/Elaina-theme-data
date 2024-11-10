@@ -1,8 +1,10 @@
-let updateType
-let autoUpdate = false
+
 
 import update from './version.js'
 import text from "./updateText.js"
+
+let autoUpdate = text['auto-update']
+let updateType
 
 if (!DataStore.has(`Update-${update}`)) {
 	DataStore.set(`Update-${update}`, true)
@@ -123,10 +125,10 @@ else if (DataStore.get(`Update-${update}`) && !DataStore.get(`Force-Update`)) {
 
 				let target = document.getElementById("elaina-update-text")
 				if (target) {
-					for (let i = 0; i < text.length; i++) {
+					for (let i = 0; i < text["text"].length; i++) {
 						let updateText = document.createElement("p")
 						updateText.setAttribute("class", "Elaina-Update")
-						updateText.textContent = text[i]
+						updateText.textContent = text["text"][i]
 
 						target.appendChild(updateText)
 					}

@@ -299,37 +299,37 @@ async function pluginsSettings(panel) {
             //     UI.Dropdown(ChampsP, "ChampsPrice", `${await getString("prices")}`, "description", "Cost"),
             //     document.createElement('br')
             // ]),
-            // UI.CheckBox(
-            //     `${await getString("auto-find-queue")}`,'autoq','autoqbox',
-            //     ()=>{
-            //         restartAfterChange('autoq', "Auto-Find-Queue")
-            //         let autoqel = document.getElementById("autoq")
-            //         let autoqbox = document.getElementById("autoqbox")
+            UI.CheckBox(
+                `${await getString("auto-find-queue")}`,'autoq','autoqbox',
+                ()=>{
+                    restartAfterChange('autoq', "Auto-Find-Queue")
+                    let autoqel = document.getElementById("autoq")
+                    let autoqbox = document.getElementById("autoqbox")
     
-            //         if (DataStore.get("Auto-Find-Queue")) {
-            //         autoqbox.checked = false
-            //         DataStore.set("Auto-Find-Queue", false)
-            //         autoqel.removeAttribute("class")
-            //         }
-            //         else {
-            //         autoqbox.checked = true
-            //         DataStore.set("Auto-Find-Queue", true)
-            //         autoqel.setAttribute("class", "checked")
-            //         }
-            //     },true, "Auto-Find-Queue"
-            // ),
-            // UI.Row("Q-Delay",[
-            //     UI.Row("Create-Delay",[
-            //         UI.Label(`${await getString("Create-Delay")}`, "Create-Delay-Text"),
-            //         UI.Input("Create-Delay"),
-            //     ]),
-            //     UI.Row("Find-Delay",[
-            //         UI.Label(`${await getString("Find-Delay")}`, "Find-Delay-Text"),
-            //         UI.Input("Find-Delay")
-            //     ])
-            // ]),
-            // UI.Dropdown(DataStore.get("queueList"), "Gamemode", `${await getString("Gamemode")}`, "description", "queueId"),
-            // document.createElement('br'),
+                    if (DataStore.get("Auto-Find-Queue")) {
+                    autoqbox.checked = false
+                    DataStore.set("Auto-Find-Queue", false)
+                    autoqel.removeAttribute("class")
+                    }
+                    else {
+                    autoqbox.checked = true
+                    DataStore.set("Auto-Find-Queue", true)
+                    autoqel.setAttribute("class", "checked")
+                    }
+                },true, "Auto-Find-Queue"
+            ),
+            UI.Row("Q-Delay",[
+                UI.Row("Create-Delay",[
+                    UI.Label(`${await getString("Create-Delay")}`, "Create-Delay-Text"),
+                    UI.Input("Create-Delay"),
+                ]),
+                UI.Row("Find-Delay",[
+                    UI.Label(`${await getString("Find-Delay")}`, "Find-Delay-Text"),
+                    UI.Input("Find-Delay")
+                ])
+            ]),
+            UI.Dropdown(DataStore.get("queueList"), "Gamemode", `${await getString("Gamemode")}`, "description", "queueId"),
+            document.createElement('br'),
             document.createElement('br'),
             UI.CheckBox(
                 `${await getString("Custom-profile-hover")}`,'cusprf','cusprfbox',

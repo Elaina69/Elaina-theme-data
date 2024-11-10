@@ -1,6 +1,9 @@
 import { UI } from "./settingsUI.js"
 import { datastore_list, utils } from "../settings.js"
 
+let eConsole = "%c Elaina "
+let eCss = "color: #ffffff; background-color: #f77fbe"
+
 async function CheckBackupFile() {
     try {
         document.getElementById("datastore-cloud-checking").textContent = `${await getString("Loading")}...`
@@ -13,14 +16,14 @@ async function CheckBackupFile() {
         try {
             let checkFile = await readfile(`DataStore-backup/${await utils.getSummonerID()}/datastore.json`)
             if (checkFile.success) {
-                console.log("You have backup file on cloud, ready to restore it.")
+                console.log(eConsole+"%c You have backup file on cloud, ready to restore it.",eCss,"")
                 a.style.visibility = "visible"
                 b.style.visibility = "visible"
                 c.style.color = "green"
                 c.textContent = `${await getString("Check-Backup.success")}`
             }
             else {
-                console.log("You don't have backup file on cloud yet.")
+                console.log(eConsole+"%c You don't have backup file on cloud yet.",eCss,"")
                 a.style.visibility = "hidden"
                 b.style.visibility = "hidden"
                 c.style.color = "red"
@@ -28,7 +31,7 @@ async function CheckBackupFile() {
             }
         }
         catch { 
-            console.log("You don't have backup file on cloud yet.")
+            console.log(eConsole+"%c You don't have backup file on cloud yet.",eCss,"")
             a.style.visibility = "hidden"
             b.style.visibility = "hidden"
             c.style.color = "red"
@@ -41,11 +44,11 @@ function setDefaultData(list, restore) {
 	Object.entries(list).forEach(([key, value]) => {
 	  	if (!DataStore.has(key)) {
 			DataStore.set(key, value);
-			console.log(`${key} data restored`)
+			console.log(eConsole+`%c ${key} data restored`,eCss,"")
 	  	}
 		else if (DataStore.has(key) && restore) {
 			DataStore.set(key, value);
-			console.log(`${key} data restored`)
+			console.log(eConsole+`%c ${key} data restored`,eCss,"")
 	  	}
 
 	});
