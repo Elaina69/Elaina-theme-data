@@ -1,8 +1,12 @@
 import { UI } from "./settingsUI.js"
 import { datastore_list, utils } from "../settings.js"
 
-let eConsole = "%c Elaina "
-let eCss = "color: #ffffff; background-color: #f77fbe"
+const CONSOLE_STYLE = {
+    prefix: '%c Elaina ',
+    css: 'color: #ffffff; background-color: #f77fbe'
+};
+
+const log = (message, ...args) => console.log(CONSOLE_STYLE.prefix + '%c ' + message, CONSOLE_STYLE.css, '', ...args);
 
 async function CheckBackupFile() {
     try {
@@ -16,14 +20,14 @@ async function CheckBackupFile() {
         try {
             let checkFile = await readfile(`DataStore-backup/${await utils.getSummonerID()}/datastore.json`)
             if (checkFile.success) {
-                console.log(eConsole+"%c You have backup file on cloud, ready to restore it.",eCss,"")
+                log("You have backup file on cloud, ready to restore it.")
                 a.style.visibility = "visible"
                 b.style.visibility = "visible"
                 c.style.color = "green"
                 c.textContent = `${await getString("Check-Backup.success")}`
             }
             else {
-                console.log(eConsole+"%c You don't have backup file on cloud yet.",eCss,"")
+                log("You don't have backup file on cloud yet.")
                 a.style.visibility = "hidden"
                 b.style.visibility = "hidden"
                 c.style.color = "red"
@@ -31,7 +35,7 @@ async function CheckBackupFile() {
             }
         }
         catch { 
-            console.log(eConsole+"%c You don't have backup file on cloud yet.",eCss,"")
+            log("You don't have backup file on cloud yet.")
             a.style.visibility = "hidden"
             b.style.visibility = "hidden"
             c.style.color = "red"
@@ -44,11 +48,11 @@ function setDefaultData(list, restore) {
 	Object.entries(list).forEach(([key, value]) => {
 	  	if (!DataStore.has(key)) {
 			DataStore.set(key, value);
-			console.log(eConsole+`%c ${key} data restored`,eCss,"")
+			log(`${key} data restored`)
 	  	}
 		else if (DataStore.has(key) && restore) {
 			DataStore.set(key, value);
-			console.log(eConsole+`%c ${key} data restored`,eCss,"")
+			log(`${key} data restored`)
 	  	}
 
 	});
@@ -93,7 +97,8 @@ export async function backuprestoretab(panel) {
                     
                         reader.onload = async (e) => {
                             text.textContent = await getString("Manual-restore-inProgress")
-                            text.style.color = "blue"
+                            text.style.color = "#e4c2b3"
+                            
                             try {
                                 const json = JSON.parse(e.target.result);
                                 let restoreData = new Promise((resolve, reject) => {
@@ -105,7 +110,7 @@ export async function backuprestoretab(panel) {
                                         }
                                         catch {
                                             reject()
-                                            console.log(eConsole+`%c Datastore file not found, avoid restoring`,eCss,"")
+                                            log(`Datastore file not found, avoid restoring`)
                                         }
                                     },5000)
                                 })
@@ -167,7 +172,7 @@ export async function backuprestoretab(panel) {
                             }
                             catch {
                                 reject()
-                                console.log(eConsole+`%c Datastore file not found, avoid restoring`,eCss,"")
+                                log(`Datastore file not found, avoid restoring`)
                             }
                         },5000)
                     })

@@ -1,5 +1,13 @@
 const BASE_PATH = new URL(".", import.meta.url).href;
 
+const CONSOLE_STYLE = {
+    prefix: '%c Elaina ',
+    css: 'color: #ffffff; background-color: #f77fbe'
+};
+
+const log = (message, ...args) => console.log(CONSOLE_STYLE.prefix + '%c ' + message, CONSOLE_STYLE.css, '', ...args);
+const warn = (message, ...args) => console.warn(CONSOLE_STYLE.prefix + '%c ' + message, CONSOLE_STYLE.css, '', ...args);
+
 /**
  * Imports a locale module based on the given language code.
  * @param {string} langCode - The language code to import.
@@ -29,7 +37,7 @@ async function getString(key) {
     let result = localeModule[key];
 
     if (!result) {
-        console.warn(`Missing translation for key: ${key}`);
+        warn(`Missing translation for key: ${key}`);
         return key
     }
 

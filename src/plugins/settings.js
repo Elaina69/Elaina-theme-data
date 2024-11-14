@@ -1,5 +1,3 @@
-let eConsole = "%c Elaina "
-let eCss = "color: #ffffff; background-color: #f77fbe"
 let datapath = new URL("..", import.meta.url).href
 
 DataStore.set("settingsChangenumber", 0)
@@ -7,6 +5,14 @@ DataStore.set("settingsChangenumber", 0)
 import utils from '../utils/utils.js'
 import cdnVersion from "../update/cdnVersionList.js"
 import datastore_list from "../config/datastoreDefault.js"
+
+const CONSOLE_STYLE = {
+    prefix: '%c Elaina ',
+    css: 'color: #ffffff; background-color: #f77fbe'
+};
+
+const log = (message, ...args) => console.log(CONSOLE_STYLE.prefix + '%c ' + message, CONSOLE_STYLE.css, '', ...args);
+const error = (message, ...args) => console.error(CONSOLE_STYLE.prefix + '%c ' + message, CONSOLE_STYLE.css, '', ...args);
 
 async function restartAfterChange(el, data) {
     let lastdata = document.getElementById(el).getAttribute("lastdatastore")
@@ -59,7 +65,7 @@ function tickcheck (Data, el, checkbox) {
             box.checked = true
         }
     }
-    catch{ console.error(eConsole+`%c Can't find target's class`,eCss,"") }
+    catch{ error(`Can't find target's class`) }
 }
 
 function writeBackupData() {
@@ -123,11 +129,11 @@ window.addEventListener('load', async () => {
                                     DataStore.set("Active-dev-button", DataStore.get("Active-dev-button") + 1)
                                     if (DataStore.get("Active-dev-button") == 20) {
                                         DataStore.set("Dev-button", true)
-                                        console.log(eConsole+"%c Developer mode button has appeared !",eCss,"")
+                                        log("Developer mode button has appeared !")
                                     }
                                     else if (DataStore.get("Active-dev-button") > 20) {
                                         DataStore.set("Dev-button", true)
-                                        console.log(eConsole+"%c You already become developer !",eCss,"")
+                                        log("You already become developer !")
                                     }
                                 })
                             }

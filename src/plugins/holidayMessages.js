@@ -1,14 +1,18 @@
 import config from "../config/holiday.js"
 //import pandoru from "../configs/pandoru.txt?raw"
 
+const CONSOLE_STYLE = {
+    prefix: '%c Elaina ',
+    css: 'color: #ffffff; background-color: #f77fbe'
+};
+
+const log = (message, ...args) => console.log(CONSOLE_STYLE.prefix + '%c ' + message, CONSOLE_STYLE.css, '', ...args);
+
 if (!DataStore.has("Day")) {
     DataStore.set("Day", "0/0")
 }
 
 let datapath = new URL("..", import.meta.url).href
-
-let eConsole = "%c Elaina "
-let eCss = "color: #ffffff; background-color: #f77fbe"
 
 let month = new Date().getMonth() + 1;
 let day = new Date().getDate();
@@ -20,7 +24,7 @@ function addData() {
     message = config[newdate]["Text"]
     imageLink = `${datapath}assets/image/${config[newdate]["Image"]}`
     filter = config[newdate]["filters"]
-    console.log(eConsole+`%c ${message}`,eCss,"")
+    log(`${message}`)
     DataStore.set("Day", newdate)
     DataStore.set("Holiday", true)
 }
@@ -32,17 +36,17 @@ if (DataStore.has("Day") && newdate != DataStore.get("Day")) {
             else if (config[newdate]["nsfw"]) {
                 if (DataStore.get("NSFW-Content")) {
                     addData()
-                    console.log(eConsole+`%c NSFW content!!`,eCss,"")
+                    log(`NSFW content!!`)
                 }
             }
         }
         else {
-            console.log(eConsole+`%c Today doesn't have event`,eCss,"")
+            log(`Today doesn't have event`)
             DataStore.set("Day", newdate)
         }
     }
     catch {
-        console.log(eConsole+`%c Today doesn't have event`,eCss,"")
+        log(`Today doesn't have event`)
         DataStore.set("Day", newdate)
     }
 }
@@ -110,4 +114,4 @@ if (DataStore.get("Holiday")) showMessage(false)
 
 export { showMessage }
 
-console.log(eConsole+`%c ${DataStore.get("Day")}`,eCss,"")
+log(`${DataStore.get("Day")}`)
