@@ -1,17 +1,14 @@
+import update from "./update.js"
 
-
-import update from './version.js'
-import text from "./updateText.js"
-
-let autoUpdate = text['auto-update']
+let autoUpdate = update['auto-update']
 let updateType
 
-if (!DataStore.has(`Update-${update}`)) {
-	DataStore.set(`Update-${update}`, true)
+if (!DataStore.has(`Update-${update.version}`)) {
+	DataStore.set(`Update-${update.version}`, true)
 }
 
 if (!autoUpdate) {updateType = "Manual"}
-else if (autoUpdate && DataStore.get(`Update-${update}`)){
+else if (autoUpdate && DataStore.get(`Update-${update.version}`)){
 	updateType = "Auto"
 	let downloadUpdate = new Promise((resolve, reject) => {
 		setTimeout(() => {
@@ -27,9 +24,7 @@ else if (autoUpdate && DataStore.get(`Update-${update}`)){
 }
 
 if (DataStore.get(`Force-Update`) && !DataStore.get("prevent-manual-update")) {
-	console.log("true")
 	async function createLoaderMenu(root) {
-		console.log("true2")
 		const { Component, jsx, render } = await import('//esm.run/nano-jsx')
 		let download = await getString('l.download')
 		
@@ -53,7 +48,7 @@ if (DataStore.get(`Force-Update`) && !DataStore.get("prevent-manual-update")) {
 									</lol-uikit-content-block>
 								</div>
 								<lol-uikit-flat-button-group type="dialog-frame">
-									<lol-uikit-flat-button tabindex="1" onClick=${() => {window.open(`https://github.com/Elaina69/Elaina-V4/releases/tag/v${update}`,)}}>${download}</lol-uikit-flat-button>
+									<lol-uikit-flat-button tabindex="1" onClick=${() => {window.open(`https://github.com/Elaina69/Elaina-V4/releases/tag/v${update.version}`,)}}>${download}</lol-uikit-flat-button>
 								</lol-uikit-flat-button-group>
 							  </lol-uikit-dialog-frame>
 						</div>
@@ -65,7 +60,6 @@ if (DataStore.get(`Force-Update`) && !DataStore.get("prevent-manual-update")) {
 	}
 	
 	window.addEventListener("load", async ()=> {
-		console.log("true3")
 		const manager = () => document.getElementById('lol-uikit-layer-manager-wrapper')
 		const root    = document.createElement('div')
 		while (!manager()) await new Promise(r => setTimeout(r, 200))
@@ -80,7 +74,7 @@ if (DataStore.get(`Force-Update`) && !DataStore.get("prevent-manual-update")) {
 		})
 	})
 }
-else if (DataStore.get(`Update-${update}`) && !DataStore.get(`Force-Update`)) {
+else if (DataStore.get(`Update-${update.version}`) && !DataStore.get(`Force-Update`)) {
 	async function createLoaderMenu(root) {
 		const { Component, jsx, render } = await import('//esm.run/nano-jsx')
 		let close = await getString('l.close')
@@ -94,7 +88,7 @@ else if (DataStore.get(`Update-${update}`) && !DataStore.get(`Force-Update`)) {
 							  <lol-uikit-dialog-frame class="dialog-frame" orientation="bottom" close-button="false">
 								<div class="dialog-content">
 									<lol-uikit-content-block class="app-controls-exit-dialog" type="dialog-small" style="width: 500px;" id="elaina-update-text">
-										<h5>Elaina_V4 - ${updateType} Update ${update}</h5>
+										<h5>Elaina_V4 - ${updateType} Update ${update.version}</h5>
 										<hr class="heading-spacer" />
 									</lol-uikit-content-block>
 								</div>
@@ -125,10 +119,10 @@ else if (DataStore.get(`Update-${update}`) && !DataStore.get(`Force-Update`)) {
 
 				let target = document.getElementById("elaina-update-text")
 				if (target) {
-					for (let i = 0; i < text["text"].length; i++) {
+					for (let i = 0; i < update["text"].length; i++) {
 						let updateText = document.createElement("p")
 						updateText.setAttribute("class", "Elaina-Update")
-						updateText.textContent = text["text"][i]
+						updateText.textContent = update["text"][i]
 
 						target.appendChild(updateText)
 					}
@@ -138,6 +132,5 @@ else if (DataStore.get(`Update-${update}`) && !DataStore.get(`Force-Update`)) {
 		},1000)
 	})
 
-	DataStore.set(`Update-${update}`, false)
+	DataStore.set(`Update-${update.version}`, false)
 }
-//*/
