@@ -97,7 +97,7 @@ export default {
 	"hours1"						: 0,
 	"custom-navbar-css"				: true,
 	"manual-wallpaper-name"			: "Ex: Wallpaper.webm",
-	"manual-audio-name"				: "Ex: Audio.mp4",
+	"manual-audio-name"				: "Ex: Audio.mp3",
 	"manual-banner-name"			: "Ex: Banner.png",
 	"manual-font-name"				: "Ex: Font.ttf",
 	"change-nickname-color"			: true,

@@ -1,6 +1,13 @@
 import { UI } from "./settingsUI.js"
 import { tickcheck, restartAfterChange, utils } from "../settings.js"
 
+const FILE_REGEX = {
+    Wallpaper: /\.(png|jpg|jpeg|gif|bmp|webp|ico|mp4|webm|mkv|mov|avi|wmv|3gp|m4v)$/,
+    Audio: /\.(mp3|flac|ogg|wav|aac)$/,
+    Font: /\.(ttf|otf|woff|woff2)$/,
+    Banner: /\.(png|jpg|jpeg|gif|bmp|webp|ico)$/,
+};
+
 async function themesSettings(panel) {
     panel.prepend(
         UI.Row("",[
@@ -30,15 +37,22 @@ async function themesSettings(panel) {
                         for (let i = 0; i < currentWallpaper.length; i++) {
                             currentWallpaper[i] == newWallpaper? exist = true : exist = false
                         }
-                        if (!exist) {
-                            currentWallpaper.push(newWallpaper)
-                            DataStore.set("Wallpaper-list", currentWallpaper)
-                            text.textContent = await getString("wallpaper-added")
-                            text.style.color = "green"
+
+                        if (!FILE_REGEX.Wallpaper.test(newWallpaper)) {
+                            text.textContent = await getString("invalid-wallpaper-format");
+                            text.style.color = "red";
                         }
                         else {
-                            text.textContent = await getString("wallpaper-already-added")
-                            text.style.color = "red"
+                            if (!exist) {
+                                currentWallpaper.push(newWallpaper)
+                                DataStore.set("Wallpaper-list", currentWallpaper)
+                                text.textContent = await getString("wallpaper-added")
+                                text.style.color = "green"
+                            }
+                            else {
+                                text.textContent = await getString("wallpaper-already-added")
+                                text.style.color = "red"
+                            }
                         }
                     }),
                     UI.Button(await getString("delete"),"delete-background",async ()=> {
@@ -76,6 +90,11 @@ async function themesSettings(panel) {
                         let exist = false
                         for (let i = 0; i < currentAudio.length; i++) {
                             currentAudio[i] == newAudio? exist = true : exist = false
+                        }
+
+                        if (!FILE_REGEX.Audio.test(newAudio)) {
+                            text.textContent = await getString("invalid-audio-format");
+                            text.style.color = "red";
                         }
                         if (!exist) {
                             currentAudio.push(newAudio)
@@ -124,6 +143,11 @@ async function themesSettings(panel) {
                         for (let i = 0; i < currentBanner.length; i++) {
                             currentBanner[i] == newBanner? exist = true : exist = false
                         }
+
+                        if (!FILE_REGEX.Banner.test(newBanner)) {
+                            text.textContent = await getString("invalid-banner-format");
+                            text.style.color = "red";
+                        }
                         if (!exist) {
                             currentBanner.push(newBanner)
                             DataStore.set("Banner-list", currentBanner)
@@ -170,6 +194,11 @@ async function themesSettings(panel) {
                         let exist = false
                         for (let i = 0; i < currentFont.length; i++) {
                             currentFont[i] == newFont? exist = true : exist = false
+                        }
+
+                        if (!FILE_REGEX.Font.test(newFont)) {
+                            text.textContent = await getString("invalid-font-format");
+                            text.style.color = "red";
                         }
                         if (!exist) {
                             currentFont.push(newFont)
