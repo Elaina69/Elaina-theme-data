@@ -41,7 +41,8 @@ async function restartAfterChange(el, data) {
                 mirage[key] = DataStore.get(key)
             })
             if (DataStore.get("backup-datastore")) {
-                writeBackupData()
+                try { writeBackupData() }
+                catch { log("Server is down rightnow")}
                 window.setTimeout(()=>{
                     window.restartClient()
                 }, 3000)
