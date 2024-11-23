@@ -949,13 +949,13 @@ async function themesSettings(panel) {
                     hideovertabbox.checked = false
                     DataStore.set("hide-overview", false)
                     hideovertabel.removeAttribute("class")
-                    applyShowtab()
+                    applyHideAndShowtab()
                     }
                     else {
                     hideovertabbox.checked = true
                     DataStore.set("hide-overview", true)
                     hideovertabel.setAttribute("class", "checked")
-                    applyHidetab()
+                    applyHideAndShowtab()
                     }
                 },true
             ),
@@ -970,13 +970,13 @@ async function themesSettings(panel) {
                     hidemerchtabbox.checked = false
                     DataStore.set("hide-merch", false)
                     hidemerchtabel.removeAttribute("class")
-                    applyShowtab()
+                    applyHideAndShowtab()
                     }
                     else {
                     hidemerchtabbox.checked = true
                     DataStore.set("hide-merch", true)
                     hidemerchtabel.setAttribute("class", "checked")
-                    applyHidetab()
+                    applyHideAndShowtab()
                     }
                 },true
             ),
@@ -991,13 +991,13 @@ async function themesSettings(panel) {
                     hidepnbox.checked = false
                     DataStore.set("hide-patch-note", false)
                     hidepnel.removeAttribute("class")
-                    applyShowtab()
+                    applyHideAndShowtab()
                     }
                     else {
                     hidepnbox.checked = true
                     DataStore.set("hide-patch-note", true)
                     hidepnel.setAttribute("class", "checked")
-                    applyHidetab()
+                    applyHideAndShowtab()
                     }
                 },true
             ),
@@ -1012,13 +1012,139 @@ async function themesSettings(panel) {
                     hideesptabbox.checked = false
                     DataStore.set("hide-esport", false)
                     hideesptabel.removeAttribute("class")
-                    applyShowtab()
+                    applyHideAndShowtab()
                     }
                     else {
                     hideesptabbox.checked = true
                     DataStore.set("hide-esport", true)
                     hideesptabel.setAttribute("class", "checked")
-                    applyHidetab()
+                    applyHideAndShowtab()
+                    }
+                },true
+            ),
+            document.createElement('br'),
+            UI.CheckBox(
+                `${await getString("hide-tft-match-history")}`,'hidetftmhtab','hidetftmhtabbox',
+                ()=>{
+                    let hidetftmhtabel = document.getElementById("hidetftmhtab")
+                    let hidetftmhtabbox = document.getElementById("hidetftmhtabbox")
+    
+                    if (DataStore.get("hide-tft-match-history")) {
+                    hidetftmhtabbox.checked = false
+                    DataStore.set("hide-tft-match-history", false)
+                    hidetftmhtabel.removeAttribute("class")
+                    applyHideAndShowTFTtab()
+                    }
+                    else {
+                    hidetftmhtabbox.checked = true
+                    DataStore.set("hide-tft-match-history", true)
+                    hidetftmhtabel.setAttribute("class", "checked")
+                    applyHideAndShowTFTtab()
+                    }
+                },true
+            ),
+            document.createElement('br'),
+            UI.CheckBox(
+                `${await getString("hide-tft-news")}`,'hidetftntab','hidetftntabbox',
+                ()=>{
+                    let hidetftntabel = document.getElementById("hidetftntab")
+                    let hidetftntabbox = document.getElementById("hidetftntabbox")
+    
+                    if (DataStore.get("hide-tft-news")) {
+                    hidetftntabbox.checked = false
+                    DataStore.set("hide-tft-news", false)
+                    hidetftntabel.removeAttribute("class")
+                    applyHideAndShowTFTtab()
+                    }
+                    else {
+                    hidetftntabbox.checked = true
+                    DataStore.set("hide-tft-news", true)
+                    hidetftntabel.setAttribute("class", "checked")
+                    applyHideAndShowTFTtab()
+                    }
+                },true
+            ),
+            document.createElement('br'),
+            UI.CheckBox(
+                `${await getString("hide-tft-rotational-shop")}`,'hidetftrstab','hidetftrstabbox',
+                ()=>{
+                    let hidetftrstabel = document.getElementById("hidetftrstab")
+                    let hidetftrstabbox = document.getElementById("hidetftrstabbox")
+    
+                    if (DataStore.get("hide-tft-rotational-shop")) {
+                    hidetftrstabbox.checked = false
+                    DataStore.set("hide-tft-rotational-shop", false)
+                    hidetftrstabel.removeAttribute("class")
+                    applyHideAndShowTFTtab()
+                    }
+                    else {
+                    hidetftrstabbox.checked = true
+                    DataStore.set("hide-tft-rotational-shop", true)
+                    hidetftrstabel.setAttribute("class", "checked")
+                    applyHideAndShowTFTtab()
+                    }
+                },true
+            ),
+            document.createElement('br'),
+            UI.CheckBox(
+                `${await getString("hide-tft-troves")}`,'hidetfttrovestab','hidetfttrovestabbox',
+                ()=>{
+                    let hidetfttrovestabel = document.getElementById("hidetfttrovestab")
+                    let hidetfttrovestabbox = document.getElementById("hidetfttrovestabbox")
+    
+                    if (DataStore.get("hide-tft-troves")) {
+                    hidetfttrovestabbox.checked = false
+                    DataStore.set("hide-tft-troves", false)
+                    hidetfttrovestabel.removeAttribute("class")
+                    applyHideAndShowTFTtab()
+                    }
+                    else {
+                    hidetfttrovestabbox.checked = true
+                    DataStore.set("hide-tft-troves", true)
+                    hidetfttrovestabel.setAttribute("class", "checked")
+                    applyHideAndShowTFTtab()
+                    }
+                },true
+            ),
+            document.createElement('br'),
+            UI.CheckBox(
+                `${await getString("hide-tft-battle-pass")}`,'hidetftbattletab','hidetftbattletabbox',
+                ()=>{
+                    let hidetftbattletabel = document.getElementById("hidetftbattletab")
+                    let hidetftbattletabbox = document.getElementById("hidetftbattletabbox")
+    
+                    if (DataStore.get("hide-tft-battle-pass")) {
+                    hidetftbattletabbox.checked = false
+                    DataStore.set("hide-tft-battle-pass", false)
+                    hidetftbattletabel.removeAttribute("class")
+                    applyHideAndShowTFTtab()
+                    }
+                    else {
+                    hidetftbattletabbox.checked = true
+                    DataStore.set("hide-tft-battle-pass", true)
+                    hidetftbattletabel.setAttribute("class", "checked")
+                    applyHideAndShowTFTtab()
+                    }
+                },true
+            ),
+            document.createElement('br'),
+            UI.CheckBox(
+                `${await getString("hide-tft-home")}`,'hidetfthometab','hidetfthometabbox',
+                ()=>{
+                    let hidetfthometabel = document.getElementById("hidetfthometab")
+                    let hidetfthometabbox = document.getElementById("hidetfthometabbox")
+    
+                    if (DataStore.get("hide-tft-home")) {
+                    hidetfthometabbox.checked = false
+                    DataStore.set("hide-tft-home", false)
+                    hidetfthometabel.removeAttribute("class")
+                    applyHideAndShowTFTtab()
+                    }
+                    else {
+                    hidetfthometabbox.checked = true
+                    DataStore.set("hide-tft-home", true)
+                    hidetfthometabel.setAttribute("class", "checked")
+                    applyHideAndShowTFTtab()
                     }
                 },true
             ),
@@ -1129,6 +1255,12 @@ function themeSettingsCheckbox() {
     tickcheck(DataStore.get("old-prev/next-button"), "oldpnb", "oldpnbbox")
     tickcheck(DataStore.get("lobby-transparent-filter"), 'ltf', 'ltfbox')
     tickcheck(DataStore.get("change-nickname-color"), 'nicknamecolor', 'nicknamecolorbox')
+    tickcheck(DataStore.get("hide-tft-match-history"), 'hidetftmhtab', 'hidetftmhtabbox')
+    tickcheck(DataStore.get("hide-tft-news"), 'hidetftntab', 'hidetftntabbox')
+    tickcheck(DataStore.get("hide-tft-rotational-shop"), 'hidetftrstab','hidetftrstabbox')
+    tickcheck(DataStore.get("hide-tft-troves"), 'hidetfttrovestab','hidetfttrovestabbox')
+    tickcheck(DataStore.get("hide-tft-battle-pass"), 'hidetftbattletab','hidetftbattletabbox')
+    tickcheck(DataStore.get("hide-tft-home"), 'hidetfthometab','hidetfthometabbox')
 }
 
 export { themesSettings, themeSettingsCheckbox }
