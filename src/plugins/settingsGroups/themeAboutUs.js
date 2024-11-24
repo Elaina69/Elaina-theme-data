@@ -1,6 +1,6 @@
 import { UI } from "./settingsUI.js"
 
-export function aboutustab(panel) {
+export async function aboutustab(panel) {
     panel.prepend(
         UI.Row("",[
             UI.Row("Developer",[
@@ -8,21 +8,21 @@ export function aboutustab(panel) {
                     UI.Row("dev-div",[
                         UI.ImageAndLink(false, "https://avatars.githubusercontent.com/u/29869255", "dev_ava", "https://github.com/Ku-Tadao"),
                         UI.Label("Kubi", "first_line_kubi"),
-                        UI.Label("Optimizing theme")
+                        UI.Label(await getString("optimizing-theme"))
                     ]),
                     UI.Row("dev-div",[
                         UI.ImageAndLink(true, "about-us/elainadacatto.png", "dev_ava", "https://github.com/Elaina69"),
                         UI.Label("Elaina Da Catto", "first_line_elaina"),
-                        UI.Label("Main Developer")
+                        UI.Label(await getString("main-developer"))
                     ]),
                     UI.Row("dev-div",[
                         UI.ImageAndLink(false, "https://avatars.githubusercontent.com/u/43145883", "dev_ava", "https://github.com/Lyfhael"),
                         UI.Label("Lyfhael", "first_line_lyfhael"),
-                        UI.Label("Co-Founder")
+                        UI.Label(await getString("co-founder"))
                     ]),
                 ]),
             ]),
-            UI.Label("Contributors:","contributors"),
+            UI.Label(await getString("contributors") + ":","contributors"),
             UI.Row("Contributors-row",[
                 UI.Contributor(false, "https://avatars.githubusercontent.com/u/38210249","Nomi-san","Daubuoi"),
                 UI.Contributor(false, "https://avatars.githubusercontent.com/u/8694498","BakaFT","Support, Translator"),
@@ -51,9 +51,9 @@ export function aboutustab(panel) {
             */
             document.createElement("br"),
             UI.Row("Donation",[
-                UI.Label("Thanks for using Elaina theme :3","first_line"),
-                UI.Label("If you love Elaina theme, you can support me by sharing this theme to your friend"),
-                UI.Label("or donating me"),
+                UI.Label(await getString("donate-firstline"),"first_line"),
+                UI.Label(await getString("donate-secondline")),
+                UI.Label(await getString("donate-thirdline")),
                 UI.Row("Donation-row",[
                     //UI.ImageAndLink("ko-fi.webp","https://ko-fi.com/elainadacatto"),
                     UI.ImageAndLink(true, "paypal.png", "donate", "https://www.paypal.com/paypalme/ElainaDaCattoRiel"),

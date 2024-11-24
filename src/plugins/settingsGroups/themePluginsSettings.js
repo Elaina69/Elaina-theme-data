@@ -567,7 +567,7 @@ function pluginsSettingsCheckbox() {
     tickcheck(DataStore.get("April fool` joke"), "_1_4", "_1_4box")
     //tickcheck(DataStore.get("Merry-Christmas"), "MC", "MCbox")
     tickcheck(DataStore.get("loot-helper"), "lh", "lhbox")
-    tickcheck(DataStore.get("buy-all-champs"), "byc", "bycbox")
+    //tickcheck(DataStore.get("buy-all-champs"), "byc", "bycbox")
     tickcheck(DataStore.get("Custom-rank"), "cusrankhover", "cusrankhoverbox")
     tickcheck(DataStore.get("auto_accept_button"), "autoacceptbutton", "autoacceptbuttonbox")
 }

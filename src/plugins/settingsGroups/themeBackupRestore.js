@@ -35,7 +35,7 @@ async function CheckBackupFile() {
             }
         }
         catch { 
-            log("You don't have backup file on cloud yet.")
+            log("Cloud server is sleep, try backup/restore later.")
             a.style.visibility = "hidden"
             b.style.visibility = "hidden"
             c.style.color = "red"
@@ -62,10 +62,10 @@ export async function backuprestoretab(panel) {
     CheckBackupFile()
     panel.prepend(
         UI.Row("",[
-            UI.Label("Manual backup and restore", ""),
+            UI.Label(await getString("Manual-Backup-Restore"), ""),
             document.createElement('br'),
             UI.Row("manualRestoreBackup", [
-                UI.Button("Backup", "ManualBackup", async () => {
+                UI.Button(await getString("Backup-Data"), "ManualBackup", async () => {
                     let sumID = await utils.getSummonerID()
                     let keys = Object.keys(datastore_list)
                     let mirage = datastore_list
