@@ -136,24 +136,13 @@ export async function backuprestoretab(panel) {
                 UI.Link("", ``, ()=> {}, "downloadBackup")
             ]),
             UI.CheckBox(
-                `${await getString("backup-datastore")}`,'bakdata','bakdatabox',()=>{
-                    let el = document.getElementById("bakdata")
-                    let box = document.getElementById("bakdatabox")
-            
-                    if (DataStore.get("backup-datastore")) {
-                        el.removeAttribute("class")
-                        box.checked = false
-                        DataStore.set("backup-datastore", false)
-                        //deleteBackup(DataStore.get("Summoner-ID"))
-                    }
+                `${await getString("backup-datastore")}`,'bakdata', 'bakdatabox', ()=>{
+                    if (!DataStore.get("backup-datastore")) {}
                     else {
-                        el.setAttribute("class", "checked")
-                        box.checked = true
-                        DataStore.set("backup-datastore", true)
                         CheckBackupFile()
                         //writeBackupData()
                     }
-                },true
+                },true, "backup-datastore"
             ),
             UI.Label(`${await getString("Loading")}...`, "datastore-cloud-checking"),
             document.createElement('br'),

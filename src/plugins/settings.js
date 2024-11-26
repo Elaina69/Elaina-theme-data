@@ -17,7 +17,7 @@ const error = (message, ...args) => console.error(CONSOLE_STYLE.prefix + '%c ' +
 async function restartAfterChange(el, data) {
     let lastdata = document.getElementById(el).getAttribute("lastdatastore")
     
-    DataStore.set("settingsChangenumber", lastdata == JSON.stringify(DataStore.get(data))? DataStore.get("settingsChangenumber") + 1 : DataStore.get("settingsChangenumber") - 1)
+    DataStore.set("settingsChangenumber", lastdata == JSON.stringify(!DataStore.get(data))? DataStore.get("settingsChangenumber") + 1 : DataStore.get("settingsChangenumber") - 1)
 
     if (!document.querySelector("#restartAfterChangeButton") && DataStore.get("settingsChangenumber") > 0) {
         let target = document.querySelector(".lol-settings-footer.ember-view")
@@ -58,17 +58,6 @@ async function restartAfterChange(el, data) {
     }
 }
 
-function tickcheck (Data, el, checkbox) {
-    try {
-        let element = document.getElementById(el)
-        let box = document.getElementById(checkbox)
-        if (Data && element.getAttribute("class") == "") {
-            box.checked = true
-        }
-    }
-    catch{ error(`Can't find target's class`) }
-}
-
 function writeBackupData() {
     let keys = Object.keys(datastore_list)
     let mirage = datastore_list
@@ -79,12 +68,12 @@ function writeBackupData() {
 }
 window.writeBackupData = writeBackupData
 
-export { datapath, utils, cdnVersion, tickcheck, restartAfterChange, datastore_list }
+export { datapath, utils, cdnVersion, restartAfterChange, datastore_list }
 
 import data from "./settingsGroups/settingsStructure.js"
 import { settingsUtils } from "../utils/settingsUtils.js"
-import { themesSettings, themeSettingsCheckbox } from "./settingsGroups/themeSettings.js"
-import { pluginsSettings, pluginsSettingsCheckbox} from "./settingsGroups/themePluginsSettings.js"
+import { themesSettings } from "./settingsGroups/themeSettings.js"
+import { pluginsSettings } from "./settingsGroups/themePluginsSettings.js"
 import { backuprestoretab } from "./settingsGroups/themeBackupRestore.js"
 import { aboutustab } from "./settingsGroups/themeAboutUs.js"
 
@@ -115,7 +104,6 @@ window.addEventListener('load', async () => {
                     let check = setInterval (()=>{
                         if (document.getElementById("Info")) {
                             clearInterval(check)
-                            themeSettingsCheckbox()
                         }
                     },100)
                 }
@@ -139,10 +127,6 @@ window.addEventListener('load', async () => {
                                 })
                             }
                             catch{}
-                            if (DataStore.get("Dev-button")) {
-                                tickcheck(DataStore.get("Dev-mode"), "devbutton", "devbuttonbox")
-                            }
-                            pluginsSettingsCheckbox()
                         }
                     },100)
                 }
@@ -151,7 +135,6 @@ window.addEventListener('load', async () => {
                     let check = setInterval (()=>{
                         if (document.getElementById("bakdata")) {
                             clearInterval(check)
-                            tickcheck(DataStore.get("backup-datastore"), "bakdata", "bakdatabox")
                         }
                     },100)
                 }
