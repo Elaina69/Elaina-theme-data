@@ -3,9 +3,18 @@ export default {
     "key": 425,
     "auto-update": false,
     "text": [
-        "Fix audio/wallpaper bug on new client version",
-        "Add new hide tabs option",
-        "Change default datastore",
-        "Prevent invalid format for manual update list in settings"
+        "Refactoring code",
+        "CDN now always latest (if still not, open devtool/network and click disable cache)",
+        "Update css",
+        "Update language file's structure",
+        "Fix import CDN bug",
+        "Fix hide tab option",
+        "Fix rank string name",
+        "Fix datastore bug",
+        "Add option to TFT hide tab",
+        "Delete un-used configs file",
+        "Replace old hide friendslist button with new one",
+        "Hide friendslist button now can stay at current state when start/restart client",
+        "Add disable theme audio option",
     ]
 }
