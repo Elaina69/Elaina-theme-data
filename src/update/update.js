@@ -1,6 +1,6 @@
 export default {
-    "version": "4.2.5",
-    "key": 425,
+    "version": "4.3.0",
+    "key": 430,
     "auto-update": false,
     "text": [
         "Refactoring code",
