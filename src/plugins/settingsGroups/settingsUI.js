@@ -108,13 +108,34 @@ const UI = {
         const label = document.createElement("label")
         const none = document.createElement("div")
 
-        origin.setAttribute("class",'')
         origin.id = ID
         origin.setAttribute("lastDatastore", DataStore.get(datastore_name))
     
         checkbox.type = "checkbox"
         checkbox.id = boxID
-        checkbox.onclick = check
+        if (DataStore.get(datastore_name)){
+            checkbox.checked = true
+            origin.setAttribute("class", "checked")
+        }
+        else {
+            checkbox.checked = false
+            origin.setAttribute("class",'')
+        }
+
+        checkbox.onclick = () => {
+            if (DataStore.get(datastore_name)) {
+                origin.removeAttribute("class")
+                checkbox.checked = false
+                DataStore.set(datastore_name, false)
+                check()
+            }
+            else {
+                origin.setAttribute("class", "checked")
+                checkbox.checked = true
+                DataStore.set(datastore_name, true)
+                check()
+            }
+        }
         checkbox.setAttribute("slot", "input")
     
         label.innerHTML = text
