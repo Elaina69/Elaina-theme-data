@@ -1,5 +1,5 @@
 export default {
-    "version": "4.2.5",
+    "version": "4.2.52",
     "key": 425,
     "auto-update": false,
     "text": [
