@@ -105,4 +105,5 @@ export default {
 	"nickname-opacity"				: "ff",
 	"nickname-color-with-opacity"	: "#f2c1d0ff",
 	"lobby-transparent-filter"		: true,
+	"Disable-Theme-Audio"			: false,
 }
