@@ -1,5 +1,15 @@
 let datapath = new URL("..", import.meta.url).href
 
+if (!DataStore.has("seconds1")) {
+	DataStore.set("seconds1",0)
+	DataStore.set("minutes1",0)
+	DataStore.set("hours1",0)
+}
+
+let s = DataStore.get("seconds1")
+let m = DataStore.get("minutes1")
+let h = DataStore.get("hours1")
+
 async function createMenu(root) {
 	let close = await getString('l.close')
 	const { Component, jsx, render } = await import('//esm.run/nano-jsx')
@@ -51,30 +61,50 @@ function checkTime(i) {
 	return i
 }
 
-function onlineTime() {
-	if (!DataStore.has("seconds1")) {
-		DataStore.set("seconds1",0)
-		DataStore.set("minutes1",0)
-		DataStore.set("hours1",0)
-	}
+export function triggerDonateCommand() {
+	let s_temp = DataStore.get("seconds1")
+	let m_temp = DataStore.get("minutes1")
+	let h_temp = DataStore.get("hours1")
 
+    s = 59
+	m = 59
+	h = 0
+
+	window.setTimeout (()=> {
+		s = s_temp
+		m = m_temp
+		h = h_temp
+
+		DataStore.set("hours1",h)
+		DataStore.set("minutes1",m)
+		DataStore.set("seconds1",s)
+	},1000)
+}
+
+function onlineTime() {
 	window.setInterval(()=>{
 		try {
-			DataStore.set("seconds1",DataStore.get("seconds1")+1)
+			s = s + 1
 
-			if (DataStore.get("seconds1") >= 60) {
-				DataStore.set("minutes1",DataStore.get("minutes1")+1)
-				DataStore.set("seconds1",0)
+			if (s >= 60) {
+				m = m + 1
+				s = 0
+				DataStore.set("minutes1",m)
+				DataStore.set("seconds1",s)
 			}
-			if (DataStore.get("minutes1") >= 60) {
-				DataStore.set("hours1",DataStore.get("hours1")+1)
-				DataStore.set("minutes1",0)
-				DataStore.set("seconds1",0)
+
+			if (m >= 60) {
+				h = h + 1
+				m = 0
+				s = 0
+				DataStore.set("hours1",h)
+				DataStore.set("minutes1",m)
+				DataStore.set("seconds1",s)
 			}
 			
-			document.querySelector("span.friend-header").innerHTML = DataStore.get("hide-theme-usage-time")? "" : checkTime(DataStore.get("hours1"))+":"+checkTime(DataStore.get("minutes1"))+":"+checkTime(DataStore.get("seconds1"))
+			document.querySelector("span.friend-header").innerHTML = DataStore.get("hide-theme-usage-time")? "" : checkTime(h)+":"+checkTime(m)+":"+checkTime(s)
 
-			if (DataStore.get("hours1") == 1 && DataStore.get("minutes1") == 0 && DataStore.get("seconds1") == 0) {
+			if (h == 1 && m == 0 && s == 0) {
 				window.addEventListener("load", async ()=> {
 					const manager = () => document.getElementById('lol-uikit-layer-manager-wrapper')
 					const root    = document.createElement('div')
