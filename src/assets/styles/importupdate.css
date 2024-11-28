@@ -10,3 +10,11 @@
     height: 0;
     visibility: hidden;
 }
+
+.moe-counter {
+    width: 345px;
+}
+
+#User-counter {
+    text-align: center;
+}

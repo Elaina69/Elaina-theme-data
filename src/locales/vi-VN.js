@@ -109,6 +109,7 @@ export default {
     "speed-check-deny"              : "Chỉ có thể chỉnh tốc độ >= 6.25 và <= 300",
     "music-volume"                  : "Âm lượng nhạc",
     "turnoff-audio-ingame"          : "Tắt nhạc/âm thanh hình nền khi vào trận",
+    "Disable-Theme-Audio"           : "Vô hiệu hóa nhạc của Elaina theme",
     
     "prevent-manual-update"         : "Không nhận thông báo về các bản cập nhật thủ công trong tương lai",
     "custom-navbar-css"             : "Thanh điều hướng cấp 2 tùy chỉnh",
@@ -218,6 +219,7 @@ export default {
     "co-founder"        : "Đồng sáng lập",
     "optimizing-theme"  : "Tối ưu giao diện",
     "contributors"      : "Những người đóng góp",
+    "user-counter"      : "Số lượng người dùng",
     "donate-firstline"  : "Cảm ơn vì đã sử dụng Elaina Theme :3",
     "donate-secondline" : "Nếu bạn yêu thích Elaina theme, bạn có thể hỗ trợ tui bằng cách chia sẻ nó cho bạn bè của bạn",
     "donate-thirdline"  : "hoặc donate cho tui (>.<)!",

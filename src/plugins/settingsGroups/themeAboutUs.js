@@ -1,5 +1,17 @@
 import { UI } from "./settingsUI.js"
 
+const controller = new AbortController();
+const timeoutId = setTimeout(() => controller.abort(), 2000);
+
+try {
+    const response = await fetch('https://elainatheme.xyz/numberOfUsers', { signal: controller.signal });
+    const { count } = await response.json();
+    DataStore.set("User-Counter", count)
+} catch (err) {
+    clearTimeout(timeoutId);
+    throw err;
+}
+
 export async function aboutustab(panel) {
     panel.prepend(
         UI.Row("",[
@@ -49,6 +61,11 @@ export async function aboutustab(panel) {
                 UI.Contributor("about-us/","",""),
             ]),
             */
+            document.createElement("br"),
+            UI.Row("User-counter",[
+                UI.Label(await getString("user-counter"), "first_line"),
+                UI.ImageAndLink(false,`https://count.getloli.com/@Elainav4?name=Elainav4&theme=${DataStore.get("NSFW-Content")? "gelbooru-h" : "booru-lewd"}&padding=7&offset=0&align=center&scale=1&pixelated=1&darkmode=auto&num=${DataStore.has("User-Counter")? DataStore.get("User-Counter") : ""}`, "moe-counter", "")
+            ]),
             document.createElement("br"),
             UI.Row("Donation",[
                 UI.Label(await getString("donate-firstline"),"first_line"),
