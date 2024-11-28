@@ -109,6 +109,7 @@ export default {
     "speed-check-deny"              : "Only can set the speed >= 6.25 and <= 300",
     "music-volume"                  : "Music volume",
     "turnoff-audio-ingame"          : "Turn off music/wallpaper audio when ingame",
+    "Disable-Theme-Audio"           : "Disable theme's audio",
     
     "prevent-manual-update"         : "Don't receive notifications about future manual updates",
     "custom-navbar-css"             : "Custom secondary navigation bar",
@@ -218,6 +219,7 @@ export default {
     "co-founder"        : "Co-Founder",
     "optimizing-theme"  : "Optimizing theme",
     "contributors"      : "Contributors",
+    "user-counter"      : "Users counter",
     "donate-firstline"  : "Thanks for using Elaina theme :3",
     "donate-secondline" : "If you love Elaina theme, you can support me by sharing this theme to your friend",
     "donate-thirdline"  : "or donating me",

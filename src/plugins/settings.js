@@ -1,10 +1,17 @@
+import utils from '../utils/utils.js'
+import * as observer from "../utils/observer.js"
+import cdnVersion from "../update/cdnVersionList.js"
+import datastore_list from "../config/datastoreDefault.js"
+import data from "./settingsGroups/settingsStructure.js"
+import { settingsUtils } from "../utils/settingsUtils.js"
+import { themesSettings } from "./settingsGroups/themeSettings.js"
+import { pluginsSettings } from "./settingsGroups/themePluginsSettings.js"
+import { backuprestoretab } from "./settingsGroups/themeBackupRestore.js"
+import { aboutustab } from "./settingsGroups/themeAboutUs.js"
+
 let datapath = new URL("..", import.meta.url).href
 
 DataStore.set("settingsChangenumber", 0)
-
-import utils from '../utils/utils.js'
-import cdnVersion from "../update/cdnVersionList.js"
-import datastore_list from "../config/datastoreDefault.js"
 
 const CONSOLE_STYLE = {
     prefix: '%c Elaina ',
@@ -66,29 +73,21 @@ function writeBackupData() {
     })
     writeBackup(DataStore.get("Summoner-ID"), "datastore.json", JSON.stringify(mirage))
 }
-window.writeBackupData = writeBackupData
-
-export { datapath, utils, cdnVersion, restartAfterChange, datastore_list }
-
-import data from "./settingsGroups/settingsStructure.js"
-import { settingsUtils } from "../utils/settingsUtils.js"
-import { themesSettings } from "./settingsGroups/themeSettings.js"
-import { pluginsSettings } from "./settingsGroups/themePluginsSettings.js"
-import { backuprestoretab } from "./settingsGroups/themeBackupRestore.js"
-import { aboutustab } from "./settingsGroups/themeAboutUs.js"
-
-export function Settings(context) {
-    settingsUtils(context, data)
-}
     
 window.addEventListener('load', async () => {
-    // function DeleteEl (target, confirm) {
-    //     try {
-    //         let origin = document.querySelector(target)
-    //         if (confirm) {origin.remove()}
-    //     }
-    //     catch{}
-    // }
+    observer.subscribeToElementCreation(".plugins-settings-logo", (element) => {
+        element.addEventListener("click", ()=> {
+            DataStore.set("Active-dev-button", DataStore.get("Active-dev-button") + 1)
+            if (DataStore.get("Active-dev-button") == 20) {
+                DataStore.set("Dev-button", true)
+                log("Developer mode button has appeared !")
+            }
+            else if (DataStore.get("Active-dev-button") > 20) {
+                DataStore.set("Dev-button", true)
+                log("You already become developer !")
+            }
+        })
+    })
     const interval = setInterval(() => {
         const manager = document.getElementById('lol-uikit-layer-manager-wrapper')
         if (manager) {
@@ -101,42 +100,12 @@ window.addEventListener('load', async () => {
 
                 if (theme && mutations.some((record) => Array.from(record.addedNodes).includes(theme))) {
                     themesSettings(theme)
-                    let check = setInterval (()=>{
-                        if (document.getElementById("Info")) {
-                            clearInterval(check)
-                        }
-                    },100)
                 }
                 else if (plugin && mutations.some((record) => Array.from(record.addedNodes).includes(plugin))) {
                     pluginsSettings(plugin)
-                    let check = setInterval (()=>{
-                        if (document.getElementById("Info")) {
-                            clearInterval(check)
-                            try {
-                                let origin = document.querySelector(".plugins-settings-logo")
-                                origin.addEventListener("click", ()=> {
-                                    DataStore.set("Active-dev-button", DataStore.get("Active-dev-button") + 1)
-                                    if (DataStore.get("Active-dev-button") == 20) {
-                                        DataStore.set("Dev-button", true)
-                                        log("Developer mode button has appeared !")
-                                    }
-                                    else if (DataStore.get("Active-dev-button") > 20) {
-                                        DataStore.set("Dev-button", true)
-                                        log("You already become developer !")
-                                    }
-                                })
-                            }
-                            catch{}
-                        }
-                    },100)
                 }
                 else if (backupandrestore && mutations.some((record) => Array.from(record.addedNodes).includes(backupandrestore))) {
                     backuprestoretab(backupandrestore)
-                    let check = setInterval (()=>{
-                        if (document.getElementById("bakdata")) {
-                            clearInterval(check)
-                        }
-                    },100)
                 }
                 else if (aboutus && mutations.some((record) => Array.from(record.addedNodes).includes(aboutus))) {
                     aboutustab(aboutus)
@@ -148,3 +117,10 @@ window.addEventListener('load', async () => {
         }
     },500)
 })
+
+export { datapath, utils, cdnVersion, restartAfterChange, datastore_list }
+export function Settings(context) {
+    settingsUtils(context, data)
+}
+
+window.writeBackupData = writeBackupData
