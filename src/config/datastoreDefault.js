@@ -106,4 +106,10 @@ export default {
 	"nickname-color-with-opacity"	: "#f2c1d0ff",
 	"lobby-transparent-filter"		: true,
 	"Disable-Theme-Audio"			: false,
+	"hide-tft-home"					: false,
+	"hide-tft-battle-pass"			: false,
+	"hide-tft-troves"				: false,
+	"hide-tft-rotational-shop"		: false,
+	"hide-tft-news"					: false,
+	"hide-tft-match-history"		: false,
 }
