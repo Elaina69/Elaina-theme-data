@@ -16,11 +16,5 @@ export default [
     `${icon}/logo.png`,
     `${icon}/momo.svg`,
     //`${icon}/ko-fi.webp`,
-    `${icon}/paypal.png`,
-    "https://avatars.githubusercontent.com/u/29869255",
-    "https://avatars.githubusercontent.com/u/43145883",
-    "https://avatars.githubusercontent.com/u/38210249",
-    "https://avatars.githubusercontent.com/u/8694498",
-    "https://avatars.githubusercontent.com/u/45071533",
-    "https://avatars.githubusercontent.com/u/59478113",
+    `${icon}/paypal.png`
 ]

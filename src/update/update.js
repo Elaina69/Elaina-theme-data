@@ -1,20 +1,10 @@
 export default {
-    "version": "4.2.52",
-    "key": 425,
+    "version": "4.2.6",
+    "key": 426,
     "auto-update": false,
     "text": [
-        "Refactoring code",
-        "CDN now always latest (if still not, open devtool/network and click disable cache)",
-        "Update css",
-        "Update language file's structure",
-        "Fix import CDN bug",
-        "Fix hide tab option",
-        "Fix rank string name",
-        "Fix datastore bug",
-        "Add option to TFT hide tab",
-        "Delete un-used configs file",
-        "Replace old hide friendslist button with new one",
-        "Hide friendslist button now can stay at current state when start/restart client",
-        "Add disable theme audio option",
+        "Change lobby viewpoint to center when hiding friendlist",
+        "Fix wallpaper/audio load in v14.24 client",
+        "Remove old PluginFS code"
     ]
 }
