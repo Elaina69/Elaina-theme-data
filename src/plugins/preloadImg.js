@@ -12,4 +12,7 @@ imageLinks.forEach(link => {
 });
 
 const body = document.querySelector("body")
-body.append(origin)
+
+try {
+    body.append(origin)
+} catch { console.log("Can not add preload Image css.")}
