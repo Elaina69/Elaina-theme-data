@@ -104,7 +104,7 @@ function onlineTime() {
 			
 			document.querySelector("span.friend-header").innerHTML = DataStore.get("hide-theme-usage-time")? "" : checkTime(h)+":"+checkTime(m)+":"+checkTime(s)
 
-			if (h == 1 && m == 0 && s == 0) {
+			if ((h == 1 && m == 0 && s == 0) || (h == 12 && m == 0 && s == 0) || (h == 24 && m == 0 && s == 0)) {
 				window.addEventListener("load", async ()=> {
 					const manager = () => document.getElementById('lol-uikit-layer-manager-wrapper')
 					const root    = document.createElement('div')

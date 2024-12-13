@@ -1,12 +1,7 @@
 import config from "../config/holiday.js"
 //import pandoru from "../configs/pandoru.txt?raw"
 
-const CONSOLE_STYLE = {
-    prefix: '%c Elaina ',
-    css: 'color: #ffffff; background-color: #f77fbe'
-};
-
-const log = (message, ...args) => console.log(CONSOLE_STYLE.prefix + '%c ' + message, CONSOLE_STYLE.css, '', ...args);
+import { log } from "../utils/themeLog.js";
 
 if (!DataStore.has("Day")) {
     DataStore.set("Day", "0/0")

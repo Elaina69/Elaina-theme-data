@@ -8,18 +8,11 @@ import { themesSettings } from "./settingsGroups/themeSettings.js"
 import { pluginsSettings } from "./settingsGroups/themePluginsSettings.js"
 import { backuprestoretab } from "./settingsGroups/themeBackupRestore.js"
 import { aboutustab } from "./settingsGroups/themeAboutUs.js"
+import { log, error } from "../utils/themeLog.js";
 
 let datapath = new URL("..", import.meta.url).href
 
 DataStore.set("settingsChangenumber", 0)
-
-const CONSOLE_STYLE = {
-    prefix: '%c Elaina ',
-    css: 'color: #ffffff; background-color: #f77fbe'
-};
-
-const log = (message, ...args) => console.log(CONSOLE_STYLE.prefix + '%c ' + message, CONSOLE_STYLE.css, '', ...args);
-const error = (message, ...args) => console.error(CONSOLE_STYLE.prefix + '%c ' + message, CONSOLE_STYLE.css, '', ...args);
 
 async function restartAfterChange(el, data) {
     let lastdata = document.getElementById(el).getAttribute("lastdatastore")
