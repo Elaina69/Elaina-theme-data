@@ -22,10 +22,13 @@ class CheckUsing {
     }
 
     trackStart = (userId) => {
+        //@ts-ignore 
+
         const data = {
             userId: userId,
             pageUrl: window.location.href,
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
+            locale: document.querySelector("html")?.lang
         };
     
         fetch("https://elainatheme.xyz/api/track", {
@@ -43,7 +46,9 @@ class CheckUsing {
     sendKeepAlive = (userId) =>  {
         const data = {
             userId: userId,
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
+            pageUrl: window.location.href,
+            locale: document.querySelector("html")?.lang
         };
     
         fetch("https://elainatheme.xyz/api/keep-alive", {
