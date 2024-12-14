@@ -74,6 +74,7 @@ export default {
     // Theme settings
     "theme-settings"                : "Cài đặt chủ đề",
 
+    "AllowTrackingData"             : "Cho phép chủ đề thu thập thông tin cụ thể (Tên, thời gian sử dụng và ngôn ngữ hiện tại)",
     "update-list-manually"          : "Cập nhật thủ công danh sách của theme",
     "add"                           : "Thêm", 
     "delete"                        : "Xóa", 

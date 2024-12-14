@@ -74,6 +74,7 @@ export default {
     // Theme settings
     "theme-settings"                : "Theme settings",
 
+    "AllowTrackingData"             : "Allow theme collecting specific infomation (Username, using time and current language)",
     "update-list-manually"          : "Update theme's list manually", 
     "add"                           : "Add", 
     "delete"                        : "Delete", 
