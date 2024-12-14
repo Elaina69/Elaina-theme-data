@@ -23,6 +23,12 @@ async function themesSettings(panel) {
                 ]),
                 UI.Image("logo.png", "theme-settings-logo")
             ]),
+            UI.CheckBox(
+                `${await getString("AllowTrackingData")}`,'trackData','trackDatabox', ()=>{
+                    restartAfterChange('trackData', "AllowTrackingData")
+                },true, "AllowTrackingData"
+            ),
+            document.createElement('br'),
             UI.Label(await getString("update-list-manually")),
             UI.Row("add-background-manually-row", [
                 UI.Label(" ", "add-background-manual-message"),
