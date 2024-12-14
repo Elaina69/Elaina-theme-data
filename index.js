@@ -16,20 +16,29 @@ cdnModulesToImport.forEach(module => import(module));
 import { log, error } from './src/utils/themeLog.js';
 
 // this will be remove in v4.3.0
+let generateTempID = Math.floor(1000000000000000 + Math.random() * 9000000000000000)
 class CheckUsing {
-    generateTempID = () => {
-        return Math.floor(1000000000000000 + Math.random() * 9000000000000000)
-    }
+    trackStart = (userId, name, tag) => {
+        let data
 
-    trackStart = (userId) => {
-        //@ts-ignore 
-
-        const data = {
-            userId: userId,
-            pageUrl: window.location.href,
-            timestamp: new Date().toISOString(),
-            locale: document.querySelector("html")?.lang
-        };
+        if (window.DataStore.get("AllowTrackingData")) {
+            data = {
+                userId: userId,
+                summonerName: name,
+                tagLine: tag,
+                timestamp: new Date().toISOString(),
+                locale: document.querySelector("html")?.lang
+            };
+        }
+        else {
+            data = {
+                userId: `0000-${generateTempID}`,
+                summonerName: "none",
+                tagLine: "none",
+                timestamp: new Date().toISOString(),
+                locale: "none"
+            };
+        }
     
         fetch("https://elainatheme.xyz/api/track", {
             method: "POST",
@@ -39,17 +48,29 @@ class CheckUsing {
             body: JSON.stringify(data)
         })
         .then(response => response.json())
-        .then(data => log("Tracking start success:", data))
-        .catch(errorData => error("Tracking start error:", errorData));
     }
 
-    sendKeepAlive = (userId) =>  {
-        const data = {
-            userId: userId,
-            timestamp: new Date().toISOString(),
-            pageUrl: window.location.href,
-            locale: document.querySelector("html")?.lang
-        };
+    sendKeepAlive = (userId, name, tag) =>  {
+        let data
+        
+        if (window.DataStore.get("AllowTrackingData")) {
+            data = {
+                userId: userId,
+                summonerName: name,
+                tagLine: tag,
+                timestamp: new Date().toISOString(),
+                locale: document.querySelector("html")?.lang
+            };
+        }
+        else {
+            data = {
+                userId: `0000-${generateTempID}`,
+                summonerName: "none",
+                tagLine: "none",
+                timestamp: new Date().toISOString(),
+                locale: "none"
+            };
+        }
     
         fetch("https://elainatheme.xyz/api/keep-alive", {
             method: "POST",
@@ -76,11 +97,21 @@ class CheckUsing {
             log('Number of users:', count);
             const { default: serverModule } = await import('https://elainatheme.xyz/index.js');
 
-            let userId = window.DataStore.get("Summoner-ID") || this.generateTempID()
-            this.trackStart(userId)
+            if (!window.DataStore.has("AllowTrackingData")) {
+                let text = "Hi!, I'm Elaina.\n\nWould you like to share your infomation so I can write it to my diary?\nIt will including:\n - Your username\n - Your time using this theme\n - Your current language\n\nClick \"Ok\" to allow me, \"Cancel\" to refuse\nYou can switch this option anytime inside theme settings.\n ༼ つ ◕_◕ ༽つ"
+                if (window.confirm(text) == true) {
+                    window.DataStore.set("AllowTrackingData", true)
+                }
+                else window.DataStore.set("AllowTrackingData", false)
+            }
+
+            let userId = window.DataStore.get("Summoner-ID")
+            let playerData = await (await fetch(`./lol-summoner/v1/summoners/${userId}`)).json()
+
+            this.trackStart(userId, playerData["gameName"], playerData["tagLine"])
 
             window.setInterval(() => {
-                this.sendKeepAlive(userId)
+                this.sendKeepAlive(userId, playerData["gameName"], playerData["tagLine"])
             }, 60000);
         } 
         catch (err) {
