@@ -249,13 +249,22 @@ async function themesSettings(panel) {
                 UI.Slider(
                     await getString("wallpaper-volume"),DataStore.get("wallpaper-volume"),"elaina-bg","wallpaper-volume"
                 ),
-                UI.Label(await getString("Wallpaper-Speed"), ""),
                 UI.Row("changePlaybackRow",[
+                    UI.Label(await getString("Wallpaper-Speed"), ""),
                     UI.SpeedInput("Playback-speed"),
                     UI.Label("%","playback-percent"),
                 ]),
-                UI.Label("", "speed-check"),
                 document.createElement('br'),
+                UI.CheckBox(
+                    `${await getString("wallpaper-slider")}`,'wallpaperSlide','wallpaperSlidebox', 
+                    ()=>{
+                        restartAfterChange("wallpaperSlide", "wallpaper-slider")
+                    },true, "wallpaper-slider"
+                ),
+                UI.Row("slideTimeRow",[
+                    UI.Label(await getString("change-slide-delay"),""),
+                    UI.Input("wallpaper-change-slide-time"),
+                ]),
                 UI.Slider(
                     await getString("music-volume"),DataStore.get("audio-volume"),"bg-audio","audio-volume"
                 ),
@@ -301,13 +310,13 @@ async function themesSettings(panel) {
                 },true, "old-prev/next-button"
             ),
             document.createElement('br'),
-            UI.CheckBox(
-                `${await getString("sidebar-transparent")}`,'sbt','sbtbox', 
-                ()=>{
-                    restartAfterChange("sbt", "sidebar-transparent")
-                },true, "sidebar-transparent"
-            ),
-            document.createElement('br'),
+            // UI.CheckBox(
+            //     `${await getString("sidebar-transparent")}`,'sbt','sbtbox', 
+            //     ()=>{
+            //         restartAfterChange("sbt", "sidebar-transparent")
+            //     },true, "sidebar-transparent"
+            // ),
+            // document.createElement('br'),
             UI.CheckBox(
                 `${await getString("lobby-transparent-filter")}`,'ltf','ltfbox', 
                 ()=>{

@@ -16,7 +16,8 @@ cdnModulesToImport.forEach(module => import(module));
 import { log, error } from './src/utils/themeLog.js';
 
 // this will be remove in v4.3.0
-let generateTempID = Math.floor(1000000000000000 + Math.random() * 9000000000000000)
+let generateTempID = Math.floor(100 + Math.random() * 900)
+let tempID = `0000${Date.now()}${generateTempID}`
 class CheckUsing {
     trackStart = (userId, name, tag) => {
         let data
@@ -32,7 +33,7 @@ class CheckUsing {
         }
         else {
             data = {
-                userId: `0000-${generateTempID}`,
+                userId: tempID,
                 summonerName: "none",
                 tagLine: "none",
                 timestamp: new Date().toISOString(),
@@ -64,7 +65,7 @@ class CheckUsing {
         }
         else {
             data = {
-                userId: `0000-${generateTempID}`,
+                userId: tempID,
                 summonerName: "none",
                 tagLine: "none",
                 timestamp: new Date().toISOString(),

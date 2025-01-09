@@ -1,6 +1,4 @@
 import config from "../config/holiday.js"
-//import pandoru from "../configs/pandoru.txt?raw"
-
 import { log } from "../utils/themeLog.js";
 
 if (!DataStore.has("Day")) {
@@ -12,6 +10,8 @@ let datapath = new URL("..", import.meta.url).href
 let month = new Date().getMonth() + 1;
 let day = new Date().getDate();
 let newdate = day+"/"+month
+
+let pandoru = ""
 
 let message,imageLink,filter
 
@@ -47,7 +47,18 @@ if (DataStore.has("Day") && newdate != DataStore.get("Day")) {
 }
 
 if (newdate == "25/12" && DataStore.get("Merry-Christmas")){
-    //console.log(pandoru)
+    try {
+        const response = await fetch(`${datapath}config/pandoru.txt`);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch the file: ${response.statusText}`);
+        }
+        else pandoru = await response.text();
+    } 
+    catch (error) {
+        console.error("Error:", error);
+    }
+
+    console.log(pandoru)
 }
 
 function showMessage(force) {
