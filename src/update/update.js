@@ -1,11 +1,16 @@
 export default {
-    "version": "4.2.61",
-    "key": 426,
+    "version": "4.3.0",
+    "key": 430,
     "auto-update": false,
     "text": [
-        "Update css structure",
-        "Fix loot tab css",
-        "Fix event shop background filter",
-        "Fix custom RP, BE"
+        "Update css for new client",
+        "Update temporaryID for log diary",
+        "Change hide friendslist button style",
+        "Add hide main navigation bar button (for S15 client)",
+        "Add hide top navigation bar button",
+        "Add wallpaper slider",
+        "Fix select champ screen bug",
+        "Remove sidebar transparent settings",
+        "Remove unwanted code"
     ]
 }

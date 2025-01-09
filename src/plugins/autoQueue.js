@@ -99,7 +99,7 @@ export function AutoQueue(context) {
 }
 
 // Refrest queue list everytime go to homepage
-observe.subscribeToElementCreation(".rcp-fe-lol-home", (element) => {
+observe.subscribeToElementCreation(".rcp-fe-lol-activity-center", (element) => {
     if (element) {
         getQueueList()
         log("Queue list refreshed.")

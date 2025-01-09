@@ -112,4 +112,6 @@ export default {
 	"hide-tft-rotational-shop"		: false,
 	"hide-tft-news"					: false,
 	"hide-tft-match-history"		: false,
+	"wallpaper-slider"				: false,
+	"wallpaper-change-slide-time"	: 10000,
 }

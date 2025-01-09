@@ -62,6 +62,14 @@ function ElainaTrigger() {
 	}
 
 	wtmark.classList.add("watermark")
+
+	if (window.DataStore.get("HideFriendList")) {
+		wtmark.style.cssText = `transform: translateX(225px);`
+	}
+	else {
+		wtmark.style.cssText = `transform: translateX(0px);`
+	}
+	
 	const lang = document.querySelector("html").lang;
 	const langs = ["ja-JP", "ko-KR", "zh-CN", "zh-TW"];
 
@@ -81,7 +89,7 @@ function ElainaTrigger() {
 	let count = 0;
 	let Headpatcount = 0;
 	let answer2clicked = 0;
-	let showcontainer = document.getElementsByClassName("rcp-fe-lol-home")[0]
+	let showcontainer = document.querySelector("#activity-center")
 	showcontainer.appendChild(mainDiv)
 	
 	if (DataStore.get("NSFW-Content")) {
@@ -264,18 +272,21 @@ function DelElainaTrigger() {
     catch{}
 }
 
-let addWatermark = (node) => {
-	let pagename = node.getAttribute("data-screen-name")
-	if (pagename == "rcp-fe-lol-home-main" && !document.getElementById("EasterEgg1Div")) {
-		ElainaTrigger()
-	}
-	else if (pagename != "rcp-fe-lol-home-main" && pagename != "social") {
-		if (document.getElementById("EasterEgg1Div")) {
+let addWatermark = async (node) => {      
+	const pagename = node.getAttribute("data-screen-name");
+	const isOtherPage = !["rcp-fe-lol-navigation-screen", "window-controls", "social", "rcp-fe-lol-activity-center-main"].includes(pagename);
+	
+	if (pagename === "rcp-fe-lol-home-main" || pagename === "rcp-fe-lol-activity-center-main") {
+		if (!document.getElementById("EasterEgg1Div")) {
 			DelElainaTrigger()
+			ElainaTrigger()
 		}
+	} 
+	else if (isOtherPage && document.getElementById("EasterEgg1Div") && pagename != "rcp-fe-lol-info-hub") {
+		DelElainaTrigger()
 	}
-}
+};
 
-window.addEventListener('load', ()=> {
+window.addEventListener('load', async ()=> {
 	utils.mutationObserverAddCallback(addWatermark, ["screen-root"])
 })
