@@ -256,10 +256,10 @@ async function themesSettings(panel) {
                 ]),
                 document.createElement('br'),
                 UI.CheckBox(
-                    `${await getString("wallpaper-slider")}`,'wallpaperSlide','wallpaperSlidebox', 
+                    `${await getString("wallpaper-slideshow")}`,'wallpaperSlide','wallpaperSlidebox', 
                     ()=>{
-                        restartAfterChange("wallpaperSlide", "wallpaper-slider")
-                    },true, "wallpaper-slider"
+                        restartAfterChange("wallpaperSlide", "wallpaper-slideshow")
+                    },true, "wallpaper-slideshow"
                 ),
                 UI.Row("slideTimeRow",[
                     UI.Label(await getString("change-slide-delay"),""),
@@ -297,11 +297,18 @@ async function themesSettings(panel) {
             document.createElement('br'),
             document.createElement('br'),
             UI.CheckBox(
-                `${await getString("custom-navbar-css")}`,'cusnavcss','cusnavcssbox', ()=>{
-                    restartAfterChange("cusnavcss","custom-navbar-css")
-                },true, "custom-navbar-css"
+                `${await getString("hide-homepage-navbar")}`,'homenav','homenavbox', ()=>{
+                    window.hideShowNavBar()
+                    window.changeHomePageStyle()
+                }, true, "hide-homepage-navbar"
             ),
             document.createElement('br'),
+            // UI.CheckBox(
+            //     `${await getString("custom-navbar-css")}`,'cusnavcss','cusnavcssbox', ()=>{
+            //         restartAfterChange("cusnavcss","custom-navbar-css")
+            //     },true, "custom-navbar-css"
+            // ),
+            // document.createElement('br'),
             UI.CheckBox(
                 `${await getString("old-prev/next-button")}`,"oldpnb","oldpnbbox",
                 ()=>{
@@ -558,47 +565,47 @@ async function themesSettings(panel) {
                 },true, "Runes-BG"
             ),
             document.createElement('br'),
-            /*UI.CheckBox(
-                `${await getString("custom-cursor")}`,'cuscursor','cuscursorbox',
-                ()=>{},true, "Custom-Cursor"
-            ),
-            UI.Label(
-                `*${await getString("note")}: ${await getString("note-2")}`
-            ),
-            document.createElement('br'),*/
+            // UI.CheckBox(
+            //     `${await getString("custom-cursor")}`,'cuscursor','cuscursorbox',
+            //     ()=>{},true, "Custom-Cursor"
+            // ),
+            // UI.Label(
+            //     `*${await getString("note")}: ${await getString("note-2")}`
+            // ),
+            // document.createElement('br'),
             UI.CheckBox(
                 `${await getString("hide-theme-usage-time")}`,'hideusetime','hideusetimebox',
                 ()=>{},true,"hide-theme-usage-time"
             ),
             document.createElement('br'),
-            UI.CheckBox(
-                `${await getString("hide-overview")}`,'hideovertab','hideovertabbox',
-                ()=>{
-                    applyHideAndShowtab(true)
-                },true,"hide-overview"
-            ),
-            document.createElement('br'),
-            UI.CheckBox(
-                `${await getString("hide-merch")}`,'hidemerchtab','hidemerchtabbox',
-                ()=>{
-                    applyHideAndShowtab(true)
-                },true,"hide-merch"
-            ),
-            document.createElement('br'),
-            UI.CheckBox(
-                `${await getString("hide-patch-note")}`,'hidepn','hidepnbox',
-                ()=>{
-                    applyHideAndShowtab(true)
-                },true,"hide-patch-note"
-            ),
-            document.createElement('br'),
-            UI.CheckBox(
-                `${await getString("hide-esport")}`,'hideesptab','hideesptabbox',
-                ()=>{
-                    applyHideAndShowtab(true)
-                },true, "hide-esport"
-            ),
-            document.createElement('br'),
+            // UI.CheckBox(
+            //     `${await getString("hide-overview")}`,'hideovertab','hideovertabbox',
+            //     ()=>{
+            //         applyHideAndShowtab(true)
+            //     },true,"hide-overview"
+            // ),
+            // document.createElement('br'),
+            // UI.CheckBox(
+            //     `${await getString("hide-merch")}`,'hidemerchtab','hidemerchtabbox',
+            //     ()=>{
+            //         applyHideAndShowtab(true)
+            //     },true,"hide-merch"
+            // ),
+            // document.createElement('br'),
+            // UI.CheckBox(
+            //     `${await getString("hide-patch-note")}`,'hidepn','hidepnbox',
+            //     ()=>{
+            //         applyHideAndShowtab(true)
+            //     },true,"hide-patch-note"
+            // ),
+            // document.createElement('br'),
+            // UI.CheckBox(
+            //     `${await getString("hide-esport")}`,'hideesptab','hideesptabbox',
+            //     ()=>{
+            //         applyHideAndShowtab(true)
+            //     },true, "hide-esport"
+            // ),
+            // document.createElement('br'),
             UI.CheckBox(
                 `${await getString("hide-tft-match-history")}`,'hidetftmhtab','hidetftmhtabbox',
                 ()=>{

@@ -273,7 +273,18 @@ async function pluginsSettings(panel) {
                 UI.CheckBox(
                     `${await getString("custom-status")}`,'cussta','cusstabox',
                     ()=>{
-                        restartAfterChange('cussta',"Custom-Status")
+                        if (window.DataStore.get("Custom-Status")) {
+                            if (window.confirm("This may cause some issues with the client's chat, are you sure you want to enable this plugins?")) {
+                                restartAfterChange('cussta',"Custom-Status")
+                            }
+                            else {
+                                document.getElementById("cusstabox").checked = false
+                                window.DataStore.set("Custom-Status", false)
+                            }
+                        }
+                        else {
+                            restartAfterChange('cussta',"Custom-Status")
+                        }
                     },true,"Custom-Status"
                 ),
                 UI.Label(`${await getString("status-delay")}`),
