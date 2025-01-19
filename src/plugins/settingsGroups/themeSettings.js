@@ -317,13 +317,20 @@ async function themesSettings(panel) {
                 },true, "old-prev/next-button"
             ),
             document.createElement('br'),
-            // UI.CheckBox(
-            //     `${await getString("sidebar-transparent")}`,'sbt','sbtbox', 
-            //     ()=>{
-            //         restartAfterChange("sbt", "sidebar-transparent")
-            //     },true, "sidebar-transparent"
-            // ),
-            // document.createElement('br'),
+            UI.CheckBox(
+                `${await getString("enable-hide-top-navbar-friendlist-button")}`,'hidetopnavfriend','hidetopnavfriendbox', 
+                ()=>{
+                    restartAfterChange("hidetopnavfriend", "enable-hide-top-navbar-friendlist-button")
+                },true, "enable-hide-top-navbar-friendlist-button"
+            ),
+            document.createElement('br'),
+            UI.CheckBox(
+                `${await getString("sidebar-transparent")}`,'sbt','sbtbox', 
+                ()=>{
+                    restartAfterChange("sbt", "sidebar-transparent")
+                },true, "sidebar-transparent"
+            ),
+            document.createElement('br'),
             UI.CheckBox(
                 `${await getString("lobby-transparent-filter")}`,'ltf','ltfbox', 
                 ()=>{

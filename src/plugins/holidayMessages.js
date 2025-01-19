@@ -109,7 +109,8 @@ function showMessage(force) {
             try {
                 let closeButton = document.querySelector("#Holiday lol-uikit-dialog-frame").shadowRoot.querySelector("div.lol-uikit-dialog-frame-close-button > lol-uikit-close-button")
                 closeButton.addEventListener("click", ()=> {document.getElementById("Holiday").hidden = true})
-            }catch{}
+            }
+            catch {}
             window.clearInterval(close)
         })
     })

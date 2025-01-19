@@ -1,4 +1,5 @@
 import utils from '../utils/utils.js'
+import { serverDomain } from '../config/serverDomain.js'
 
 let datapath = new URL("..", import.meta.url).href
 
@@ -227,7 +228,7 @@ function ElainaTrigger() {
 	
 							Greeting.innerHTML = " "
 							answer3.innerHTML = "Take off her clothes"
-							answer3.setAttribute("href", "https://elainatheme.xyz/assets/104731724_p0.png")
+							answer3.setAttribute("href", `${serverDomain.domain}assets/104731724_p0.png`)
 							answer3.setAttribute("target", "_blank")
 							answer3.addEventListener("click", () => {
 								Elaina1Text.innerHTML = "..."
@@ -269,7 +270,7 @@ function DelElainaTrigger() {
     try {
         document.getElementById("EasterEgg1Div").remove()
     }
-    catch{}
+    catch {}
 }
 
 let addWatermark = async (node) => {      

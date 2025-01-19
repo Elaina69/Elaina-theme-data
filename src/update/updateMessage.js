@@ -69,7 +69,8 @@ if (DataStore.get(`Force-Update`) && !DataStore.get("prevent-manual-update")) {
 			try {
 				let closeButton = document.querySelector("#Elaina-Update lol-uikit-dialog-frame").shadowRoot.querySelector("div.lol-uikit-dialog-frame-close-button > lol-uikit-close-button")
 				closeButton.addEventListener("click", ()=> {document.getElementById("Elaina-Update").hidden = true})
-			}catch{}
+			}
+			catch {}
 			window.clearInterval(close)
 		})
 	})
@@ -128,7 +129,8 @@ else if (DataStore.get(`Update-${update.version}`) && !DataStore.get(`Force-Upda
 					}
 					window.clearInterval(close)
 				}
-			}catch{}
+			}
+			catch {}
 		},1000)
 	})
 

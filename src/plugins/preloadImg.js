@@ -1,5 +1,6 @@
 //using this to load the image if low speed internet
 import imageLinks from "../config/images.js"
+import { log, error } from "../utils/themeLog.js"
 
 const origin = document.createElement("div");
 origin.hidden = true
@@ -11,8 +12,12 @@ imageLinks.forEach(link => {
     origin.appendChild(img);
 });
 
-const body = document.querySelector("body")
-
-try {
-    body.append(origin)
-} catch { console.log("Can not add preload Image css.")}
+window.setTimeout(() => {
+    try {
+        log("Adding preload image css...")
+        document.body.prepend(origin)
+    } 
+    catch (err) { 
+        error("Can not add preload Image css.", err) 
+    }
+}, 10000)

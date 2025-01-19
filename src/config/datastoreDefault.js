@@ -64,8 +64,8 @@ export default {
   	"Ranked Queue ID"				: 2,
   	"Ranked Tier ID"				: 9,
   	"Ranked Division ID"			: 0,
-  	"Custom-Status"					: true,
-  	"status-delay"					: 5000,
+  	"Custom-Status"					: false,
+  	"status-delay"					: 10000,
   	"Merry-Christmas"				: true,
   	"April fool` joke"				: false,
   	"loot-helper"					: true,
@@ -132,4 +132,5 @@ export default {
 	"wallpaper-slideshow"			: false,
 	"wallpaper-change-slide-time"	: 10000,
 	"navbar-content"				: [],
+	"enable-hide-top-navbar-friendlist-button": true,
 }

@@ -12,7 +12,8 @@ async function CheckBackupFile() {
     try {
         document.getElementById("datastore-cloud-checking").textContent = `${await getString("Loading")}...`
         document.getElementById("datastore-cloud-checking").style.color = "#a09b8c"
-    }catch{}
+    }
+    catch{}
     window.setTimeout(async ()=>{
         let a = document.querySelector(".restore-data-button")
         let b = document.querySelector(".delete-data-button")
@@ -120,7 +121,8 @@ export async function backuprestoretab(panel) {
                                     success: 'Restore complete!',
                                     error: 'Error while restoring data, check console for more info!'
                                 })
-                            } catch {
+                            } 
+                            catch {
                                 text.textContent = await getString("Invalid-JSON")
                                 text.style.color = "red"
                             }

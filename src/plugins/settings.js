@@ -1,6 +1,5 @@
 import utils from '../utils/utils.js'
 import * as observer from "../utils/observer.js"
-import cdnVersion from "../update/cdnVersionList.js"
 import datastore_list from "../config/datastoreDefault.js"
 import data from "./settingsGroups/settingsStructure.js"
 import { settingsUtils } from "../utils/settingsUtils.js"
@@ -9,6 +8,7 @@ import { pluginsSettings } from "./settingsGroups/themePluginsSettings.js"
 import { backuprestoretab } from "./settingsGroups/themeBackupRestore.js"
 import { aboutustab } from "./settingsGroups/themeAboutUs.js"
 import { log, error } from "../utils/themeLog.js";
+import { serverDomain } from '../config/serverDomain.js'
 
 let datapath = new URL("..", import.meta.url).href
 
@@ -42,7 +42,7 @@ async function restartAfterChange(el, data) {
             })
             if (DataStore.get("backup-datastore")) {
                 try { writeBackupData() }
-                catch { log("Server is down rightnow")}
+                catch (err) { error("Server is down rightnow", err)}
                 window.setTimeout(()=>{
                     window.restartClient()
                 }, 3000)
@@ -111,7 +111,7 @@ window.addEventListener('load', async () => {
     },500)
 })
 
-export { datapath, utils, cdnVersion, restartAfterChange, datastore_list }
+export { datapath, utils, restartAfterChange, datastore_list, serverDomain }
 export function Settings(context) {
     settingsUtils(context, data)
 }
