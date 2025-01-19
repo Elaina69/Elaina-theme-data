@@ -1,4 +1,4 @@
-import { datapath, utils, cdnVersion } from "../settings.js"
+import { datapath, utils } from "../settings.js"
 
 const UI = {
     Row: (id, childs) => {
@@ -230,7 +230,8 @@ const UI = {
                 try {
                     document.querySelector("#Custom-font").remove()
                     utils.addFont(DataStore.get("Font-folder")+DataStore.get("CurrentFont"),"Custom-font","Custom")
-                }catch{}
+                }
+                catch{}
             }
             if (DataStore.get("CurrentFont") == opt) {
                 el.setAttribute("selected", "true")
@@ -261,28 +262,28 @@ const UI = {
         }
         return origin
     },
-    DropdownCDNversion: () => {
-        const origin = document.createElement("div")
-        const dropdown = document.createElement("lol-uikit-framed-dropdown")
+    // DropdownCDNversion: () => {
+    //     const origin = document.createElement("div")
+    //     const dropdown = document.createElement("lol-uikit-framed-dropdown")
     
-        origin.classList.add("Dropdown-div")
-        dropdown.classList.add("lol-settings-general-dropdown")
-        origin.append(dropdown)
-        for (let i = 0; i < cdnVersion.length; i++) {
-            const opt = cdnVersion[i]
-            const el = document.createElement("lol-uikit-dropdown-option")
-            el.setAttribute("slot", "lol-uikit-dropdown-option")
-            el.innerText = opt
-            el.onclick = () => {
-                DataStore.set("Cdn-version", opt)
-            }
-            if (DataStore.get("Cdn-version") == opt) {
-                el.setAttribute("selected", "true")
-            }
-            dropdown.appendChild(el)
-        }
-        return origin
-    },
+    //     origin.classList.add("Dropdown-div")
+    //     dropdown.classList.add("lol-settings-general-dropdown")
+    //     origin.append(dropdown)
+    //     for (let i = 0; i < cdnVersion.length; i++) {
+    //         const opt = cdnVersion[i]
+    //         const el = document.createElement("lol-uikit-dropdown-option")
+    //         el.setAttribute("slot", "lol-uikit-dropdown-option")
+    //         el.innerText = opt
+    //         el.onclick = () => {
+    //             DataStore.set("Cdn-version", opt)
+    //         }
+    //         if (DataStore.get("Cdn-version") == opt) {
+    //             el.setAttribute("selected", "true")
+    //         }
+    //         dropdown.appendChild(el)
+    //     }
+    //     return origin
+    // },
     Contributor: (localImage, image,C_name,info) => {
         const origin = document.createElement("div")
         const div = document.createElement("div")

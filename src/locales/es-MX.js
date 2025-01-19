@@ -118,6 +118,7 @@ export default {
     "hide-homepage-navbar"          : "Hide homepage's navbar manually",
     "custom-navbar-css"             : "Custom secondary navigation bar",
     "old-prev/next-button"          : "Old wallpaper change button",
+    "enable-hide-top-navbar-friendlist-button": "Hide top navigation bar and friends list button",
     "sidebar-transparent"           : "Sidebar transparent",
     "lobby-transparent-filter"      : "Lobby transparent filter",
     "settings-dialogs-transparent"  : "Transparent dialogs and settings panel",

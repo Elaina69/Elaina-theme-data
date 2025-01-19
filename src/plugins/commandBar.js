@@ -1,6 +1,7 @@
-//import pandoru from "../configs/pandoru.txt?raw"
 import { showMessage } from "../plugins/holidayMessages.js"
 import { triggerDonateCommand } from "./donate.js"
+
+let datapath = new URL("..", import.meta.url).href
 
 CommandBar.addAction({
     name: "Show Donate popup",
@@ -32,16 +33,29 @@ CommandBar.addAction({
         showMessage(true)
     }
 })
-// CommandBar.addAction({
-//     name: "Pandoru",
-//     legend: "Pandoru",
-//     tags: ["ElainaTheme","pandoru"],
-//     group: "ElainaTheme",
-//     hidden: false,
-//     perform: () => {
-//         console.log(pandoru)
-//     }
-// })
+CommandBar.addAction({
+    name: "Pandoru",
+    legend: "Pandoru",
+    tags: ["ElainaTheme","pandoru"],
+    group: "ElainaTheme",
+    hidden: false,
+    perform: async () => {
+        let pandoru = ""
+        
+        try {
+            const response = await fetch(`${datapath}config/pandoru.txt`);
+            if (!response.ok) {
+                throw new Error(`Failed to fetch the file: ${response.statusText}`);
+            }
+            else pandoru = await response.text();
+        } 
+        catch (error) {
+            console.error("Error:", error);
+        }
+    
+        console.log(pandoru)
+    }
+})
 /*
 CommandBar.addAction({
     name: "",

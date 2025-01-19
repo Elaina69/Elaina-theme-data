@@ -1,3 +1,5 @@
+import { log } from "../utils/themeLog.js";
+
 window.addEventListener("keydown", async (event)=>{
     let key = event.key
     if (event.ctrlKey && key=="p") {
@@ -11,5 +13,9 @@ window.addEventListener("keydown", async (event)=>{
     // }
     if ((event.ctrlKey && key=="s") || (event.altKey && key =="F4")) {
         writeBackupData()
+    }
+    if (event.key === 'Tab') {
+        event.preventDefault()
+        log("Tab key is disable!");
     }
 })

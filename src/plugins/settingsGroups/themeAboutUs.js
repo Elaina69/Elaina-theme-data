@@ -1,17 +1,5 @@
 import { UI } from "./settingsUI.js"
 
-const controller = new AbortController();
-const timeoutId = setTimeout(() => controller.abort(), 2000);
-
-try {
-    const response = await fetch('https://elainatheme.xyz/numberOfUsers', { signal: controller.signal });
-    const { count } = await response.json();
-    DataStore.set("User-Counter", count)
-} catch (err) {
-    clearTimeout(timeoutId);
-    throw err;
-}
-
 export async function aboutustab(panel) {
     panel.prepend(
         UI.Row("",[

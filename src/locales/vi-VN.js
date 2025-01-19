@@ -118,6 +118,7 @@ export default {
     "hide-homepage-navbar"          : "Ẩn thanh điều hướng trang chủ thủ công",
     "custom-navbar-css"             : "Thanh điều hướng cấp 2 tùy chỉnh",
     "old-prev/next-button"          : "Nút thay đổi hình nền cũ",
+    "enable-hide-top-navbar-friendlist-button": "Nút ẩn thanh điều hướng bên trên và danh sách bạn bè",
     "sidebar-transparent"           : "Thanh bên trong suốt",
     "lobby-transparent-filter"      : "Filter trong suốt cho sảnh chờ",
     "settings-dialogs-transparent"  : "Bảng cài đặt và hộp hội thoại trong suốt",

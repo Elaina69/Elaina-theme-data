@@ -1,4 +1,5 @@
 import utils from "./utils/utils.js";
+import { serverDomain } from "./config/serverDomain.js";
 
 const DATA_PATH = new URL(".", import.meta.url).href;
 const RICK_ROLL_URL = "https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygULcmljayBhc3RsZXk%3D";
@@ -33,7 +34,7 @@ const createLoaderMenu = async (root) => {
                                     <p class="Elaina-Update" style="text-align: center">"Happy 1/4"</p>
                                     <hr class="heading-spacer" />
                                     <hr class="heading-spacer" />
-                                    <video src="https://elainatheme.xyz/assets/1-4.webm" controls style="width: 250px; border: 0px; border-radius: 10px; display: ${isNSFWContentEnabled()}"></video>
+                                    <video src="${serverDomain.domain}assets/1-4.webm" controls style="width: 250px; border: 0px; border-radius: 10px; display: ${isNSFWContentEnabled()}"></video>
                                 </lol-uikit-content-block>
                             </div>
                             <lol-uikit-flat-button-group type="dialog-frame">
@@ -64,7 +65,8 @@ const setupCloseButtonListener = () => {
                 window.open(RICK_ROLL_URL, "_blank");
             });
             clearInterval(intervalId);
-        } catch (error) {
+        } 
+        catch (error) {
             console.error("Failed to set up close button listener:", error);
         }
     }, 200);

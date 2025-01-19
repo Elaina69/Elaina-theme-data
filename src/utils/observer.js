@@ -107,7 +107,8 @@ export function handleElementMutation(element, isCreation, callbacks) {
           handleElementMutation(child, isCreation, callbacks)
         );
       }
-    } catch (e) {
+    } 
+    catch (e) {
       console.warn('Unable to access iframe content. It may be cross-origin.', e);
     }
   }
