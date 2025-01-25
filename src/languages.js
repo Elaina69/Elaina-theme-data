@@ -1,7 +1,8 @@
-import { warn } from "./utils/themeLog.js";
+import { warn, log } from "./utils/themeLog.js";
 
 const BASE_PATH = new URL(".", import.meta.url).href;
-
+let knownLocale = false
+let getStringTime = 0
 /**
  * Imports a locale module based on the given language code.
  * @param {string} langCode - The language code to import.
@@ -10,6 +11,16 @@ const BASE_PATH = new URL(".", import.meta.url).href;
 async function importLocale(langCode) {
     const module = await import(`${BASE_PATH}locales/${langCode}.js`);
     return module.default;
+}
+
+async function haveLocaleFile(langCode) {
+    try {
+        await importLocale(langCode)
+        return true
+    } 
+    catch {
+        return false
+    }
 }
 
 /**
@@ -21,14 +32,23 @@ async function getString(key) {
     const lang = document.querySelector("html").lang;
     let localeModule
 
-    try {
+    if (await haveLocaleFile(lang)) {
         localeModule = await importLocale(lang)
-    } 
-    catch {
-        localeModule = await importLocale(`default`)
+        knownLocale = true
     }
-
+    else {
+        localeModule = await importLocale('default')
+        knownLocale = false
+    }
+    
+    if (getStringTime == 0) {
+        if (knownLocale) log("Current locale:", lang)
+        else log("Current locale:", 'default')
+    }
+    
     let result = localeModule[key];
+
+    getStringTime += 1
 
     if (!result) {
         warn(`Missing translation for key: ${key}`);
@@ -38,7 +58,7 @@ async function getString(key) {
     return result
 }
 
-// Expose getString globally
+// Export getString globally
 window.getString = getString;
 
 export default getString;

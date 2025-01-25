@@ -3,28 +3,6 @@ import { serverDomain } from "./src/config/serverDomain.js"
 
 let currentTime = window.DataStore.get("start-time", Date.now())
 
-class ImportCDNModules {
-    constructor () {
-        this.moduleList = [
-            `./src/update/updateMessage.js`,
-            `./src/importupdate.js`,
-            `./src/languages.js`,
-            `./src/plugins/watermark.js`,
-            `./src/plugins/donate.js`,
-            `./src/plugins/holidayMessages.js`,
-            `./src/plugins/commandBar.js`,
-            `./src/plugins/keyCombines.js`,
-            `./src/plugins/customChampsBg.js`,
-            `./src/plugins/preloadImg.js`
-        ];
-    }
-
-    main () {
-        this.moduleList.forEach(module => import(module));
-    }
-}
-const importCDNModules = new ImportCDNModules()
-
 class CheckDomainExpiry {
     main = () => {
         let expiringTime = new Date(serverDomain.expiring);
@@ -156,7 +134,6 @@ const checkUsing = new CheckUsing()
 const elainaThemeData = () => {
     window.DataStore.set("Elaina-domain-server", serverDomain.domain)
 
-    importCDNModules.main()
     checkUsing.main()
     // window.setTimeout(()=> {
     //     if (window.DataStore.get("Dev-mode")) {
