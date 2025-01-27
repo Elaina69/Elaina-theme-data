@@ -26,7 +26,7 @@ window.setInterval(()=>{
             let name = document.getElementsByClassName("champion-name")
             for(let j = 0; j < list.length; j++) {
                 if (name[i].innerText == list[j]["default_name"]){
-                    thumbnail[i].querySelector(".champion-image").setAttribute("src", `${datapath}Assets/Champs/${list[j]["image_preview"]}`)
+                    thumbnail[i].querySelector(".champion-image").setAttribute("src", `${datapath}assets/champs/${list[j]["image_preview"]}`)
                     name[i].innerText = list[j]["replace_name"]
                 }
             }
@@ -39,7 +39,7 @@ window.setInterval(()=>{
             for (let j = 0; j < list.length; j++) {
                 let img = champSetRow[i].querySelector("img")
                 if (img.getAttribute("src").includes(list[j]["default_icon_id"])) {
-                    img.setAttribute("src", `${datapath}Assets/Champs/${list[j]["image_thumbnail"]}`)
+                    img.setAttribute("src", `${datapath}assets/champs/${list[j]["image_thumbnail"]}`)
                 }
             }
         }
@@ -51,7 +51,7 @@ window.setInterval(()=>{
             for (let j = 0; j < list.length; j++) {
                 let img = champSelectList[i].querySelector("img")
                 if (img.getAttribute("src").includes(list[j]["default_icon_id"])) {
-                    img.setAttribute("src", `${datapath}Assets/Champs/${list[j]["image_thumbnail"]}`)
+                    img.setAttribute("src", `${datapath}assets/champs/${list[j]["image_thumbnail"]}`)
                 }
             }
         }

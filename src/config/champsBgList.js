@@ -8,7 +8,7 @@ export default [
         "image_preview"     : "miku_preview.png",
         "image_thumbnail"   : "miku_thumbnail.png",
         "css-left"          : "100px",
-        "lore"              : "",
+        "lore"              : "Crypton - the parent company that owns Miku, \ngave her the concept of an android diva who came from a future where music is gone. \nHence her name meaning \"First sound from the future\"",
     },
     {
         "default_name"      : "Aurora",
