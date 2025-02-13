@@ -1,7 +1,7 @@
 let serverDomain = {
-    "domain": "https://elainatheme.xyz/",
+    "domain": "https://elainadacatto.site/",
     "info": "Elaina theme server domain",
-    "expiring": "2025-2-14"
+    "expiring": "2026-2-13"
 }
 
 export { serverDomain }
