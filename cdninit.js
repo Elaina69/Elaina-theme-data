@@ -21,10 +21,10 @@ class ImportCDNModules {
         this.moduleList.forEach(module => import(module));
     }
 }
-const importCDNModules = new ImportCDNModules()
+
+new ImportCDNModules().main()
 
 export function Cdninit(context) {
-    importCDNModules.main()
 	AutoQueue(context)
     skipHonor(context)
 }
