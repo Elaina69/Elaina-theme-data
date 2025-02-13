@@ -216,6 +216,14 @@ export default {
 	"Check-Backup.success"      : "您在云端有备份文件，准备恢复。",
 	"Check-Backup.error"        : "您在云端没有备份文件。",
 	"Check-Backup.serverError"  : "云服务器出现问题，请稍后再试备份/恢复。",
+    "backupInfo"                : "Backup info:",
+    "last-backup"               : "Last backup",
+    "OS"                        : "OS",
+    "CPU"                       : "CPU",
+    "Core"                      : "Core",
+    "RAM"                       : "RAM",
+    "GPU"                       : "GPU",
+    "Vram"                      : "Vram",
 
 
 	// 关于我们
