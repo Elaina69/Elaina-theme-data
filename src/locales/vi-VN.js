@@ -217,6 +217,14 @@ export default {
     "Check-Backup.success"      : "Bạn đang có tệp sao lưu trên đám mấy, sẵn sàng để khôi phục.",
     "Check-Backup.error"        : "Hiện bạn chưa có tệp sao lưu nào trên đám mây.",
     "Check-Backup.serverError"  : "Máy chủ đám mây đang đi ngủ, thử sao lưu/khôi phục lại sau.",
+    "backupInfo"                : "Thông tin bản sao lưu:",
+    "last-backup"               : "Sao lưu lần cuối",
+    "OS"                        : "OS",
+    "CPU"                       : "CPU",
+    "Core"                      : "Số nhân",
+    "RAM"                       : "RAM",
+    "GPU"                       : "GPU",
+    "Vram"                      : "Vram",
 
 
     // About us

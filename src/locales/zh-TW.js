@@ -216,6 +216,14 @@ export default {
     "Check-Backup.success"      : "You have backup file on cloud, ready to restore it.",
     "Check-Backup.error"        : "You don't have backup file on cloud yet.",
     "Check-Backup.serverError"  : "Cloud server is sleep, try backup/restore later.",
+    "backupInfo"                : "Backup info:",
+    "last-backup"               : "Last backup",
+    "OS"                        : "OS",
+    "CPU"                       : "CPU",
+    "Core"                      : "Core",
+    "RAM"                       : "RAM",
+    "GPU"                       : "GPU",
+    "Vram"                      : "Vram",
 
 
     // About us

@@ -1,3 +1,5 @@
+import getString from '../languages.js'
+
 let datapath = new URL("..", import.meta.url).href
 
 if (!DataStore.has("seconds1")) {
@@ -12,6 +14,9 @@ let h = DataStore.get("hours1")
 
 async function createMenu(root) {
 	let close = await getString('l.close')
+	let donate_line1 = await getString("donate-firstline")
+	let donate_line2 = await getString("donate-secondline")
+	let donate_line3 = await getString("donate-thirdline")
 	const { Component, jsx, render } = await import('//esm.run/nano-jsx')
 	
 	class LoaderMenu extends Component {
@@ -23,17 +28,15 @@ async function createMenu(root) {
 						<lol-uikit-dialog-frame class="dialog-frame" orientation="bottom" close-button="false">
 							<div class="dialog-content">
 								<lol-uikit-content-block class="app-controls-exit-dialog" type="dialog-small" style="width: 500px;">
-									<h5 class="Elaina-Update" style="text-align: center">Thanks for using Elaina theme !!</p>
+									<h5 class="Elaina-Update" style="text-align: center">${donate_line1}</p>
 									<hr class="heading-spacer" />
 									<hr class="heading-spacer" />
-									<p class="Elaina-Update" style="text-align: center">If you love Elaina theme, you can support me by sharing this theme to your friend</p>
-									<p class="Elaina-Update" style="text-align: center">or donating me</p>
+									<p class="Elaina-Update" style="text-align: center">${donate_line2}</p>
+									<p class="Elaina-Update" style="text-align: center">${donate_line3}</p>
 									<div id="donate">
-										<!--
 										<a href="https://ko-fi.com/elainadacatto" target="_blank" id="kofi">
 											<img src="${datapath}assets/icon/ko-fi.webp" class="donate"></img>
 										</a>
-										-->
 										<a href="https://www.paypal.com/paypalme/ElainaDaCattoRiel" target="_blank" id="paypal">
 											<img src="${datapath}assets/icon/paypal.png" class="donate"></img>
 										</a>
@@ -104,7 +107,7 @@ function onlineTime() {
 			
 			document.querySelector("span.friend-header").innerHTML = DataStore.get("hide-theme-usage-time")? "" : checkTime(h)+":"+checkTime(m)+":"+checkTime(s)
 
-			if ((h == 1 && m == 0 && s == 0) || (h == 12 && m == 0 && s == 0) || (h == 24 && m == 0 && s == 0)) {
+			if ((h == 1 && m == 0 && s == 0) || (h == 24 && m == 0 && s == 0)) {
 				window.addEventListener("load", async ()=> {
 					const manager = () => document.getElementById('lol-uikit-layer-manager-wrapper')
 					const root    = document.createElement('div')
