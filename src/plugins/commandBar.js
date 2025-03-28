@@ -20,7 +20,7 @@ CommandBar.addAction({
     group: "ElainaTheme",
     hidden: false,
     perform: () => {
-        writeBackupData()
+        window.writeBackupData()
     }
 })
 CommandBar.addAction({

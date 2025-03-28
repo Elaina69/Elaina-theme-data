@@ -1,16 +1,14 @@
-import getString from '../languages.js'
-
 let datapath = new URL("..", import.meta.url).href
 
-if (!DataStore.has("seconds1")) {
-	DataStore.set("seconds1",0)
-	DataStore.set("minutes1",0)
-	DataStore.set("hours1",0)
+if (!ElainaData.has("seconds1")) {
+	ElainaData.set("seconds1",0)
+	ElainaData.set("minutes1",0)
+	ElainaData.set("hours1",0)
 }
 
-let s = DataStore.get("seconds1")
-let m = DataStore.get("minutes1")
-let h = DataStore.get("hours1")
+let s = ElainaData.get("seconds1")
+let m = ElainaData.get("minutes1")
+let h = ElainaData.get("hours1")
 
 async function createMenu(root) {
 	let close = await getString('l.close')
@@ -65,9 +63,9 @@ function checkTime(i) {
 }
 
 export function triggerDonateCommand() {
-	let s_temp = DataStore.get("seconds1")
-	let m_temp = DataStore.get("minutes1")
-	let h_temp = DataStore.get("hours1")
+	let s_temp = ElainaData.get("seconds1")
+	let m_temp = ElainaData.get("minutes1")
+	let h_temp = ElainaData.get("hours1")
 
     s = 59
 	m = 59
@@ -78,9 +76,9 @@ export function triggerDonateCommand() {
 		m = m_temp
 		h = h_temp
 
-		DataStore.set("hours1",h)
-		DataStore.set("minutes1",m)
-		DataStore.set("seconds1",s)
+		ElainaData.set("hours1",h)
+		ElainaData.set("minutes1",m)
+		ElainaData.set("seconds1",s)
 	},1000)
 }
 
@@ -92,20 +90,20 @@ function onlineTime() {
 			if (s >= 60) {
 				m = m + 1
 				s = 0
-				DataStore.set("minutes1",m)
-				DataStore.set("seconds1",s)
+				ElainaData.set("minutes1",m)
+				ElainaData.set("seconds1",s)
 			}
 
 			if (m >= 60) {
 				h = h + 1
 				m = 0
 				s = 0
-				DataStore.set("hours1",h)
-				DataStore.set("minutes1",m)
-				DataStore.set("seconds1",s)
+				ElainaData.set("hours1",h)
+				ElainaData.set("minutes1",m)
+				ElainaData.set("seconds1",s)
 			}
 			
-			document.querySelector("span.friend-header").innerHTML = DataStore.get("hide-theme-usage-time")? "" : checkTime(h)+":"+checkTime(m)+":"+checkTime(s)
+			document.querySelector("span.friend-header").innerHTML = ElainaData.get("hide-theme-usage-time")? "" : checkTime(h)+":"+checkTime(m)+":"+checkTime(s)
 
 			if ((h == 1 && m == 0 && s == 0) || (h == 24 && m == 0 && s == 0)) {
 				window.addEventListener("load", async ()=> {

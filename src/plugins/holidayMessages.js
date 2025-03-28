@@ -1,8 +1,8 @@
 import config from "../config/holiday.js"
 import { log } from "../utils/themeLog.js";
 
-if (!DataStore.has("Day")) {
-    DataStore.set("Day", "0/0")
+if (!ElainaData.has("Day")) {
+    ElainaData.set("Day", "0/0")
 }
 
 let datapath = new URL("..", import.meta.url).href
@@ -20,16 +20,16 @@ function addData() {
     imageLink = `${datapath}assets/image/${config[newdate]["Image"]}`
     filter = config[newdate]["filters"]
     log(`${message}`)
-    DataStore.set("Day", newdate)
-    DataStore.set("Holiday", true)
+    ElainaData.set("Day", newdate)
+    ElainaData.set("Holiday", true)
 }
 
-if (DataStore.has("Day") && newdate != DataStore.get("Day")) {
+if (ElainaData.has("Day") && newdate != ElainaData.get("Day")) {
     try {
         if (newdate == config[newdate]["Day"]) {
             if (!config[newdate]["nsfw"]) addData()
             else if (config[newdate]["nsfw"]) {
-                if (DataStore.get("NSFW-Content")) {
+                if (ElainaData.get("NSFW-Content")) {
                     addData()
                     log(`NSFW content!!`)
                 }
@@ -37,16 +37,16 @@ if (DataStore.has("Day") && newdate != DataStore.get("Day")) {
         }
         else {
             log(`Today doesn't have event`)
-            DataStore.set("Day", newdate)
+            ElainaData.set("Day", newdate)
         }
     }
     catch {
         log(`Today doesn't have event`)
-        DataStore.set("Day", newdate)
+        ElainaData.set("Day", newdate)
     }
 }
 
-if (newdate == "25/12" && DataStore.get("Merry-Christmas")){
+if (newdate == "25/12" && ElainaData.get("Merry-Christmas")){
     try {
         const response = await fetch(`${datapath}config/pandoru.txt`);
         if (!response.ok) {
@@ -114,11 +114,11 @@ function showMessage(force) {
             window.clearInterval(close)
         })
     })
-    DataStore.set("Holiday", false)
+    ElainaData.set("Holiday", false)
 }
 
-if (DataStore.get("Holiday")) showMessage(false)
+if (ElainaData.get("Holiday")) showMessage(false)
 
 export { showMessage }
 
-log(`${DataStore.get("Day")}`)
+log(`${ElainaData.get("Day")}`)
