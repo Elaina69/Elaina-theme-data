@@ -117,7 +117,7 @@ function showMessage(force) {
     ElainaData.set("Holiday", false)
 }
 
-if (ElainaData.get("Holiday")) showMessage(false)
+if (ElainaData.get("Holiday") && ElainaData.get("holiday-message")) showMessage(false)
 
 export { showMessage }
 
