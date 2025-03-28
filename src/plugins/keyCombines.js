@@ -3,7 +3,7 @@ import { log } from "../utils/themeLog.js";
 window.addEventListener("keydown", async (event)=>{
     let key = event.key
     if (event.ctrlKey && key=="p") {
-        window.openPluginsFolder(`${DataStore.get("Plugin-folder-name")}`)
+        window.openPluginsFolder(`${ElainaData.get("Plugin-folder-name")}`)
     }
     if (key=="F1") {
         CommandBar.show()
@@ -12,7 +12,7 @@ window.addEventListener("keydown", async (event)=>{
     //     window.restartClient()
     // }
     if ((event.ctrlKey && key=="s") || (event.altKey && key =="F4")) {
-        writeBackupData()
+        window.writeBackupData()
     }
     if (event.key === 'Tab') {
         event.preventDefault()

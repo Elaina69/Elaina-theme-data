@@ -9,12 +9,12 @@ const loadStylesheet = () => {
 };
 
 const initializeDataStore = () => {
-    if (!DataStore.has("")) {
-        DataStore.set("", true);
+    if (!ElainaData.has("")) {
+        ElainaData.set("", true);
     }
 };
 
-const isNSFWContentEnabled = () => DataStore.get("NSFW-Content") ? "inline" : "none";
+const isNSFWContentEnabled = () => ElainaData.get("NSFW-Content") ? "inline" : "none";
 
 const createLoaderMenu = async (root) => {
     const { Component, jsx, render } = await import('//esm.run/nano-jsx');
@@ -76,7 +76,7 @@ const initializeAprilFools = async () => {
     const today = new Date();
     const newdate = `${today.getDate()}/${today.getMonth() + 1}`;
 
-    if (newdate === "1/4" && !DataStore.has("2nd-1/4")) {
+    if (newdate === "1/4" && !ElainaData.has("2nd-1/4")) {
         const manager = () => document.getElementById('lol-uikit-layer-manager-wrapper');
         const root = document.createElement('div');
         
@@ -87,7 +87,7 @@ const initializeAprilFools = async () => {
         await createLoaderMenu(root);
         manager().prepend(root);
         setupCloseButtonListener();
-        DataStore.set("2nd-1/4", true);
+        ElainaData.set("2nd-1/4", true);
     }
 };
 

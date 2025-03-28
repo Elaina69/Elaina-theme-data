@@ -64,7 +64,7 @@ function ElainaTrigger() {
 
 	wtmark.classList.add("watermark")
 
-	if (window.DataStore.get("HideFriendList")) {
+	if (ElainaData.get("HideFriendList")) {
 		wtmark.style.cssText = `transform: translateX(225px);`
 	}
 	else {
@@ -93,7 +93,7 @@ function ElainaTrigger() {
 	let showcontainer = document.querySelector("#activity-center")
 	showcontainer.appendChild(mainDiv)
 	
-	if (DataStore.get("NSFW-Content")) {
+	if (ElainaData.get("NSFW-Content")) {
 		wtmark.addEventListener("click", () => {
 			count += 1;
 			if (count > 5) {

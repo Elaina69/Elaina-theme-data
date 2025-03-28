@@ -3,12 +3,12 @@ import update from "./update.js"
 let autoUpdate = update['auto-update']
 let updateType
 
-if (!window.DataStore.has(`Update-${update.version}`)) {
-	window.DataStore.set(`Update-${update.version}`, true)
+if (!ElainaData.has(`Update-${update.version}`)) {
+	ElainaData.set(`Update-${update.version}`, true)
 }
 
 if (!autoUpdate) {updateType = "Manual"}
-else if (autoUpdate && window.DataStore.get(`Update-${update.version}`)){
+else if (autoUpdate && ElainaData.get(`Update-${update.version}`)){
 	updateType = "Auto"
 	let downloadUpdate = new Promise((resolve, reject) => {
 		setTimeout(() => {
@@ -23,7 +23,7 @@ else if (autoUpdate && window.DataStore.get(`Update-${update.version}`)){
 	})
 }
 
-if (window.DataStore.get(`Force-Update`) && !window.DataStore.get("prevent-manual-update")) {
+if (ElainaData.get(`Force-Update`) && !ElainaData.get("prevent-manual-update")) {
 	async function createLoaderMenu(root) {
 		const { Component, jsx, render } = await import('//esm.run/nano-jsx')
 		let download = await getString('l.download')
@@ -75,7 +75,7 @@ if (window.DataStore.get(`Force-Update`) && !window.DataStore.get("prevent-manua
 		})
 	})
 }
-else if (window.DataStore.get(`Update-${update.version}`) && !window.DataStore.get(`Force-Update`)) {
+else if (ElainaData.get(`Update-${update.version}`) && !ElainaData.get(`Force-Update`)) {
 	async function createLoaderMenu(root) {
 		const { Component, jsx, render } = await import('//esm.run/nano-jsx')
 		let close = await getString('l.close')
@@ -134,5 +134,5 @@ else if (window.DataStore.get(`Update-${update.version}`) && !window.DataStore.g
 		},1000)
 	})
 
-	window.DataStore.set(`Update-${update.version}`, false)
+	ElainaData.set(`Update-${update.version}`, false)
 }
