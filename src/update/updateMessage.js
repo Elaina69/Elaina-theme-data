@@ -3,6 +3,61 @@ import update from "./update.js"
 let autoUpdate = update['auto-update']
 let updateType
 
+let CheckBox = (text, ID, boxID, check, show, datastore_name) => {
+    const container = document.createElement("div")
+    const origin = document.createElement("lol-uikit-flat-checkbox")
+    const checkbox = document.createElement("input")
+    const label = document.createElement("label")
+    const none = document.createElement("div")
+
+    container.style.width = "fit-content"
+	container.style.marginLeft = "18px"
+    origin.id = ID
+    origin.setAttribute("lastDatastore", ElainaData.get(datastore_name))
+    
+    checkbox.type = "checkbox"
+    checkbox.id = boxID
+    if (ElainaData.get(datastore_name)){
+        checkbox.checked = true
+        origin.setAttribute("class", "checked")
+    }
+    else {
+        checkbox.checked = false
+        origin.setAttribute("class",'')
+    }
+
+    checkbox.onclick = () => {
+        if (ElainaData.get(datastore_name)) {
+            origin.removeAttribute("class")
+            checkbox.checked = false
+            ElainaData.set(datastore_name, false)
+            check()
+        }
+        else {
+            origin.setAttribute("class", "checked")
+            checkbox.checked = true
+            ElainaData.set(datastore_name, true)
+            check()
+        }
+    }
+    checkbox.setAttribute("slot", "input")
+    
+    label.innerHTML = text
+    label.setAttribute("slot", "label")
+    
+    if (show) {
+        container.appendChild(origin)
+        origin.appendChild(checkbox)
+        origin.appendChild(label)
+    
+        return container
+    }
+    else {
+        container.appendChild(none)
+    	return container
+    }
+}
+
 if (!ElainaData.has(`Update-${update.version}`)) {
 	ElainaData.set(`Update-${update.version}`, true)
 }
@@ -44,7 +99,7 @@ if (ElainaData.get(`Force-Update`) && !ElainaData.get("prevent-manual-update")) 
 										<p class="Elaina-Update" style="text-align: center">You have to update manually to continue using Elaina theme without problems</p>
 										<hr class="heading-spacer" />
 										<p class="Elaina-Update" style="text-align: center"> Meow ~~~</p>
-	
+										${CheckBox("Don't show this again (still can change this inside theme settings)", "lol-uikit-flat-checkbox", "lol-uikit-flat-checkbox-input", () => {}, true, `prevent-manual-update`)}
 									</lol-uikit-content-block>
 								</div>
 								<lol-uikit-flat-button-group type="dialog-frame">
