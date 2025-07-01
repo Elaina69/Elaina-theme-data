@@ -15,22 +15,22 @@ let pandoru = ""
 
 let message,imageLink,filter
 
-function addData() {
-    message = config[newdate]["Text"]
-    imageLink = `${datapath}assets/image/${config[newdate]["Image"]}`
-    filter = config[newdate]["filters"]
+function addData(date) {
+    message = config[date]["Text"]
+    imageLink = `${datapath}assets/image/${config[date]["Image"]}`
+    filter = config[date]["filters"]
     log(`${message}`)
-    ElainaData.set("Day", newdate)
+    ElainaData.set("Day", date)
     ElainaData.set("Holiday", true)
 }
 
 if (ElainaData.has("Day") && newdate != ElainaData.get("Day")) {
     try {
         if (newdate == config[newdate]["Day"]) {
-            if (!config[newdate]["nsfw"]) addData()
+            if (!config[newdate]["nsfw"]) addData(newdate)
             else if (config[newdate]["nsfw"]) {
                 if (ElainaData.get("NSFW-Content")) {
-                    addData()
+                    addData(newdate)
                     log(`NSFW content!!`)
                 }
             }
@@ -62,7 +62,7 @@ if (newdate == "25/12" && ElainaData.get("Merry-Christmas")){
 }
 
 function showMessage(force) {
-    if (force) addData()
+    if (force) addData(ElainaData.get("Day"))
         
     async function createLoaderMenu(root) {
         let close = await getString('l.close')

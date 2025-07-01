@@ -3,6 +3,26 @@ import { serverDomain } from "./src/config/serverDomain.js"
 
 let currentTime = ElainaData.get("start-time", Date.now())
 
+class ImportModules {
+    constructor () {
+        this.moduleList = [
+            `./src/update/updateMessage.js`,
+            `./src/importupdate.js`,
+            `./src/plugins/watermark.js`,
+            `./src/plugins/donate.js`,
+            `./src/plugins/holidayMessages.js`,
+            `./src/plugins/commandBar.js`,
+            `./src/plugins/keyCombines.js`,
+            `./src/plugins/preloadImg.js`
+        ];
+    }
+
+    main () {
+        this.moduleList.forEach(module => import(module));
+    }
+}
+const importModules = new ImportModules();
+
 class CheckDomainExpiry {
     main = () => {
         let expiringTime = new Date(serverDomain.expiring);
@@ -135,6 +155,7 @@ const checkUsing = new CheckUsing()
 ElainaData.set("Elaina-domain-server", serverDomain.domain)
 
 window.addEventListener("load", () => {
+    importModules.main()
     checkUsing.main()
     window.setTimeout(() => {
         if (ElainaData.get("Dev-mode")) {
