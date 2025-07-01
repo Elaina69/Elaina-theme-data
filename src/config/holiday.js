@@ -16,14 +16,21 @@ export default {
     "9/3": {
         "Day"    : "9/3",
         "Text"   : "Okaimono~~~ Okaimono~~~ ",
-        "Image"  : "miku.jpg",
+        "Image"  : "static-miku.jpg",
         "filters": "brightness(1.0)",
         "nsfw"   : false
     },
-    "17/08": {
-        "Day"    : "17/08",
-        "Text"   : "Lick~~~",
-        "Image"  : "HoukiLickElaina.png",
+    "1/6": {
+        "Day"    : "1/6",
+        "Text"   : "Welcome summer !!",
+        "Image"  : "",
+        "filters": "brightness(1.0)",
+        "nsfw"   : false
+    },
+    "17/8": {
+        "Day"    : "17/8",
+        "Text"   : "Nyan~~~",
+        "Image"  : "SayaXElaina.jpg",
         "filters": "brightness(1.0)",
         "nsfw"   : false
     },
@@ -36,7 +43,7 @@ export default {
     },
     "31/10": {
         "Day"    : "31/10",
-        "Text"   : "I'm pretty sure I'm dressed as a maid right now (=^ ◡ ^=)",
+        "Text"   : "Today, i will become Elaina, fr (=^ ◡ ^=)",
         "Image"  : "hw2025.jpg",
         "filters": "brightness(1.0)",
         "nsfw"   : false
@@ -51,7 +58,7 @@ export default {
     "19/11": {
         "Day"    : "19/11",
         "Text"   : "Wolrd Skabidi Toilet Day!!",
-        "Image"  : "skabidi-toilet.webp",
+        "Image"  : "static-skabidi-toilet.webp",
         "filters": "brightness(1.0)",
         "nsfw"   : false
     },

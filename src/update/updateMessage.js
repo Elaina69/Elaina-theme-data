@@ -1,7 +1,6 @@
 import update from "./update.js"
 
-let autoUpdate = update['auto-update']
-let updateType
+let updateType = update['update-type']
 
 let CheckBox = (text, ID, boxID, check, show, datastore_name) => {
     const container = document.createElement("div")
@@ -62,9 +61,7 @@ if (!ElainaData.has(`Update-${update.version}`)) {
 	ElainaData.set(`Update-${update.version}`, true)
 }
 
-if (!autoUpdate) {updateType = "Manual"}
-else if (autoUpdate && ElainaData.get(`Update-${update.version}`)){
-	updateType = "Auto"
+if (updateType == "Auto" && ElainaData.get(`Update-${update.version}`)){
 	let downloadUpdate = new Promise((resolve, reject) => {
 		setTimeout(() => {
 			resolve()
@@ -134,6 +131,7 @@ else if (ElainaData.get(`Update-${update.version}`) && !ElainaData.get(`Force-Up
 	async function createLoaderMenu(root) {
 		const { Component, jsx, render } = await import('//esm.run/nano-jsx')
 		let close = await getString('l.close')
+		let download = await getString('l.download')
 		
 		class LoaderMenu extends Component {
 			render() {
@@ -146,10 +144,12 @@ else if (ElainaData.get(`Update-${update.version}`) && !ElainaData.get(`Force-Up
 									<lol-uikit-content-block class="app-controls-exit-dialog" type="dialog-small" style="width: 500px;" id="elaina-update-text">
 										<h5>Elaina_V4 - ${updateType} Update ${update.version}</h5>
 										<hr class="heading-spacer" />
+										${update['text'].map((text) => jsx/*html*/`<p class="Elaina-Update">${text}</p>`)}
 									</lol-uikit-content-block>
 								</div>
 								<lol-uikit-flat-button-group type="dialog-frame">
 									<lol-uikit-flat-button tabindex="1" class="button-decline" onClick=${() => {document.getElementById("Elaina-Update").hidden = true}}>${close}</lol-uikit-flat-button>
+									${updateType == "New" ? jsx/*html*/`<lol-uikit-flat-button tabindex="1" onClick=${() => {window.open(`https://github.com/Elaina69/Elaina-V4/releases/tag/v${update.version}`,)}} style="margin-left: 10px;">${download}</lol-uikit-flat-button>` : jsx``}
 								</lol-uikit-flat-button-group>
 							  </lol-uikit-dialog-frame>
 						</div>
@@ -169,23 +169,10 @@ else if (ElainaData.get(`Update-${update.version}`) && !ElainaData.get(`Force-Up
 		let close = window.setInterval(()=>{
 			try {
 				let closeButton = document.querySelector("#Elaina-Update lol-uikit-dialog-frame").shadowRoot.querySelector("div.lol-uikit-dialog-frame-close-button > lol-uikit-close-button")
-				closeButton.addEventListener("click", ()=> {
-					document.getElementById("Elaina-Update").hidden = true
-				})
-
-				let target = document.getElementById("elaina-update-text")
-				if (target) {
-					for (let i = 0; i < update["text"].length; i++) {
-						let updateText = document.createElement("p")
-						updateText.setAttribute("class", "Elaina-Update")
-						updateText.textContent = update["text"][i]
-
-						target.appendChild(updateText)
-					}
-					window.clearInterval(close)
-				}
+				closeButton.addEventListener("click", ()=> {document.getElementById("Elaina-Update").hidden = true})
 			}
 			catch {}
+			window.clearInterval(close)
 		},1000)
 	})
 
