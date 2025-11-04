@@ -45,7 +45,15 @@ class CheckUsing {
         this.tempID = `0000${currentTime}${this.generateTempID}`
     }
 
-    trackStart = async (userId, name, tag) => {
+    getOnlineToken = async (userId, userName) => {
+        let getToken = await window.elainathemeApi.login(userId, userName)
+
+        ElainaData.set("ElainaTheme-Token", getToken.token)
+
+        if (ElainaData.get("Dev-mode")) log("Online token retrieved:", getToken.token)
+    }
+
+    dataToSend = async (userId, name, tag) => {
         let data
 
         if (ElainaData.get("AllowTrackingData")) {
@@ -54,7 +62,7 @@ class CheckUsing {
                 summonerName: name,
                 tagLine: tag,
                 timestamp: new Date().toISOString(),
-                locale: document.querySelector("html")?.lang
+                locale: (await (await fetch("/riotclient/region-locale")).json()).region
             };
         }
         else {
@@ -66,59 +74,47 @@ class CheckUsing {
                 locale: "none"
             };
         }
-    
-        fetch(`${serverDomain.domain}api/elainatheme/track`, {
+
+        return data
+    }
+
+    trackStart = async (userId, name, tag) => {
+        let data = await this.dataToSend(userId, name, tag);
+
+        const response = await fetch(`${serverDomain.domain}api/elainatheme/track`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        
+        });
+        await response.json();
+
         log(await (await window.elainathemeApi.register(userId, `${name}#${tag}`)).message)
     }
 
-    sendKeepAlive = (userId, name, tag) =>  {
-        let data
-        
-        if (ElainaData.get("AllowTrackingData")) {
-            data = {
-                userId: userId,
-                summonerName: name,
-                tagLine: tag,
-                timestamp: new Date().toISOString(),
-                locale: document.querySelector("html")?.lang
-            };
+    sendKeepAlive = async (userId, name, tag) =>  {
+        let data = await this.dataToSend(userId, name, tag);
+
+        try {
+            const response = await fetch(`${serverDomain.domain}api/elainatheme/keep-alive`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
+            const result = await response.json();
+            if (ElainaData.get("Dev-mode")) log("Keep-alive success:", result)
+        } catch (errorData) {
+            error("Keep-alive error:", errorData);
         }
-        else {
-            data = {
-                userId: this.tempID,
-                summonerName: "none",
-                tagLine: "none",
-                timestamp: new Date().toISOString(),
-                locale: "none"
-            };
-        }
-    
-        fetch(`${serverDomain.domain}api/elainatheme/keep-alive`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (ElainaData.get("Dev-mode")) log("Keep-alive success:", data)
-        })
-        .catch(errorData => error("Keep-alive error:", errorData));
     }
 
     main = async () => {
         log('Checking backup server availability');
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 2000);
+        const timeoutId = setTimeout(() => controller.abort(), 3000);
 
         try {
             const response = await fetch(`${serverDomain.domain}api/elainatheme/totalUsers`, { signal: controller.signal });
@@ -138,7 +134,10 @@ class CheckUsing {
             let userId = ElainaData.get("Summoner-ID")
             let playerData = await (await fetch(`./lol-summoner/v1/summoners/${userId}`)).json()
 
-            this.trackStart(userId, playerData["gameName"], playerData["tagLine"])
+            await this.trackStart(userId, playerData["gameName"], playerData["tagLine"])
+            await this.getOnlineToken(userId, `${playerData["gameName"]}#${playerData["tagLine"]}`)
+
+            await window.syncUserIcons.main()
 
             window.setInterval(() => {
                 this.sendKeepAlive(userId, playerData["gameName"], playerData["tagLine"])
