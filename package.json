@@ -1,6 +1,6 @@
 {
   "name": "elaina-theme-data",
-  "version": "4.4.0",
+  "version": "4.4.1",
   "description": "Data files for Elaina theme",
   "main": "index.js",
   "files": [
