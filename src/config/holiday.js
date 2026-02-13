@@ -2,14 +2,14 @@ export default {
     "1/1": {
         "Day"    : "1/1",
         "Text"   : "Happy new year !!",
-        "Image"  : "ny2026.jpg",
+        "Image"  : "ny2027.jpg",
         "filters": "brightness(0.8)",
         "nsfw"   : false
     },
     "1/2": {
         "Day"    : "1/2",
-        "Text"   : "Elaina theme's 3rd Anniversary !!",
-        "Image"  : "anni3rd.png",
+        "Text"   : "Elaina theme's 4th Anniversary !!",
+        "Image"  : "anni4th.png",
         "filters": "brightness(1.0)",
         "nsfw"   : false
     },
@@ -37,21 +37,21 @@ export default {
     "17/10": {
         "Day"    : "17/10",
         "Text"   : "Happy birthday Elaina !!",
-        "Image"  : "hb2025.jpg",
+        "Image"  : "hb2026.jpg",
         "filters": "brightness(1.0)",
         "nsfw"   : false
     },
     "31/10": {
         "Day"    : "31/10",
         "Text"   : "Today, i will become Elaina, fr (=^ ◡ ^=)",
-        "Image"  : "hw2025.jpg",
+        "Image"  : "hw2026.jpg",
         "filters": "brightness(1.0)",
         "nsfw"   : false
     },
     "1/11": {
         "Day"    : "1/11",
         "Text"   : "Happy NNN day !!",
-        "Image"  : "nnn2025.png",
+        "Image"  : "nnn2026.png",
         "filters": "brightness(0.8)",
         "nsfw"   : false
     },
@@ -65,14 +65,14 @@ export default {
     "1/12": {
         "Day"    : "1/12",
         "Text"   : "Goodbye, NNN and Welcoom, DDD !!",
-        "Image"  : "ddd2025.gif",
+        "Image"  : "ddd2026.gif",
         "filters": "brightness(0.9)",
         "nsfw"   : false
     },
     "25/12": {
         "Day"    : "25/12",
         "Text"   : "Merry Christmas !!",
-        "Image"  : "xmas2025.jpg",
+        "Image"  : "xmas2026.jpg",
         "filters": "brightness(1.0)",
         "nsfw"   : false
     },
