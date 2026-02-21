@@ -5,6 +5,10 @@ if (!ElainaData.has("Day")) {
     ElainaData.set("Day", "0/0")
 }
 
+if (!ElainaData.has("Holiday-Shown-Images")) {
+    ElainaData.set("Holiday-Shown-Images", {})
+}
+
 let datapath = new URL("..", import.meta.url).href
 
 let month = new Date().getMonth() + 1;
@@ -17,9 +21,43 @@ let message,imageLink,filter
 
 function addData(date) {
     message = config[date]["Text"]
-    imageLink = `${datapath}assets/image/${config[date]["Image"]}`
+
+    const images = config[date]["Image"]
+    let randomImage = ""
+    
+    if (images.length > 0) {
+        // Get the list of shown images for the current date
+        let shownImages = ElainaData.has("Holiday-Shown-Images") ? ElainaData.get("Holiday-Shown-Images") : {}
+        let shownForDate = shownImages[date] || []
+        
+        // Filter out images that have already been shown
+        const unshownImages = images.filter(img => !shownForDate.includes(img))
+        
+        // If there are unshown images, prioritize showing them
+        if (unshownImages.length > 0) {
+            randomImage = unshownImages[Math.floor(Math.random() * unshownImages.length)]
+        } 
+        else {
+            // If all images have been shown, reset and choose randomly
+            log(`All images for ${date} have been shown. Resetting...`)
+            shownForDate = []
+            randomImage = images[Math.floor(Math.random() * images.length)]
+        }
+        
+        // Save the selected image to the list of shown images
+        shownForDate.push(randomImage)
+        shownImages[date] = shownForDate
+        ElainaData.set("Holiday-Shown-Images", shownImages)
+        
+        imageLink = `${datapath}assets/image/${randomImage}`
+    } else {
+        imageLink = ""
+    }
+
     filter = config[date]["filters"]
+
     log(`${message}`)
+
     ElainaData.set("Day", date)
     ElainaData.set("Holiday", true)
 }
