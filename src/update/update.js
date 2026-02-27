@@ -1,13 +1,13 @@
 export default {
-    "version": "4.4.1",
-    "key": 440,
-    "update-type": "New", // "Auto", "Manual", "New"
+    "version": "4.4.2",
+    "key": 442,
+    "update-type": "Manual", // "Auto", "Manual", "New"
     "text": [
-        "Add Sync User Icons option",
-        "Add refresh button for custom rank (hover card)",
-        "Fix backup info not showing after checking for backup",
-        "Fix homepage's hide navbar button css issue",
-        "Fix audio loop bug when click loop button many time",
-        "Update css"
+        "Added Drag/Drop feature for homepage audio/wallpaper controllers",
+        "Updated Homepage Css",
+        "Updated the code of custom champs background",
+        "Optimized the code of theme settings",
+        "Optimized the code of audio/wallpaper player",
+        "Removed all languages that are no longer translated in the theme for a long time",
     ]
 }
