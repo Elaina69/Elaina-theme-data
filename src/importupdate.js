@@ -76,7 +76,7 @@ const initializeAprilFools = async () => {
     const today = new Date();
     const newdate = `${today.getDate()}/${today.getMonth() + 1}`;
 
-    if (newdate === "1/4" && !ElainaData.has("2nd-1/4")) {
+    if (newdate === "1/4" && !ElainaData.has("3rd-1/4")) {
         const manager = () => document.getElementById('lol-uikit-layer-manager-wrapper');
         const root = document.createElement('div');
         
@@ -87,7 +87,7 @@ const initializeAprilFools = async () => {
         await createLoaderMenu(root);
         manager().prepend(root);
         setupCloseButtonListener();
-        ElainaData.set("2nd-1/4", true);
+        ElainaData.set("3rd-1/4", true);
     }
 };
 

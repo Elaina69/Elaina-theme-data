@@ -1,4 +1,4 @@
-import { showMessage } from "../plugins/holidayMessages.js"
+import { showMessage } from "./holidayMessages.js"
 import { triggerDonateCommand } from "./donate.js"
 
 let datapath = new URL("..", import.meta.url).href

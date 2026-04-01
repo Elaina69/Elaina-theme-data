@@ -6,7 +6,6 @@ let currentTime = ElainaData.get("start-time", Date.now())
 class ImportModules {
     constructor () {
         this.moduleList = [
-            `./src/update/updateMessage.js`,
             `./src/importupdate.js`,
             `./src/plugins/watermark.js`,
             `./src/plugins/donate.js`,
