@@ -1,153 +1,133 @@
-// Constants for callback types
 const CALLBACK_TYPES = {
   ID: 'id',
   TAG: 'tag',
   CLASS: 'class'
 };
 
-// Callback storage
-const callbackStore = {
-  creation: {
-    [CALLBACK_TYPES.ID]: new Map(),
-    [CALLBACK_TYPES.TAG]: new Map(),
-    [CALLBACK_TYPES.CLASS]: new Map()
-  },
-  deletion: {
-    [CALLBACK_TYPES.ID]: new Map(),
-    [CALLBACK_TYPES.TAG]: new Map(),
-    [CALLBACK_TYPES.CLASS]: new Map()
-  }
-};
+class DomObserver {
+  constructor() {
+    this._callbackStore = {
+      creation: {
+        [CALLBACK_TYPES.ID]: new Map(),
+        [CALLBACK_TYPES.TAG]: new Map(),
+        [CALLBACK_TYPES.CLASS]: new Map()
+      },
+      deletion: {
+        [CALLBACK_TYPES.ID]: new Map(),
+        [CALLBACK_TYPES.TAG]: new Map(),
+        [CALLBACK_TYPES.CLASS]: new Map()
+      }
+    };
 
-/**
- * Adds a callback to the appropriate callback map.
- * @param {string} target - The target selector.
- * @param {Function} callback - The callback function.
- * @param {Object} callbackMap - The map to store the callback.
- */
-function addCallback(target, callback, callbackMap) {
-  const key = target.startsWith('.') || target.startsWith('#')
-    ? target.slice(1)
-    : target;
-  
-  if (!callbackMap.has(key)) {
-    callbackMap.set(key, []);
-  }
-  callbackMap.get(key).push(callback);
-}
+    this._observerConfig = {
+      attributes: false,
+      childList: true,
+      subtree: true
+    };
 
-/**
- * Subscribes to element creation events.
- * @param {string} target - The target selector.
- * @param {Function} callback - The callback function.
- */
-export function subscribeToElementCreation(target, callback) {
-  const type = target.startsWith('.') ? CALLBACK_TYPES.CLASS :
-               target.startsWith('#') ? CALLBACK_TYPES.ID :
-               CALLBACK_TYPES.TAG;
-  addCallback(target, callback, callbackStore.creation[type]);
-}
-
-/**
- * Subscribes to element deletion events.
- * @param {string} target - The target selector.
- * @param {Function} callback - The callback function.
- */
-export function subscribeToElementDeletion(target, callback) {
-  const type = target.startsWith('.') ? CALLBACK_TYPES.CLASS :
-               target.startsWith('#') ? CALLBACK_TYPES.ID :
-               CALLBACK_TYPES.TAG;
-  addCallback(target, callback, callbackStore.deletion[type]);
-}
-
-/**
- * Handles element mutations.
- * @param {Element} element - The mutated element.
- * @param {boolean} isCreation - Whether this is a creation event.
- * @param {Object} callbacks - The callback object to use.
- */
-export function handleElementMutation(element, isCreation, callbacks) {
-  if (!callbacks || typeof callbacks !== 'object') {
-    console.error('Invalid callbacks object:', callbacks);
-    return;
+    this._observer = new MutationObserver((mutations) => this._observerCallback(mutations));
+    this._observer.observe(document, this._observerConfig);
   }
 
-  const { id, tagName, classList } = element;
+  _addCallback(target, callback, callbackMap) {
+    const key = target.startsWith('.') || target.startsWith('#')
+      ? target.slice(1)
+      : target;
 
-  if (id && callbacks[CALLBACK_TYPES.ID] && callbacks[CALLBACK_TYPES.ID].get) {
-    callbacks[CALLBACK_TYPES.ID].get(id)?.forEach(cb => cb(element));
+    if (!callbackMap.has(key)) {
+      callbackMap.set(key, []);
+    }
+    callbackMap.get(key).push(callback);
   }
 
-  if (callbacks[CALLBACK_TYPES.TAG] && callbacks[CALLBACK_TYPES.TAG].get) {
-    callbacks[CALLBACK_TYPES.TAG].get(tagName.toLowerCase())?.forEach(cb => cb(element));
+  _getType(target) {
+    if (target.startsWith('.')) return CALLBACK_TYPES.CLASS;
+    if (target.startsWith('#')) return CALLBACK_TYPES.ID;
+    return CALLBACK_TYPES.TAG;
   }
 
-  if (classList && callbacks[CALLBACK_TYPES.CLASS] && callbacks[CALLBACK_TYPES.CLASS].get) {
-    classList.forEach(className => {
-      callbacks[CALLBACK_TYPES.CLASS].get(className.toLowerCase())?.forEach(cb => cb(element));
-    });
+  subscribeToElementCreation(target, callback) {
+    this._addCallback(target, callback, this._callbackStore.creation[this._getType(target)]);
   }
 
-  Array.from(element.children).forEach(child => handleElementMutation(child, isCreation, callbacks));
+  subscribeToElementDeletion(target, callback) {
+    this._addCallback(target, callback, this._callbackStore.deletion[this._getType(target)]);
+  }
 
-  if (element.shadowRoot) {
-    Array.from(element.shadowRoot.children).forEach(child => handleElementMutation(child, isCreation, callbacks));
+  handleElementMutation(element, isCreation, callbacks) {
+    if (!callbacks || typeof callbacks !== 'object') {
+      console.error('Invalid callbacks object:', callbacks);
+      return;
+    }
 
-    if (isCreation) {
-      observerInstance.observe(element.shadowRoot, observerConfig);
+    const { id, tagName, classList } = element;
+
+    if (id && callbacks[CALLBACK_TYPES.ID]?.get) {
+      callbacks[CALLBACK_TYPES.ID].get(id)?.forEach(cb => cb(element));
+    }
+
+    if (callbacks[CALLBACK_TYPES.TAG]?.get) {
+      callbacks[CALLBACK_TYPES.TAG].get(tagName.toLowerCase())?.forEach(cb => cb(element));
+    }
+
+    if (classList && callbacks[CALLBACK_TYPES.CLASS]?.get) {
+      classList.forEach(className => {
+        callbacks[CALLBACK_TYPES.CLASS].get(className.toLowerCase())?.forEach(cb => cb(element));
+      });
+    }
+
+    Array.from(element.children).forEach(child => this.handleElementMutation(child, isCreation, callbacks));
+
+    if (element.shadowRoot) {
+      Array.from(element.shadowRoot.children).forEach(child => this.handleElementMutation(child, isCreation, callbacks));
+
+      if (isCreation) {
+        this._observer.observe(element.shadowRoot, this._observerConfig);
+      }
+    }
+
+    if (element.tagName.toLowerCase() === 'iframe') {
+      try {
+        const iframeDocument = element.contentDocument || element.contentWindow.document;
+        if (iframeDocument) {
+          this._observer.observe(iframeDocument, this._observerConfig);
+          Array.from(iframeDocument.body.children).forEach(child =>
+            this.handleElementMutation(child, isCreation, callbacks)
+          );
+        }
+      }
+      catch (e) {
+        console.warn('Unable to access iframe content. It may be cross-origin.', e);
+      }
     }
   }
 
-  if (element.tagName.toLowerCase() === 'iframe') {
-    try {
-      const iframeDocument = element.contentDocument || element.contentWindow.document;
-      if (iframeDocument) {
-        observerInstance.observe(iframeDocument, observerConfig);
-        Array.from(iframeDocument.body.children).forEach(child => 
-          handleElementMutation(child, isCreation, callbacks)
-        );
-      }
-    } 
-    catch (e) {
-      console.warn('Unable to access iframe content. It may be cross-origin.', e);
-    }
+  _observerCallback(mutations) {
+    mutations.forEach(mutation => {
+      mutation.addedNodes.forEach(node => {
+        if (node.nodeType === Node.ELEMENT_NODE) {
+          this.handleElementMutation(node, true, this._callbackStore.creation);
+        }
+      });
+
+      mutation.removedNodes.forEach(node => {
+        if (node.nodeType === Node.ELEMENT_NODE) {
+          this.handleElementMutation(node, false, this._callbackStore.deletion);
+        }
+      });
+    });
   }
 }
 
-/**
- * Callback function for the MutationObserver.
- * @param {MutationRecord[]} mutations - List of mutations.
- */
-function observerCallback(mutations) {
-  mutations.forEach(mutation => {
-    mutation.addedNodes.forEach(node => {
-      if (node.nodeType === Node.ELEMENT_NODE) {
-        handleElementMutation(node, true, callbackStore.creation);
-      }
-    });
+const domObserver = new DomObserver();
 
-    mutation.removedNodes.forEach(node => {
-      if (node.nodeType === Node.ELEMENT_NODE) {
-        handleElementMutation(node, false, callbackStore.deletion);
-      }
-    });
-  });
-}
+const subscribeToElementCreation = (...args) => domObserver.subscribeToElementCreation(...args);
+const subscribeToElementDeletion = (...args) => domObserver.subscribeToElementDeletion(...args);
 
-// MutationObserver configuration
-const observerConfig = {
-  attributes: false,
-  childList: true,
-  subtree: true
-};
+export { domObserver, subscribeToElementCreation, subscribeToElementDeletion };
 
-// Create and start the MutationObserver
-const observerInstance = new MutationObserver(observerCallback);
-observerInstance.observe(document, observerConfig);
-
-// Export the public API
 window.observer = {
-  handleElementMutation,
+  handleElementMutation: (...args) => domObserver.handleElementMutation(...args),
   subscribeToElementCreation,
   subscribeToElementDeletion
 };

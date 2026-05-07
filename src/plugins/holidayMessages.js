@@ -1,111 +1,118 @@
 import config from "../config/holiday.js"
 import { log } from "../utils/themeLog.js";
 
-if (!ElainaData.has("Day")) {
-    ElainaData.set("Day", "0/0")
-}
+const datapath = new URL("..", import.meta.url).href
 
-if (!ElainaData.has("Holiday-Shown-Images")) {
-    ElainaData.set("Holiday-Shown-Images", {})
-}
+class HolidayMessages {
+    constructor() {
+        if (!ElainaData.has("Day")) ElainaData.set("Day", "0/0")
+        if (!ElainaData.has("Holiday-Shown-Images")) ElainaData.set("Holiday-Shown-Images", {})
 
-let datapath = new URL("..", import.meta.url).href
+        this.message = ""
+        this.imageLink = ""
+        this.filter = ""
 
-let month = new Date().getMonth() + 1;
-let day = new Date().getDate();
-let newdate = day+"/"+month
+        this._checkToday()
+        this._checkChristmas()
 
-let pandoru = ""
-
-let message,imageLink,filter
-
-function addData(date) {
-    message = config[date]["Text"]
-
-    const images = config[date]["Image"]
-    let randomImage = ""
-    
-    if (images.length > 0) {
-        // Get the list of shown images for the current date
-        let shownImages = ElainaData.has("Holiday-Shown-Images") ? ElainaData.get("Holiday-Shown-Images") : {}
-        let shownForDate = shownImages[date] || []
-        
-        // Filter out images that have already been shown
-        const unshownImages = images.filter(img => !shownForDate.includes(img))
-        
-        // If there are unshown images, prioritize showing them
-        if (unshownImages.length > 0) {
-            randomImage = unshownImages[Math.floor(Math.random() * unshownImages.length)]
-        } 
-        else {
-            // If all images have been shown, reset and choose randomly
-            log(`All images for ${date} have been shown. Resetting...`)
-            shownForDate = []
-            randomImage = images[Math.floor(Math.random() * images.length)]
+        if (ElainaData.get("Holiday") && ElainaData.get("holiday-message")) {
+            this.showMessage(false)
         }
-        
-        // Save the selected image to the list of shown images
-        shownForDate.push(randomImage)
-        shownImages[date] = shownForDate
-        ElainaData.set("Holiday-Shown-Images", shownImages)
-        
-        imageLink = `${datapath}assets/image/${randomImage}`
-    } else {
-        imageLink = ""
+
+        log(`${ElainaData.get("Day")}`)
     }
 
-    filter = config[date]["filters"]
+    _addData(date) {
+        this.message = config[date]["Text"]
 
-    log(`${message}`)
+        const images = config[date]["Image"]
+        let randomImage = ""
 
-    ElainaData.set("Day", date)
-    ElainaData.set("Holiday", true)
-}
+        if (images.length > 0) {
+            let shownImages = ElainaData.has("Holiday-Shown-Images") ? ElainaData.get("Holiday-Shown-Images") : {}
+            let shownForDate = shownImages[date] || []
 
-if (ElainaData.has("Day") && newdate != ElainaData.get("Day")) {
-    try {
-        if (newdate == config[newdate]["Day"]) {
-            if (!config[newdate]["nsfw"]) addData(newdate)
-            else if (config[newdate]["nsfw"]) {
-                if (ElainaData.get("NSFW-Content")) {
-                    addData(newdate)
-                    log(`NSFW content!!`)
+            const unshownImages = images.filter(img => !shownForDate.includes(img))
+
+            if (unshownImages.length > 0) {
+                randomImage = unshownImages[Math.floor(Math.random() * unshownImages.length)]
+            }
+            else {
+                log(`All images for ${date} have been shown. Resetting...`)
+                shownForDate = []
+                randomImage = images[Math.floor(Math.random() * images.length)]
+            }
+
+            shownForDate.push(randomImage)
+            shownImages[date] = shownForDate
+            ElainaData.set("Holiday-Shown-Images", shownImages)
+
+            this.imageLink = `${datapath}assets/image/${randomImage}`
+        } else {
+            this.imageLink = ""
+        }
+
+        this.filter = config[date]["filters"]
+
+        log(`${this.message}`)
+
+        ElainaData.set("Day", date)
+        ElainaData.set("Holiday", true)
+    }
+
+    _checkToday() {
+        const month = new Date().getMonth() + 1
+        const day = new Date().getDate()
+        const newdate = day + "/" + month
+
+        if (ElainaData.has("Day") && newdate != ElainaData.get("Day")) {
+            try {
+                if (newdate == config[newdate]["Day"]) {
+                    if (!config[newdate]["nsfw"]) {
+                        this._addData(newdate)
+                    }
+                    else if (config[newdate]["nsfw"] && ElainaData.get("NSFW-Content")) {
+                        this._addData(newdate)
+                        log(`NSFW content!!`)
+                    }
+                }
+                else {
+                    log(`Today doesn't have event`)
+                    ElainaData.set("Day", newdate)
                 }
             }
-        }
-        else {
-            log(`Today doesn't have event`)
-            ElainaData.set("Day", newdate)
+            catch {
+                log(`Today doesn't have event`)
+                ElainaData.set("Day", newdate)
+            }
         }
     }
-    catch {
-        log(`Today doesn't have event`)
-        ElainaData.set("Day", newdate)
-    }
-}
 
-if (newdate == "25/12" && ElainaData.get("Merry-Christmas")){
-    try {
-        const response = await fetch(`${datapath}config/pandoru.txt`);
-        if (!response.ok) {
-            throw new Error(`Failed to fetch the file: ${response.statusText}`);
+    async _checkChristmas() {
+        const month = new Date().getMonth() + 1
+        const day = new Date().getDate()
+        const newdate = day + "/" + month
+
+        if (newdate == "25/12" && ElainaData.get("Merry-Christmas")) {
+            try {
+                const response = await fetch(`${datapath}config/pandoru.txt`)
+                if (!response.ok) throw new Error(`Failed to fetch the file: ${response.statusText}`)
+                const pandoru = await response.text()
+                console.log(pandoru)
+            }
+            catch (err) {
+                console.error("Error:", err)
+            }
         }
-        else pandoru = await response.text();
-    } 
-    catch (error) {
-        console.error("Error:", error);
     }
 
-    console.log(pandoru)
-}
-
-function showMessage(force) {
-    if (force) addData(ElainaData.get("Day"))
-        
-    async function createLoaderMenu(root) {
-        let close = await getString('l.close')
+    async _createLoaderMenu(root) {
+        const close = await getString('l.close')
         const { Component, jsx, render } = await import('//esm.run/nano-jsx')
-        
+        const message = this.message
+        const imageLink = this.imageLink
+        const filter = this.filter
+
         class LoaderMenu extends Component {
             render() {
                 return jsx/*html*/`
@@ -121,7 +128,6 @@ function showMessage(force) {
                                         <hr class="heading-spacer" />
                                         <hr class="heading-spacer" />
                                         <img src="${imageLink}" style="width: 410px; border: 0px; border-radius: 10px; filter: ${filter};">
-    
                                     </lol-uikit-content-block>
                                 </div>
                                 <lol-uikit-flat-button-group type="dialog-frame">
@@ -130,33 +136,36 @@ function showMessage(force) {
                             </lol-uikit-dialog-frame>
                         </div>
                     </div>
-                </div>
                 `
             }
         }
         render(jsx`<${LoaderMenu} />`, root)
     }
-    
-    window.addEventListener("load", async ()=> {
-        const manager = () => document.getElementById('lol-uikit-layer-manager-wrapper')
-        const root    = document.createElement('div')
-        while (!manager()) await new Promise(r => setTimeout(r, 200))
-        await createLoaderMenu(root)
-        manager().prepend(root)
-        let close = window.setInterval(()=>{
-            try {
-                let closeButton = document.querySelector("#Holiday lol-uikit-dialog-frame").shadowRoot.querySelector("div.lol-uikit-dialog-frame-close-button > lol-uikit-close-button")
-                closeButton.addEventListener("click", ()=> {document.getElementById("Holiday").hidden = true})
-            }
-            catch {}
-            window.clearInterval(close)
+
+    showMessage = (force) => {
+        if (force) this._addData(ElainaData.get("Day"))
+
+        window.addEventListener("load", async () => {
+            const manager = () => document.getElementById('lol-uikit-layer-manager-wrapper')
+            const root = document.createElement('div')
+            while (!manager()) await new Promise(r => setTimeout(r, 200))
+            await this._createLoaderMenu(root)
+            manager().prepend(root)
+            let close = window.setInterval(() => {
+                try {
+                    let closeButton = document.querySelector("#Holiday lol-uikit-dialog-frame").shadowRoot.querySelector("div.lol-uikit-dialog-frame-close-button > lol-uikit-close-button")
+                    closeButton.addEventListener("click", () => { document.getElementById("Holiday").hidden = true })
+                }
+                catch {}
+                window.clearInterval(close)
+            })
         })
-    })
-    ElainaData.set("Holiday", false)
+        ElainaData.set("Holiday", false)
+    }
 }
 
-if (ElainaData.get("Holiday") && ElainaData.get("holiday-message")) showMessage(false)
+const holidayMessages = new HolidayMessages()
 
-export { showMessage }
-
-log(`${ElainaData.get("Day")}`)
+export function showMessage(force) {
+    holidayMessages.showMessage(force)
+}

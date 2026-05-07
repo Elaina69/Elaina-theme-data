@@ -1,10 +1,11 @@
 import { log, warn, error } from "./src/utils/themeLog.js"
 import { serverDomain } from "./src/config/serverDomain.js"
+import { syncIconsWithHashCheck } from "./src/plugins/syncIcons.js"
 
 let currentTime = ElainaData.get("start-time", Date.now())
 
 class ImportModules {
-    constructor () {
+    constructor() {
         this.moduleList = [
             `./src/importupdate.js`,
             `./src/plugins/watermark.js`,
@@ -16,7 +17,7 @@ class ImportModules {
         ];
     }
 
-    main () {
+    main() {
         this.moduleList.forEach(module => import(module));
     }
 }
@@ -27,7 +28,7 @@ class CheckDomainExpiry {
         let expiringTime = new Date(serverDomain.expiring);
         let timeDifference = expiringTime - currentTime;
         let daysDifference = timeDifference / (1000 * 60 * 60 * 24);
-    
+
         if (daysDifference < 30) {
             warn(`The server domain is expiring soon! (${daysDifference} days left)`)
         }
@@ -39,7 +40,7 @@ class CheckDomainExpiry {
 const checkDomainExpiry = new CheckDomainExpiry()
 
 class CheckUsing {
-    constructor () {
+    constructor() {
         this.generateTempID = Math.floor(100 + Math.random() * 900)
         this.tempID = `0000${currentTime}${this.generateTempID}`
     }
@@ -92,7 +93,7 @@ class CheckUsing {
         log(await (await window.elainathemeApi.register(userId, `${name}#${tag}`)).message)
     }
 
-    sendKeepAlive = async (userId, name, tag) =>  {
+    sendKeepAlive = async (userId, name, tag) => {
         let data = await this.dataToSend(userId, name, tag);
 
         try {
@@ -120,7 +121,7 @@ class CheckUsing {
             const count = await response.json();
             log('Number of users:', count.total);
             ElainaData.set("User-Counter", count.total)
-            const { default: serverModule } = await import(`${serverDomain.domain}index.js`);
+            await import(`./src/apiWrapper.js`);
 
             if (!ElainaData.has("AllowTrackingData")) {
                 let text = "Hi!, I'm Elaina.\n\nWould you like to share your infomation so I can write it to my diary?\nIt will including:\n - Your username\n - Your time using this theme\n - Your current language\n\nClick \"Ok\" to allow me, \"Cancel\" to refuse\nYou can switch this option anytime inside theme settings.\n ༼ つ ◕_◕ ༽つ"
@@ -136,12 +137,12 @@ class CheckUsing {
             await this.trackStart(userId, playerData["gameName"], playerData["tagLine"])
             await this.getOnlineToken(userId, `${playerData["gameName"]}#${playerData["tagLine"]}`)
 
-            await window.syncUserIcons.main()
+            await syncIconsWithHashCheck()
 
             window.setInterval(() => {
                 this.sendKeepAlive(userId, playerData["gameName"], playerData["tagLine"])
             }, 60000);
-        } 
+        }
         catch (err) {
             clearTimeout(timeoutId);
             throw err;
@@ -159,5 +160,5 @@ window.addEventListener("load", () => {
         if (ElainaData.get("Dev-mode")) {
             checkDomainExpiry.main()
         }
-    },10000)
+    }, 10000)
 })

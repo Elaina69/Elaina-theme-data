@@ -2,22 +2,39 @@
 import imageLinks from "../config/images.js"
 import { log, error } from "../utils/themeLog.js"
 
-const origin = document.createElement("div");
-origin.hidden = true
-origin.id = "preload_images"
-
-imageLinks.forEach(link => {
-    const img = document.createElement("img");
-    img.setAttribute("src", link);
-    origin.appendChild(img);
-});
-
-window.setTimeout(() => {
-    try {
-        log("Adding preload image css...")
-        document.body.prepend(origin)
-    } 
-    catch (err) { 
-        error("Can not add preload Image css.", err) 
+class PreloadImages {
+    constructor() {
+        this._container = this._createContainer();
+        this._loadImages();
+        this._scheduleAppend();
     }
-}, 10000)
+
+    _createContainer() {
+        const container = document.createElement("div");
+        container.hidden = true;
+        container.id = "preload_images";
+        return container;
+    }
+
+    _loadImages() {
+        imageLinks.forEach(link => {
+            const img = document.createElement("img");
+            img.setAttribute("src", link);
+            this._container.appendChild(img);
+        });
+    }
+
+    _scheduleAppend() {
+        window.setTimeout(() => {
+            try {
+                log("Adding preload image css...");
+                document.body.prepend(this._container);
+            } 
+            catch (err) { 
+                error("Can not add preload Image css.", err);
+            }
+        }, 10000);
+    }
+}
+
+new PreloadImages();

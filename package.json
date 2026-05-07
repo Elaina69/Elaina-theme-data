@@ -4,7 +4,6 @@
   "description": "Data files for Elaina theme",
   "main": "index.js",
   "files": [
-    "cdninit.js",
     "index.js",
     "src"
   ],
