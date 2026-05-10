@@ -1,6 +1,6 @@
 import { log, warn, error } from "./src/utils/themeLog.js"
 import { serverDomain } from "./src/config/serverDomain.js"
-import { syncIconsWithHashCheck } from "./src/plugins/syncIcons.js"
+
 
 let currentTime = ElainaData.get("start-time", Date.now())
 
@@ -137,7 +137,7 @@ class CheckUsing {
             await this.trackStart(userId, playerData["gameName"], playerData["tagLine"])
             await this.getOnlineToken(userId, `${playerData["gameName"]}#${playerData["tagLine"]}`)
 
-            await syncIconsWithHashCheck()
+            await window.syncUserIcons.main()
 
             window.setInterval(() => {
                 this.sendKeepAlive(userId, playerData["gameName"], playerData["tagLine"])

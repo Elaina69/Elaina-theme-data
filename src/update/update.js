@@ -1,14 +1,22 @@
 export default {
-    "version": "4.4.3",
-    "key": 20260401443,
+    "version": "4.5.0",
+    "key": 20260510450,
     "update-type": "Manual", // "Auto", "Manual", "New"
     "text": [
-        "Added more Regex to check for user-entered filenames.",
-        "Added custom summoner level",
-        "Increased the time before the Audio Controller hides",
-        "Custom champion icons now work for all champions, and also appear in more places",
-        "Fixed custom icons not appearing correctly on profile tab",
-        "Fixed update message not showing properly",
-        "Removed Dodge Button",
+        "From Pengu 1.2.0, theme will use PluginFS to store user's data:",
+        "- For no PluginFS pengu versions, theme will still use default DataStore",
+        "- For PluginFS pengu versions, user's data will be stored in ./data/ElainaData/json, old data from DataStore will auto migrate to new ElainaData",
+        'Added "Disable theme wallpaper" option',
+        'Added "Hide gamemodes" option',
+        "Sanitized HTML/colors",
+        "Faster sync users icons (for Pengu 1.2.0+)",
+        "Updated custom avatar in TFT and Arena lobby",
+        "Allowed users to copy wallpaper/audio/banner/font files name inside theme settings (for no PluginFS pengu versions)",
+        "Theme now auto detect wallpaper/audio/banner/font lists",
+        "The homepage navigation bar will be hidden by default",
+        "No longer forced client restarts when installing themes for the first time or deleting data.",
+        "No longer auto play wallpaper and audio after enable theme's wallpaper/audio",
+        'Removed "Aram only mode" plugin',
+        'Removed "Custom practice lobby" button'
     ]
 }
