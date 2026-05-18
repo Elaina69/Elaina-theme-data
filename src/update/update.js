@@ -1,6 +1,6 @@
 export default {
     "version": "4.5.0",
-    "key": 20260510450,
+    "key": 20260515450,
     "update-type": "Manual", // "Auto", "Manual", "New"
     "text": [
         "From Pengu 1.2.0, theme will use PluginFS to store user's data:",

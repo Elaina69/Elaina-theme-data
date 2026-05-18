@@ -28,12 +28,53 @@ export default {
         "filters": "brightness(1.0)",
         "nsfw"   : false
     },
-    "5/7": {
-        "Day"    : "5/7",
-        "Text"   : "Just a normal day, but let's enjoy it with Elaina !!",
-        "Image"  : [
-            "07-05/Normal_1.png",
-        ],
+    "1/3": {
+        "Day"    : "1/3",
+        "Title"  : "Ho-kago Tea Time",
+        "Text"   : "\"Graduation isn't the end...\"",
+        "Image"  : [],
+        "Video"  : {
+            "path"       : "assets/video/K-ON_Tenshi ni Fureta yo!-compressed.webm",
+            "source"     : "data",
+            "width"      : "720px",
+            "volume"     : 0.15,
+            "attributes" : {
+                "autoplay": true
+            }
+        },
+        "DialogWidth": "800px",
+        "DataKey"    : "1/3",
+        "IgnoreHolidayMessageSetting": true,
+        "Actions"    : {
+            "beforeShow"  : ["pauseAudioIfPlaying"],
+            "buttonClose" : ["pauseVideo", "hideModal", "pauseAudioIfPlaying"],
+            "frameClose"  : ["hideModal"],
+            "skipped"     : ["removeDataKey"]
+        },
+        "filters": "",
+        "nsfw"   : false
+    },
+    "1/4": {
+        "Day"    : "1/4",
+        "Title"  : "Elaina_V4",
+        "Text"   : "\"Happy 1/4\"",
+        "Image"  : [],
+        "Video"  : {
+            "path"       : "assets/1-4.webm",
+            "source"     : "server",
+            "width"      : "250px",
+            "volume"     : 0.15,
+            "attributes" : {
+                "controls": true
+            }
+        },
+        "DialogWidth": "400px",
+        "DataKey"    : "3rd-1/4",
+        "IgnoreHolidayMessageSetting": true,
+        "Actions"    : {
+            "buttonClose" : ["pauseVideo", "hideModal", "rickRoll"],
+            "frameClose"  : ["hideModal", "rickRoll"]
+        },
         "filters": "",
         "nsfw"   : false
     },
@@ -46,6 +87,15 @@ export default {
             "06-01/Summer_3.png"
         ],
         "filters": "brightness(1.0)",
+        "nsfw"   : false
+    },
+    "5/7": {
+        "Day"    : "5/7",
+        "Text"   : "Just a normal day, but let's enjoy it with Elaina !!",
+        "Image"  : [
+            "07-05/Normal_1.png",
+        ],
+        "filters": "",
         "nsfw"   : false
     },
     "17/8": {
