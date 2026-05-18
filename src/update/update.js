@@ -3,11 +3,13 @@ export default {
     "key": 20260515450,
     "update-type": "Manual", // "Auto", "Manual", "New"
     "text": [
-        "From Pengu 1.2.0, theme will use PluginFS to store user's data:",
+        "From Pengu 1.2.0 Beta test, theme will use PluginFS to store user's data:",
         "- For no PluginFS pengu versions, theme will still use default DataStore",
         "- For PluginFS pengu versions, user's data will be stored in ./data/ElainaData/json, old data from DataStore will auto migrate to new ElainaData",
         'Added "Disable theme wallpaper" option',
         'Added "Hide gamemodes" option',
+        'Added "Window effect" option (Only available after enabling "Disable theme wallpaper" option)',
+        "Re-designed settings UI",
         "Sanitized HTML/colors",
         "Faster sync users icons (for Pengu 1.2.0+)",
         "Updated custom avatar in TFT and Arena lobby",
