@@ -207,7 +207,7 @@ class HolidayMessages {
     }
 
     async _createLoaderMenu(root, holiday) {
-        const close = await getString('l.close')
+        const close = await getString('preset-settings.close')
         const { Component, jsx, render } = await import('//esm.run/nano-jsx')
         const modal = this
 

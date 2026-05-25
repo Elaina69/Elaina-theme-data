@@ -201,50 +201,63 @@ class ElainathemeApi {
         }
     }
 
-    async getFriendsImage(friends) {
-        const response = await fetch(`${this.baseUrl()}api/elainatheme/image/getFriendsImage`, {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                friendsList: friends
-            })
-        })
-
-        if (!response.ok) {
-            warn(`Failed to get friends image: ${response.status}`)
-            return []
-        }
-
-        let result = await response.json()
-        return Array.isArray(result) ? result : []
-    }
-
-    async syncFriendsIcons(friends, localHashes) {
+    async getUsersImage(users) {
         try {
-            const response = await fetch(`${this.baseUrl()}api/elainatheme/image/syncFriendsIcons`, {
+            const response = await fetch(`${this.baseUrl()}api/elainatheme/image/getUsersImage`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    friendsList: friends,
+                    usersList: users
+                })
+            })
+
+            if (!response.ok) {
+                warn(`Failed to get users image: ${response.status}`)
+                return []
+            }
+
+            let result = await response.json()
+            return Array.isArray(result) ? result : []
+        } catch (err) {
+            warn(`getUsersImage failed: ${err.message}`)
+            return []
+        }
+    }
+
+    async getFriendsImage(friends) {
+        return this.getUsersImage(friends)
+    }
+
+    async syncUsersIcons(users, localHashes) {
+        try {
+            const response = await fetch(`${this.baseUrl()}api/elainatheme/image/syncUsersIcons`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    usersList: users,
                     localHashes: localHashes || {}
                 })
             })
 
             if (!response.ok) {
-                warn(`Failed to sync friends icons: ${response.status}`)
+                warn(`Failed to sync users icons: ${response.status}`)
                 return null
             }
 
             const result = await response.json()
             return Array.isArray(result) ? result : []
         } catch (err) {
-            warn(`syncFriendsIcons failed: ${err.message}`)
+            warn(`syncUsersIcons failed: ${err.message}`)
             return null
         }
+    }
+
+    async syncFriendsIcons(friends, localHashes) {
+        return this.syncUsersIcons(friends, localHashes)
     }
 
 

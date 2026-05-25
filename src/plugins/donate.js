@@ -24,10 +24,10 @@ class DonatePopup {
 	}
 
 	async _createMenu(root) {
-		const close = await getString("l.close");
-		const donate_line1 = await getString("donate-firstline");
-		const donate_line2 = await getString("donate-secondline");
-		const donate_line3 = await getString("donate-thirdline");
+		const close = await getString("preset-settings.close");
+		const donate_line1 = await getString("about-us.donate-firstline");
+		const donate_line2 = await getString("about-us.donate-secondline");
+		const donate_line3 = await getString("about-us.donate-thirdline");
 		const { Component, jsx, render } = await import("//esm.run/nano-jsx");
 
 		class LoaderMenu extends Component {
