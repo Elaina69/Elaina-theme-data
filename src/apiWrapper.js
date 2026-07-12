@@ -201,7 +201,7 @@ class ElainathemeApi {
         }
     }
 
-    async getUsersImage(users) {
+    async getUsersImage(users, types) {
         try {
             const response = await fetch(`${this.baseUrl()}api/elainatheme/image/getUsersImage`, {
                 method: 'POST',
@@ -209,7 +209,8 @@ class ElainathemeApi {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    usersList: users
+                    usersList: users,
+                    types: Array.isArray(types) ? types : undefined
                 })
             })
 
@@ -226,11 +227,11 @@ class ElainathemeApi {
         }
     }
 
-    async getFriendsImage(friends) {
-        return this.getUsersImage(friends)
+    async getFriendsImage(friends, types) {
+        return this.getUsersImage(friends, types)
     }
 
-    async syncUsersIcons(users, localHashes) {
+    async syncUsersIcons(users, localHashes, types) {
         try {
             const response = await fetch(`${this.baseUrl()}api/elainatheme/image/syncUsersIcons`, {
                 method: 'POST',
@@ -239,7 +240,8 @@ class ElainathemeApi {
                 },
                 body: JSON.stringify({
                     usersList: users,
-                    localHashes: localHashes || {}
+                    localHashes: localHashes || {},
+                    types: Array.isArray(types) ? types : undefined
                 })
             })
 
@@ -256,8 +258,8 @@ class ElainathemeApi {
         }
     }
 
-    async syncFriendsIcons(friends, localHashes) {
-        return this.syncUsersIcons(friends, localHashes)
+    async syncFriendsIcons(friends, localHashes, types) {
+        return this.syncUsersIcons(friends, localHashes, types)
     }
 
 

@@ -83,6 +83,14 @@ class SyncIcons {
             { 
                 url: `${iconFolder}${icdata["Honor"]}`,
                 type: "emblem" 
+            },
+            {
+                url: `${iconFolder}${icdata["Rank-icon"]}`,
+                type: "rankIcon"
+            },
+            {
+                url: `${iconFolder}${icdata["Clash-banner"]}`,
+                type: "clashBanner"
             }
         ]
 
