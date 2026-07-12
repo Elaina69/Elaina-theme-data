@@ -13,8 +13,8 @@ export default {
         "Day"    : "1/2",
         "Text"   : "Elaina theme's 4th Anniversary !!",
         "Image"  : [
-            "02-01/Anniversary_2.png",
-            "02-01/Anniversary_4.jpg"
+            "02-01/Anniversary_2.webp",
+            "02-01/Anniversary_4.webp"
         ],
         "filters": "brightness(1.0)",
         "nsfw"   : false
@@ -84,7 +84,7 @@ export default {
         "Image"  : [
             "06-01/Summer_1.jpg",
             "06-01/Summer_2.jpg",
-            "06-01/Summer_3.png"
+            "06-01/Summer_3.webp"
         ],
         "filters": "brightness(1.0)",
         "nsfw"   : false
@@ -93,7 +93,7 @@ export default {
         "Day"    : "5/7",
         "Text"   : "Just a normal day, but let's enjoy it with Elaina !!",
         "Image"  : [
-            "07-05/Normal_1.png",
+            "07-05/Normal_1.webp",
         ],
         "filters": "",
         "nsfw"   : false
@@ -102,7 +102,7 @@ export default {
         "Day"    : "17/8",
         "Text"   : "Nyan~~~",
         "Image"  : [
-            "08-17/SayaXElaina.jpg"
+            "08-17/SayaXElaina.webp"
         ],
         "filters": "brightness(1.0)",
         "nsfw"   : false
@@ -131,7 +131,7 @@ export default {
         "Day"    : "1/11",
         "Text"   : "Happy NNN day !!",
         "Image"  : [
-            "11-01/nnn_2023.png"
+            "11-01/nnn_2023.webp"
         ],
         "filters": "brightness(0.8)",
         "nsfw"   : false
@@ -149,7 +149,7 @@ export default {
         "Day"    : "1/12",
         "Text"   : "Goodbye, NNN and Welcoom, DDD !!",
         "Image"  : [
-            "12-01/ddd_2023.png",
+            "12-01/ddd_2023.webp",
             "12-01/ddd_2024.gif"
         ],
         "filters": "brightness(0.9)",

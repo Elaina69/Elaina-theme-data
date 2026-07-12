@@ -1,8 +1,8 @@
 import { log, warn, error } from "./src/utils/themeLog.js"
 import { serverDomain } from "./src/config/serverDomain.js"
 
-
 let currentTime = ElainaData.get("start-time", Date.now())
+let elainaThemeDataStarted = false
 
 class ImportModules {
     constructor() {
@@ -47,6 +47,7 @@ class CheckUsing {
 
     getOnlineToken = async (userId, userName) => {
         let getToken = await window.elainathemeApi.login(userId, userName)
+        if (!getToken?.token) throw new Error("Login response did not include a token")
 
         ElainaData.set("ElainaTheme-Token", getToken.token)
 
@@ -111,54 +112,119 @@ class CheckUsing {
         }
     }
 
-    main = async () => {
-        log('Checking backup server availability');
+    fetchJsonWithTimeout = async (url, options = {}, timeout = 10000) => {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 3000);
+        const timeoutId = setTimeout(() => controller.abort(), timeout);
 
         try {
-            const response = await fetch(`${serverDomain.domain}api/elainatheme/totalUsers`, { signal: controller.signal });
-            const count = await response.json();
-            log('Number of users:', count.total);
-            ElainaData.set("User-Counter", count.total)
-            await import(`./src/apiWrapper.js`);
+            const response = await fetch(url, {
+                ...options,
+                signal: controller.signal
+            });
 
-            if (!ElainaData.has("AllowTrackingData")) {
-                let text = "Hi!, I'm Elaina.\n\nWould you like to share your infomation so I can write it to my diary?\nIt will including:\n - Your username\n - Your time using this theme\n - Your current language\n\nClick \"Ok\" to allow me, \"Cancel\" to refuse\nYou can switch this option anytime inside theme settings.\n ༼ つ ◕_◕ ༽つ"
-                if (window.confirm(text) == true) {
-                    ElainaData.set("AllowTrackingData", true)
-                }
-                else ElainaData.set("AllowTrackingData", false)
+            if (!response.ok) {
+                throw new Error(`Request failed with status ${response.status}`)
             }
 
-            let userId = ElainaData.get("Summoner-ID")
-            let playerData = await (await fetch(`./lol-summoner/v1/summoners/${userId}`)).json()
+            return await response.json();
+        }
+        finally {
+            clearTimeout(timeoutId);
+        }
+    }
 
-            await this.trackStart(userId, playerData["gameName"], playerData["tagLine"])
-            await this.getOnlineToken(userId, `${playerData["gameName"]}#${playerData["tagLine"]}`)
+    main = async () => {
+        await import(`./src/apiWrapper.js`);
 
-            await window.syncUserIcons.main()
+        // Check if the server is reachable
+        log('Checking backup server availability');
 
-            window.setInterval(() => {
-                this.sendKeepAlive(userId, playerData["gameName"], playerData["tagLine"])
-            }, 60000);
+        try {
+            const count = await this.fetchJsonWithTimeout(`${serverDomain.domain}api/elainatheme/totalUsers`);
+            log('Number of users:', count.total);
+            ElainaData.set("User-Counter", count.total)
         }
         catch (err) {
-            clearTimeout(timeoutId);
-            throw err;
+            warn("Cannot reach Elaina theme backend totalUsers endpoint yet:", err)
         }
+
+        // Check if the user has allowed tracking data
+        if (!ElainaData.has("AllowTrackingData")) {
+            let text = "Hi!, I'm Elaina.\n\nWould you like to share your infomation so I can write it to my diary?\nIt will including:\n - Your username\n - Your time using this theme\n - Your current language\n\nClick \"Ok\" to allow me, \"Cancel\" to refuse\nYou can switch this option anytime inside theme settings.\n ༼ つ ◕_◕ ༽つ"
+            if (window.confirm(text) == true) {
+                ElainaData.set("AllowTrackingData", true)
+            }
+            else ElainaData.set("AllowTrackingData", false)
+        }
+
+        // Get the current summoner ID and data
+        let userId = ElainaData.get("Summoner-ID")
+        let playerData
+        try {
+            playerData = await (await fetch(`./lol-summoner/v1/summoners/${userId}`)).json()
+        }
+        catch (err) {
+            warn("Cannot load current summoner data for backend init:", err)
+            return
+        }
+
+        // Send tracking/register request
+        try {
+            await this.trackStart(userId, playerData["gameName"], playerData["tagLine"])
+        }
+        catch (err) {
+            warn("Failed to send tracking/register request:", err)
+        }
+
+        // Get online token
+        try {
+            await this.getOnlineToken(userId, `${playerData["gameName"]}#${playerData["tagLine"]}`)
+        }
+        catch (err) {
+            warn("Failed to login to Elaina theme backend:", err)
+        }
+
+        // Sync user icons
+        try {
+            await window.syncUserIcons.main()
+        }
+        catch (err) {
+            warn("Failed to run sync user icons after backend init:", err)
+        }
+
+        // Set up keep-alive interval
+        window.setInterval(() => {
+            this.sendKeepAlive(userId, playerData["gameName"], playerData["tagLine"])
+        }, 60000);
     }
 }
 const checkUsing = new CheckUsing()
 
+class StartElainaThemeData {
+    main = () => {
+        if (elainaThemeDataStarted) return
+        elainaThemeDataStarted = true
+
+        importModules.main()
+        checkUsing.main().catch(err => {
+            error("Failed to initialize Elaina theme backend API:", err)
+        })
+        window.setTimeout(() => {
+            if (ElainaData.get("Dev-mode")) {
+                checkDomainExpiry.main()
+            }
+        }, 10000)
+    }
+}
+const startElainaThemeData = new StartElainaThemeData()
+
+// Set the server domain in DataStore for use in other parts
 ElainaData.set("Elaina-domain-server", serverDomain.domain)
 
-window.addEventListener("load", () => {
-    importModules.main()
-    checkUsing.main()
-    window.setTimeout(() => {
-        if (ElainaData.get("Dev-mode")) {
-            checkDomainExpiry.main()
-        }
-    }, 10000)
-})
+// Start CDN initialization
+if (document.readyState === "loading") {
+    window.addEventListener("load", startElainaThemeData, { once: true })
+}
+else {
+    startElainaThemeData()
+}

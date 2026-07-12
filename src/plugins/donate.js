@@ -49,7 +49,7 @@ class DonatePopup {
 												<img src="${datapath}assets/icon/ko-fi.webp" class="donate"></img>
 											</a>
 											<a href="https://www.paypal.com/paypalme/ElainaDaCattoRiel" target="_blank" id="paypal">
-												<img src="${datapath}assets/icon/paypal.png" class="donate"></img>
+												<img src="${datapath}assets/icon/paypal.webp" class="donate"></img>
 											</a>
 											<a href="https://me.momo.vn/elainadacatto" target="_blank" id="momo">
 												<img src="${datapath}assets/icon/momo.svg" class="donate"></img>
