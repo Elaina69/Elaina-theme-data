@@ -216,7 +216,7 @@ class StartElainaThemeData {
         }, 10000)
     }
 }
-const startElainaThemeData = new StartElainaThemeData()
+const startElainaThemeData = new StartElainaThemeData().main
 
 // Set the server domain in DataStore for use in other parts
 ElainaData.set("Elaina-domain-server", serverDomain.domain)
